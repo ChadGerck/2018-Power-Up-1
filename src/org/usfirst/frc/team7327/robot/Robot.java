@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
 	
 	static Timer myTimer = new Timer();
 	public static boolean done = true; 
+	public static boolean killButton = true; 
 	
 
 	@Override
@@ -379,7 +380,7 @@ public class Robot extends TimedRobot {
 		Robot.done = false; 
 		double time = myTimer.get() + 3.27;
 		double arm0 = -.6, arma = 0, armd = 0;
-		while( myTimer.get() < time ) {
+		while( myTimer.get() < time && killButton) {
 			if(myTimer.get() < time - 2.27) { 
 				arma = arm0 - .2*(time - myTimer.get());
 				drivetrain.setRaw(0, 0, 0, arma, 0);
