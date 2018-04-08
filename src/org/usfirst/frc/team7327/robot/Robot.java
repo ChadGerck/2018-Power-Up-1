@@ -221,7 +221,7 @@ public class Robot extends TimedRobot {
 			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
 			break;
 		case 2:
-			if(RobotLocation == 'L') { BackwardsPrioritizeScalev2(); }
+			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
 			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }
 			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
 			break;
@@ -270,28 +270,6 @@ public class Robot extends TimedRobot {
 			double arm1 = -.6;
 			double arm2 = -.3; 
 			double shoot = .5; 
-			while(isAutonomous() && myTimer.get() < 10.3) {
-				if(myTimer.get() < 6) {drivetrain.setRaw(x, y, 0, 0, 0);}	
-				if(myTimer.get() >= 6 && myTimer.get() < 8)  {drivetrain.setRaw(0,0,0,arm1,0);}
-				if(myTimer.get() >= 8 && myTimer.get() < 10) {drivetrain.setRaw(0,0,0,arm2,0);}
-				if(myTimer.get() >= 10 && myTimer.get() < 10.3){drivetrain.setRaw(0,0,shoot,0,0);}
-			}	
-		}
-		else {
-			while(isAutonomous() && myTimer.get() < 5) {
-				if(myTimer.get() < 4.0) {drivetrain.setRaw(.5, .5, 0, 0, 0);}
-				if(myTimer.get() >= 4 && myTimer.get() < 5)  {drivetrain.setRaw(-.3,.4,0,0,0);}
-			}
-		}
-		drivetrain.setRaw(0, 0, 0, 0, 0);
-	}
-	public void BackwardsPrioritizeScalev2() {
-		if(RobotLocation == ScaleSide) {
-			double x = .35;
-			double y = .36; 
-			double arm1 = -.6;
-			double arm2 = -.3; 
-			double shoot = .5; 
 			
 			MoveForward(x, y, 1); 
 			MoveRaw(x, y, 0, -.35, 2);
@@ -306,6 +284,7 @@ public class Robot extends TimedRobot {
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
+	
 	public void ResetBackwardsTest() {
 		if(RobotLocation == ScaleSide) {
 			

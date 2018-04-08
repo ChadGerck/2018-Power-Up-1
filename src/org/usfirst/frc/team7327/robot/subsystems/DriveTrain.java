@@ -44,15 +44,12 @@ public class DriveTrain extends Subsystem {
 			
 	} 
 	
-	public void setRaw1(double rightvalue, double leftvalue, double wheelvalue/*, double armvalue, double winchvalue*/) {
+	public void setRaw1(double rightvalue, double leftvalue, double wheelvalue) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
 		LeftMotor1.set(leftvalue);
 		RightMotor1.set(-rightvalue);
 		WheelMotor.set(wheelvalue);
-		//ArmMotor.set(armvalue);
-		//Flappers.set(flapervalue);
-		//WinchMotor.set(winchvalue);
 			
 	} 
 	public void setRaw2(double armvalue) {
