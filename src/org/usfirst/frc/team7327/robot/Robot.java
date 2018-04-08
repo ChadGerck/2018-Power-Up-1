@@ -317,27 +317,24 @@ public class Robot extends TimedRobot {
 		{
 	
 			while(isAutonomous() && myTimer.get() < 10.3) {
-				
-				if(myTimer.get() < 1.2) {drivetrain.setRaw(0,0,0,-.35,0);}
-				if(myTimer.get() >= 1.2 && myTimer.get() < 4) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 4 && myTimer.get() < 5) {drivetrain.setRaw(-.3,.4,0,0,0);}
-				if(myTimer.get() >= 5 && myTimer.get() < 7) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 7 && myTimer.get() < 8) {drivetrain.setRaw(.3,-.3,0,0,0);}
-				if(myTimer.get() >= 8 && myTimer.get() < 9) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 9 && myTimer.get() < 10) {drivetrain.setRaw(0,0,0,-.35,0);}
-				if(myTimer.get() >= 10 && myTimer.get() < 10.3) {drivetrain.setRaw(0,0,.5,0,0);}
+				//changing code to start robot on Right middle side in front of switch. 
+				BeginLift(); 
+				BeginLift();
+				MoveForward(-.35, .353, 3.8);
+				ShootBox();
 				
 			}
 		} else if(gameData.charAt(0) == 'L'){
 			while(isAutonomous() && myTimer.get() < 10.3) {
-				if(myTimer.get() < 1.2) {drivetrain.setRaw(0,0,0,-.35,0);}
-				if(myTimer.get() >= 1.2 && myTimer.get() < 4) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 4 && myTimer.get() < 5) {drivetrain.setRaw(.3,-.4,0,0,0);}
-				if(myTimer.get() >= 5 && myTimer.get() < 7) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 7 && myTimer.get() < 8) {drivetrain.setRaw(-.3,.3,0,0,0);}
-				if(myTimer.get() >= 8 && myTimer.get() < 9) {drivetrain.setRaw(-.35,-.353,0,0,0);}
-				if(myTimer.get() >= 9 && myTimer.get() < 10) {drivetrain.setRaw(0,0,0,-.35,0);}
-				if(myTimer.get() >= 10 && myTimer.get() < 10.3) {drivetrain.setRaw(0,0,.5,0,0);}
+
+				BeginLift(); 
+				MoveForward(-.35, .353, 1.8);
+				TurnRight();
+				MoveForward(-.35,-.353,3);
+				TurnLeft(); 
+				BeginLift();
+				MoveForward(-.35, -.35, 2);
+				ShootBox();
 				
 			}
 		}
@@ -364,6 +361,21 @@ public class Robot extends TimedRobot {
 		while(isAutonomous() && myTimer.get() < time) {
 			drivetrain.setRaw(x, y, 0, 0, 0);
 		}  
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+	}
+	public void TurnLeft() {
+		double time = myTimer.get() + 1; 
+		while(myTimer.get() < time) {
+			drivetrain.setRaw(.3, -.4, 0, 0, 0);
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+	}
+	
+	public void TurnRight() {
+		double time = myTimer.get() + 1; 
+		while(myTimer.get() < time) {
+			drivetrain.setRaw(.4, -.3, 0, 0, 0);
+		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	
