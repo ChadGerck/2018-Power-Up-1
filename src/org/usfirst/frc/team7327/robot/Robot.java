@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 	private char ScaleSide = gameData.charAt(1);
 	
 	//Change based on alliance
-	private char RobotLocation = 'L';
+	private char RobotLocation = 'M';
 	
 
 	
@@ -315,28 +315,20 @@ public class Robot extends TimedRobot {
 	public void MiddlePrioritizeSwitch() {
 		if(gameData.charAt(0) == 'R')
 		{
-	
-			while(isAutonomous() && myTimer.get() < 10.3) {
 				//changing code to start robot on Right middle side in front of switch. 
 				BeginLift(); 
 				BeginLift();
-				MoveForward(-.35, .353, 3.8);
+				MoveForward(-.35, -.353, 3.8);
 				ShootBox();
-				
-			}
 		} else if(gameData.charAt(0) == 'L'){
-			while(isAutonomous() && myTimer.get() < 10.3) {
-
 				BeginLift(); 
-				MoveForward(-.35, .353, 1.8);
-				TurnRight();
+				MoveForward(-.35, -.353, 1.8);
+				TurnLeft();
 				MoveForward(-.35,-.353,3);
-				TurnLeft(); 
+				TurnRight(); 
 				BeginLift();
 				MoveForward(-.35, -.35, 2);
 				ShootBox();
-				
-			}
 		}
 	}
 	
@@ -364,7 +356,7 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	public void TurnLeft() {
-		double time = myTimer.get() + 1; 
+		double time = myTimer.get() + .5; 
 		while(myTimer.get() < time) {
 			drivetrain.setRaw(.3, -.4, 0, 0, 0);
 		}
@@ -372,9 +364,9 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void TurnRight() {
-		double time = myTimer.get() + 1; 
+		double time = myTimer.get() + .5; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(.4, -.3, 0, 0, 0);
+			drivetrain.setRaw(-.4, .3, 0, 0, 0);
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
