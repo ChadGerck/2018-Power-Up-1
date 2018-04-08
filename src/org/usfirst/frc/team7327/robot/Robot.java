@@ -293,16 +293,16 @@ public class Robot extends TimedRobot {
 			double arm2 = -.3; 
 			double shoot = .5; 
 			
-			MoveForward(x, y, 6); 
-			ArmBasetoTop();  
-			MoveForward(x, 0, 2);
+			MoveForward(x, y, 1); 
+			MoveRaw(x, y, 0, -.35, 2);
+			MoveForward(x, y, 3);
+			ArmBasetoTop();
+			ShootBox();
 			
 		}
 		else {
-			while(isAutonomous() && myTimer.get() < 5) {
-				if(myTimer.get() < 4.0) {drivetrain.setRaw(.5, .5, 0, 0, 0);}
-				if(myTimer.get() >= 4 && myTimer.get() < 5)  {drivetrain.setRaw(-.3,.4,0,0,0);}
-			}
+			MoveForward(.5, .5, 4);
+			MoveForward(-.3, .4, 1);
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
@@ -371,6 +371,15 @@ public class Robot extends TimedRobot {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
 			drivetrain.setRaw(0, 0, 0, arm, 0); 
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+		
+	}
+	
+	public void ShootBox() {
+		double time = myTimer.get() + .3; 
+		while(isAutonomous() && myTimer.get() < time) {
+			drivetrain.setRaw(0, 0, .5, 0, 0); 
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 		

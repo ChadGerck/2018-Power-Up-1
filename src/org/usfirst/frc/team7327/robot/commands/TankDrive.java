@@ -62,7 +62,7 @@ public class TankDrive extends Command {
 					Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW, Robot.oi.getLeftStickY (Robot.oi.Controller2)* throttleA, WinchMotor); 
 		}
 		*/
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR);
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR, Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW);
 		if(Robot.oi.getAButton(Robot.oi.Controller2)) {
 			Robot.BeginLift();
 		}
@@ -76,7 +76,7 @@ public class TankDrive extends Command {
 			Robot.killButton = true; 
 		}
 		if(Robot.done) {
-			Robot.drivetrain.setRaw2(Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW, Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
+			Robot.drivetrain.setRaw2(Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
 		}
 		
 				
