@@ -19,10 +19,12 @@ public class TankDrive extends Command {
 	
 	protected void execute(){
 		//throttle speed from 1 to 0 based on desired speed
-		double throttleL = .4;
-		double throttleR = .4;
+		double throttleL = .6;
+		double throttleR = .6;
 		double throttleW = .4;
 		double throttleA = .4; 
+		
+		/*
 		DoubleSolenoid.Value Flappers  = DoubleSolenoid.Value.kOff;
 		double WinchMotor = 0;
 		
@@ -59,7 +61,17 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRaw(Robot.oi.getLeftStickY (Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR,
 					Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW, Robot.oi.getLeftStickY (Robot.oi.Controller2)* throttleA, WinchMotor); 
 		}
-		
+		*/
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR);
+		if(Robot.oi.getAButton(Robot.oi.Controller2)) {
+			Robot.BeginLift();
+		}
+		 if(Robot.oi.getBButton(Robot.oi.Controller2)) {
+			Robot.ArmBasetoTop();
+		}
+		if(Robot.done) {
+			Robot.drivetrain.setRaw2(Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW, Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
+		}
 		
 				
 	}

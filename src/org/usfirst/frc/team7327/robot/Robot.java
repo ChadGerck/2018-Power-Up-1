@@ -42,7 +42,8 @@ public class Robot extends TimedRobot {
 	
 
 	
-	Timer myTimer = new Timer();
+	static Timer myTimer = new Timer();
+	public static boolean done = true; 
 	
 
 	@Override
@@ -292,7 +293,7 @@ public class Robot extends TimedRobot {
 			double shoot = .5; 
 			
 			MoveForward(x, y, 6); 
-			MoveArm(arm1, 2);
+			ArmBasetoTop();  
 			MoveForward(x, 0, 2);
 			
 		}
@@ -341,27 +342,56 @@ public class Robot extends TimedRobot {
 		}
 	}
 	
-	public void BeginLift() {
-		while(isAutonomous()) {
-			if(myTimer.get() < 1.2) {drivetrain.setRaw(0,0,0,-.3,0);}
+	public static void BeginLift() {
+		Robot.done = false; 
+		double time = myTimer.get() + 1.2; 
+		while(myTimer.get() < time) {drivetrain.setRaw(0,0,0,-.3,0);}
+		Robot.done = true; 
+	}
+	
+	public void MoveRaw(double x, double y, double wheel, double arm, double time) {
+		time = myTimer.get() + time; 
+		while(isAutonomous() && myTimer.get() < time) {
+			drivetrain.setRaw(x, y, wheel, arm, 0);
 		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+		
 	}
 	
 	public void MoveForward(double x, double y, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
 			drivetrain.setRaw(x, y, 0, 0, 0);
-		}
+		}  
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	
 	public void MoveArm(double arm, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(0, 0, 0, arm, 0);
+			drivetrain.setRaw(0, 0, 0, arm, 0); 
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 		
+	}
+	
+	public static void ArmBasetoTop() {
+		Robot.done = false; 
+		double time = myTimer.get() + 3.27;
+		double arm0 = -.6, arma = 0, armd = 0;
+		while( myTimer.get() < time ) {
+			if(myTimer.get() < time - 2.27) { 
+				arma = arm0 - .2*(time - myTimer.get());
+				drivetrain.setRaw(0, 0, 0, arma, 0);
+			} 
+			else if(myTimer.get() < time) { 
+				armd = arma + .2*(time - myTimer.get() - 1);
+				drivetrain.setRaw(0, 0, 0, armd, 0);
+			}
+			
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+		Robot.done = true; 
 	}
 	
 }

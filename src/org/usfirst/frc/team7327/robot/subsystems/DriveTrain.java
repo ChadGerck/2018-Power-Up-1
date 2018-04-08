@@ -44,6 +44,23 @@ public class DriveTrain extends Subsystem {
 			
 	} 
 	
+	public void setRaw1(double rightvalue, double leftvalue/*, double wheelvalue, double armvalue, double winchvalue*/) {
+		LeftMotor.set(leftvalue);
+		RightMotor.set(-rightvalue);
+		LeftMotor1.set(leftvalue);
+		RightMotor1.set(-rightvalue);
+		//WheelMotor.set(wheelvalue);
+		//ArmMotor.set(armvalue);
+		//Flappers.set(flapervalue);
+		//WinchMotor.set(winchvalue);
+			
+	} 
+	public void setRaw2(double wheelvalue, double armvalue) {
+		WheelMotor.set(wheelvalue);
+		ArmMotor.set(armvalue);
+		
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TankDrive());

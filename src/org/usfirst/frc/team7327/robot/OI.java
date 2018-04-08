@@ -60,6 +60,17 @@ public class OI {
 		boolean raw = Controller.getYButtonPressed();
 		return raw;
 	}
+
+	public boolean getAButton(XboxController Controller) {
+		boolean raw = Controller.getAButtonPressed();
+		return raw;
+	}
+
+	public boolean getBButton(XboxController Controller) {
+		boolean raw = Controller.getBButtonPressed();
+		return raw;
+	}
+	
 	
 	public OI () {
 		
