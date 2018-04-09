@@ -267,9 +267,6 @@ public class Robot extends TimedRobot {
 		if(RobotLocation == ScaleSide) {
 			double x = .35;
 			double y = .36; 
-			double arm1 = -.6;
-			double arm2 = -.3; 
-			double shoot = .5; 
 			
 			MoveForward(x, y, 1); 
 			MoveRaw(x, y, 0, -.35, 2);
@@ -285,10 +282,22 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	
-	public void ResetBackwardsTest() {
+	public void ResetBackwards() {
 		if(RobotLocation == ScaleSide) {
+			double x = -.35;
+			double y = -.36; 
+			
+			ArmToptoBase();
+			MoveForward(x, y, 3);
+			MoveRaw(x, y, 0, .35, 2);
+			MoveForward(x, y, 1); 
 			
 		}
+		else {
+			MoveForward(.3, -.4, 1);
+			MoveForward(-.5, -.5, 4);
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	
 	public void MiddlePrioritizeSwitch() {
@@ -379,6 +388,25 @@ public class Robot extends TimedRobot {
 			} 
 			else if(myTimer.get() < time) { 
 				armd = arma + .2*(time - myTimer.get() - 1);
+				drivetrain.setRaw(0, 0, 0, armd, 0);
+			}
+			
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
+		Robot.done = true; 
+	}
+	
+	public static void ArmToptoBase() {
+		Robot.done = false; 
+		double time = myTimer.get() + 3.27;
+		double arm0 = .6, arma = 0, armd = 0;
+		while( myTimer.get() < time && killButton) {
+			if(myTimer.get() < time - 2.27) { 
+				arma = arm0 + .2*(time - myTimer.get());
+				drivetrain.setRaw(0, 0, 0, arma, 0);
+			} 
+			else if(myTimer.get() < time) { 
+				armd = arma - .2*(time - myTimer.get() - 1);
 				drivetrain.setRaw(0, 0, 0, armd, 0);
 			}
 			
