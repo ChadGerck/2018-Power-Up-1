@@ -16,8 +16,8 @@ public enum RobotMap {
 	RIGHT_MOTOR1(3),
 	WHEEL_MOTOR(4),
 	ARM_MOTOR(5),
-	FlapperLeft_MOTOR(6),
-	FlapperRight_MOTOR(7),
+	SpinnerLeft_MOTOR(6),
+	SpinnerRight_MOTOR(7),
 	WINCH_MOTOR(8),
 	//Control Mapping
 	XBOX_CONTROLLER(0),

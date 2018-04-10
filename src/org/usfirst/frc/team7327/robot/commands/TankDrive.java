@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = false; 
+	//private boolean SinglePlayer = false; 
 
 	public TankDrive() {
 		requires(Robot.drivetrain);
@@ -23,6 +23,7 @@ public class TankDrive extends Command {
 		double throttleR = .6;
 		double throttleW = .4;
 		double throttleA = .4; 
+		double throttleS = .5;
 		
 		/*
 		DoubleSolenoid.Value Flappers  = DoubleSolenoid.Value.kOff;
@@ -62,7 +63,18 @@ public class TankDrive extends Command {
 					Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW, Robot.oi.getLeftStickY (Robot.oi.Controller2)* throttleA, WinchMotor); 
 		}
 		*/
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR, Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW);
+		double WheelMotor = 0;
+		if(Robot.oi.getRightTrigger(Robot.oi.Controller2) == 1) {
+			WheelMotor = 1; 
+		}else if(Robot.oi.getLeftTrigger(Robot.oi.Controller2) == 1) {
+			WheelMotor = -1;
+		}else {
+			WheelMotor = 0;
+		}
+		
+		
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR, WheelMotor * throttleW);
+		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Robot.oi.Controller1)*throttleS-Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS, Robot.oi.getLeftStickX(Robot.oi.Controller2)*throttleS + Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS );
 		if(Robot.oi.getXButton(Robot.oi.Controller2)) {
 			Robot.BeginLift();
 		}
@@ -84,7 +96,7 @@ public class TankDrive extends Command {
 		}
 		
 		if(Robot.done) {
-			Robot.drivetrain.setRaw2(Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
+			Robot.drivetrain.setRaw2(Robot.oi.getRightStickY(Robot.oi.Controller2)*throttleA);
 		}
 		
 				
