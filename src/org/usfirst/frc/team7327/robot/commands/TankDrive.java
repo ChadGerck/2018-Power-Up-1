@@ -63,18 +63,26 @@ public class TankDrive extends Command {
 		}
 		*/
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR, Robot.oi.getRightStickY(Robot.oi.Controller2)* throttleW);
-		if(Robot.oi.getAButton(Robot.oi.Controller2)) {
+		if(Robot.oi.getXButton(Robot.oi.Controller2)) {
 			Robot.BeginLift();
 		}
 		 if(Robot.oi.getBButton(Robot.oi.Controller2)) {
 			Robot.ArmBasetoTop();
 		}
-		if(Robot.oi.getYButton(Robot.oi.Controller2)) {
-			Robot.killButton = false; 
-		}
-		if(Robot.oi.getXButton(Robot.oi.Controller2)) {
+		 
+		double unkillTimer = 0; 
+		if(unkillTimer >= Robot.myTimer.get() + 1) {
 			Robot.killButton = true; 
 		}
+		if(Robot.oi.getYButton(Robot.oi.Controller2)) {
+			if(Robot.killButton == false) {
+				Robot.killButton = true; 
+			} else {
+				Robot.killButton = false;
+				unkillTimer = Robot.myTimer.get();
+			}
+		}
+		
 		if(Robot.done) {
 			Robot.drivetrain.setRaw2(Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
 		}

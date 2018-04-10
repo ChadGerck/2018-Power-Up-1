@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 	
 
 	
-	static Timer myTimer = new Timer();
+	public static Timer myTimer = new Timer();
 	public static boolean done = true; 
 	public static boolean killButton = true; 
 	
@@ -323,7 +323,7 @@ public class Robot extends TimedRobot {
 	public static void BeginLift() {
 		Robot.done = false; 
 		double time = myTimer.get() + 1.2; 
-		while(myTimer.get() < time) {drivetrain.setRaw(0,0,0,-.3,0);}
+		while(myTimer.get() < time && killButton) {drivetrain.setRaw(0,0,0,-.3,0);}
 		Robot.done = true; 
 	}
 	
