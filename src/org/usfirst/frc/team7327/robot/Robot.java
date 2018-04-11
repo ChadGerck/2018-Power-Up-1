@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
 	private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
 	private int station = DriverStation.getInstance().getLocation();
 	private String gameData = DriverStation.getInstance().getGameSpecificMessage();
-	private char SwitchSide = gameData.charAt(0);
-	private char ScaleSide = gameData.charAt(1);
+	//private char SwitchSide = gameData.charAt(0);
+	//private char ScaleSide = gameData.charAt(1);
 	
 	//Change based on alliance
 	private char RobotLocation = 'M';
@@ -264,7 +264,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void BackwardsPrioritizeScale() {
-		if(RobotLocation == ScaleSide) {
+		if(RobotLocation == gameData.charAt(1)) {
 			double x = .35;
 			double y = .36; 
 			
@@ -283,7 +283,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void ResetBackwards() {
-		if(RobotLocation == ScaleSide) {
+		if(RobotLocation == gameData.charAt(1)) {
 			double x = -.35;
 			double y = -.36; 
 			
