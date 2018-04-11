@@ -23,7 +23,7 @@ public class TankDrive extends Command {
 		double throttleR = .6;
 		double throttleW = .4;
 		double throttleA = .4; 
-		double throttleS = .5;
+		double throttleS = .7;
 		
 		/*
 		DoubleSolenoid.Value Flappers  = DoubleSolenoid.Value.kOff;
