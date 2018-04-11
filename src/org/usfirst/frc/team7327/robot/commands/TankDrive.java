@@ -74,7 +74,7 @@ public class TankDrive extends Command {
 		
 		
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Robot.oi.Controller1)* throttleL, Robot.oi.getRightStickY(Robot.oi.Controller1)* throttleR, WheelMotor * throttleW);
-		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Robot.oi.Controller1)*throttleS-Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS, Robot.oi.getLeftStickX(Robot.oi.Controller2)*throttleS + Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS );
+		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Robot.oi.Controller2)*throttleS-Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS, Robot.oi.getLeftStickX(Robot.oi.Controller2)*throttleS + Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleS );
 		if(Robot.oi.getXButton(Robot.oi.Controller2)) {
 			Robot.BeginLift();
 		}
