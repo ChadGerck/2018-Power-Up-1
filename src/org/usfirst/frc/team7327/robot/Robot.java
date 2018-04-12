@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.Solenoid;
 
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot { 
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
@@ -34,8 +34,6 @@ public class Robot extends TimedRobot {
 	private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
 	private int station = DriverStation.getInstance().getLocation();
 	private String gameData = DriverStation.getInstance().getGameSpecificMessage();
-	//private char SwitchSide = gameData.charAt(0);
-	//private char ScaleSide = gameData.charAt(1);
 	
 	//Change based on alliance
 	private char RobotLocation = 'M';
@@ -74,145 +72,6 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		
-		
-		//DoubleSolenoid.Value FlapOff = DoubleSolenoid.Value.kOff;
-		
-
-		/*
-		if(color == DriverStation.Alliance.Blue || color == DriverStation.Alliance.Red) {
-			switch(station) {
-			case 1:
-				if(gameData.length() > 1)
-				{
-					if(gameData.charAt(0) == 'L')
-					{
-						//Goes forward and pushes cube on switch
-						while(isAutonomous() && elapsedSeconds < 7.3) {
-
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 5) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 5 && elapsedSeconds < 6) {drivetrain.setRaw(-.3,.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 6 && elapsedSeconds < 7) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 7 && elapsedSeconds < 7.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-						
-						}
-					} else if(gameData.charAt(1) == 'L') {
-						while(isAutonomous() && elapsedSeconds < 13.3) {
-
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 8) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 8 && elapsedSeconds < 9) {drivetrain.setRaw(.3,-.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 9 && elapsedSeconds < 11) {drivetrain.setRaw(0,0,0,-.5,FlapOff,0);}
-							if(elapsedSeconds >= 11 && elapsedSeconds < 13) {drivetrain.setRaw(0,0,0,-.3,FlapOff,0);}
-							if(elapsedSeconds >= 13 && elapsedSeconds < 13.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-						
-						}
-					} else {
-						while(isAutonomous() && elapsedSeconds < 5) {
-							
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 5) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-						}
-						
-						}
-						
-				}
-				break;
-			case 2:
-				if(gameData.length() > 1)
-				{
-					if(gameData.charAt(0) == 'R')
-					{
-				
-						while(isAutonomous() && elapsedSeconds < 10.3) {
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 4) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 4 && elapsedSeconds < 5) {drivetrain.setRaw(-.3,.4,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 5 && elapsedSeconds < 7) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 7 && elapsedSeconds < 8) {drivetrain.setRaw(.3,-.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 8 && elapsedSeconds < 9) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 9 && elapsedSeconds < 10) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 10 && elapsedSeconds < 10.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-							
-						}
-					} else if(gameData.charAt(0) == 'L'){
-						while(isAutonomous() && elapsedSeconds < 10.3) {
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 4) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 4 && elapsedSeconds < 5) {drivetrain.setRaw(.3,-.4,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 5 && elapsedSeconds < 7) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 7 && elapsedSeconds < 8) {drivetrain.setRaw(-.3,.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 8 && elapsedSeconds < 9) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 9 && elapsedSeconds < 10) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 10 && elapsedSeconds < 10.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-							
-						}
-					}
-				}
-				break;
-			case 3: 
-				if(gameData.length() > 1)
-				{
-					if(gameData.charAt(0) == 'R')
-					{
-						//Goes forward and pushes cube on switch
-						while(isAutonomous() && elapsedSeconds < 7.3) {
-
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 5) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 5 && elapsedSeconds < 6) {drivetrain.setRaw(.3,-.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 6 && elapsedSeconds < 7) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 7 && elapsedSeconds < 7.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-						
-						}
-					} else if(gameData.charAt(1) == 'R') {
-						while(isAutonomous() && elapsedSeconds < 13.3) {
-
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 8) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 8 && elapsedSeconds < 9) {drivetrain.setRaw(-.3,.3,0,0,FlapOff,0);}
-							if(elapsedSeconds >= 9 && elapsedSeconds < 11) {drivetrain.setRaw(0,0,0,-.5,FlapOff,0);}
-							if(elapsedSeconds >= 11 && elapsedSeconds < 13) {drivetrain.setRaw(0,0,0,-.3,FlapOff,0);}
-							if(elapsedSeconds >= 13 && elapsedSeconds < 13.3) {drivetrain.setRaw(0,0,.5,0,FlapOff,0);}
-						
-						}
-					} else {
-						while(isAutonomous() && elapsedSeconds < 5) {
-							
-							elapsedTime = System.currentTimeMillis() - startTime;
-							elapsedSeconds = elapsedTime /1000;
-							if(elapsedSeconds < 1.2) {drivetrain.setRaw(0,0,0,-.35,FlapOff,0);}
-							if(elapsedSeconds >= 1.2 && elapsedSeconds < 5) {drivetrain.setRaw(-.35,-.353,0,0,FlapOff,0);}
-						}
-						
-					}
-				}
-				break;
-				
-			}
-			
-		}
-		*/
-		//Attempting to simplify the code
 		switch(station)
 		{
 		case 1:

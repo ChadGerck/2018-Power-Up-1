@@ -27,8 +27,7 @@ public class TankDrive extends Command {
 		
 		/*
 		DoubleSolenoid.Value Flappers  = DoubleSolenoid.Value.kOff;
-		double WinchMotor = 0;
-		
+		 
 		
 		if(Robot.oi.getRightBumper(Robot.oi.Controller1)) {
 			Flappers = DoubleSolenoid.Value.kForward; 
@@ -38,24 +37,8 @@ public class TankDrive extends Command {
 			Flappers = DoubleSolenoid.Value.kOff;
 		}
 		
-		if(Robot.oi.getXButton(Robot.oi.Controller2)) {
-			WinchMotor = .3; 
-		}else if(Robot.oi.getYButton(Robot.oi.Controller2)) {
-			WinchMotor = -.3;
-		}else {
-			WinchMotor = 0;
-		}
-		
-		
+		 
 		if(SinglePlayer) {
-			double WheelMotor = 0;
-			if(Robot.oi.getRightTrigger(Robot.oi.Controller1) == 1) {
-				WheelMotor = .4; 
-			}else if(Robot.oi.getLeftTrigger(Robot.oi.Controller1) == 1) {
-				WheelMotor = -.4;
-			}else {
-				WheelMotor = 0;
-			}
 			Robot.drivetrain.setRaw(Robot.oi.getLeftStickY (Robot.oi.Controller1)* throttleL, Robot.oi.getLeftStickX(Robot.oi.Controller1)* throttleR,
 									WheelMotor, Robot.oi.getRightStickY (Robot.oi.Controller1)* throttleA, WinchMotor); 
 		}else {
@@ -96,7 +79,7 @@ public class TankDrive extends Command {
 		}
 		
 		if(Robot.done) {
-			Robot.drivetrain.setRaw2(Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
+			Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Robot.oi.Controller2)*throttleA);
 		}
 		
 				

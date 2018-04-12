@@ -19,7 +19,6 @@ public class DriveTrain extends Subsystem {
 	//private DoubleSolenoid Flappers;
 	private Spark SpinnerLeft;
 	private Spark SpinnerRight;
-	private Spark WinchMotor;
 	
 	
 	
@@ -33,10 +32,9 @@ public class DriveTrain extends Subsystem {
 		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
 		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
 		//Flappers = new DoubleSolenoid(0,4);
-		WinchMotor = new Spark(RobotMap.WINCH_MOTOR.value);
 	}
 	
-	public void setRaw(double rightvalue, double leftvalue, double wheelvalue, double armvalue, double winchvalue) {
+	public void setRaw(double rightvalue, double leftvalue, double wheelvalue, double armvalue, double extra) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
 		LeftMotor1.set(leftvalue);
@@ -44,7 +42,6 @@ public class DriveTrain extends Subsystem {
 		WheelMotor.set(wheelvalue);
 		ArmMotor.set(armvalue);
 		//Flappers.set(flapervalue);
-		WinchMotor.set(winchvalue);
 			
 	} 
 	
@@ -54,9 +51,9 @@ public class DriveTrain extends Subsystem {
 		LeftMotor1.set(leftvalue);
 		RightMotor1.set(-rightvalue);
 		WheelMotor.set(wheelvalue);
-			
+		
 	} 
-	public void setRaw2(double armvalue) {
+	public void setRawArm(double armvalue) {
 		ArmMotor.set(armvalue);
 		
 	}
