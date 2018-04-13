@@ -71,6 +71,10 @@ public class OI {
 		return raw;
 	}
 	
+	public double Dpad(XboxController Controller) {
+		double dpad = Controller.getPOV();
+		return dpad;
+	}
 	
 	public OI () {
 		

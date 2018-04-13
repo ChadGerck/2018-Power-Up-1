@@ -16,9 +16,9 @@ public class DriveTrain extends Subsystem {
 	private Spark RightMotor1;
 	private Spark ArmMotor;
 	private Spark WheelMotor;
-	//private DoubleSolenoid Flappers;
 	private Spark SpinnerLeft;
 	private Spark SpinnerRight;
+	//private DoubleSolenoid Flappers;
 	
 	
 	
@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
 		//Flappers = new DoubleSolenoid(0,4);
 	}
 	
-	public void setRaw(double rightvalue, double leftvalue, double wheelvalue, double armvalue, double extra) {
+	public void setRaw(double rightvalue, double leftvalue, double wheelvalue, double armvalue, double flappervalue) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
 		LeftMotor1.set(leftvalue);

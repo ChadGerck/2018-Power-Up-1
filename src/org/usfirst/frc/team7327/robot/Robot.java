@@ -50,8 +50,8 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		drivetrain = new DriveTrain();
 		Camera = CameraServer.getInstance();
-				Camera.startAutomaticCapture();
-				Camera.getVideo();
+		Camera.startAutomaticCapture();
+		Camera.getVideo();
 		
 		//c.setClosedLoopControl(false);
 		
@@ -272,6 +272,17 @@ public class Robot extends TimedRobot {
 		}
 		drivetrain.setRaw(0, 0, 0, 0, 0);
 		Robot.done = true; 
+	}
+	
+	public static void DelayedStart() {
+		double time = myTimer.get() + 14; 
+		while(myTimer.get() < time) {
+			//raise arm here
+			if(myTimer.get() > time - 7) {
+				drivetrain.setRaw(.45, .45, 0, 0, 0);
+			}
+		}
+		drivetrain.setRaw(0, 0, 0, 0, 0);
 	}
 	
 }
