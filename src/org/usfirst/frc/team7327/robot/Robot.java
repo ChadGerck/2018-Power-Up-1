@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
 	private String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	
 	//Change based on alliance
-	private char RobotLocation = 'M';
+	private char RobotLocation = 'L';
 	
 
 	
@@ -72,23 +72,42 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		switch(station)
-		{
-		case 1:
-			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
-			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-			break;
-		case 2:
-			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }
-			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-			break;
-		case 3: 
-			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
-			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-			break;
+		if(color == DriverStation.Alliance.Blue){
+			switch(station){
+			case 1: // Match 41 and 61
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			case 2: // Match 2 and 73
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			case 3: // Match 23
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			}
+		} else {
+			switch(station){
+			case 1: // Match 15
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			case 2: // Match 79
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			case 3: // Match 49, 96, and 103
+				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
+				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+				break;
+			}
 		}
 		
 		 
@@ -132,6 +151,7 @@ public class Robot extends TimedRobot {
 			MoveForward(x, y, 3);
 			ArmBasetoTop();
 			ShootBox();
+			//MoveForward(-x, -y, 1)
 			
 		}
 		else {
