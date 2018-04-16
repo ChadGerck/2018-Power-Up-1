@@ -72,8 +72,18 @@ public class OI {
 	}
 	
 	public double Dpad(XboxController Controller) {
-		double dpad = Controller.getPOV();
-		return dpad;
+		double raw = Controller.getPOV();
+		return raw;
+	}
+	
+	public boolean getSlowButton(XboxController Controller) {
+		boolean raw = Controller.getRawButtonPressed(7);
+		return raw; 
+	}
+	
+	public boolean getStartButton(XboxController Controller) {
+		boolean raw = Controller.getStartButtonPressed();
+		return raw; 
 	}
 	
 	public OI () {
