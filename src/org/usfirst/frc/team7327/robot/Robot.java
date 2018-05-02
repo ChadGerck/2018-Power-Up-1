@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Compressor;
-//import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import java.util.Timer;
 import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.Solenoid;
@@ -35,16 +34,16 @@ public class Robot extends TimedRobot {
 	
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
-	private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-	private int station = DriverStation.getInstance().getLocation();
-	private String gameData = DriverStation.getInstance().getGameSpecificMessage();
+	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+	//private int station = DriverStation.getInstance().getLocation();
+	private String gameData;
 	
 	//Change based on alliance
-	private char RobotLocation = 'L';
+	//private char RobotLocation = 'L';
 	
-	public static Timer myTimer = new Timer();
+	//public static Timer myTimer = new Timer();
 	public static boolean done = true; 
-	public static boolean killButton = true; 
+	//public static boolean killButton = true; 
 	
 
 	@Override
@@ -54,8 +53,8 @@ public class Robot extends TimedRobot {
 		Camera = CameraServer.getInstance();
 		Camera.startAutomaticCapture();
 		Camera.getVideo();
-		
 		c.setClosedLoopControl(true);
+		//gameData = null; 
 		
 	}
 
@@ -71,50 +70,62 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		myTimer.reset();
-		myTimer.start();
-		
-		if(color == DriverStation.Alliance.Blue){
-			switch(station){
-			case 1: // Q 41 and 61
-				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); } //Match 4 and 6
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-				break;
-			case 2: // Q 2 and 73
-				if(RobotLocation == 'L') { BackwardsPrioritizeSwitch(); } //Match 1
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  } //Match 7
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-				break;
-			case 3: // Q 23
-				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); } //Match 3
-				break;
-			}
-		} else {
-			switch(station){
-			case 1: // Q 15
-				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); } //Match 2
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-				break;
-			case 2: // Q 79
-				if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }//Match 8
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-				break;
-			case 3: // Q 49, 96, and 103
-				if(RobotLocation == 'L') { BackwardsPrioritizeSwitch(); }//Match 10
-				else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); } //Match 5 and Match 9
-				else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
-				break;
-			}
+		//myTimer.reset();
+		//myTimer.start();
+/*
+		gameData = ("NULL".equalsIgnoreCase(gameData)) ? null : gameData; 
+		while(gameData == null) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
+		
+*/
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		System.out.println("This is your gameData" + gameData.charAt(0)); 
+		
+		
+		long startTime = System.currentTimeMillis();
+		long elapsedTime = System.currentTimeMillis() - startTime;
+		long elapsedSeconds = elapsedTime /1000; 
+		
+		
+		while(isAutonomous() && elapsedSeconds < 10) {
+			elapsedTime = System.currentTimeMillis() - startTime;
+			elapsedSeconds = elapsedTime /1000;
+			if(elapsedSeconds < 2) {drivetrain.setRaw(.35,.36,0,0);}
+			if(elapsedSeconds >= 2 && elapsedSeconds < 4) {drivetrain.setRaw(0,0, 0, -.55);}
+			if(elapsedSeconds >= 4 && elapsedSeconds < 10) {drivetrain.setRaw(.35,.36, 0, 0);}
+			//if(elapsedSeconds >= 2 && elapsedSeconds <6) {drivetrain.setRaw(-.35,-.36, 0, 0,);}
+			//if(elapsedSeconds >= 6 && elapsedSeconds <7 && gameData.charAt(0) == 'R'  ) { drivetrain.setRaw(0, 0, 0, 0, DoubleSolenoid.Value.kReverse);}
+		//drivetrain.setRaw(leftvalue, rightvalue, wheelvalue, armvalue, grabbervalue);	
+		}
+		
+
+		drivetrain.setRaw(0, 0, 0, 0);
+		
+		/*
+		switch(station){
+		case 1: // Q 15
+			if(RobotLocation == 'L') { 
+				MoveForward(-.35,-.36, 3); }//BackwardsPrioritizeScale(); } //Match 2
+			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
+			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+			break;
+		case 2: // Q 79
+			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
+			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch();  }//Match 8
+			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+			break;
+		case 3: // Q 49, 96, and 103
+			while(isAutonomous() && elapsedSeconds < 3) {
+				elapsedTime = System.currentTimeMillis() - startTime;
+				elapsedSeconds = elapsedTime /1000; 
+				if(elapsedSeconds <3) {drivetrain.setRaw(-.3,-.31, 0, 0,);}
+			}
+		*/	
 		
 		 
 		
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff);
+		drivetrain.setRaw(0, 0, 0, 0);
 		
 	}
 
@@ -138,7 +149,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
-	
+	/*
 	public void ForwardPrioritizeScale() {
 		BeginLift();
 	}
@@ -160,7 +171,7 @@ public class Robot extends TimedRobot {
 			MoveForward(.5, .5, 4);
 			MoveForward(-.3, .4, 1);
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
 	public void BackwardsPrioritizeSwitch() {
@@ -176,6 +187,24 @@ public class Robot extends TimedRobot {
 			
 		}
 		else { BackwardsPrioritizeScale(); }
+		drivetrain.setRaw(0, 0, 0, 0);
+	}
+	
+	public void ForwardsPrioritizeSwitch() {
+		if(RobotLocation == gameData.charAt(0)) {
+			double x = .35;
+			double y = .36; 
+			MoveForward(-x, -y, 1);
+			MoveRaw(-x, -y, 0, -.35, 2);
+			BeginLift(); 
+			TurnRight(); 
+			MoveForward(-x, -y, 1);
+			//ShootBox(); 
+			drivetrain.setRaw(0, 0, 0, 0,DoubleSolenoid.Value.kForward);
+			
+		}
+		else { MoveForward(-.35, -.36, 3); }
+		drivetrain.setRaw(0, 0, 0, 0);
 	}
 	
 	public void ResetBackwards() {
@@ -193,7 +222,7 @@ public class Robot extends TimedRobot {
 			MoveForward(.3, -.4, 1);
 			MoveForward(-.5, -.5, 4);
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
 	public void MiddlePrioritizeSwitch() {
@@ -219,57 +248,57 @@ public class Robot extends TimedRobot {
 	public static void BeginLift() {
 		Robot.done = false; 
 		double time = myTimer.get() + 1.2; 
-		while(myTimer.get() < time && killButton) {drivetrain.setRaw(0,0,0,-.3,GrabOff); }
+		while(myTimer.get() < time && killButton) {drivetrain.setRaw(0,0,0,-.3); }
 		Robot.done = true; 
 	}
 	
 	public void MoveRaw(double x, double y, double wheel, double arm, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(x, y, wheel, arm,GrabOff); 
+			drivetrain.setRaw(x, y, wheel, arm); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 		
 	}
 	
 	public void MoveForward(double x, double y, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(x, y, 0, 0,GrabOff); 
+			drivetrain.setRaw(x, y, 0, 0); 
 		}  
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	public void TurnLeft() {
-		double time = myTimer.get() + .5; 
+		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(.3, -.4, 0, 0,GrabOff); 
+			drivetrain.setRaw(.3, -.4, 0, 0); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
 	public void TurnRight() {
-		double time = myTimer.get() + .5; 
+		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(-.4, .3, 0, 0,GrabOff); 
+			drivetrain.setRaw(-.4, .3, 0, 0); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
 	public void MoveArm(double arm, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(0, 0, 0, arm,GrabOff);  
+			drivetrain.setRaw(0, 0, 0, arm);  
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 		
 	}
 	
 	public void ShootBox() {
 		double time = myTimer.get() + .3; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(0, 0, .5, 0,GrabOff);  
+			drivetrain.setRaw(0, 0, .5, 0);  
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 		
 	}
 	
@@ -280,15 +309,15 @@ public class Robot extends TimedRobot {
 		while( myTimer.get() < time && killButton) {
 			if(myTimer.get() < time - 2.27) { 
 				arma = arm0 - .2*(time - myTimer.get());
-				drivetrain.setRaw(0, 0, 0, arma,GrabOff); 
+				drivetrain.setRaw(0, 0, 0, arma); 
 			} 
 			else if(myTimer.get() < time) { 
 				armd = arma + .2*(time - myTimer.get() - 1);
-				drivetrain.setRaw(0, 0, 0, armd,GrabOff); 
+				drivetrain.setRaw(0, 0, 0, armd); 
 			}
 			
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 		Robot.done = true; 
 	}
 	
@@ -299,15 +328,15 @@ public class Robot extends TimedRobot {
 		while( myTimer.get() < time && killButton) {
 			if(myTimer.get() < time - 2.27) { 
 				arma = arm0 + .2*(time - myTimer.get());
-				drivetrain.setRaw(0, 0, 0, arma,GrabOff); 
+				drivetrain.setRaw(0, 0, 0, arma); 
 			} 
 			else if(myTimer.get() < time) { 
 				armd = arma - .2*(time - myTimer.get() - 1);
-				drivetrain.setRaw(0, 0, 0, armd,GrabOff); 
+				drivetrain.setRaw(0, 0, 0, armd); 
 			}
 			
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 		Robot.done = true; 
 	}
 	
@@ -316,10 +345,17 @@ public class Robot extends TimedRobot {
 		while(myTimer.get() < time) {
 			//raise arm here
 			if(myTimer.get() > time - 7) {
-				drivetrain.setRaw(.45, .45, 0, 0,GrabOff); 
+				drivetrain.setRaw(.45, .45, 0, 0); 
 			}
 		}
-		drivetrain.setRaw(0, 0, 0, 0,GrabOff); 
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
+	
+	public static void ReleaseFunction() {
+		double time = myTimer.get();
+		if(myTimer.get() < time + .6) { drivetrain.setRaw(0, 0, 0, .5); }
+		if(myTimer.get() >= time + .6 && myTimer.get() < .7) drivetrain.setRaw(0, 0, 0, .5, DoubleSolenoid.Value.kForward);
+		if(myTimer.get() >= time + .7 && myTimer.get() < 1) drivetrain.setRaw(0, 0, 0, .5, GrabOff);
+	}*/
 	
 }

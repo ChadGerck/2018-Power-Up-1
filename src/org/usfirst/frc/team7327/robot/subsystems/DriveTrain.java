@@ -4,6 +4,7 @@ import org.usfirst.frc.team7327.robot.RobotMap;
 import org.usfirst.frc.team7327.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,7 +20,7 @@ public class DriveTrain extends Subsystem {
 	private Spark SpinnerLeft;
 	private Spark SpinnerRight;
 	private DoubleSolenoid Grabbers;
-	
+	private DoubleSolenoid Puncher;
 	
 	
 	public DriveTrain() {
@@ -32,19 +33,25 @@ public class DriveTrain extends Subsystem {
 		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
 		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
 		Grabbers = new DoubleSolenoid(0,4);
+		Puncher = new DoubleSolenoid(1,2);
 	}
 	
-	public void setRaw(double leftvalue, double rightvalue, double wheelvalue, double armvalue, DoubleSolenoid.Value grabbervalue) {
+	public void setRaw(double leftvalue, double rightvalue, double wheelvalue, double armvalue) {
 		LeftMotor.set(-leftvalue);
 		RightMotor.set(rightvalue);
 		LeftMotor1.set(-leftvalue);
 		RightMotor1.set(rightvalue);
 		WheelMotor.set(wheelvalue);
 		ArmMotor.set(armvalue);
-		Grabbers.set(grabbervalue);
 			
 	} 
 	
+	
+	public void setPunchGrab( DoubleSolenoid.Value punchervalue, DoubleSolenoid.Value grabbervalue  ) {
+		Puncher.set(punchervalue);
+		Grabbers.set(grabbervalue);
+	}
+	 
 	public void setRaw1(double leftvalue, double rightvalue, double wheelvalue) {
 		LeftMotor.set(-leftvalue);
 		RightMotor.set(rightvalue);

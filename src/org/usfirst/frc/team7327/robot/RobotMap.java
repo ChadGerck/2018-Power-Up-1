@@ -1,5 +1,6 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2017-2018 FIRS
+ * T. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -18,6 +19,7 @@ public enum RobotMap {
 	ARM_MOTOR(5),
 	SpinnerLeft_MOTOR(6),
 	SpinnerRight_MOTOR(7),
+	//FISTING_MOTOR(8),
 	//Control Mapping
 	XBOX_CONTROLLER(0),
 	XBOX_CONTROLLER1(1);

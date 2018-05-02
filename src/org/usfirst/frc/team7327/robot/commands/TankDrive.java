@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = false; 
+	private boolean SinglePlayer = true; 
 
 	boolean Dpressed = false;
 	boolean armOn = true;
@@ -26,19 +26,25 @@ public class TankDrive extends Command {
 		//throttle speed from 1 to 0 based on desired speed
 		double throttleL = .6;
 		double throttleR = .6;
-		double throttleW = .4;
-		double throttleA = .4;  
+		double throttleW = .65;
+		double throttleA = .65;  
 		double throttleS = .7;
 		
+		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
 		XboxController Player1 = Robot.oi.Controller1; 
 		XboxController Player2 = Robot.oi.Controller2;
 		if(SinglePlayer) { Player2 = Robot.oi.Controller1; }
+		/*
+		if(Robot.oi.getAButton(Player2)) {
+			Robot.ReleaseFunction();
+		}
+		*/
 		
 		if(Robot.oi.getRightBumper(Player2)) {
-			Grabbers = DoubleSolenoid.Value.kForward;
-		}else if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
+		}else if(Robot.oi.getLeftBumper(Player2)) {
+			Grabbers = DoubleSolenoid.Value.kForward;
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
 		}
@@ -52,28 +58,31 @@ public class TankDrive extends Command {
 		else { Dpressed = false; }
 		
 		if((Robot.oi.Dpad(Player2) >= 0 && Robot.oi.Dpad(Player2) < 45) || (Robot.oi.Dpad(Player2) >= 315 && Robot.oi.Dpad(Player2) < 360) ) {
-			DRight = -throttleS;
+			DRight = throttleS;
 			DLeft = throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 45 && Robot.oi.Dpad(Player2) < 135) {
 			DRight = throttleS;
-			DLeft = throttleS;
+			DLeft = -throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 135 && Robot.oi.Dpad(Player2) < 225) {
-			DRight = throttleS;
+			DRight = -throttleS;
 			DLeft = -throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 225 && Robot.oi.Dpad(Player2) < 315) {
 			DRight = -throttleS;
-			DLeft = -throttleS;
+			DLeft = throttleS;
 		}
 		else {
 			DRight = 0;
 			DLeft = 0;
 		} 
-		if( !Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player2)*throttleS-Robot.oi.getLeftStickY(Player2)*throttleS, Robot.oi.getLeftStickX(Player2)*throttleS + Robot.oi.getLeftStickY(Player2)*throttleS ); }
-		else if(Dpressed) {Robot.drivetrain.setRawSpinner(DLeft, DRight);}
-		
+		if( !Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(-Robot.oi.getLeftStickX(Player2)*throttleS-Robot.oi.getLeftStickY(Player2)*throttleS, Robot.oi.getLeftStickX(Player2)*throttleS - Robot.oi.getLeftStickY(Player2)*throttleS ); }
+		else if(Dpressed && !SinglePlayer) {Robot.drivetrain.setRawSpinner(DLeft, DRight);}
+		if(SinglePlayer) {
+			Robot.drivetrain.setRawSpinner(DLeft, DRight);
+		}
+		/*
 		if(Robot.oi.getXButton(Player2)) {
 			Robot.BeginLift();
 		}
@@ -102,12 +111,13 @@ public class TankDrive extends Command {
 		}else {
 			WheelMotor = 0;
 		}
-		
+		*/
 		if(Robot.oi.getAButton(Player1) && SinglePlayer) {
-			if(armOn) { armOn = false;} else { armOn = true; }
+			if(armOn) { armOn = false;} 
+			else { armOn = true; }
 		}
 		
-		if(Robot.done && armOn) {
+		if(!armOn) {
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA);
 		}
 
@@ -122,7 +132,7 @@ public class TankDrive extends Command {
 				throttleL = .6;
 				throttleR = .6;
 			}
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, WheelMotor * throttleW);
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, 0);
 		} else if(SinglePlayer){
 			if(Robot.oi.getStartButton(Player1)) {
 				if(Speed == 0 || Speed == 2) { Speed = 1; }
@@ -136,9 +146,9 @@ public class TankDrive extends Command {
 			else { throttleL = .4; throttleR = .4; }
 			
 			if(!armOn) {
-				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, 0, WheelMotor * throttleW);
+				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, 0, 0 );
 			}else {
-				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, WheelMotor * throttleW);
+				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, 0);
 			}
 		}
 	}
