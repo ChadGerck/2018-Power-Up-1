@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
 	
-	Compressor c = new Compressor(0);
+	Compressor c0 = new Compressor(0);
 	
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 		Camera = CameraServer.getInstance();
 		Camera.startAutomaticCapture();
 		Camera.getVideo();
-		c.setClosedLoopControl(true);
+		c0.setClosedLoopControl(true);
 		//gameData = null; 
 		
 	}

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = true; 
+	private boolean SinglePlayer = false; 
 
 	boolean Dpressed = false;
 	boolean armOn = true;
@@ -32,6 +32,7 @@ public class TankDrive extends Command {
 		
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
+		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
 		XboxController Player1 = Robot.oi.Controller1; 
 		XboxController Player2 = Robot.oi.Controller2;
 		if(SinglePlayer) { Player2 = Robot.oi.Controller1; }
@@ -49,6 +50,15 @@ public class TankDrive extends Command {
 			Grabbers = DoubleSolenoid.Value.kOff;
 		}
 		Robot.drivetrain.setRawGrabber(Grabbers);
+		
+		if(Robot.oi.getRightBumper(Player1)) {
+			Punchers = DoubleSolenoid.Value.kReverse;
+		}else if(Robot.oi.getLeftBumper(Player1)) {
+			Punchers = DoubleSolenoid.Value.kForward;
+		}else {
+			Punchers = DoubleSolenoid.Value.kOff;
+		}
+		Robot.drivetrain.setPunchers(Punchers);
 		
 		double DRight = 0;
 		double DLeft = 0;
@@ -117,7 +127,7 @@ public class TankDrive extends Command {
 			else { armOn = true; }
 		}
 		
-		if(!armOn) {
+		if(armOn) {
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA);
 		}
 

@@ -32,8 +32,8 @@ public class DriveTrain extends Subsystem {
 		ArmMotor = new Spark(RobotMap.ARM_MOTOR.value);
 		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
 		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
-		Grabbers = new DoubleSolenoid(0,4);
-		Puncher = new DoubleSolenoid(1,2);
+		Grabbers = new DoubleSolenoid(0,0,4);
+		Puncher = new DoubleSolenoid(1,1,2);
 	}
 	
 	public void setRaw(double leftvalue, double rightvalue, double wheelvalue, double armvalue) {
@@ -47,9 +47,8 @@ public class DriveTrain extends Subsystem {
 	} 
 	
 	
-	public void setPunchGrab( DoubleSolenoid.Value punchervalue, DoubleSolenoid.Value grabbervalue  ) {
+	public void setPunchers( DoubleSolenoid.Value punchervalue ) {
 		Puncher.set(punchervalue);
-		Grabbers.set(grabbervalue);
 	}
 	 
 	public void setRaw1(double leftvalue, double rightvalue, double wheelvalue) {
