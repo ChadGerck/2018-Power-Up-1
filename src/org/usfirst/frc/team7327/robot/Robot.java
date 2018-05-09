@@ -12,23 +12,34 @@ import java.io.IOException;
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Compressor;
 //import java.util.Timer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Talon;
 //import edu.wpi.first.wpilibj.Solenoid;
 
 public class Robot extends TimedRobot { 
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
+	Encoder encoder;
+    XboxController Controller1;
+    Talon talon;
+
+    // update every 0.005 seconds/5 milliseconds.
+    long kUpdatePeriod = (long) 0.005;
+
 	
 	Compressor c0 = new Compressor(0);
 	
@@ -48,6 +59,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+	/* encoder(1, 2, false, Encoder::k4X);
+     Controller1(0), // Initialize logitech on port 0.
+     talon(0), // Initialize the Talon on channel 0.{
+		*/
 		oi = new OI();
 		drivetrain = new DriveTrain();
 		Camera = CameraServer.getInstance();
@@ -56,7 +71,12 @@ public class Robot extends TimedRobot {
 		c0.setClosedLoopControl(true);
 		//gameData = null; 
 		
+   /*  encoder.setSamplesToAverage(5); // Used to reduce noise in period
+     encoder.setDistancePerPulse(1.0/360); // This makes it so that GetDistance will return 1 when the shaft 
+     // makes a full rotation and that GetRate will be in Revs per second
+	*/
 	}
+
 
 	@Override
 	public void disabledInit() {
@@ -73,6 +93,7 @@ public class Robot extends TimedRobot {
 		//myTimer.reset();
 		//myTimer.start();
 /*
+ 
 		gameData = ("NULL".equalsIgnoreCase(gameData)) ? null : gameData; 
 		while(gameData == null) {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -97,6 +118,7 @@ public class Robot extends TimedRobot {
 			//if(elapsedSeconds >= 2 && elapsedSeconds <6) {drivetrain.setRaw(-.35,-.36, 0, 0,);}
 			//if(elapsedSeconds >= 6 && elapsedSeconds <7 && gameData.charAt(0) == 'R'  ) { drivetrain.setRaw(0, 0, 0, 0, DoubleSolenoid.Value.kReverse);}
 		//drivetrain.setRaw(leftvalue, rightvalue, wheelvalue, armvalue, grabbervalue);	
+			
 		}
 		
 
@@ -136,8 +158,29 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		
-	}
+		/* 
+		encoder.reset();
+	        while (isOperatorControl() && isEnabled()) {
+	            talon.set(Controller1.getY()); 
+	            //gets the y-axis on the LEFT logitech
+	            while(encoder.getDistance() < 2) {
+	                talon.set(-0.2);
+	                SmartDashboard.putNumber("Encoder Distance", encoder.getDistance()); 
+	                // prints displacement in revolutions
+	                SmartDashboard.putNumber("Encoder Rate", encoder.getRate()); 
+	                // prints rate in Revs per second 
+	                try {
+						wait(kUpdatePeriod);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+	            }
+	        }
+	        */
+	    }
+	
 	
 
 	@Override

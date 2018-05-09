@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = false; 
+	private boolean SinglePlayer = true; 
 
 	boolean Dpressed = false;
 	boolean armOn = true;
@@ -42,18 +42,21 @@ public class TankDrive extends Command {
 		}
 		*/
 		
-		if(Robot.oi.getRightBumper(Player2)) {
+		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
-		}else if(Robot.oi.getLeftBumper(Player2)) {
+		}
+		else if(Robot.oi.getRightBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
+			//Punchers = DoubleSolenoid.Value.kReverse;
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
 		}
+		
 		Robot.drivetrain.setRawGrabber(Grabbers);
 		
-		if(Robot.oi.getRightBumper(Player1)) {
+		if(Robot.oi.getRightTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kReverse;
-		}else if(Robot.oi.getLeftBumper(Player1)) {
+		}else if(Robot.oi.getLeftTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kForward;
 		}else {
 			Punchers = DoubleSolenoid.Value.kOff;
@@ -68,26 +71,26 @@ public class TankDrive extends Command {
 		else { Dpressed = false; }
 		
 		if((Robot.oi.Dpad(Player2) >= 0 && Robot.oi.Dpad(Player2) < 45) || (Robot.oi.Dpad(Player2) >= 315 && Robot.oi.Dpad(Player2) < 360) ) {
-			DRight = throttleS;
+			DRight = -throttleS;
 			DLeft = throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 45 && Robot.oi.Dpad(Player2) < 135) {
 			DRight = throttleS;
-			DLeft = -throttleS;
+			DLeft = throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 135 && Robot.oi.Dpad(Player2) < 225) {
-			DRight = -throttleS;
+			DRight = throttleS;
 			DLeft = -throttleS;
 		}
 		else if(Robot.oi.Dpad(Player2) >= 225 && Robot.oi.Dpad(Player2) < 315) {
 			DRight = -throttleS;
-			DLeft = throttleS;
+			DLeft = -throttleS;
 		}
 		else {
 			DRight = 0;
 			DLeft = 0;
 		} 
-		if( !Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(-Robot.oi.getLeftStickX(Player2)*throttleS-Robot.oi.getLeftStickY(Player2)*throttleS, Robot.oi.getLeftStickX(Player2)*throttleS - Robot.oi.getLeftStickY(Player2)*throttleS ); }
+		if( !Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player2)*throttleS-Robot.oi.getLeftStickY(Player2)*throttleS, Robot.oi.getLeftStickX(Player2)*throttleS + Robot.oi.getLeftStickY(Player2)*throttleS ); }
 		else if(Dpressed && !SinglePlayer) {Robot.drivetrain.setRawSpinner(DLeft, DRight);}
 		if(SinglePlayer) {
 			Robot.drivetrain.setRawSpinner(DLeft, DRight);
@@ -123,8 +126,8 @@ public class TankDrive extends Command {
 		}
 		*/
 		if(Robot.oi.getAButton(Player1) && SinglePlayer) {
-			if(armOn) { armOn = false;} 
-			else { armOn = true; }
+			if(!armOn) { armOn = true;} 
+			else { armOn = false; }
 		}
 		
 		if(armOn) {
@@ -155,7 +158,7 @@ public class TankDrive extends Command {
 			else if(Speed == 2){ throttleL = .85; throttleR = .85; }
 			else { throttleL = .4; throttleR = .4; }
 			
-			if(!armOn) {
+			if(armOn) {
 				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, 0, 0 );
 			}else {
 				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, 0);
