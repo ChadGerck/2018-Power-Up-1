@@ -47,6 +47,7 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceL2: ", distanceL2);
 		SmartDashboard.putNumber("DistanceR1: ", distanceR1);
 		SmartDashboard.putNumber("DistanceR2: ", distanceR2);
+		SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
 		
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;

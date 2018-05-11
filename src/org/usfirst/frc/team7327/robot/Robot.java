@@ -17,7 +17,7 @@ import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.XboxController;
-	//import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Timer;
 	//import edu.wpi.first.wpilibj.command.Command;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -41,6 +41,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Talon;
 	//import edu.wpi.first.wpilibj.Solenoid;
@@ -57,10 +58,12 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderL2;
 	public static Encoder encoderR1;
 	public static Encoder encoderR2;
+	public static ADXRS450_Gyro gyro; 
+	
+	
 
 	//public double gyro; 
 	//public double gyroOffset;
-	//private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
     XboxController Controller1;
     Talon talon;
@@ -75,13 +78,15 @@ public class Robot extends TimedRobot {
 	//Change based on alliance
 	//private char RobotLocation = 'L';
 	
-	//public static Timer myTimer = new Timer();
+	public static Timer myTimer = new Timer();
 	public static boolean done = true; 
 	//public static boolean killButton = true; 
 	
 
 	@Override
 	public void robotInit() {
+		
+		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		encoderL1 = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 		encoderL1.setMaxPeriod(.1);
@@ -139,8 +144,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		//myTimer.reset();
-		//myTimer.start();
+		myTimer.reset();
+		myTimer.start();
+		MoveForward(-.35, -.35, 5);
+		
 /*
  
 		gameData = ("NULL".equalsIgnoreCase(gameData)) ? null : gameData; 
@@ -152,7 +159,7 @@ public class Robot extends TimedRobot {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println("This is your gameData" + gameData.charAt(0)); 
 		
-		*/
+		*//*
 		long startTime = System.currentTimeMillis();
 		long elapsedTime = System.currentTimeMillis() - startTime;
 		long elapsedSeconds = elapsedTime /1000; 
@@ -169,7 +176,7 @@ public class Robot extends TimedRobot {
 		//drivetrain.setRaw(leftvalue, rightvalue, wheelvalue, armvalue, grabbervalue);	
 			
 		}
-		
+		*/
        
 		drivetrain.setRaw(0, 0, 0, 0);
 		
@@ -212,6 +219,8 @@ public class Robot extends TimedRobot {
 		encoderL2.reset();
 		encoderR1.reset();
 		encoderR2.reset();
+		gyro.reset();
+		gyro.calibrate();
 		//imu.reset();
 		//imu.calibrate();
 		//gyroOffset = imu.getYaw(); 
@@ -222,6 +231,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		
+		
 	    //SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
 	    //SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
 	    //SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
@@ -235,16 +247,43 @@ public class Robot extends TimedRobot {
 	    //gyro = imu.getYaw() - gyroOffset;
 	    //if(gyro < 0) {
 	    	//gyro = 360+gyro; 
-	    }
+	    //}
 	    //SmartDashboard.putNumber("Gyro: ", gyro);
 	    
 	    //SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
 	    //SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
-	//}
+	}
 
 	@Override
 	public void testPeriodic() {
 	}
+	
+	public void MoveForward(double x, double y, double time) {
+
+		time = myTimer.get() + time; 
+		double tempx = x; 
+		double tempy = y; 
+		while(isAutonomous() && myTimer.get() < time) {
+			SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
+			drivetrain.setRaw(tempx, tempy, 0, 0);
+			System.out.println(tempx + " " + tempy);
+			if(gyro.getAngle() < 0 ) {
+				if(tempx < x + .05) { tempx += .01;  }
+				else { tempx -= .01; tempy -= .01; }
+			}else if(gyro.getAngle() > 0) {
+				if(tempy < y + .05) { tempy += .01; }
+				else { tempy -= .01; tempx -= .01; }
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}  
+		drivetrain.setRaw(0, 0, 0, 0); 
+	}
+	
 	
 	/*
 	public void ForwardPrioritizeScale() {
