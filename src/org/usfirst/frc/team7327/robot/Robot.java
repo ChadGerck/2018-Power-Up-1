@@ -7,47 +7,70 @@
 
 package org.usfirst.frc.team7327.robot;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
+
 import java.io.IOException;
 
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
-//import edu.wpi.first.wpilibj.DigitalInput;
+	//import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.Timer;
-//import edu.wpi.first.wpilibj.command.Command;
+	//import edu.wpi.first.wpilibj.Timer;
+	//import edu.wpi.first.wpilibj.command.Command;
+
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj.CameraServer;
+
 import edu.wpi.first.wpilibj.Compressor;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-//import edu.wpi.first.wpilibj.Compressor;
-//import java.util.Timer;
+	//import edu.wpi.first.wpilibj.Compressor;
+	//import java.util.Timer;
+
 import edu.wpi.first.wpilibj.DriverStation;
+
 import edu.wpi.first.wpilibj.Encoder;
+
 import edu.wpi.first.wpilibj.Joystick;
+
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Talon;
-//import edu.wpi.first.wpilibj.Solenoid;
+	//import edu.wpi.first.wpilibj.Solenoid;
+
+import edu.wpi.first.wpilibj.*;
 
 public class Robot extends TimedRobot { 
+	//public static final ADIS16448_IMU imu = new ADIS16448_IMU();
+	//public static SPI spi;
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
-	Encoder encoder;
+	public static Encoder encoderL1;
+	public static Encoder encoderL2;
+	public static Encoder encoderR1;
+	public static Encoder encoderR2;
+
+	//public double gyro; 
+	//public double gyroOffset;
+	//private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	
     XboxController Controller1;
     Talon talon;
-
-    // update every 0.005 seconds/5 milliseconds.
-    long kUpdatePeriod = (long) 0.005;
-
-	
 	Compressor c0 = new Compressor(0);
 	
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
 	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
 	//private int station = DriverStation.getInstance().getLocation();
-	private String gameData;
+	//private String gameData;
 	
 	//Change based on alliance
 	//private char RobotLocation = 'L';
@@ -59,18 +82,44 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-	/* encoder(1, 2, false, Encoder::k4X);
-     Controller1(0), // Initialize logitech on port 0.
-     talon(0), // Initialize the Talon on channel 0.{
-		*/
+		
+		encoderL1 = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+		encoderL1.setMaxPeriod(.1);
+		encoderL1.setMinRate(10);
+		encoderL1.setDistancePerPulse(5);
+		encoderL1.setReverseDirection(false);
+		encoderL1.setSamplesToAverage(7);
+		
+		encoderL2 = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		encoderL2.setMaxPeriod(.1);
+		encoderL2.setMinRate(10);
+		encoderL2.setDistancePerPulse(5);
+		encoderL2.setReverseDirection(false);
+		encoderL2.setSamplesToAverage(7);
+		
+		encoderR1 = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
+		encoderR1.setMaxPeriod(.1);
+		encoderR1.setMinRate(10);
+		encoderR1.setDistancePerPulse(5);
+		encoderR1.setReverseDirection(true);
+		encoderR1.setSamplesToAverage(7);
+		encoderR1.reset();
+		
+		encoderR2 = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+		encoderR2.setMaxPeriod(.1);
+		encoderR2.setMinRate(10);
+		encoderR2.setDistancePerPulse(5);
+		encoderR2.setReverseDirection(true);
+		encoderR2.setSamplesToAverage(7);
+		encoderR2.reset();
+				
 		oi = new OI();
 		drivetrain = new DriveTrain();
 		Camera = CameraServer.getInstance();
 		Camera.startAutomaticCapture();
 		Camera.getVideo();
-		c0.setClosedLoopControl(true);
-		//gameData = null; 
-		
+		c0.setClosedLoopControl(true); 
+
    /*  encoder.setSamplesToAverage(5); // Used to reduce noise in period
      encoder.setDistancePerPulse(1.0/360); // This makes it so that GetDistance will return 1 when the shaft 
      // makes a full rotation and that GetRate will be in Revs per second
@@ -99,11 +148,11 @@ public class Robot extends TimedRobot {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
 		
-*/
+
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println("This is your gameData" + gameData.charAt(0)); 
 		
-		
+		*/
 		long startTime = System.currentTimeMillis();
 		long elapsedTime = System.currentTimeMillis() - startTime;
 		long elapsedSeconds = elapsedTime /1000; 
@@ -121,7 +170,7 @@ public class Robot extends TimedRobot {
 			
 		}
 		
-
+       
 		drivetrain.setRaw(0, 0, 0, 0);
 		
 		/*
@@ -150,7 +199,7 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0, 0);
 		
 	}
-
+	
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -158,40 +207,45 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		/* 
-		encoder.reset();
-	        while (isOperatorControl() && isEnabled()) {
-	            talon.set(Controller1.getY()); 
-	            //gets the y-axis on the LEFT logitech
-	            while(encoder.getDistance() < 2) {
-	                talon.set(-0.2);
-	                SmartDashboard.putNumber("Encoder Distance", encoder.getDistance()); 
-	                // prints displacement in revolutions
-	                SmartDashboard.putNumber("Encoder Rate", encoder.getRate()); 
-	                // prints rate in Revs per second 
-	                try {
-						wait(kUpdatePeriod);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-	            }
-	        }
-	        */
-	    }
-	
+
+		encoderL1.reset();
+		encoderL2.reset();
+		encoderR1.reset();
+		encoderR2.reset();
+		//imu.reset();
+		//imu.calibrate();
+		//gyroOffset = imu.getYaw(); 
+		
+	}
 	
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-	}
-	
+	    //SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
+	    //SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+	    //SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
+	    //SmartDashboard.putNumber("Gyro-X", getAngle());
+	    //SmartDashboard.putNumber("Accel-X", imu.getAccelX());
+	    //SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
+	    //SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
+	    
+	    //SmartDashboard.putNumber("Pitch", imu.getPitch());
+	    //SmartDashboard.putNumber("Roll", imu.getRoll());
+	    //gyro = imu.getYaw() - gyroOffset;
+	    //if(gyro < 0) {
+	    	//gyro = 360+gyro; 
+	    }
+	    //SmartDashboard.putNumber("Gyro: ", gyro);
+	    
+	    //SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
+	    //SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
+	//}
 
 	@Override
 	public void testPeriodic() {
 	}
+	
 	/*
 	public void ForwardPrioritizeScale() {
 		BeginLift();

@@ -5,6 +5,8 @@ import org.usfirst.frc.team7327.robot.Robot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class TankDrive extends Command {
 
@@ -29,6 +31,22 @@ public class TankDrive extends Command {
 		double throttleW = .65;
 		double throttleA = .65;  
 		double throttleS = .7;
+
+		
+
+		//int count = Robot.encoderR1.get();
+		//double rate = Robot.encoderR1.getRate();
+		//boolean direction = Robot.encoderR1.getDirection();
+		//boolean stopped = Robot.encoderR1.getStopped();
+		double distanceL1 = Robot.encoderL1.getDistance();
+		double distanceL2 = Robot.encoderL2.getDistance();
+		double distanceR1 = Robot.encoderR1.getDistance();
+		double distanceR2 = Robot.encoderR2.getDistance();
+
+		SmartDashboard.putNumber("DistanceL1: ", distanceL1);
+		SmartDashboard.putNumber("DistanceL2: ", distanceL2);
+		SmartDashboard.putNumber("DistanceR1: ", distanceR1);
+		SmartDashboard.putNumber("DistanceR2: ", distanceR2);
 		
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
@@ -36,6 +54,8 @@ public class TankDrive extends Command {
 		XboxController Player1 = Robot.oi.Controller1; 
 		XboxController Player2 = Robot.oi.Controller2;
 		if(SinglePlayer) { Player2 = Robot.oi.Controller1; }
+
+		
 		/*
 		if(Robot.oi.getAButton(Player2)) {
 			Robot.ReleaseFunction();
