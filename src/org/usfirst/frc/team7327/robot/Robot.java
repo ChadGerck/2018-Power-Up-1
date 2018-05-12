@@ -110,6 +110,8 @@ public class Robot extends TimedRobot {
 		Camera.startAutomaticCapture();
 		Camera.getVideo();
 		c0.setClosedLoopControl(true); 
+		
+		gyro.calibrate();
 
    /*  encoder.setSamplesToAverage(5); // Used to reduce noise in period
      encoder.setDistancePerPulse(1.0/360); // This makes it so that GetDistance will return 1 when the shaft 
@@ -132,7 +134,9 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		myTimer.reset();
 		myTimer.start();
-		MoveForwardDistance(-.35, -.35, 60);
+		gyro.reset();
+		//MoveForwardDistance(-.35, -.35, 5);
+		TurnRight(GyroAngle(), 90);
 		
 /*
  
@@ -163,8 +167,6 @@ public class Robot extends TimedRobot {
 			
 		}
 		*/
-       
-		drivetrain.setRaw(0, 0, 0, 0);
 		
 		/*
 		switch(station){
@@ -204,7 +206,6 @@ public class Robot extends TimedRobot {
 		encoderL.reset();
 		encoderR.reset();
 		gyro.reset();
-		gyro.calibrate();
 		//imu.reset();
 		//imu.calibrate();
 		//gyroOffset = imu.getYaw(); 
@@ -249,13 +250,13 @@ public class Robot extends TimedRobot {
 		double tempr = r; 
 		while(isAutonomous() && avgDistance < distance ) {
 			
-			SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0, 0);
 			System.out.println(templ + " " + tempr);
-			if(Robot.gyro.getAngle() < -0.5 ) {
+			if(GyroAngle() < -0.5 ) {
 				if(templ > l - .05) { templ -= .001;  }
 				else { templ += .001; tempr += .002; }
-			}else if(Robot.gyro.getAngle() > 0.5) {
+			}else if(GyroAngle() > 0.5) {
 				if(tempr > r - .05) { tempr -= .001; }
 				else { tempr += .001; templ += .002; }
 			}else {
@@ -279,13 +280,13 @@ public class Robot extends TimedRobot {
 		double templ = l; 
 		double tempr = r; 
 		while(isAutonomous() && myTimer.get() < time) {
-			SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0, 0);
-			System.out.println(templ + " " + tempr);
-			if(Robot.gyro.getAngle() < -0.5 ) {
+			//System.out.println(templ + " " + tempr);
+			if(GyroAngle() < -0.5 ) {
 				if(templ > l - .05) { templ -= .001;  }
 				else { templ += .001; tempr += .002; }
-			}else if(Robot.gyro.getAngle() > 0.5) {
+			}else if(GyroAngle() > 0.5) {
 				if(tempr > r - .05) { tempr -= .001; }
 				else { tempr += .001; templ += .002; }
 			}else {
@@ -302,6 +303,70 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
+	public void TurnTo(double At, double angle) {
+		
+	}
+	
+	public void TurnLeft(double At, double angle) {
+		double tempAngle = GyroAngle(); 
+		while(tempAngle > At - angle) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(.3, -.4, 0, 0); 
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			tempAngle = GyroAngle();
+		}
+		while(tempAngle < At - angle) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(-.4, .3, 0, 0); 
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			tempAngle = GyroAngle();
+		}
+		drivetrain.setRaw(0, 0, 0, 0);  
+	}
+	
+	public void TurnRight(double At, double angle) {
+		double tempAngle = GyroAngle(); 
+		while(tempAngle < At + angle) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(-.4, .3, 0, 0); 
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			tempAngle = GyroAngle();
+		}
+		while(tempAngle > At + angle) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(.3, -.4, 0, 0); 
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			tempAngle = GyroAngle();
+		}
+		drivetrain.setRaw(0, 0, 0, 0);  
+	}
+	
+	public static double GyroAngle() {
+		double angle = Robot.gyro.getAngle();
+		while(angle >  180) { angle -= 360; }
+		while(angle < -180) { angle += 360; }
+		return angle; 
+	}
 	
 	/*
 	public void ForwardPrioritizeScale() {
