@@ -26,9 +26,9 @@ public class TankDrive extends Command {
 	
 	protected void execute(){
 		//throttle speed from 1 to 0 based on desired speed
+		//double throttleW = .65;
 		double throttleL = .6;
 		double throttleR = .6;
-		double throttleW = .65;
 		double throttleA = .65;  
 		double throttleS = .7;
 
@@ -38,15 +38,14 @@ public class TankDrive extends Command {
 		//double rate = Robot.encoderR1.getRate();
 		//boolean direction = Robot.encoderR1.getDirection();
 		//boolean stopped = Robot.encoderR1.getStopped();
-		double distanceL1 = Robot.encoderL1.getDistance();
-		double distanceL2 = Robot.encoderL2.getDistance();
-		double distanceR1 = Robot.encoderR1.getDistance();
-		double distanceR2 = Robot.encoderR2.getDistance();
+		
+		//Distance to feet is approximately /686
+		double distanceL = Robot.encoderL.getDistance()/686;
+		double distanceR = Robot.encoderR.getDistance()/686;
 
-		SmartDashboard.putNumber("DistanceL1: ", distanceL1);
-		SmartDashboard.putNumber("DistanceL2: ", distanceL2);
-		SmartDashboard.putNumber("DistanceR1: ", distanceR1);
-		SmartDashboard.putNumber("DistanceR2: ", distanceR2);
+		
+		SmartDashboard.putNumber("DistanceL: ", distanceL);
+		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
 		
 		DoubleSolenoid.clearAllPCMStickyFaults(0);

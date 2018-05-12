@@ -54,10 +54,10 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
-	public static Encoder encoderL1;
-	public static Encoder encoderL2;
-	public static Encoder encoderR1;
-	public static Encoder encoderR2;
+	//public static Encoder encoderL1;
+	public static Encoder encoderL;
+	//public static Encoder encoderR1;
+	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
 	
 	
@@ -88,35 +88,21 @@ public class Robot extends TimedRobot {
 		
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
-		encoderL1 = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-		encoderL1.setMaxPeriod(.1);
-		encoderL1.setMinRate(10);
-		encoderL1.setDistancePerPulse(5);
-		encoderL1.setReverseDirection(false);
-		encoderL1.setSamplesToAverage(7);
+		// Might be able to setDistancePerPulse by 686*5 and not have to divide by 686 to get feet. 
+		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		encoderL.setMaxPeriod(.1);
+		encoderL.setMinRate(10);
+		encoderL.setDistancePerPulse(5);
+		encoderL.setReverseDirection(false);
+		encoderL.setSamplesToAverage(7);
 		
-		encoderL2 = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
-		encoderL2.setMaxPeriod(.1);
-		encoderL2.setMinRate(10);
-		encoderL2.setDistancePerPulse(5);
-		encoderL2.setReverseDirection(false);
-		encoderL2.setSamplesToAverage(7);
-		
-		encoderR1 = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
-		encoderR1.setMaxPeriod(.1);
-		encoderR1.setMinRate(10);
-		encoderR1.setDistancePerPulse(5);
-		encoderR1.setReverseDirection(true);
-		encoderR1.setSamplesToAverage(7);
-		encoderR1.reset();
-		
-		encoderR2 = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
-		encoderR2.setMaxPeriod(.1);
-		encoderR2.setMinRate(10);
-		encoderR2.setDistancePerPulse(5);
-		encoderR2.setReverseDirection(true);
-		encoderR2.setSamplesToAverage(7);
-		encoderR2.reset();
+		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+		encoderR.setMaxPeriod(.1);
+		encoderR.setMinRate(10);
+		encoderR.setDistancePerPulse(5);
+		encoderR.setReverseDirection(true);
+		encoderR.setSamplesToAverage(7);
+		encoderR.reset();
 				
 		oi = new OI();
 		drivetrain = new DriveTrain();
@@ -146,7 +132,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		myTimer.reset();
 		myTimer.start();
-		MoveForward(-.35, -.35, 5);
+		MoveForwardDistance(-.35, -.35, 60);
 		
 /*
  
@@ -215,10 +201,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 
-		encoderL1.reset();
-		encoderL2.reset();
-		encoderR1.reset();
-		encoderR2.reset();
+		encoderL.reset();
+		encoderR.reset();
 		gyro.reset();
 		gyro.calibrate();
 		//imu.reset();
@@ -258,24 +242,58 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 	
-	public void MoveForward(double x, double y, double time) {
+	public void MoveForwardDistance(double l, double r, double distance) { //l and r are left speed and right speed
 
-		time = myTimer.get() + time; 
-		double tempx = x; 
-		double tempy = y; 
-		while(isAutonomous() && myTimer.get() < time) {
+		double avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		double templ = l; 
+		double tempr = r; 
+		while(isAutonomous() && avgDistance < distance ) {
+			
 			SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
-			drivetrain.setRaw(tempx, tempy, 0, 0);
-			System.out.println(tempx + " " + tempy);
-			if(gyro.getAngle() < 0 ) {
-				if(tempx < x + .05) { tempx += .01;  }
-				else { tempx -= .01; tempy -= .01; }
-			}else if(gyro.getAngle() > 0) {
-				if(tempy < y + .05) { tempy += .01; }
-				else { tempy -= .01; tempx -= .01; }
+			drivetrain.setRaw(templ, tempr, 0, 0);
+			System.out.println(templ + " " + tempr);
+			if(Robot.gyro.getAngle() < -0.5 ) {
+				if(templ > l - .05) { templ -= .001;  }
+				else { templ += .001; tempr += .002; }
+			}else if(Robot.gyro.getAngle() > 0.5) {
+				if(tempr > r - .05) { tempr -= .001; }
+				else { tempr += .001; templ += .002; }
+			}else {
+				templ = l; 
+				tempr = r; 
 			}
 			try {
-				Thread.sleep(100);
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		}  
+		drivetrain.setRaw(0, 0, 0, 0); 
+	}
+	
+	public void MoveForward(double l, double r, double time) { //l and r are left speed and right speed
+
+		time = myTimer.get() + time; 
+		double templ = l; 
+		double tempr = r; 
+		while(isAutonomous() && myTimer.get() < time) {
+			SmartDashboard.putNumber("Gyro: ", Robot.gyro.getAngle());
+			drivetrain.setRaw(templ, tempr, 0, 0);
+			System.out.println(templ + " " + tempr);
+			if(Robot.gyro.getAngle() < -0.5 ) {
+				if(templ > l - .05) { templ -= .001;  }
+				else { templ += .001; tempr += .002; }
+			}else if(Robot.gyro.getAngle() > 0.5) {
+				if(tempr > r - .05) { tempr -= .001; }
+				else { tempr += .001; templ += .002; }
+			}else {
+				templ = l; 
+				tempr = r; 
+			}
+			try {
+				Thread.sleep(20);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
