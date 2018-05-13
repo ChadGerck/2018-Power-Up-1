@@ -368,6 +368,20 @@ public class Robot extends TimedRobot {
 		return angle; 
 	}
 	
+	public static void ShootBox() {
+		DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
+		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
+		double time = myTimer.get() + .15;
+		while(myTimer.get() < time) {
+			Punchers = DoubleSolenoid.Value.kReverse;
+			Robot.drivetrain.setPunchers(Punchers);
+		}
+		while(myTimer.get() < time + .1) {
+			Grabbers = DoubleSolenoid.Value.kForward;
+			Robot.drivetrain.setRawGrabber(Grabbers);
+		}
+	}
+	
 	/*
 	public void ForwardPrioritizeScale() {
 		BeginLift();

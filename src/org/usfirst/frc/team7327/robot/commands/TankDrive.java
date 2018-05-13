@@ -62,12 +62,15 @@ public class TankDrive extends Command {
 		}
 		*/
 		
+		if(Robot.oi.getYButton(Player2)) {
+			Robot.ShootBox(); 
+		}
+		
 		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 		}
 		else if(Robot.oi.getRightBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
-			//Punchers = DoubleSolenoid.Value.kReverse;
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
 		}
