@@ -54,19 +54,11 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	CameraServer Camera;
-	//public static Encoder encoderL1;
 	public static Encoder encoderL;
-	//public static Encoder encoderR1;
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
 	
-	
-
-	//public double gyro; 
-	//public double gyroOffset;
-	
-    XboxController Controller1;
-    Talon talon;
+    //Talon talon;
 	Compressor c0 = new Compressor(0);
 	
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
@@ -112,11 +104,7 @@ public class Robot extends TimedRobot {
 		c0.setClosedLoopControl(true); 
 		
 		gyro.calibrate();
-
-   /*  encoder.setSamplesToAverage(5); // Used to reduce noise in period
-     encoder.setDistancePerPulse(1.0/360); // This makes it so that GetDistance will return 1 when the shaft 
-     // makes a full rotation and that GetRate will be in Revs per second
-	*/
+		
 	}
 
 
@@ -135,10 +123,8 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
-		//MoveForwardDistance(-.35, -.35, 5);
-		//TurnLeft(GyroAngle(), 71);
-		//TurnRight(GyroAngle(), 270);
-		//TurnLeft(GyroAngle(), 300);
+		
+		
 		MoveDistance(.45, 10);
 		TurnTo(90);
 		MoveDistance(.45, 4);
@@ -203,7 +189,7 @@ public class Robot extends TimedRobot {
 		
 		 
 		
-		drivetrain.setRaw(0, 0, 0, 0);
+		drivetrain.setRaw(0, 0, 0);
 		
 	}
 	
@@ -218,6 +204,8 @@ public class Robot extends TimedRobot {
 		encoderL.reset();
 		encoderR.reset();
 		gyro.reset();
+		
+		
 		//imu.reset();
 		//imu.calibrate();
 		//gyroOffset = imu.getYaw(); 
@@ -263,7 +251,7 @@ public class Robot extends TimedRobot {
 		while(isAutonomous() && avgDistance < distance ) {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
-			drivetrain.setRaw(templ, tempr, 0, 0);
+			drivetrain.setRaw(templ, tempr, 0);
 			System.out.println(templ + " " + tempr);
 			if(GyroAngle() < -0.5 ) {
 				if(templ > speed - .05) { templ -= .001;  }
@@ -283,7 +271,36 @@ public class Robot extends TimedRobot {
 			}
 			avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
 		}  
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
+	}
+	
+	public void MoveTime(double speed, double time) { //l and r are left speed and right speed
+
+		time = myTimer.get() + time; 
+		double templ = speed; 
+		double tempr = speed; 
+		while(isAutonomous() && myTimer.get() < time) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(speed, speed, 0);
+			//System.out.println(templ + " " + tempr);
+			if(GyroAngle() < -0.5 ) {
+				if(templ > speed - .05) { templ -= .001;  }
+				else { templ += .001; tempr += .002; }
+			}else if(GyroAngle() > 0.5) {
+				if(tempr > speed - .05) { tempr -= .001; }
+				else { tempr += .001; templ += .002; }
+			}else {
+				templ = speed; 
+				tempr = speed; 
+			}
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}  
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void MoveForwardDistance(double l, double r, double distance) { //l and r are left speed and right speed
@@ -294,7 +311,7 @@ public class Robot extends TimedRobot {
 		while(isAutonomous() && avgDistance < distance ) {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
-			drivetrain.setRaw(templ, tempr, 0, 0);
+			drivetrain.setRaw(templ, tempr, 0);
 			System.out.println(templ + " " + tempr);
 			if(GyroAngle() < -0.5 ) {
 				if(templ > l - .05) { templ -= .001;  }
@@ -314,7 +331,7 @@ public class Robot extends TimedRobot {
 			}
 			avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
 		}  
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void MoveForward(double l, double r, double time) { //l and r are left speed and right speed
@@ -324,7 +341,7 @@ public class Robot extends TimedRobot {
 		double tempr = r; 
 		while(isAutonomous() && myTimer.get() < time) {
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
-			drivetrain.setRaw(templ, tempr, 0, 0);
+			drivetrain.setRaw(templ, tempr, 0);
 			//System.out.println(templ + " " + tempr);
 			if(GyroAngle() < -0.5 ) {
 				if(templ > l - .05) { templ -= .001;  }
@@ -343,7 +360,7 @@ public class Robot extends TimedRobot {
 				e.printStackTrace();
 			}
 		}  
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void TurnTo(double angle) {
@@ -355,7 +372,7 @@ public class Robot extends TimedRobot {
 			//Turn Right
 			while(tempAngle < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(-.4, .3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -366,7 +383,7 @@ public class Robot extends TimedRobot {
 			}
 			while(tempAngle > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0, 0); 
+				drivetrain.setRaw(.22, -.22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -380,7 +397,7 @@ public class Robot extends TimedRobot {
 			//Turn Right
 			while(At < 360 && At > 179) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(-.4, .3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -391,7 +408,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > 0 && At < angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(-.4, .3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -402,7 +419,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0, 0); 
+				drivetrain.setRaw(.22, -.22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -416,7 +433,7 @@ public class Robot extends TimedRobot {
 			//Turn Left
 			while(At > 0 && At < 181) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -427,7 +444,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(At <= 360 && At > angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -438,7 +455,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At < angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -452,7 +469,7 @@ public class Robot extends TimedRobot {
 			//Turn Left
 			while(tempAngle > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -463,7 +480,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(tempAngle < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -483,7 +500,7 @@ public class Robot extends TimedRobot {
 		if(crossZero) {
 			while(At > 0 && At < 350) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -494,7 +511,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(At <= 360 && At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -505,7 +522,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -518,7 +535,7 @@ public class Robot extends TimedRobot {
 		else{
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0, 0); 
+				drivetrain.setRaw(.3, -.4, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -529,7 +546,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -540,7 +557,7 @@ public class Robot extends TimedRobot {
 			}
 		}
 		
-		drivetrain.setRaw(0, 0, 0, 0);  
+		drivetrain.setRaw(0, 0, 0);  
 	}
 	
 	public void TurnRight(double angle) {
@@ -551,7 +568,7 @@ public class Robot extends TimedRobot {
 		if(!crossZero) { 
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.4, -.3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -562,7 +579,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -575,7 +592,7 @@ public class Robot extends TimedRobot {
 		else{
 			while(At < 360 && At > 10) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.4, -.3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -586,7 +603,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > 0 && At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.4, -.3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -597,7 +614,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -607,7 +624,7 @@ public class Robot extends TimedRobot {
 				At = GyroAngle();
 			}
 		}
-		drivetrain.setRaw(0, 0, 0, 0);  
+		drivetrain.setRaw(0, 0, 0);  
 	}
 	
 	public static double GyroAngle() {
@@ -653,7 +670,7 @@ public class Robot extends TimedRobot {
 			MoveForward(.5, .5, 4);
 			MoveForward(-.3, .4, 1);
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void BackwardsPrioritizeSwitch() {
@@ -669,7 +686,7 @@ public class Robot extends TimedRobot {
 			
 		}
 		else { BackwardsPrioritizeScale(); }
-		drivetrain.setRaw(0, 0, 0, 0);
+		drivetrain.setRaw(0, 0, 0);
 	}
 	
 	public void ForwardsPrioritizeSwitch() {
@@ -682,11 +699,11 @@ public class Robot extends TimedRobot {
 			TurnRight(); 
 			MoveForward(x, y, 1);
 			//ShootBox(); 
-			drivetrain.setRaw(0, 0, 0, 0,DoubleSolenoid.Value.kForward);
+			drivetrain.setRaw(0, 0, 0);
 			
 		}
 		else { MoveForward(.35, .36, 3); }
-		drivetrain.setRaw(0, 0, 0, 0);
+		drivetrain.setRaw(0, 0, 0);
 	}
 	
 	public void ResetBackwards() {
@@ -704,7 +721,7 @@ public class Robot extends TimedRobot {
 			MoveForward(-.3, .4, 1);
 			MoveForward(.5, .5, 4);
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void MiddlePrioritizeSwitch() {
@@ -730,57 +747,57 @@ public class Robot extends TimedRobot {
 	public static void BeginLift() {
 		Robot.done = false; 
 		double time = myTimer.get() + 1.2; 
-		while(myTimer.get() < time && killButton) {drivetrain.setRaw(0,0,0,-.3); }
+		while(myTimer.get() < time && killButton) {drivetrain.setRaw(0,0,-.3); }
 		Robot.done = true; 
 	}
 	
-	public void MoveRaw(double x, double y, double wheel, double arm, double time) {
+	public void MoveRaw(double x, double y, double arm, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(x, y, wheel, arm); 
+			drivetrain.setRaw(x, y, arm); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 		
 	}
 	
 	public void MoveForward(double x, double y, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(x, y, 0, 0); 
+			drivetrain.setRaw(x, y, 0); 
 		}  
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	public void TurnLeft() {
 		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(-.3, .4, 0, 0); 
+			drivetrain.setRaw(-.3, .4, 0); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void TurnRight() {
 		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(.4, -.3, 0, 0); 
+			drivetrain.setRaw(.4, -.3, 0); 
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void MoveArm(double arm, double time) {
 		time = myTimer.get() + time; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(0, 0, 0, arm);  
+			drivetrain.setRaw(0, 0, arm);  
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 		
 	}
 	
 	public void ShootBox() {
 		double time = myTimer.get() + .3; 
 		while(isAutonomous() && myTimer.get() < time) {
-			drivetrain.setRaw(0, 0, .5, 0);  
+			drivetrain.setRaw(0, 0, 0);  
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 		
 	}
 	
@@ -791,15 +808,15 @@ public class Robot extends TimedRobot {
 		while( myTimer.get() < time && killButton) {
 			if(myTimer.get() < time - 2.27) { 
 				arma = arm0 - .2*(time - myTimer.get());
-				drivetrain.setRaw(0, 0, 0, arma); 
+				drivetrain.setRaw(0, 0, arma); 
 			} 
 			else if(myTimer.get() < time) { 
 				armd = arma + .2*(time - myTimer.get() - 1);
-				drivetrain.setRaw(0, 0, 0, armd); 
+				drivetrain.setRaw(0, 0, armd); 
 			}
 			
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 		Robot.done = true; 
 	}
 	
@@ -810,15 +827,15 @@ public class Robot extends TimedRobot {
 		while( myTimer.get() < time && killButton) {
 			if(myTimer.get() < time - 2.27) { 
 				arma = arm0 + .2*(time - myTimer.get());
-				drivetrain.setRaw(0, 0, 0, arma); 
+				drivetrain.setRaw(0, 0, arma); 
 			} 
 			else if(myTimer.get() < time) { 
 				armd = arma - .2*(time - myTimer.get() - 1);
-				drivetrain.setRaw(0, 0, 0, armd); 
+				drivetrain.setRaw(0, 0, armd); 
 			}
 			
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 		Robot.done = true; 
 	}
 	
@@ -827,17 +844,17 @@ public class Robot extends TimedRobot {
 		while(myTimer.get() < time) {
 			//raise arm here
 			if(myTimer.get() > time - 7) {
-				drivetrain.setRaw(-.45, -.45, 0, 0); 
+				drivetrain.setRaw(-.45, -.45, 0); 
 			}
 		}
-		drivetrain.setRaw(0, 0, 0, 0); 
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public static void ReleaseFunction() {
 		double time = myTimer.get();
-		if(myTimer.get() < time + .6) { drivetrain.setRaw(0, 0, 0, .5); }
-		if(myTimer.get() >= time + .6 && myTimer.get() < .7) drivetrain.setRaw(0, 0, 0, .5, DoubleSolenoid.Value.kForward);
-		if(myTimer.get() >= time + .7 && myTimer.get() < 1) drivetrain.setRaw(0, 0, 0, .5, GrabOff);
+		if(myTimer.get() < time + .6) { drivetrain.setRaw(0, 0, .5); }
+		if(myTimer.get() >= time + .6 && myTimer.get() < .7) drivetrain.setRaw(0, 0, .5, DoubleSolenoid.Value.kForward);
+		if(myTimer.get() >= time + .7 && myTimer.get() < 1) drivetrain.setRaw(0, 0, .5, GrabOff);
 	}*/
 	
 }

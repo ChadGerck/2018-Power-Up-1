@@ -15,13 +15,11 @@ public enum RobotMap {
 	LEFT_MOTOR1(1),
 	RIGHT_MOTOR(2),
 	RIGHT_MOTOR1(3),
-	WHEEL_MOTOR(5),
 	ARM_MOTOR(4),
 	SpinnerLeft_MOTOR(6),
 	SpinnerRight_MOTOR(7),
-	//FISTING_MOTOR(8),
 	//Control Mapping
-	XBOX_CONTROLLER(0),
+	XBOX_CONTROLLER0(0),
 	XBOX_CONTROLLER1(1);
 	
 	public final int value;

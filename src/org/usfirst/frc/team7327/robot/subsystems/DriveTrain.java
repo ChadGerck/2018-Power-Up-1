@@ -16,7 +16,6 @@ public class DriveTrain extends Subsystem {
 	private Spark LeftMotor1;
 	private Spark RightMotor1;
 	private Spark ArmMotor;
-	private Spark WheelMotor;
 	private Spark SpinnerLeft;
 	private Spark SpinnerRight;
 	private DoubleSolenoid Grabbers;
@@ -27,8 +26,7 @@ public class DriveTrain extends Subsystem {
 		LeftMotor = new Spark(RobotMap.LEFT_MOTOR.value);
 		RightMotor = new Spark(RobotMap.RIGHT_MOTOR.value);	
 		LeftMotor1 = new Spark(RobotMap.LEFT_MOTOR1.value);
-		RightMotor1 = new Spark(RobotMap.RIGHT_MOTOR1.value);	
-		WheelMotor = new Spark(RobotMap.WHEEL_MOTOR.value);
+		RightMotor1 = new Spark(RobotMap.RIGHT_MOTOR1.value);
 		ArmMotor = new Spark(RobotMap.ARM_MOTOR.value);
 		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
 		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
@@ -36,12 +34,11 @@ public class DriveTrain extends Subsystem {
 		Puncher = new DoubleSolenoid(1,1,2);
 	}
 	
-	public void setRaw(double leftvalue, double rightvalue, double wheelvalue, double armvalue) {
+	public void setRaw(double leftvalue, double rightvalue, double armvalue) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
 		LeftMotor1.set(leftvalue);
 		RightMotor1.set(-rightvalue);
-		WheelMotor.set(wheelvalue);
 		ArmMotor.set(armvalue);
 			
 	} 
@@ -51,12 +48,11 @@ public class DriveTrain extends Subsystem {
 		Puncher.set(punchervalue);
 	}
 	 
-	public void setRaw1(double leftvalue, double rightvalue, double wheelvalue) {
+	public void setRaw1(double leftvalue, double rightvalue) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
 		LeftMotor1.set(leftvalue);
 		RightMotor1.set(-rightvalue);
-		WheelMotor.set(wheelvalue);
 		
 	} 
 	public void setRawArm(double armvalue) {

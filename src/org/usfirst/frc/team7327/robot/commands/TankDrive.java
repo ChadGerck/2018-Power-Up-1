@@ -26,7 +26,6 @@ public class TankDrive extends Command {
 	
 	protected void execute(){
 		//throttle speed from 1 to 0 based on desired speed
-		//double throttleW = .65;
 		double throttleL = .6;
 		double throttleR = .6;
 		double throttleA = .65;  
@@ -51,16 +50,10 @@ public class TankDrive extends Command {
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
 		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
-		XboxController Player1 = Robot.oi.Controller1; 
-		XboxController Player2 = Robot.oi.Controller2;
-		if(SinglePlayer) { Player2 = Robot.oi.Controller1; }
-
 		
-		/*
-		if(Robot.oi.getAButton(Player2)) {
-			Robot.ReleaseFunction();
-		}
-		*/
+		XboxController Player1 = Robot.oi.Controller0; 
+		XboxController Player2 = Robot.oi.Controller1;
+		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
 		
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
@@ -68,12 +61,11 @@ public class TankDrive extends Command {
 		
 		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
-		}
-		else if(Robot.oi.getRightBumper(Player2)) {
+		}else if(Robot.oi.getRightBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
-		}
+		} // Test to see if you need this else statement. 
 		
 		Robot.drivetrain.setRawGrabber(Grabbers);
 		
@@ -114,10 +106,8 @@ public class TankDrive extends Command {
 			DLeft = 0;
 		} 
 		if( !Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player2)*throttleS-Robot.oi.getLeftStickY(Player2)*throttleS, Robot.oi.getLeftStickX(Player2)*throttleS + Robot.oi.getLeftStickY(Player2)*throttleS ); }
-		else if(Dpressed && !SinglePlayer) {Robot.drivetrain.setRawSpinner(DLeft, DRight);}
-		if(SinglePlayer) {
-			Robot.drivetrain.setRawSpinner(DLeft, DRight);
-		}
+		else if(Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(DLeft, DRight); }
+		if(SinglePlayer) { Robot.drivetrain.setRawSpinner(DLeft, DRight); }
 		/*
 		if(Robot.oi.getXButton(Player2)) {
 			Robot.BeginLift();
@@ -137,15 +127,6 @@ public class TankDrive extends Command {
 				Robot.killButton = false;
 				unkillTimer = Robot.myTimer.get();
 			}
-		}
-		
-		double WheelMotor = 0;
-		if(Robot.oi.getRightTrigger(Player2) == 1) {
-			WheelMotor = 1; 
-		}else if(Robot.oi.getLeftTrigger(Player2) == 1) {
-			WheelMotor = -1;
-		}else {
-			WheelMotor = 0;
 		}
 		*/
 		if(Robot.oi.getAButton(Player1) && SinglePlayer) {
@@ -168,7 +149,7 @@ public class TankDrive extends Command {
 				throttleL = .6;
 				throttleR = .6;
 			}
-			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR, 0);
+			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR);
 		} else if(SinglePlayer){
 			if(Robot.oi.getStartButton(Player1)) {
 				if(Speed == 0 || Speed == 2) { Speed = 1; }
@@ -182,9 +163,9 @@ public class TankDrive extends Command {
 			else { throttleL = .4; throttleR = .4; }
 			
 			if(armOn) {
-				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, 0, 0 );
+				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, 0 );
 			}else {
-				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR, 0);
+				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR);
 			}
 		}
 	}

@@ -15,8 +15,8 @@ public class OI {
 	 public static final double LEFT_DEADZONE_LIMIT = 0.2;
 	 public static final double RIGHT_DEADZONE_LIMIT = 0.2;
 	
-	public final XboxController Controller1 = new XboxController(RobotMap.XBOX_CONTROLLER.value);
-	public final XboxController Controller2 = new XboxController(RobotMap.XBOX_CONTROLLER1.value);
+	public final XboxController Controller0 = new XboxController(RobotMap.XBOX_CONTROLLER0.value);
+	public final XboxController Controller1 = new XboxController(RobotMap.XBOX_CONTROLLER1.value);
 	
 	public double getLeftStickX(XboxController Controller) {
 		double raw = Controller.getRawAxis(0);
