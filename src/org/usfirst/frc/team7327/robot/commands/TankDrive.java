@@ -168,7 +168,7 @@ public class TankDrive extends Command {
 				throttleL = .6;
 				throttleR = .6;
 			}
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, 0);
+			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR, 0);
 		} else if(SinglePlayer){
 			if(Robot.oi.getStartButton(Player1)) {
 				if(Speed == 0 || Speed == 2) { Speed = 1; }
@@ -182,9 +182,9 @@ public class TankDrive extends Command {
 			else { throttleL = .4; throttleR = .4; }
 			
 			if(armOn) {
-				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, 0, 0 );
+				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, 0, 0 );
 			}else {
-				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)* throttleL, Robot.oi.getRightStickY(Player1)* throttleR, 0);
+				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getRightStickY(Player1)* throttleR, 0);
 			}
 		}
 	}

@@ -139,9 +139,15 @@ public class Robot extends TimedRobot {
 		//TurnLeft(GyroAngle(), 71);
 		//TurnRight(GyroAngle(), 270);
 		//TurnLeft(GyroAngle(), 300);
+		MoveDistance(.45, 10);
 		TurnTo(90);
-		TurnTo(180);
+		MoveDistance(.45, 4);
+		TurnTo(0);
+		MoveDistance(.45, 5);
 		TurnTo(270);
+		MoveDistance(.45, 4);
+		TurnTo(0);
+		MoveDistance(.45, 10);
 		
 		
 /*
@@ -164,10 +170,10 @@ public class Robot extends TimedRobot {
 		while(isAutonomous() && elapsedSeconds < 10) {
 			elapsedTime = System.currentTimeMillis() - startTime;
 			elapsedSeconds = elapsedTime /1000;
-			if(elapsedSeconds < 2) {drivetrain.setRaw(.35,.36,0,0);}
+			if(elapsedSeconds < 2) {drivetrain.setRaw(-.35,-.36,0,0);}
 			if(elapsedSeconds >= 2 && elapsedSeconds < 4) {drivetrain.setRaw(0,0, 0, -.55);}
-			if(elapsedSeconds >= 4 && elapsedSeconds < 10) {drivetrain.setRaw(.35,.36, 0, 0);}
-			//if(elapsedSeconds >= 2 && elapsedSeconds <6) {drivetrain.setRaw(-.35,-.36, 0, 0,);}
+			if(elapsedSeconds >= 4 && elapsedSeconds < 10) {drivetrain.setRaw(-.35,-.36, 0, 0);}
+			//if(elapsedSeconds >= 2 && elapsedSeconds <6) {drivetrain.setRaw(.35,.36, 0, 0,);}
 			//if(elapsedSeconds >= 6 && elapsedSeconds <7 && gameData.charAt(0) == 'R'  ) { drivetrain.setRaw(0, 0, 0, 0, DoubleSolenoid.Value.kReverse);}
 		//drivetrain.setRaw(leftvalue, rightvalue, wheelvalue, armvalue, grabbervalue);	
 			
@@ -178,7 +184,7 @@ public class Robot extends TimedRobot {
 		switch(station){
 		case 1: // Q 15
 			if(RobotLocation == 'L') { 
-				MoveForward(-.35,-.36, 3); }//BackwardsPrioritizeScale(); } //Match 2
+				MoveForward(.35,.36, 3); }//BackwardsPrioritizeScale(); } //Match 2
 			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
 			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
 			break;
@@ -191,7 +197,7 @@ public class Robot extends TimedRobot {
 			while(isAutonomous() && elapsedSeconds < 3) {
 				elapsedTime = System.currentTimeMillis() - startTime;
 				elapsedSeconds = elapsedTime /1000; 
-				if(elapsedSeconds <3) {drivetrain.setRaw(-.3,-.31, 0, 0,);}
+				if(elapsedSeconds <3) {drivetrain.setRaw(.3,.31, 0, 0,);}
 			}
 		*/	
 		
@@ -247,6 +253,37 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testPeriodic() {
+	}
+	
+	public void MoveDistance(double speed, double distance) { 
+
+		double avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		double templ = speed; 
+		double tempr = speed; 
+		while(isAutonomous() && avgDistance < distance ) {
+			
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(templ, tempr, 0, 0);
+			System.out.println(templ + " " + tempr);
+			if(GyroAngle() < -0.5 ) {
+				if(templ > speed - .05) { templ -= .001;  }
+				else { templ += .001; tempr += .002; }
+			}else if(GyroAngle() > 0.5) {
+				if(tempr > speed - .05) { tempr -= .001; }
+				else { tempr += .001; templ += .002; }
+			}else {
+				templ = speed; 
+				tempr = speed; 
+			}
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		}  
+		drivetrain.setRaw(0, 0, 0, 0); 
 	}
 	
 	public void MoveForwardDistance(double l, double r, double distance) { //l and r are left speed and right speed
@@ -508,14 +545,13 @@ public class Robot extends TimedRobot {
 	
 	public void TurnRight(double angle) {
 		double At = GyroAngle(); 
-		double tempAngle = GyroAngle(); 
 		double theta = At + angle; 
 		boolean crossZero = false; 
 		if(theta > 360) { theta -= 360; crossZero = true; }
 		if(!crossZero) { 
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -526,7 +562,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -539,7 +575,7 @@ public class Robot extends TimedRobot {
 		else{
 			while(At < 360 && At > 10) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -550,7 +586,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > 0 && At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0, 0); 
+				drivetrain.setRaw(.4, -.3, 0, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -561,7 +597,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0, 0); 
+				drivetrain.setRaw(-.22, .22, 0, 0); 
 				try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
@@ -602,8 +638,8 @@ public class Robot extends TimedRobot {
 	
 	public void BackwardsPrioritizeScale() {
 		if(RobotLocation == gameData.charAt(1)) {
-			double x = .35;
-			double y = .36; 
+			double x = -.35;
+			double y = -.36; 
 			
 			MoveForward(x, y, 1); 
 			MoveRaw(x, y, 0, -.35, 2);
@@ -622,8 +658,8 @@ public class Robot extends TimedRobot {
 	
 	public void BackwardsPrioritizeSwitch() {
 		if(RobotLocation == gameData.charAt(0)) {
-			double x = .35;
-			double y = .36; 
+			double x = -.35;
+			double y = -.36; 
 			MoveForward(x, y, 1);
 			MoveRaw(x, y, 0, -.35, 2);
 			BeginLift(); 
@@ -640,23 +676,23 @@ public class Robot extends TimedRobot {
 		if(RobotLocation == gameData.charAt(0)) {
 			double x = .35;
 			double y = .36; 
-			MoveForward(-x, -y, 1);
-			MoveRaw(-x, -y, 0, -.35, 2);
+			MoveForward(x, y, 1);
+			MoveRaw(x, y, 0, -.35, 2);
 			BeginLift(); 
 			TurnRight(); 
-			MoveForward(-x, -y, 1);
+			MoveForward(x, y, 1);
 			//ShootBox(); 
 			drivetrain.setRaw(0, 0, 0, 0,DoubleSolenoid.Value.kForward);
 			
 		}
-		else { MoveForward(-.35, -.36, 3); }
+		else { MoveForward(.35, .36, 3); }
 		drivetrain.setRaw(0, 0, 0, 0);
 	}
 	
 	public void ResetBackwards() {
 		if(RobotLocation == gameData.charAt(1)) {
-			double x = -.35;
-			double y = -.36; 
+			double x = .35;
+			double y = .36; 
 			
 			ArmToptoBase();
 			MoveForward(x, y, 3);
@@ -665,8 +701,8 @@ public class Robot extends TimedRobot {
 			
 		}
 		else {
-			MoveForward(.3, -.4, 1);
-			MoveForward(-.5, -.5, 4);
+			MoveForward(-.3, .4, 1);
+			MoveForward(.5, .5, 4);
 		}
 		drivetrain.setRaw(0, 0, 0, 0); 
 	}
@@ -677,16 +713,16 @@ public class Robot extends TimedRobot {
 				//changing code to start robot on Right middle side in front of switch. 
 				BeginLift(); 
 				BeginLift();
-				MoveForward(-.35, -.353, 3.8);
+				MoveForward(.35, .353, 3.8);
 				ShootBox();
 		} else if(gameData.charAt(0) == 'L'){
 				BeginLift(); 
-				MoveForward(-.35, -.353, 1.8);
+				MoveForward(.35, .353, 1.8);
 				TurnLeft();
-				MoveForward(-.35,-.353,3);
+				MoveForward(.35,.353,3);
 				TurnRight(); 
 				BeginLift();
-				MoveForward(-.35, -.35, 2);
+				MoveForward(.35, .35, 2);
 				ShootBox();
 		}
 	}
@@ -717,7 +753,7 @@ public class Robot extends TimedRobot {
 	public void TurnLeft() {
 		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(.3, -.4, 0, 0); 
+			drivetrain.setRaw(-.3, .4, 0, 0); 
 		}
 		drivetrain.setRaw(0, 0, 0, 0); 
 	}
@@ -725,7 +761,7 @@ public class Robot extends TimedRobot {
 	public void TurnRight() {
 		double time = myTimer.get() + 1; 
 		while(myTimer.get() < time) {
-			drivetrain.setRaw(-.4, .3, 0, 0); 
+			drivetrain.setRaw(.4, -.3, 0, 0); 
 		}
 		drivetrain.setRaw(0, 0, 0, 0); 
 	}
@@ -791,7 +827,7 @@ public class Robot extends TimedRobot {
 		while(myTimer.get() < time) {
 			//raise arm here
 			if(myTimer.get() > time - 7) {
-				drivetrain.setRaw(.45, .45, 0, 0); 
+				drivetrain.setRaw(-.45, -.45, 0, 0); 
 			}
 		}
 		drivetrain.setRaw(0, 0, 0, 0); 
