@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
 		myTimer.start();
 		gyro.reset();
 		
-		
+		/*
 		MoveDistance(.45, 10);
 		TurnTo(90);
 		MoveDistance(.45, 4);
@@ -134,8 +134,9 @@ public class Robot extends TimedRobot {
 		MoveDistance(.45, 4);
 		TurnTo(0);
 		MoveDistance(.45, 10);
-		
-		
+		*/
+		TurnToSin(15);
+		//TurnToSin(90);
 /*
  
 		gameData = ("NULL".equalsIgnoreCase(gameData)) ? null : gameData; 
@@ -143,6 +144,7 @@ public class Robot extends TimedRobot {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
 		
+
 
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println("This is your gameData" + gameData.charAt(0)); 
@@ -363,6 +365,27 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0); 
 	}
 	
+	public void TurnToSin(double Omega){
+		double Phi = GyroAngle(); 
+		if(Math.sin(Math.toRadians(Omega - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(Omega-Phi)) < 0) {
+				SmartDashboard.putNumber("Gyro: ", GyroAngle());
+				drivetrain.setRaw(.3, -.4, 0); 
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = GyroAngle();
+			} 
+			
+		}else {
+			while(Math.sin(Math.toRadians(Omega-Phi)) >= 0) {
+				SmartDashboard.putNumber("Gyro: ", GyroAngle());
+				drivetrain.setRaw(-.4, .3, 0); 
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = GyroAngle();
+			}
+		}
+			
+	}
+	
 	public void TurnTo(double angle) {
 		double At = GyroAngle(); 
 		double DummyZero = GyroAngle(); 
@@ -378,7 +401,7 @@ public class Robot extends TimedRobot {
 			}
 			while(tempAngle > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0); 
+				drivetrain.setRaw(.25, -.25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero;
 			}
@@ -399,7 +422,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At > angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0); 
+				drivetrain.setRaw(.25, -.25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
@@ -420,7 +443,7 @@ public class Robot extends TimedRobot {
 			}
 			while(At < angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0); 
+				drivetrain.setRaw(-.25, .25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
@@ -435,7 +458,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(tempAngle < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0); 
+				drivetrain.setRaw(-.25, .25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero; 
 			}
