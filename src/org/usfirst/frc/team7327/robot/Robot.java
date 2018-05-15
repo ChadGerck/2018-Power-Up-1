@@ -373,23 +373,13 @@ public class Robot extends TimedRobot {
 			while(tempAngle < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.4, .3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero;
 			}
 			while(tempAngle > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.22, -.22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero;
 			}
 		}
@@ -398,34 +388,19 @@ public class Robot extends TimedRobot {
 			while(At < 360 && At > 179) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.4, .3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At > 0 && At < angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.4, .3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At > angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.22, -.22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
@@ -434,34 +409,19 @@ public class Robot extends TimedRobot {
 			while(At > 0 && At < 181) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			} 
 			while(At <= 360 && At > angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At < angle) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
@@ -470,23 +430,13 @@ public class Robot extends TimedRobot {
 			while(tempAngle > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero;
 			} 
 			while(tempAngle < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				tempAngle = GyroAngle() - DummyZero; 
 			}
 		}
@@ -501,34 +451,19 @@ public class Robot extends TimedRobot {
 			while(At > 0 && At < 350) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			} 
 			while(At <= 360 && At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
@@ -536,23 +471,13 @@ public class Robot extends TimedRobot {
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.3, -.4, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			} 
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
@@ -569,23 +494,13 @@ public class Robot extends TimedRobot {
 			while(At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.4, -.3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
@@ -593,34 +508,19 @@ public class Robot extends TimedRobot {
 			while(At < 360 && At > 10) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.4, -.3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At > 0 && At < theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.4, -.3, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 			while(At > theta) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				At = GyroAngle();
 			}
 		}
