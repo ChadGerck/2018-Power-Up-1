@@ -260,20 +260,19 @@ public class Robot extends TimedRobot {
 		double distanceDone = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
 		double templ = speed; 
 		double tempr = speed; 
-		double tempAngle = angle; 
 		while(isAutonomous() && avgDistance < distance ) {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0);
-			if(Math.sin(Math.toRadians(GyroAngle()+tempAngle)) < -.01) {
+			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
 				if(templ < speed + .05) { templ += .001;  }
 				else { templ -= .001; tempr -= .002; }
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+tempAngle))) );
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
 				System.out.println("Go Right: " + templ + " " + tempr);
-			}else if(Math.sin(Math.toRadians(GyroAngle()+tempAngle)) > .01 ) {
+			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
 				if(tempr < speed + .05) { tempr += .001; }
 				else { tempr -= .001; templ -= .002; } 
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+tempAngle))));
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
 				System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
@@ -290,21 +289,25 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0); 
 	}
 	
-	public void MoveTime(double speed, double time) { //l and r are left speed and right speed
-
-		time = myTimer.get() + time; 
+	public void MoveTime(double angle, double speed, double time) { //l and r are left speed and right speed
+		
+		time = myTimer.get() + time;
 		double templ = speed; 
 		double tempr = speed; 
-		while(isAutonomous() && myTimer.get() < time) {
+		while(isAutonomous() && myTimer.get() < time ) {
+			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
-			drivetrain.setRaw(speed, speed, 0);
-			//System.out.println(templ + " " + tempr);
-			if(GyroAngle() < -0.5 ) {
-				if(templ > speed - .05) { templ -= .001;  }
-				else { templ += .001; tempr += .002; }
-			}else if(GyroAngle() > 0.5) {
-				if(tempr > speed - .05) { tempr -= .001; }
-				else { tempr += .001; templ += .002; }
+			drivetrain.setRaw(templ, tempr, 0);
+			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
+				if(templ < speed + .05) { templ += .001;  }
+				else { templ -= .001; tempr -= .002; }
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
+				System.out.println("Go Right: " + templ + " " + tempr);
+			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
+				if(tempr < speed + .05) { tempr += .001; }
+				else { tempr -= .001; templ -= .002; } 
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
+				System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
 				tempr = speed; 
@@ -317,6 +320,7 @@ public class Robot extends TimedRobot {
 			}
 		}  
 		drivetrain.setRaw(0, 0, 0); 
+		
 	}
 	
 	public void MoveForwardDistance(double l, double r, double distance) { //l and r are left speed and right speed
