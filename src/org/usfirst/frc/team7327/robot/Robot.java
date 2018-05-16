@@ -124,18 +124,27 @@ public class Robot extends TimedRobot {
 		myTimer.start();
 		gyro.reset();
 		
-		/*
-		MoveDistance(.45, 10);
+
+		System.out.println("FIRST MOVEMENT");
+		MoveDistance(0, .40, 20);
+		System.out.println("TURN RIGHT");
 		TurnTo(90);
-		MoveDistance(.45, 4);
+		System.out.println("MOVE RIGHT");
+		MoveDistance(90, .35, 4);
+		System.out.println("TURN TO 0");
 		TurnTo(0);
-		MoveDistance(.45, 5);
+		System.out.println("MOVE FORWARD");
+		MoveDistance(0, .40, 10);
 		TurnTo(270);
-		MoveDistance(.45, 4);
+		MoveDistance(270, .35, 4);
 		TurnTo(0);
-		MoveDistance(.45, 10);
-		*/
-		TurnToSin(15);
+		System.out.println("LAST MOVEMENT");
+		MoveDistance(0, .40, 20);
+		
+		//TurnTo(350); 
+		//TurnTo(90);
+		//TurnToSin(82); 
+		//TurnTo(35);
 		//TurnToSin(90);
 /*
  
@@ -245,22 +254,27 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 	
-	public void MoveDistance(double speed, double distance) { 
-
-		double avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+	public void MoveDistance(double angle, double speed, double distance) { 
+		
+		double avgDistance = 0; 
+		double distanceDone = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
 		double templ = speed; 
 		double tempr = speed; 
+		double tempAngle = angle; 
 		while(isAutonomous() && avgDistance < distance ) {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0);
-			System.out.println(templ + " " + tempr);
-			if(GyroAngle() < -0.5 ) {
-				if(templ > speed - .05) { templ -= .001;  }
-				else { templ += .001; tempr += .002; }
-			}else if(GyroAngle() > 0.5) {
-				if(tempr > speed - .05) { tempr -= .001; }
-				else { tempr += .001; templ += .002; }
+			if(Math.sin(Math.toRadians(GyroAngle()))+tempAngle < -.05) {
+				if(templ < speed + .05) { templ += .001;  }
+				else { templ -= .001; tempr -= .002; }
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()))+tempAngle) );
+				System.out.println("Go Right: " + templ + " " + tempr);
+			}else if(Math.sin(Math.toRadians(GyroAngle()))+tempAngle > .05 ) {
+				if(tempr < speed + .05) { tempr += .001; }
+				else { tempr -= .001; templ -= .002; } 
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()))+tempAngle));
+				System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
 				tempr = speed; 
@@ -271,7 +285,7 @@ public class Robot extends TimedRobot {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			avgDistance = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+			avgDistance = (((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2)-distanceDone;
 		}  
 		drivetrain.setRaw(0, 0, 0); 
 	}
@@ -365,20 +379,32 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0); 
 	}
 	
-	public void TurnToSin(double Omega){
+	public void TurnTo(double Omega){
 		double Phi = GyroAngle(); 
 		if(Math.sin(Math.toRadians(Omega - Phi)) < 0) {
-			while(Math.sin(Math.toRadians(Omega-Phi)) < 0) {
+			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) < 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.3, -.4, 0); 
+				drivetrain.setRaw(-.3, .4, 0); 
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = GyroAngle();
+			} 
+			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) > 0) {
+				SmartDashboard.putNumber("Gyro: ", GyroAngle());
+				drivetrain.setRaw(.22, -.22, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			} 
 			
 		}else {
-			while(Math.sin(Math.toRadians(Omega-Phi)) >= 0) {
+			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) >= 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.4, .3, 0); 
+				drivetrain.setRaw(.4, -.3, 0); 
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = GyroAngle();
+			}
+			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) < 0) {
+				SmartDashboard.putNumber("Gyro: ", GyroAngle());
+				drivetrain.setRaw(-.22, .22, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			}
@@ -386,7 +412,7 @@ public class Robot extends TimedRobot {
 			
 	}
 	
-	public void TurnTo(double angle) {
+	public void TurnToBroke(double angle) {
 		double At = GyroAngle(); 
 		double DummyZero = GyroAngle(); 
 		double tempAngle = GyroAngle() - DummyZero;
