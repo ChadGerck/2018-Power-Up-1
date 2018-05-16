@@ -449,17 +449,9 @@ public class Robot extends TimedRobot {
 	}
 	
 	public static void ShootBox() {
-		DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
-		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
 		double time = myTimer.get() + .15;
-		while(myTimer.get() < time) {
-			Punchers = DoubleSolenoid.Value.kReverse;
-			Robot.drivetrain.setPunchers(Punchers);
-		}
-		while(myTimer.get() < time + .1) {
-			Grabbers = DoubleSolenoid.Value.kForward;
-			Robot.drivetrain.setRawGrabber(Grabbers);
-		}
+		while(myTimer.get() < time) { Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kReverse); }
+		while(myTimer.get() < time + .1) { Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kForward); }
 	}
 	
 	/*
