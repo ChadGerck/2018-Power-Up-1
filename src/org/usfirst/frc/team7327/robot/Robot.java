@@ -265,15 +265,15 @@ public class Robot extends TimedRobot {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0);
-			if(Math.sin(Math.toRadians(GyroAngle()))+tempAngle < -.05) {
+			if(Math.sin(Math.toRadians(GyroAngle()+tempAngle)) < -.01) {
 				if(templ < speed + .05) { templ += .001;  }
 				else { templ -= .001; tempr -= .002; }
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()))+tempAngle) );
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+tempAngle))) );
 				System.out.println("Go Right: " + templ + " " + tempr);
-			}else if(Math.sin(Math.toRadians(GyroAngle()))+tempAngle > .05 ) {
+			}else if(Math.sin(Math.toRadians(GyroAngle()+tempAngle)) > .01 ) {
 				if(tempr < speed + .05) { tempr += .001; }
 				else { tempr -= .001; templ -= .002; } 
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()))+tempAngle));
+				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+tempAngle))));
 				System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
