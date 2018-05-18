@@ -12,7 +12,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import java.io.IOException;
 
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
-	//import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
@@ -58,6 +58,8 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
 	
+	DigitalInput limitSwitch; 
+	
     //Talon talon;
 	Compressor c0 = new Compressor(0);
 	
@@ -78,6 +80,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		
+		limitSwitch = new DigitalInput(0);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		// Might be able to setDistancePerPulse by 686*5 and not have to divide by 686 to get feet. 
@@ -123,8 +126,6 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
-		
-
 		System.out.println("FIRST MOVEMENT");
 		MoveDistance(0, .40, 20);
 		System.out.println("TURN RIGHT");
@@ -260,20 +261,21 @@ public class Robot extends TimedRobot {
 		double distanceDone = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
 		double templ = speed; 
 		double tempr = speed; 
+		
 		while(isAutonomous() && avgDistance < distance ) {
-			
+			System.out.println(limitSwitch.get()); 
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0);
 			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
 				if(templ < speed + .05) { templ += .001;  }
 				else { templ -= .001; tempr -= .002; }
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
-				System.out.println("Go Right: " + templ + " " + tempr);
+				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
+				//System.out.println("Go Right: " + templ + " " + tempr);
 			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
 				if(tempr < speed + .05) { tempr += .001; }
 				else { tempr -= .001; templ -= .002; } 
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
-				System.out.println("Go Left: " + templ + " " + tempr);
+				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
+				//System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
 				tempr = speed; 
