@@ -21,7 +21,7 @@ public class TankDrive extends Command {
 	}
 	
 	protected void initialize() {
-		
+		//stay
 	}
 	
 	protected void execute(){
