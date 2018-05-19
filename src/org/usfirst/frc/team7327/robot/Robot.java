@@ -261,8 +261,9 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 	
-	public static void MoveForward(double feet) { 
+	public static void MoveForward() { 
 		
+		double feet = 1; 
 		double angle = GyroAngle(); 
 		double speed = .3; 
 		double avgDistance = 0; 
@@ -368,6 +369,14 @@ public class Robot extends TimedRobot {
 		
 	}
 	
+	public static void TurnRight() {
+		TurnTo(GyroAngle(90)); 
+	}
+	
+	public static void TurnLeft() {
+		TurnTo(GyroAngle(-90)); 
+	}
+	
 	public static void TurnTo(double degrees){
 		double Phi = GyroAngle(); 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
@@ -399,7 +408,7 @@ public class Robot extends TimedRobot {
 		}
 	}
 	
-	public void TurnLeft(double angle) {
+	public void TurnLeftold(double angle) {
 		double At = GyroAngle(); 
 		double theta = At - angle;
 		boolean crossZero = false; 
@@ -442,7 +451,7 @@ public class Robot extends TimedRobot {
 		drivetrain.setRaw(0, 0, 0);  
 	}
 	
-	public void TurnRight(double angle) {
+	public void TurnRightold(double angle) {
 		double At = GyroAngle(); 
 		double theta = At + angle; 
 		boolean crossZero = false; 
@@ -486,6 +495,13 @@ public class Robot extends TimedRobot {
 	
 	public static double GyroAngle() {
 		double angle = Robot.gyro.getAngle();
+		while(angle > 360) { angle -= 360; }
+		while(angle < 0)   { angle += 360; }
+		return angle; 
+	}
+	
+	public static double GyroAngle(double add) {
+		double angle = Robot.gyro.getAngle() + add;
 		while(angle > 360) { angle -= 360; }
 		while(angle < 0)   { angle += 360; }
 		return angle; 
