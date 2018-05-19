@@ -15,23 +15,32 @@ public class TankDrive extends Command {
 	boolean Dpressed = false;
 	boolean armOn = true;
 	int Speed = 1; 
-
+    
 	public TankDrive() {
 		requires(Robot.drivetrain);
 	}
-	
-	protected void initialize() {
-		
-	}
-	
-	protected void execute(){
+
 		//throttle speed from 1 to 0 based on desired speed
 		double throttleL = .6;
 		double throttleR = .6;
 		double throttleA = .65;  
 		double throttleS = .7;
-
 		
+		XboxController Player1 = Robot.oi.Controller0; 
+		XboxController Player2 = Robot.oi.Controller1;
+	protected void initialize() {
+		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
+		DoubleSolenoid.clearAllPCMStickyFaults(0);
+	}
+	DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
+
+	double DRight = 0;
+	double DLeft = 0;
+	double distanceL = Robot.encoderL.getDistance()/686;
+	double distanceR = Robot.encoderR.getDistance()/686;
+	
+	protected void execute(){
 
 		//int count = Robot.encoderR1.get();
 		//double rate = Robot.encoderR1.getRate();
@@ -39,21 +48,12 @@ public class TankDrive extends Command {
 		//boolean stopped = Robot.encoderR1.getStopped();
 		
 		//Distance to feet is approximately /686
-		double distanceL = Robot.encoderL.getDistance()/686;
-		double distanceR = Robot.encoderR.getDistance()/686;
+		distanceL = Robot.encoderL.getDistance()/686;
+		distanceR = Robot.encoderR.getDistance()/686;
 
-		
 		SmartDashboard.putNumber("DistanceL: ", distanceL);
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
-		
-		DoubleSolenoid.clearAllPCMStickyFaults(0);
-		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
-		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
-		
-		XboxController Player1 = Robot.oi.Controller0; 
-		XboxController Player2 = Robot.oi.Controller1;
-		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
 		
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
@@ -65,7 +65,7 @@ public class TankDrive extends Command {
 			Grabbers = DoubleSolenoid.Value.kForward;
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
-		} // Test to see if you need this else statement. 
+		}
 		
 		Robot.drivetrain.setRawGrabber(Grabbers);
 		
@@ -78,8 +78,6 @@ public class TankDrive extends Command {
 		}
 		Robot.drivetrain.setPunchers(Punchers);
 		
-		double DRight = 0;
-		double DLeft = 0;
 		if(Robot.oi.Dpad(Player2) >= 0) {
 			Dpressed = true;
 		}
