@@ -15,7 +15,7 @@ public class TankDrive extends Command {
 	boolean Dpressed = false;
 	boolean armOn = true;
 	int Speed = 1; 
-
+    
 	public TankDrive() {
 		requires(Robot.drivetrain);
 	}
@@ -30,8 +30,6 @@ public class TankDrive extends Command {
 		double throttleR = .6;
 		double throttleA = .65;  
 		double throttleS = .7;
-
-		
 
 		//int count = Robot.encoderR1.get();
 		//double rate = Robot.encoderR1.getRate();

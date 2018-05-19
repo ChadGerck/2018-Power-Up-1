@@ -58,6 +58,8 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
 	
+	public static boolean tele = false;
+	
 	DigitalInput limitSwitch; 
 	
     //Talon talon;
@@ -126,6 +128,8 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
+		Autonomous.Auto();
+		/*
 		System.out.println("FIRST MOVEMENT");
 		MoveDistance(0, .40, 20);
 		System.out.println("TURN RIGHT");
@@ -141,6 +145,7 @@ public class Robot extends TimedRobot {
 		TurnTo(0);
 		System.out.println("LAST MOVEMENT");
 		MoveDistance(0, .40, 20);
+		*/
 		
 		//TurnTo(350); 
 		//TurnTo(90);
@@ -216,6 +221,7 @@ public class Robot extends TimedRobot {
 		encoderL.reset();
 		encoderR.reset();
 		gyro.reset();
+		tele = true; 
 		
 		
 		//imu.reset();
@@ -253,6 +259,43 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testPeriodic() {
+	}
+	
+	public static void MoveForward(double feet) { 
+		
+		double angle = GyroAngle(); 
+		double speed = .3; 
+		double avgDistance = 0; 
+		double distanceDone = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		double templ = speed; 
+		double tempr = speed; 
+		
+		while(!tele && avgDistance < feet ) {
+			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			drivetrain.setRaw(templ, tempr, 0);
+			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
+				if(templ < speed + .05) { templ += .001;  }
+				else { templ -= .001; tempr -= .002; }
+				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
+				//System.out.println("Go Right: " + templ + " " + tempr);
+			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
+				if(tempr < speed + .05) { tempr += .001; }
+				else { tempr -= .001; templ -= .002; } 
+				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
+				//System.out.println("Go Left: " + templ + " " + tempr);
+			}else {
+				templ = speed; 
+				tempr = speed; 
+			}
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			avgDistance = (((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2)-distanceDone;
+		}  
+		drivetrain.setRaw(0, 0, 0); 
 	}
 	
 	public void MoveDistance(double angle, double speed, double distance) { 
@@ -325,37 +368,35 @@ public class Robot extends TimedRobot {
 		
 	}
 	
-	public void TurnTo(double Omega){
+	public static void TurnTo(double degrees){
 		double Phi = GyroAngle(); 
-		if(Math.sin(Math.toRadians(Omega - Phi)) < 0) {
-			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) < 0) {
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.3, .4, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			} 
-			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) > 0) {
+			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) > 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.22, -.22, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			} 
-			
 		}else {
-			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) >= 0) {
+			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(.4, -.3, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			}
-			while(isAutonomous() && Math.sin(Math.toRadians(Omega-Phi)) < 0) {
+			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
 				drivetrain.setRaw(-.22, .22, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			}
 		}
-			
 	}
 	
 	public void TurnLeft(double angle) {
