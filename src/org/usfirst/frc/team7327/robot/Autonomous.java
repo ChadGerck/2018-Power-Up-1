@@ -6,5 +6,6 @@ public class Autonomous {
 	public static void Auto() {
 		Robot.MoveForward(10);
 		Robot.TurnTo(90); 
+		Robot.MoveForward(8);
 	}
 }
