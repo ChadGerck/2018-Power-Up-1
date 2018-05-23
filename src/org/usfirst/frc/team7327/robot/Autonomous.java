@@ -8,5 +8,7 @@ public class Autonomous {
 		Robot.TurnRight();   
 		Robot.MoveForward();
 		Robot.MoveForward();
+		Robot.MoveForward();
+		
 	}
 }
