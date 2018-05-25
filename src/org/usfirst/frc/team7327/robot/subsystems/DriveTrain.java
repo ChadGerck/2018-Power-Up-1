@@ -32,11 +32,11 @@ public class DriveTrain extends Subsystem {
 		WinchMotor = new Spark(RobotMap.WINCH_MOTOR.value);
 	}
 	
-	public void setRaw(double rightvalue, double leftvalue, double wheelvalue, double armvalue, double winchvalue) {
-		LeftMotor.set(leftvalue);
-		RightMotor.set(-rightvalue);
-		LeftMotor1.set(leftvalue);
-		RightMotor1.set(-rightvalue);
+	public void setRaw(double leftvalue, double rightvalue, double wheelvalue, double armvalue, double winchvalue) {
+		LeftMotor.set(-leftvalue);
+		RightMotor.set(rightvalue);
+		LeftMotor1.set(-leftvalue);
+		RightMotor1.set(rightvalue);
 		WheelMotor.set(wheelvalue);
 		ArmMotor.set(armvalue);
 		//Flappers.set(flapervalue);
@@ -44,11 +44,11 @@ public class DriveTrain extends Subsystem {
 			
 	} 
 	
-	public void setRaw1(double rightvalue, double leftvalue, double wheelvalue) {
-		LeftMotor.set(leftvalue);
-		RightMotor.set(-rightvalue);
-		LeftMotor1.set(leftvalue);
-		RightMotor1.set(-rightvalue);
+	public void setRaw1(double leftvalue, double rightvalue, double wheelvalue) {
+		LeftMotor.set(-leftvalue);
+		RightMotor.set(rightvalue);
+		LeftMotor1.set(-leftvalue);
+		RightMotor1.set(rightvalue);
 		WheelMotor.set(wheelvalue);
 			
 	} 

@@ -19,8 +19,8 @@ public class TankDrive extends Command {
 	
 	protected void execute(){
 		//throttle speed from 1 to 0 based on desired speed
-		double throttleL = .6;
-		double throttleR = .6;
+		double throttleL = .3;
+		double throttleR = .3;
 		double throttleW = .4;
 		double throttleA = .4; 
 		

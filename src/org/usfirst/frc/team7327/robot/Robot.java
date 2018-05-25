@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 	private char ScaleSide = gameData.charAt(1);
 	
 	//Change based on alliance
-	private char RobotLocation = 'M';
+	private char RobotLocation = 'R';
 	
 
 	
@@ -228,7 +228,10 @@ public class Robot extends TimedRobot {
 		case 3: 
 			if(RobotLocation == 'L') { BackwardsPrioritizeScale(); }
 			else if(RobotLocation == 'M') { MiddlePrioritizeSwitch(); }
-			else if(RobotLocation == 'R') { BackwardsPrioritizeScale(); }
+			else if(RobotLocation == 'R') { 
+				BackwardsPrioritizeScale();
+				ResetBackwards();
+			}
 			break;
 		}
 		
@@ -285,7 +288,7 @@ public class Robot extends TimedRobot {
 	public void ResetBackwards() {
 		if(RobotLocation == ScaleSide) {
 			double x = -.35;
-			double y = -.36; 
+			double y = -.35; 
 			
 			ArmToptoBase();
 			MoveForward(x, y, 3);
