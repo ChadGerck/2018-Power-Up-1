@@ -19,24 +19,14 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain);
 	}
-<<<<<<< HEAD
-
-=======
-	
-	protected void initialize() {
-		//stay
-	}
-	
-	protected void execute(){
->>>>>>> Group1
-		//throttle speed from 1 to 0 based on desired speed
-		double throttleL = .6;
-		double throttleR = .6;
-		double throttleA = .65;  
-		double throttleS = .7;
+	//throttle speed from 1 to 0 based on desired speed
+	double throttleL = .6;
+	double throttleR = .6;
+	double throttleA = .65;  
+	double throttleS = .7;
 		
-		XboxController Player1 = Robot.oi.Controller0; 
-		XboxController Player2 = Robot.oi.Controller1;
+	XboxController Player1 = Robot.oi.Controller0; 
+	XboxController Player2 = Robot.oi.Controller1;
 	protected void initialize() {
 		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
@@ -64,8 +54,6 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
 		
-<<<<<<< HEAD
-=======
 		DoubleSolenoid.clearAllPCMStickyFaults(0);
 		DoubleSolenoid.Value Grabbers  = DoubleSolenoid.Value.kOff;
 		DoubleSolenoid.Value Punchers  = DoubleSolenoid.Value.kOff;
@@ -75,7 +63,6 @@ public class TankDrive extends Command {
 		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
 		
 		/*
->>>>>>> Group1
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
 		}
