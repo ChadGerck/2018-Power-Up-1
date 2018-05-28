@@ -53,9 +53,11 @@ public class TankDrive extends Command {
 		XboxController Player2 = Robot.oi.Controller1;
 		if(SinglePlayer) { Player2 = Robot.oi.Controller0; }
 		
+		/*
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
 		}
+		*/
 		
 		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
