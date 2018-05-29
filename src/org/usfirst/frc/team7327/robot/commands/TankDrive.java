@@ -26,7 +26,8 @@ public class TankDrive extends Command {
 	double throttleA = .65;  
 	double throttleS = .7;
 
-	Servo screamServo = new Servo(1);
+	Servo Servo1 = new Servo(8);
+	Servo Servo2 = new Servo(9);
 	XboxController Player1 = Robot.oi.Controller0; 
 	XboxController Player2 = Robot.oi.Controller1;
 	protected void initialize() {
@@ -55,6 +56,24 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceL: ", distanceL);
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
+		
+		if(Robot.oi.getBButton(Player1)) {
+			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
+			else { Servo1.setSpeed(-1);}
+		}
+		/*
+		if(Robot.oi.getAButton(Player1)) {
+			Servo1.setSpeed(-1);
+		}
+		*/
+		if(Robot.oi.getXButton(Player1)) {
+			if(Servo2.get() == 0) {Servo2.setSpeed(1); }
+			else { Servo2.setSpeed(-1);}
+		}/*
+		if(Robot.oi.getYButton(Player1)) {
+			Servo2.setSpeed(-1);
+		}
+		*/
 		/*
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
