@@ -80,6 +80,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		myTimer.reset();
+		myTimer.start();
+		
 		
 		limitSwitch = new DigitalInput(0);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
@@ -126,6 +129,8 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
+		Autonomous.Auto();
+		
 		/*
 		System.out.println("FIRST MOVEMENT");
 		MoveDistance(0, .40, 20);

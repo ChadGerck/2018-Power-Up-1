@@ -61,24 +61,15 @@ public class TankDrive extends Command {
 			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
 			else { Servo1.setSpeed(-1);}
 		}
-		/*
-		if(Robot.oi.getAButton(Player1)) {
-			Servo1.setSpeed(-1);
-		}
-		*/
 		if(Robot.oi.getXButton(Player1)) {
 			if(Servo2.get() == 0) {Servo2.setSpeed(1); }
 			else { Servo2.setSpeed(-1);}
-		}/*
-		if(Robot.oi.getYButton(Player1)) {
-			Servo2.setSpeed(-1);
 		}
-		*/
-		/*
+		
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
 		}
-		*/
+		
 		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 		}else if(Robot.oi.getRightBumper(Player2)) {
