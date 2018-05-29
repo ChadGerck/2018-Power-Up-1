@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
 
@@ -26,6 +27,7 @@ public class TankDrive extends Command {
 		double throttleA = .65;  
 		double throttleS = .7;
 		
+		Servo screamServo = new Servo(1);
 		XboxController Player1 = Robot.oi.Controller0; 
 		XboxController Player2 = Robot.oi.Controller1;
 	protected void initialize() {
@@ -54,15 +56,16 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceL: ", distanceL);
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
-		
+		/*
 		if(Robot.oi.getYButton(Player2)) {
 			Robot.ShootBox(); 
 		}
-		
+		*/
 		if(Robot.oi.getLeftBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 		}else if(Robot.oi.getRightBumper(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
+
 		}else {
 			Grabbers = DoubleSolenoid.Value.kOff;
 		}
@@ -71,11 +74,14 @@ public class TankDrive extends Command {
 		
 		if(Robot.oi.getRightTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kReverse;
+			System.out.println("It went,");
 		}else if(Robot.oi.getLeftTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kForward;
-		}else {
+			System.out.println("It went, it's not the code");
+		}/*else {
 			Punchers = DoubleSolenoid.Value.kOff;
 		}
+		*/
 		Robot.drivetrain.setPunchers(Punchers);
 		
 		if(Robot.oi.Dpad(Player2) >= 0) {
@@ -86,6 +92,7 @@ public class TankDrive extends Command {
 		if((Robot.oi.Dpad(Player2) >= 0 && Robot.oi.Dpad(Player2) < 45) || (Robot.oi.Dpad(Player2) >= 315 && Robot.oi.Dpad(Player2) < 360) ) {
 			DRight = -throttleS;
 			DLeft = throttleS;
+
 		}
 		else if(Robot.oi.Dpad(Player2) >= 45 && Robot.oi.Dpad(Player2) < 135) {
 			DRight = throttleS;
@@ -131,7 +138,7 @@ public class TankDrive extends Command {
 			if(!armOn) { armOn = true;} 
 			else { armOn = false; }
 		}
-		
+	
 		if(armOn) {
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA);
 		}
