@@ -4,8 +4,6 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		
-		System.out.println("Hello World"); 
 		Sparky.MoveForward();
 		Sparky.MoveForward();
 		Sparky.MoveForward();
