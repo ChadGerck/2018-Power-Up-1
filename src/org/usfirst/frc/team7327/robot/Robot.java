@@ -87,18 +87,17 @@ public class Robot extends TimedRobot {
 		limitSwitch = new DigitalInput(0);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
-		// Might be able to setDistancePerPulse by 686*5 and not have to divide by 686 to get feet. 
 		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 		encoderL.setMaxPeriod(.1);
 		encoderL.setMinRate(10);
-		encoderL.setDistancePerPulse(5);
+		encoderL.setDistancePerPulse(3430);
 		encoderL.setReverseDirection(false);
 		encoderL.setSamplesToAverage(7);
 		
 		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
 		encoderR.setMaxPeriod(.1);
 		encoderR.setMinRate(10);
-		encoderR.setDistancePerPulse(5);
+		encoderR.setDistancePerPulse(3430);
 		encoderR.setReverseDirection(true);
 		encoderR.setSamplesToAverage(7);
 				
