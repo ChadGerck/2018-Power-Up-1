@@ -18,7 +18,7 @@ public class TankDrive extends Command {
 	int Speed = 1; 
     
 	public TankDrive() {
-		requires(Robot.drivetrain);
+		requires(Robot.drivetrain); 
 	}
 	//throttle speed from 1 to 0 based on desired speed
 	double throttleL = .6;
@@ -83,10 +83,8 @@ public class TankDrive extends Command {
 		
 		if(Robot.oi.getRightTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kReverse;
-			System.out.println("It went,");
 		}else if(Robot.oi.getLeftTrigger(Player2) == 1) {
 			Punchers = DoubleSolenoid.Value.kForward;
-			System.out.println("It went, it's not the code");
 		}/*else {
 			Punchers = DoubleSolenoid.Value.kOff;
 		}
