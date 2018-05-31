@@ -94,8 +94,8 @@ public class TankDrive extends Command {
 		}
 	}
 
-	static double distanceL = Robot.encoderL.getDistance()/686;
-	static double distanceR = Robot.encoderR.getDistance()/686;
+	static double distanceL = Robot.encoderL.getDistance();
+	static double distanceR = Robot.encoderR.getDistance();
 	public static void Distance() {
 		distanceL = Robot.encoderL.getDistance();
 		distanceR = Robot.encoderR.getDistance();
