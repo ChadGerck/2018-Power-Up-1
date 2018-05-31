@@ -42,12 +42,6 @@ public class DriveTrain extends Subsystem {
 		ArmMotor.set(armvalue);
 			
 	} 
-	
-	
-	public void setPunchers( DoubleSolenoid.Value punchervalue ) {
-		Puncher.set(punchervalue);
-	}
-	 
 	public void setRaw1(double leftvalue, double rightvalue) {
 		LeftMotor.set(leftvalue);
 		RightMotor.set(-rightvalue);
@@ -67,6 +61,10 @@ public class DriveTrain extends Subsystem {
 	
 	public void setRawGrabber(DoubleSolenoid.Value grabbervalue) {
 		Grabbers.set(grabbervalue);
+	}
+
+	public void setPunchers( DoubleSolenoid.Value punchervalue ) {
+		Puncher.set(punchervalue);
 	}
 	
 	@Override
