@@ -44,6 +44,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 	//import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj.*;
@@ -57,6 +58,8 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderL;
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
+
+	public static UltrasonicSensor ultra = new UltrasonicSensor(0);
 	
 	public static boolean tele = false;
 	
@@ -83,21 +86,20 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		
 		limitSwitch = new DigitalInput(0);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 		encoderL.setMaxPeriod(.1);
 		encoderL.setMinRate(10);
-		encoderL.setDistancePerPulse(3430);
+		encoderL.setDistancePerPulse(.0073);
 		encoderL.setReverseDirection(false);
 		encoderL.setSamplesToAverage(7);
 		
 		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
 		encoderR.setMaxPeriod(.1);
 		encoderR.setMinRate(10);
-		encoderR.setDistancePerPulse(3430);
+		encoderR.setDistancePerPulse(.0073);
 		encoderR.setReverseDirection(true);
 		encoderR.setSamplesToAverage(7);
 				
