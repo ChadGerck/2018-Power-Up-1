@@ -25,7 +25,7 @@ public class Autonomous {
         Sparky.MoveForward();
         Sparky.MoveForward();
 	
-		Sparky.TurnLeft(); 
+		 
 	
 	
 		Sparky.MoveForward(); 
@@ -51,7 +51,9 @@ public class Autonomous {
 	    Sparky.MoveForward();
 	    Sparky.MoveForward();
 	    Sparky.MoveForward(); 
-	    
+	    Sparky.MoveForward();
+	    Sparky.MoveForward();
+	    Sparky.MoveForward();
 	}
 	
 }
