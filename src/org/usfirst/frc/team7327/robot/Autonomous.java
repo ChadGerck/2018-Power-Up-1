@@ -5,14 +5,11 @@ import org.usfirst.frc.team7327.robot.Robot;
 public class Autonomous {
 	public static void Auto() {
 		Sparky.MoveForward();
+		Sparky.TurnRight();  
 		Sparky.MoveForward();
 		Sparky.MoveForward(); 
-		Sparky.MoveForward(); 
-		Sparky.TurnRight();  
-		Sparky.MoveForward(); 
+		Sparky.MoveForward();
 	}
-	
-	
 }
 
 
