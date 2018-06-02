@@ -7,13 +7,5 @@ public class Autonomous {
 		Sparky.MoveForward();
 		Sparky.TurnRight();  
 		Sparky.MoveForward();
-		Sparky.MoveForward(); 
 	}
 }
-
-
-
-
-
-
-
