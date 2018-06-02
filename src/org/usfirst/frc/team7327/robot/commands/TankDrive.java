@@ -49,7 +49,7 @@ public class TankDrive extends Command {
 		distanceL = Robot.encoderL.getDistance();
 		distanceR = Robot.encoderR.getDistance();
 
-		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
+		//SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
 		SmartDashboard.putNumber("DistanceL: ", distanceL);
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
