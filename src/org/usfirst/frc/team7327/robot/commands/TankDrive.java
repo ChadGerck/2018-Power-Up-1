@@ -39,9 +39,20 @@ public class TankDrive extends Command {
 	double DRight = 0;
 	double DLeft = 0;
 	
+
+	static double distanceL = Robot.encoderL.getDistance();
+	static double distanceR = Robot.encoderR.getDistance();
+	
 	protected void execute(){
 		
-		Distance(); 
+
+		distanceL = Robot.encoderL.getDistance();
+		distanceR = Robot.encoderR.getDistance();
+
+		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
+		SmartDashboard.putNumber("DistanceL: ", distanceL);
+		SmartDashboard.putNumber("DistanceR: ", distanceR);
+		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
 		
 		if(Robot.oi.getBButton(Player1)) {
 			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
@@ -102,18 +113,6 @@ public class TankDrive extends Command {
 		}
 	}
 
-	static double distanceL = Robot.encoderL.getDistance();
-	static double distanceR = Robot.encoderR.getDistance();
-	public static void Distance() {
-		distanceL = Robot.encoderL.getDistance();
-		distanceR = Robot.encoderR.getDistance();
-
-		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
-		SmartDashboard.putNumber("DistanceL: ", distanceL);
-		SmartDashboard.putNumber("DistanceR: ", distanceR);
-		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
-	}
-	
 	
 	protected boolean isFinished() {
 
