@@ -8,6 +8,7 @@ public class Autonomous {
 		Sparky.TurnRight();  
 		Sparky.MoveForward();
 		Sparky.MoveForward(); 
+		Sparky.MoveForward();
 	}
 }
 
