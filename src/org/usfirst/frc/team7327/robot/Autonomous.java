@@ -4,56 +4,56 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		Sparky.MoveForward();
-		Sparky.MoveForward();  
-		Sparky.MoveForward();
-	    Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward(); 
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
-        Sparky.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();  
+		Robot.MoveForward();
+	    Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward(); 
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
+        Robot.MoveForward();
 	
 		 
 	
 	
-		Sparky.MoveForward(); 
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
+		Robot.MoveForward(); 
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
 	
-	    Sparky.TurnLeft();
-	    Sparky.TurnLeft();
-	    Sparky.TurnLeft();
-	    Sparky.TurnLeft();
+	    Robot.TurnLeft();
+	    Robot.TurnLeft();
+	    Robot.TurnLeft();
+	    Robot.TurnLeft();
  
 	    
 	   
 	     
 	    
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward(); 
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
-	    Sparky.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward(); 
+	    Robot.MoveForward();
+	    Robot.MoveForward();
+	    Robot.MoveForward();
 	}
 	
 }
