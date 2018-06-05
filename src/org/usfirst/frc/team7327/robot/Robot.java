@@ -363,7 +363,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) > 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0); 
+				drivetrain.setRaw(.25, -.25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			} 
@@ -376,7 +376,7 @@ public class Robot extends TimedRobot {
 			}
 			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0); 
+				drivetrain.setRaw(-.25, .25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			}
