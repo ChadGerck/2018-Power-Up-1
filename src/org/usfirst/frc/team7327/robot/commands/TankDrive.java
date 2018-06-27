@@ -3,8 +3,8 @@ package org.usfirst.frc.team7327.robot.commands;
 import org.usfirst.frc.team7327.robot.Robot;
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
@@ -29,7 +29,7 @@ public class TankDrive extends Command {
 	double throttleA = .65;  
 	double throttleS = .7;
 	
-	TalonSRX TestTalon = new TalonSRX(0); 
+	//TalonSRX TestTalon = new TalonSRX(0); 
 
 	Servo Servo1 = new Servo(8);
 	Servo Servo2 = new Servo(9);
@@ -65,8 +65,8 @@ public class TankDrive extends Command {
 			else { Servo1.setSpeed(-1);}
 		}
 		if(Robot.oi.getXButton(Player1)) {
-			if(TestTalon.getMotorOutputPercent() == 0) {TestTalon.set(ControlMode.PercentOutput, .5); }
-			else { TestTalon.set(ControlMode.PercentOutput, 0);}
+			//if(Robot.drivetrain.getTalon() == 0) {Robot.drivetrain.setTalon(.5); }
+			//else { Robot.drivetrain.setTalon(0); }
 		}
 		
 		if(Robot.oi.getYButton(Player2)) { Robot.ShootBox(); }

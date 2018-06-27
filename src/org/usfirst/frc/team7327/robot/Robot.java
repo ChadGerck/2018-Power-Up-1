@@ -86,10 +86,10 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		limitSwitch = new DigitalInput(0);
+		limitSwitch = new DigitalInput(8);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
-		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		encoderL = new Encoder(1, 2, false, Encoder.EncodingType.k4X);
 		encoderL.setMaxPeriod(.1);
 		encoderL.setMinRate(10);
 		encoderL.setDistancePerPulse(.0073);
@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
 		encoderL.setSamplesToAverage(7);
 		encoderL.reset();
 		
-		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+		encoderR = new Encoder(3, 4, false, Encoder.EncodingType.k4X);
 		encoderR.setMaxPeriod(.1);
 		encoderR.setMinRate(10);
 		encoderR.setDistancePerPulse(.0073);
