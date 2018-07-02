@@ -97,6 +97,7 @@ public class Robot extends TimedRobot {
 		encoderL.setSamplesToAverage(7);
 		encoderL.reset();
 		
+		
 		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
 		encoderR.setMaxPeriod(.1);
 		encoderR.setMinRate(10);
