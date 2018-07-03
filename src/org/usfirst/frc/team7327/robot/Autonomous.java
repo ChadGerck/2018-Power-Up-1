@@ -4,15 +4,18 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		for (var i = 0; i < 13; i++ ){
+		int count = 0;
+		while(count < 13 ){
 			Robot.MoveForward();
+			count++;
 		}
 		Robot.TurnLeft(); 
 		Robot.MoveForward();
 		Robot.MoveForward();
 		Robot.TurnLeft();
-		for (var i = 0; i < 13; i++ ){
+		while(count < 13) {
 			Robot.MoveForward();
+			count++;
 		}
 		Robot.TurnLeft();
 		Robot.TurnLeft();
