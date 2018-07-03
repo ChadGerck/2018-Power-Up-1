@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
 
-	public static UltrasonicSensor ultra = new UltrasonicSensor(0);
+	//public static UltrasonicSensor ultra = new UltrasonicSensor(0);
 	
 	public static boolean tele = false;
 	
@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		limitSwitch = new DigitalInput(0);
+		//limitSwitch = new DigitalInput(8);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
@@ -95,6 +95,8 @@ public class Robot extends TimedRobot {
 		encoderL.setDistancePerPulse(.0073);
 		encoderL.setReverseDirection(false);
 		encoderL.setSamplesToAverage(7);
+		encoderL.reset();
+		
 		
 		encoderR = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
 		encoderR.setMaxPeriod(.1);
@@ -102,6 +104,7 @@ public class Robot extends TimedRobot {
 		encoderR.setDistancePerPulse(.0073);
 		encoderR.setReverseDirection(true);
 		encoderR.setSamplesToAverage(7);
+		encoderR.reset();
 				
 		oi = new OI();
 		drivetrain = new DriveTrain();
@@ -130,6 +133,8 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
+		encoderL.reset();
+		encoderR.reset();
 		Autonomous.Auto();
 		
 		/*
@@ -263,60 +268,65 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
+	
 	public static void MoveForward() {
-		MoveDistance(GyroAngle(), .3, 1); 
+		MoveDistance(GyroAngle(), .25, 1); 
 	}
+	
+
+	 
 	
 	public static void MoveDistance(double angle, double speed, double distance) { 
 		
+		double distanceL = Robot.encoderL.getDistance();
+		double distanceR = Robot.encoderR.getDistance();
 		double avgDistance = 0; 
-		double distanceDone = ((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2;
+		double distanceDone = ((Robot.encoderL.getDistance()) + (Robot.encoderR.getDistance()))/2;
 		double templ = speed; 
 		double tempr = speed; 
 		
+		
+		
 		while(!tele && avgDistance < distance ) {
-			//System.out.println(limitSwitch.get()); 
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
+			distanceL = Robot.encoderL.getDistance();
+			distanceR = Robot.encoderR.getDistance();
+			SmartDashboard.putNumber("DistanceL: ", distanceL);
+			SmartDashboard.putNumber("DistanceR: ", distanceR);
 			drivetrain.setRaw(templ, tempr, 0);
 			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
 				if(templ < speed + .05) { templ += .001;  }
 				else { templ -= .001; tempr -= .002; }
-				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
-				//System.out.println("Go Right: " + templ + " " + tempr);
 			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
 				if(tempr < speed + .05) { tempr += .001; }
 				else { tempr -= .001; templ -= .002; } 
-				//System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
-				//System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
 				tempr = speed; 
 			}
 			try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-			avgDistance = (((Robot.encoderL.getDistance()/686) + (Robot.encoderR.getDistance()/686))/2)-distanceDone;
+			avgDistance = (((Robot.encoderL.getDistance()) + (Robot.encoderR.getDistance()))/2)-distanceDone;
+			System.out.println(avgDistance); 
+			
 		}  
 		drivetrain.setRaw(0, 0, 0); 
 	}
 	
-	public void MoveTime(double angle, double speed, double time) { //l and r are left speed and right speed
+	public void MoveTime(double angle, double speed, double time) { 
 		
 		time = myTimer.get() + time;
 		double templ = speed; 
 		double tempr = speed; 
-		while(isAutonomous() && myTimer.get() < time ) {
+		while(!tele && myTimer.get() < time ) {
 			
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
 			drivetrain.setRaw(templ, tempr, 0);
 			if(Math.sin(Math.toRadians(GyroAngle()+angle)) < -.01) {
 				if(templ < speed + .05) { templ += .001;  }
 				else { templ -= .001; tempr -= .002; }
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))) );
-				System.out.println("Go Right: " + templ + " " + tempr);
 			}else if(Math.sin(Math.toRadians(GyroAngle()+angle)) > .01 ) {
 				if(tempr < speed + .05) { tempr += .001; }
 				else { tempr -= .001; templ -= .002; } 
-				System.out.println("Sin: " + (Math.sin(Math.toRadians(GyroAngle()+angle))));
-				System.out.println("Go Left: " + templ + " " + tempr);
 			}else {
 				templ = speed; 
 				tempr = speed; 
@@ -346,7 +356,7 @@ public class Robot extends TimedRobot {
 			} 
 			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) > 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(.22, -.22, 0); 
+				drivetrain.setRaw(.25, -.25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			} 
@@ -359,7 +369,7 @@ public class Robot extends TimedRobot {
 			}
 			while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("Gyro: ", GyroAngle());
-				drivetrain.setRaw(-.22, .22, 0); 
+				drivetrain.setRaw(-.25, .25, 0); 
 				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
 				Phi = GyroAngle();
 			}
