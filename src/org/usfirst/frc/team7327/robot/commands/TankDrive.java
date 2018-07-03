@@ -2,6 +2,10 @@ package org.usfirst.frc.team7327.robot.commands;
 
 import org.usfirst.frc.team7327.robot.Robot;
 
+
+//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,6 +28,8 @@ public class TankDrive extends Command {
 	double throttleR = .6;
 	double throttleA = .65;  
 	double throttleS = .7;
+	
+	//TalonSRX TestTalon = new TalonSRX(0); 
 
 	Servo Servo1 = new Servo(8);
 	Servo Servo2 = new Servo(9);
@@ -39,22 +45,34 @@ public class TankDrive extends Command {
 	double DRight = 0;
 	double DLeft = 0;
 	
+
+	static double distanceL = Robot.encoderL.getDistance();
+	static double distanceR = Robot.encoderR.getDistance();
+	
 	protected void execute(){
 		
-		Distance(); 
+
+		distanceL = Robot.encoderL.getDistance();
+		distanceR = Robot.encoderR.getDistance();
+
+		//SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
+		SmartDashboard.putNumber("DistanceL: ", distanceL);
+		SmartDashboard.putNumber("DistanceR: ", distanceR);
+		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
 		
 		if(Robot.oi.getBButton(Player1)) {
 			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
 			else { Servo1.setSpeed(-1);}
 		}
 		if(Robot.oi.getXButton(Player1)) {
-			if(Servo2.get() == 0) {Servo2.setSpeed(1); }
-			else { Servo2.setSpeed(-1);}
+			//if(Robot.drivetrain.getTalon() == 0) {Robot.drivetrain.setTalon(.5); }
+			//else { Robot.drivetrain.setTalon(0); }
 		}
 		
 		if(Robot.oi.getYButton(Player2)) { Robot.ShootBox(); }
 		if(Robot.oi.getLeftBumper(Player2)) { Grabbers = DoubleSolenoid.Value.kReverse; }
-		if(Robot.oi.getRightBumper(Player2)){ Grabbers = DoubleSolenoid.Value.kForward; }
+		else if(Robot.oi.getRightBumper(Player2)){ Grabbers = DoubleSolenoid.Value.kForward; }
+		else { Grabbers = DoubleSolenoid.Value.kOff; }
 		Robot.drivetrain.setRawGrabber(Grabbers);
 		
 		if(Robot.oi.getRightTrigger(Player2) == 1){ Punchers = DoubleSolenoid.Value.kReverse; }
@@ -102,18 +120,6 @@ public class TankDrive extends Command {
 		}
 	}
 
-	static double distanceL = Robot.encoderL.getDistance();
-	static double distanceR = Robot.encoderR.getDistance();
-	public static void Distance() {
-		distanceL = Robot.encoderL.getDistance();
-		distanceR = Robot.encoderR.getDistance();
-
-		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
-		SmartDashboard.putNumber("DistanceL: ", distanceL);
-		SmartDashboard.putNumber("DistanceR: ", distanceR);
-		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
-	}
-	
 	
 	protected boolean isFinished() {
 
