@@ -6,7 +6,62 @@ public class Autonomous {
 	public static void Auto() {
 		Robot.MoveForward(); 
 		Robot.MoveForward();
-		Robot.TurnRight();  
 		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.TurnRight();
+		Robot.TurnRight();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.TurnRight();
+		Robot.TurnRight();
+		
+		
+		
 	}
 }
