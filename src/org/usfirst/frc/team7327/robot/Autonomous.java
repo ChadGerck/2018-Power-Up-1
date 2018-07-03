@@ -4,14 +4,17 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		Robot.MoveForward();
-		Robot.MoveForward();
-		Robot.MoveForward();
-		Robot.MoveForward();
-		Robot.MoveForward();
+		for (int i = 1; i < 13; i++ ){
+			Robot.MoveForward();
+		}
 		Robot.TurnLeft(); 
 		Robot.MoveForward();
-		Robot.TurnLeft();
 		Robot.MoveForward();
+		Robot.TurnLeft();
+		for (int i = 1; i < 13; i++ ){
+			Robot.MoveForward();
+		}
+		Robot.TurnLeft();
+		Robot.TurnLeft();
 	}
 }
