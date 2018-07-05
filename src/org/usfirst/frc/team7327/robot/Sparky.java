@@ -5,7 +5,26 @@ public class Sparky {
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		Autonomous.Auto(); 
+		//Autonomous.Auto(); 
+		int k = 0; 
+		while(k < 50) {
+			MoveForward(); 
+			if(k == 25) {
+				TurnRight(); 
+				TurnRight(); 
+			}
+			k++; 
+		}
+		
+		int i = 0; 
+		if(i == 10) {
+			
+		}
+		while(i < 26) {
+			MoveForward();
+			i++; 
+		}
+		
 		
 	}
 	public static void MoveForward() {

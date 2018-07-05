@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
 	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-	//private int station = DriverStation.getInstance().getLocation();
+	public static int station = DriverStation.getInstance().getLocation();
 	//private String gameData;
 	
 	//Change based on alliance
@@ -136,6 +136,7 @@ public class Robot extends TimedRobot {
 		encoderL.reset();
 		encoderR.reset();
 		Autonomous.Auto();
+		station = DriverStation.getInstance().getLocation();
 		
 		/*
 		System.out.println("FIRST MOVEMENT");
@@ -284,8 +285,6 @@ public class Robot extends TimedRobot {
 		double distanceDone = ((Robot.encoderL.getDistance()) + (Robot.encoderR.getDistance()))/2;
 		double templ = speed; 
 		double tempr = speed; 
-		
-		
 		
 		while(!tele && avgDistance < distance ) {
 			SmartDashboard.putNumber("Gyro: ", GyroAngle());
