@@ -6,7 +6,7 @@ public class Autonomous {
 	public static void Auto() {
 
 		int i = 0;
-		while (i < 54){
+		while (i < 52){
 			Robot.MoveForward();
 			if(i == 25) {
 				Robot.TurnRight();
@@ -17,3 +17,4 @@ public class Autonomous {
 	}
 }
 	
+			
