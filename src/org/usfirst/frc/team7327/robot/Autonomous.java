@@ -4,24 +4,32 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		int i = 0;
-		while (i < 52) {
+		switch(Robot.station){
+		case 1:
 			Robot.MoveForward();
-			i++;
-			if (i == 26) {
-				TurnAround();
-			}
+			TurnAround();
+			Robot.MoveForward();
+			TurnAround();
+			break;
+		case 2:
+			Robot.MoveForward();
+			Robot.MoveForward();
+			Robot.MoveForward();
+			Robot.MoveForward();
+			Robot.MoveForward();
+			Robot.MoveForward();
+			Robot.MoveForward();
+			break;
+		case 3:
+			TurnAround();
+			TurnAround();
+			TurnAround();
+			TurnAround();
+			TurnAround();
+			TurnAround();
+			break;
 		}
 	}
-
-	public static void MoveForward(int distance) {
-		int i = 0;
-		while (i < distance) {
-			Robot.MoveForward();
-			i++;
-		}
-	}
-
 	public static void TurnAround() {
 		Robot.TurnRight();
 		Robot.TurnRight();
