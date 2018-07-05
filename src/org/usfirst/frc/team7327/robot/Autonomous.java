@@ -24,8 +24,8 @@ public class Autonomous {
 		Robot.TurnRight();
 		MoveForward(26); 
 		
-		
-		switch(Robot.station){
+		int station = 3; 
+		switch(station){
 		case 1: 
 			Robot.TurnRight();
 			Robot.TurnRight();
@@ -33,7 +33,6 @@ public class Autonomous {
 			Robot.TurnRight();
 			break; 
 		case 2: 
-			Robot.MoveDistance(0, .3, 26);
 			
 			
 			break; 
@@ -44,9 +43,47 @@ public class Autonomous {
 		}
 		
 		
+		
+		
+		while(true) {
+			double timer = Robot.myTimer.get(); 
+			//leftvalue and rightvalue from 0 - 1
+			Robot.drivetrain.setRaw1(.25, .25);
+			
+			if(timer < 10 ) {
+				
+			}
+			else if( timer < 20 ) {
+				
+			}
+			else if(timer < 30) {
+				
+			}
+			else {
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
-	public static void MoveAngle() {
-		Robot.drivetrain.setRaw1(.25, .25);
+	public static void MoveAngle(double angle ) {
+		Robot.drivetrain.setRaw1(.25,  .25);
 		double gyroAngle = Robot.GyroAngle(); 
 		gyroAngle = Math.toRadians(gyroAngle);
 		
