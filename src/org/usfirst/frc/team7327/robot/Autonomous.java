@@ -5,6 +5,35 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
+		
+		
+		int station = 2;
+		switch(station){
+		case 1:
+			   Robot.TurnRight();
+		       Robot.TurnRight();
+		       Robot.TurnRight();
+		       Robot.TurnRight();
+		       
+		       
+		       break;
+		case 2:Robot.MoveForward();
+		       Robot.TurnRight();
+		       Robot.MoveForward();
+		       Robot.TurnRight();
+			
+			
+			   break;
+		case 3:Robot.TurnRight();
+		       Robot.TurnLeft();
+		       Robot.TurnRight();
+			   Robot.TurnLeft();
+			   
+			   
+			   break;
+
+		    } 
+		
 		int i = 0;
 		while(i<52){
 		    Robot.MoveForward();
@@ -23,4 +52,7 @@ public class Autonomous {
 		i= i +1;
 		}
 	}
-}
+
+
+
+  }
