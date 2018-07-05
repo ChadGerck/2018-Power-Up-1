@@ -8,22 +8,22 @@ public class Autonomous {
 		
 		int count = 0;
 		
-		while(count < 26 ) {
+		while(count <= 52 ) {
+			
 			Sparky.MoveForward();
+			if (count == 26) {
+				Sparky.TurnLeft();
+				Sparky.TurnLeft();
+			}			
 			count++;
-		}
-		
-		Sparky.TurnLeft(); 
+		}		
+	}
+
+public static void MoveForward(int distance){
+	int i = 0;
+	while (i < distance){
 		Sparky.MoveForward();
-		Sparky.MoveForward();
-		Sparky.TurnLeft();
-		
-		count = 0;
-		while(count < 26) {
-			Sparky.MoveForward();
-			count++;
+		i = i + 1;
 		}
-		Sparky.TurnLeft();
-		Sparky.TurnLeft();
 	}
 }
