@@ -15,19 +15,12 @@ public class Autonomous {
 			}
 
 			else if (timer < 20) {
-				int i = 0;
-				while (i < 10) {
-					Robot.MoveForward();
-					i++;
-				}
-
+				Robot.drivetrain.setRaw1(-.25, .25 );	
+			
 			}
 
-			else if (timer < 30) {
-				Robot.MoveForward();
-				Robot.drivetrain.setRaw1(0, .25);
-				
-			}
+			else if (timer < 30) 
+				Robot.drivetrain.setRaw1(.25, -.25 );
 			else {
 
 			}
