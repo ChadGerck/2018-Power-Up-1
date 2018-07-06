@@ -5,8 +5,26 @@ import org.usfirst.frc.team7327.robot.Robot;
 public class Autonomous {
 	
 	public static void Auto() {
+		
+		while(true) {
+			double timer = Robot.myTimer.get();
+			//leftvalue and rightvalue from 0-1
+			Robot.drivetrain.setRaw1(.25, .25);
+			
+			if (timer<10) {
+				Robot.drivetrain.setRaw1(.30, .10);
+			}else if (timer<20){
+				Robot.drivetrain.setRaw1(.99, .19);
+			}else if (timer<30){
+				Robot.drivetrain.setRaw1(.5, .5);
+			}else {
+				Robot.drivetrain.setRaw1(.8, .8);
+				
+			}
+		}
+	}
 	
-	int station = 3;
+	/*int station = 3;
 			switch(station){
 			case 1 :
 				Robot.TurnRight();
