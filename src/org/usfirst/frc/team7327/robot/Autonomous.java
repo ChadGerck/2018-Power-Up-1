@@ -4,7 +4,8 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		switch(Robot.station){
+		int station = 1; 
+		switch(station){
 		case 1:
 			Robot.MoveForward();
 			TurnAround();
