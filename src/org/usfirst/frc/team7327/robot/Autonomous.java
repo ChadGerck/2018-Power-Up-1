@@ -4,9 +4,26 @@ import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
 	public static void Auto() {
-		Robot.MoveForward();
-		Robot.MoveForward();
-		Robot.TurnRight();
-		Robot.MoveForward(); 
+		int d = 0;
+
+		if(d == 25) {
+			Robot.TurnLeft();
+			Robot.TurnLeft();
+			
+		}
+		while (d < 26) {
+			Robot.MoveForward();
+			d = d + 1;
+		}
+	}
+		
+	    
+
+	public static void MoveForward(int distance) {
+		int i = 0;
+		while (i < distance) {
+
+		}
+
 	}
 }
