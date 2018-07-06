@@ -5,30 +5,31 @@ import org.usfirst.frc.team7327.robot.Robot;
 public class Autonomous {
 	public static void Auto() {
 
-		int station = 1;
-		switch (station) {
-		case 1:
-			Robot.TurnRight();
-			Robot.TurnRight();
-			Robot.TurnRight();
-			Robot.TurnRight();
-			break;
-		case 2:
-			int i = 0;
-			while (i < 10) {
-				Robot.MoveForward();
-				i = i + 1;
-			
-			}
-			break;
-		case 3:
-			int k = 0;
-			while (k < 15) {
-				Robot.MoveForward();
-				k = k + 1;
+		while (true) {
+			double timer = Robot.myTimer.get();
+			Robot.drivetrain.setRaw1(.25, .25);
 
-				Robot.TurnLeft();
-				break;
+			if (timer < 10) {
+				Robot.drivetrain.setRaw1(.50, 0);
+
+			}
+
+			else if (timer < 20) {
+				int i = 0;
+				while (i < 10) {
+					Robot.MoveForward();
+					i++;
+				}
+
+			}
+
+			else if (timer < 30) {
+				Robot.MoveForward();
+				Robot.drivetrain.setRaw1(0, .25);
+				
+			}
+			else {
+
 			}
 
 		}
