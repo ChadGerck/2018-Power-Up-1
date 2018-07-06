@@ -5,7 +5,8 @@ public class Sparky {
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		Autonomous.Auto(); 
+		//Autonomous.Auto(); 
+		System.out.println("Hello World");
 		
 	}
 	public static void MoveForward() {
