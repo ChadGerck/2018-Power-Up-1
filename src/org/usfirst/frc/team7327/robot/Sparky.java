@@ -5,7 +5,9 @@ public class Sparky {
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		Autonomous.Auto(); 
+		//Autonomous.Auto(); 
+		MoveForward();
+		System.out.println("Hello, world!");
 		
 	}
 	public static void MoveForward() {
@@ -16,8 +18,8 @@ public class Sparky {
 		System.out.println("Turn Right");
 		if(!Offline) { Robot.TurnRight(); }
 	}
-	public static void TurnLeft() {
+	public static void TurnLeft() { 
 		System.out.println("Turn Left");
 		if(!Offline) { Robot.TurnLeft(); }
 	}
-}
+} 
