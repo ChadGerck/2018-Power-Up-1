@@ -22,7 +22,7 @@ public class Autonomous {
 			else if (timer < 30) 
 				Robot.drivetrain.setRaw1(.25, -.25 );
 			else {
-
+				Robot.drivetrain.setRaw1(0, 0);
 			}
 
 		}
