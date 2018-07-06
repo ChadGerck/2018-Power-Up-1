@@ -11,10 +11,29 @@ public class Autonomous {
 			Robot.MoveForward();
 			i = i + 1;
 			
-			if(i == 25)
+			switch(i)
 			{
-				Robot.TurnRight();
-				Robot.TurnRight();
+				case 10:
+					Robot.TurnRight();
+					Robot.TurnRight();
+					Robot.TurnRight();
+					Robot.TurnRight();
+					break;
+					
+				case 25:
+					Robot.TurnRight();
+					Robot.TurnRight();
+					break;
+					
+				case 45:
+					Robot.TurnRight();
+					Robot.TurnLeft();
+					break;
+					
+				default:
+					break;
+					
+				
 			}
 		}
 			
