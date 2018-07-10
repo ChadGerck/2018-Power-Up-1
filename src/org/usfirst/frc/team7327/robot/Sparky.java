@@ -1,4 +1,5 @@
-package org.usfirst.frc.team7327.robot;
+p
+ackage org.usfirst.frc.team7327.robot;
 
 public class Sparky {
 	public static boolean Offline = false; 
