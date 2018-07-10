@@ -21,7 +21,7 @@ public class Group3 {
 			if (fas == 20) {
 				Robot.TurnRight();
 				Robot.TurnRight();
-			}
+			} 
 			fas++;
 		}
 	}
