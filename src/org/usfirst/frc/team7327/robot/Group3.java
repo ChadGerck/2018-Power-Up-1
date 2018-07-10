@@ -7,29 +7,24 @@ public class Group3 {
 			Robot.MoveForward();
 			count++;
 		}
-		  
 			Robot.TurnRight();
-		
 			Robot.TurnRight();
-		
 		while (count < 54) {
 			Robot.MoveForward();
 			count++;
 		}
 	}
-
 	public static void Project3() {
-		int Saltbridge = 0;
-		while (Saltbridge < 40) {
+		int fas = 0;
+		while (fas < 40) {
 			Robot.MoveForward();
-			if (Saltbridge == 20) {
+			if (fas == 20) {
 				Robot.TurnRight();
 				Robot.TurnRight();
 			}
-			Saltbridge = Saltbridge + 1;
+			fas++;
 		}
 	}
-
 	public static void Project4() {
 		int station = 4;
 		switch (station) {
@@ -51,7 +46,6 @@ public class Group3 {
 			break;
 		}
 	}
-
 	public static void Project5() {
 		while (true) {
 			double timer = Robot.myTimer.get();
