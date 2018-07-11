@@ -24,6 +24,7 @@ public class GroupA {
 				Robot.TurnRight();
 			}
 		}
+		//Whats poppin my dudes
 	}
 	public static void Project4() {
 		int station = 1;
