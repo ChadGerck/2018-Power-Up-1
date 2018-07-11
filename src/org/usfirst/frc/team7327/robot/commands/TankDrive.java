@@ -29,27 +29,27 @@ public class TankDrive extends Command {
 			throttleL = Math.abs(throttleL);
 			Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)*throttleL + Robot.oi.getLeftStickX(Player1)*throttleL, Robot.oi.getRightTrigger(Player1)*throttleL);
 			
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
+			//sRobot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 		}
 		
 		if (Robot.oi.getLeftTrigger(Player1) == 1){
 			throttleL = -Math.abs(throttleL);
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftTrigger(Player1)*throttleL + Robot.oi.getLeftStickX(Player1)*throttleL, Robot.oi.getLeftTrigger(Player1)*throttleL);
 			
-			throttleL = Math.abs(throttleL);			
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
+			//throttleL = Math.abs(throttleL);			
+			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 		}
 		
 
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
+			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 			
-			if (Robot.oi.getLeftStickX(Player1) == 1){
+			/* (Robot.oi.getLeftStickX(Player1) == 1){
 				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), 0);
 			}
 			
 			if (Robot.oi.getRightStickX(Player1) == 1){
 				Robot.drivetrain.setRaw1(0, Robot.oi.getRightStickX(Player1));
-			}
+			}*/
 
 	}
 
