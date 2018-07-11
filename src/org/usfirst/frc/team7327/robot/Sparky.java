@@ -5,7 +5,7 @@ public class Sparky {
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		Autonomous.Auto(); 
+		//Autonomous.Auto(); 
 		
 	}
 	public static void MoveForward() {
