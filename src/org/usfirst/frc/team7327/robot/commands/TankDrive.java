@@ -24,11 +24,11 @@ public class TankDrive extends Command {
 	
 	protected void initialize() {
 	}
-	
 	protected void execute(){
 		Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)* throttleL,Robot.oi.getRightTrigger(Player1)* throttleL );
 		
-	if (Robot.oi.getRightStickX(Player1))
+		
+	///////	
 		
 			
 		/*
