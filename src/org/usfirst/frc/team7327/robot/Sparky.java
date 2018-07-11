@@ -19,6 +19,6 @@ public class Sparky {
 	public static void TurnLeft() {
 		System.out.println("Turn Left");
 		if(!Offline) { Robot.TurnLeft(); }
-		// Hi my name is Diego
+		// Hi my name is bernardo
 	}
 }
