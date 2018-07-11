@@ -28,8 +28,8 @@ public class TankDrive extends Command {
 			Robot.MoveForward();
 		}
 
-		Robot.drivetrain.setRaw1((Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
-				Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1) * throttleL);
+		Robot.drivetrain.setRaw1((-Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
+				-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1) * throttleL);
 		
 
 	}
@@ -43,3 +43,5 @@ public class TankDrive extends Command {
 		end();
 	}
 }
+
+
