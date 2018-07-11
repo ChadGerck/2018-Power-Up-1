@@ -39,6 +39,7 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player2)*throttleL, Robot.oi.getRightStickY(Player2)*throttleL);
 		//Checking
+		// yes means no
 	}
 
 	
