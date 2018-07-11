@@ -23,7 +23,7 @@ public class TankDrive extends Command {
 	
 	
 	protected void initialize() {
-		
+		  
 	}
 
 	protected void execute() {
@@ -38,14 +38,6 @@ public class TankDrive extends Command {
 	
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player2)*throttleL, Robot.oi.getRightStickY(Player2)*throttleL);
-	/*	
-		 if (Robot.oi.getLeftStick(Player1)) {
-		   Robot.drivetrain.setRaw1(Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1))* throttleL, Robot.oi.getLeftStickY(Player1)*throttleL);
-		   }
-		   else if (Robot.oi.getRightStick(Player1)) {
-		 	 Robot.drivetrain.setRaw1(Robot.drivetrain.setRaw1(Robot.oi.getRightStickX(Player1)* -throttleL, Robot.oi.getRightStickY(Player1)*-throttleL));
-		   }
- */
 	
 	}
 
