@@ -1,11 +1,60 @@
 package org.usfirst.frc.team7327.robot;
+import java.util.Scanner;
 
 public class Sparky {
 	public static boolean Offline = false; 
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		Autonomous.Auto(); 
+		// Autonomous.Auto();
+/*int[] array;
+array = new int[10];
+array[0] = 1;
+array[1] = 2;
+array[2] = 3;
+array[3] = 4;
+array[4] = 5;
+array[5] = 6; 
+array[6] = 7; 
+array[7] = 8;
+array[8] = 9;
+array[9] = 10;
+
+		for (int i = 0; i < 10;) {
+			System.out.println("Value of i: " + array[i]);
+			i++;
+		}*/
+		String[] days = new String[7];
+	days[0] = "Monday";
+	days[1] = "Tuesday";
+	days[2] = "Wednesday";
+	days[3] = "Thursday!";
+	days[4] = "Friday";
+	days[5] = "Saturday";
+	days[6] = "Sunday";
+		Scanner date = new Scanner(System.in);  // Reading from System.in
+		System.out.println("Enter Today's Date: ");
+		String numDate = date.next();
+			if (numDate == "7/11/18") {
+				System.out.println("Today is: " + days[2]);
+			  }
+		//once finished
+		date.close();
+		
+		
+		
+		
+		
+		
+		System.out.println("");
+		System.out.println("Done by: ");
+		System.out.println("");
+		System.out.println("     _/_/_/    _/_/    _/   _/_/_/   _/_/_/_/   _/        ++           ++        ");
+		System.out.println("    _/   _/   _/ _/   _/  _/        _/         _/         ++           ++		 ");
+		System.out.println("   _/   _/   _/  _/  _/  _/        _/         _/      +++++++++++  +++++++++++   ");
+		System.out.println("  _/_/__/   _/   _/ _/   _/_/__/  _/_/_/_/   _/           ++           ++		 ");
+ 		System.out.println(" _/   _/   _/    _/_/        _/  _/         _/            ++           ++		 ");
+		System.out.println("_/   _/   _/      _/    _/_/_/  _/_/_/_/   _/_/_/_/							     ");
 		
 	}
 	public static void MoveForward() {
