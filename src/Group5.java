@@ -56,22 +56,22 @@ public class Group5 {
 		
 		double timer = Robot.myTimer.get();
 		
-		if(timer<5) {
+		if(timer<2) {
 			Robot.drivetrain.setRaw1( 0.20, 0.20);
 		}
-		else if(timer<10) {
+		else if(timer<4) {
 			Robot.drivetrain.setRaw1( 0.45, 0.45);
 		}
-		else if(timer<15){
+		else if(timer<6){
 			Robot.drivetrain.setRaw1( 0.55, 0.55);
 		}
-		else if(timer<20) {
+		else if(timer<8) {
 			Robot.drivetrain.setRaw1( 0.45, 0.45);
 		}
-		else if(timer<25) {
+		else if(timer<10) {
 			Robot.drivetrain.setRaw1( 0.20, 0.20);
 		}
-					else {
+		else {
 				
 		}
 	}
