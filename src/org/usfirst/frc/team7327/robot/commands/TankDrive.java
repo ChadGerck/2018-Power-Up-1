@@ -29,7 +29,7 @@ public class TankDrive extends Command {
 		}
 
 		Robot.drivetrain.setRaw1((-Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
-				-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1) * throttleL);
+				(-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1)) * throttleL);
 		
 
 	}

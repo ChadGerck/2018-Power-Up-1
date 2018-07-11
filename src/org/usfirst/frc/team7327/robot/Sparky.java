@@ -6,10 +6,15 @@ public class Sparky {
 	public static void main(String[] args) {
 		Offline = true; 
 		//Autonomous.Auto(); 
-		System.out.println("Hello World");
-		MoveForward();
-		TurnRight();
-		TurnLeft();	}
+
+		double y=1;
+		
+		while(y>0) {
+		System.out.println(y);
+		y= y/2;
+		
+		}
+	}
 	public static void MoveForward() {
 		System.out.println("Move robot forward 1 space");
 		if(!Offline) { Robot.MoveDistance(Robot.GyroAngle(), .3, 1); }
