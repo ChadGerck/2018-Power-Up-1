@@ -15,17 +15,19 @@ import edu.wpi.first.wpilibj.Servo;
 public class TankDrive extends Command {
 
     
-	public TankDrive() {
+	/*public TankDrive() {p
 		requires(Robot.drivetrain); 
-	}
+	}*/
 	
 	XboxController Player1= Robot.oi.Controller0;
 	double throttleL=0.25;
+	double throttleR= -.25;
 	
 	protected void initialize() {
 	}
 	protected void execute(){
 		Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)* throttleL,Robot.oi.getRightTrigger(Player1)* throttleL );
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftTrigger(Player1)* throttleR,Robot.oi.getLeftTrigger(Player1)* throttleR );
 		
 		
 	///////	hiii

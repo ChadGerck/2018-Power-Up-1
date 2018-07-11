@@ -5,9 +5,16 @@ public class Sparky {
 	
 	public static void main(String[] args) {
 		Offline = true; 
-		//Autonomous.Auto();
-		MoveForward();
-		System.out.println("Hello World ");
+// 1,3,5,7,11,13,15,17,19,23,25,27,
+//prime numbers can only be divided by themselves and 1, 
+		int x=1;
+		while(x<100){
+			System.out.println(x);
+			x=(x+2)/3;
+		}
+		
+	/*MoveForward();
+		System.out.println("Hello World ");*/
 		
 	}
 	public static void MoveForward() {
@@ -33,6 +40,8 @@ public class Sparky {
 		if(!Offline) { Robot.TurnLeft(); }
 	}
 }
+
+
 
 //hellooo
 //bye
