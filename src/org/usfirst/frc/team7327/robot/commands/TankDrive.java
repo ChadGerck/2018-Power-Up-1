@@ -24,7 +24,7 @@ public class TankDrive extends Command {
 	
 	protected void initialize() {
 		     
-	}
+	}  
 
 	protected void execute() {
 		if(Robot.oi.getRightTrigger(Player1) == 1 || Robot.oi.getRightTrigger(Player2) == 1) {
