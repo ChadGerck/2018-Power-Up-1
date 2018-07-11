@@ -6,6 +6,17 @@ public class Autonomous {
 
 	public static void Auto() {
 
+		
+		Group7.Project4(2);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		while (true) {
 			double timer = Robot.myTimer.get();
 			if (timer > 2) {
