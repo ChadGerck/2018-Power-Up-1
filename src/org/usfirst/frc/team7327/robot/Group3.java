@@ -1,5 +1,4 @@
 package org.usfirst.frc.team7327.robot;
-
 public class Group3 {
 	public static void Project2() {
 		int count = 0;
@@ -45,8 +44,6 @@ public class Group3 {
 			Robot.MoveForward();
 			break;
 		}
-		//hi
-		//Not hello
 	}
 	public static void Project5() {
 		while (true) {
