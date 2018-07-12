@@ -17,6 +17,7 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	DoubleSolenoid value = new DoubleSolenoid(5,-5);
+	value.set(value.kOff);
 	boolean isGrabbed = false;
 	boolean isPunched = false;
 	XboxController Player1 = Robot.oi.Controller0; 
