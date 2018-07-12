@@ -37,24 +37,20 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw((-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, (-Robot.oi.getLeftStickY(Player1) + Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)*throttleA);
 		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player1),-Robot.oi.getLeftStickX(Player1) );
 		if(!isPunched && Robot.oi.getLeftTrigger(Player1) == 1){
-			value.set(value.kForward);
-			Robot.drivetrain.setPunchers(value.kForward);
+			Robot.drivetrain.setPunchers(kForward);
 			isPunched = true;
 		}
 		else if(isPunched && Robot.oi.getLeftTrigger(Player1) == 1){
-			value.set(value.kOff);
-			Robot.drivetrain.setPunchers(value.kReverse));
+			Robot.drivetrain.setPunchers(kReverse);
 			isPunched = false;
 		}
 		if(!isGrabbed && Robot.oi.getRightTrigger(Player1) == 1){
-			value.set(value.kForward)
-			Robot.drivetrain.setRawGrabber(value.kForward);
+			Robot.drivetrain.setRawGrabber(kForward);
 			isGrabbed = true;
 		}
 		
 		else if(isGrabbed && Robot.oi.getRightTrigger(Player1) == 1){
-			value.set(value.kReverse)
-			Robot.drivetrain.setRawGrabber(value.kReverse);
+			Robot.drivetrain.setRawGrabber(kReverse);
 			isGrabbed = false;
 		}		
 	}
