@@ -22,7 +22,7 @@ public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
 	double throttleL = .25;
 	double spinner = 0; 
-	
+	double throttleA= 0.55;
 
 	protected void initialize() {
 	}
@@ -33,7 +33,7 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw1((-Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
 				(-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1)) * throttleL);
 		
-		Robot.drivetrain.setRawArm((Robot.oi.getRightTrigger(Player1)+ -Robot.oi.getLeftTrigger(Player1))*throttleL);
+		Robot.drivetrain.setRawArm((Robot.oi.getRightTrigger(Player1)+ -Robot.oi.getLeftTrigger(Player1))*throttleA);
 		
 		//Robot.drivetrain.setRawGrabber(grabbervalue);
 		
