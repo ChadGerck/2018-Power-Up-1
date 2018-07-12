@@ -16,35 +16,43 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
+	DoubleSolenoid value = new DoubleSolenoid(5,-5);
 	boolean isGrabbed = false;
 	boolean isPunched = false;
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25;
-	double throttleA = .65;
+	double throttleA = .55;
 	protected void initialize() {
-		Robot.drivetrain.setRawArm(0);
-		Robot.drivetrain.setPunchers(0);
-		Robot.drivetrain.setRawGrabber(0);
+		value.set(value.kReverse);
+		Robot.drivetrain.setRawArm(value.kReverse);
+		Robot.drivetrain.set
+		Robot.drivetrain.setRawGrabber(value.kReverse);
 	}
 	
+	
+	
 	protected void execute(){
-		Robot.drivetrain.setRaw((-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, (-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)*throttleA);
-		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player1),Robot.oi.getLeftStickX(Player1) );
+		Robot.drivetrain.setRaw((-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, (-Robot.oi.getLeftStickY(Player1) + Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)*throttleA);
+		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player1),-Robot.oi.getLeftStickX(Player1) );
 		if(!isPunched && Robot.oi.getAButton(Player1) == 1){
-			Robot.drivetrain.setPunchers(100);
+			value.set(value.kForward);
+			Robot.drivetrain.setPunchers(value.kForward);
 			isPunched = true;
 		}
 		else if(isPunched && Robot.oi.getAButton(Player1) == 1){
-			Robot.drivetrain.setPunchers(0);
+			value.set(value.kReverse);
+			Robot.drivetrain.setPunchers(value.kReverse));
 			isPunched = false;
 		}
 		if(!isGrabbed && Robot.oi.getRightBumper(Player1) == 1){
-			Robot.drivetrain.setRawGrabber(100);
+			value.set(value.kForward)
+			Robot.drivetrain.setRawGrabber(value.kForward);
 			isGrabbed = true;
 		}
 		
 		else if(isGrabbed && Robot.oi.getRightBumper(Player1) == 1){
-			Robot.drivetrain.setRawGrabber(0);
+			value.set(value.kReverse)
+			Robot.drivetrain.setRawGrabber(value.kReverse);
 			isGrabbed = false;
 		}		
 	}
