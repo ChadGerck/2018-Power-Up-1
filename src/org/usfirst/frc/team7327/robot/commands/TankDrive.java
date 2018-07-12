@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.Servo;
 public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
-	}
+	} 
+	//cbange
 	DoubleSolenoid value = new DoubleSolenoid(5,-5);
 	value.set(value.kOff);
 	boolean isGrabbed = false;
