@@ -21,9 +21,12 @@ public class TankDrive extends Command {
 	}
 	protected void execute(){
 		
+		double throttle=.25;
+		
 		XboxController Player1 = Robot.oi.Controller0;
 		
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1),(Robot.oi.getLeftStickX(Player1)));
+		Robot.drivetrain.setRaw1(Robot.oi.getRightStickY(Player1),(Robot.oi.getLeftStickX(Player1)));
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1),(Robot.oi.getRightStickY(Player1)));
 		
 	    
 		
