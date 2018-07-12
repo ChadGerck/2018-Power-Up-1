@@ -18,13 +18,14 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0;
-	XboxController Player2 = Robot.oi.Controller0;
+	XboxController Player2 = Robot.oi.Controller1;
 	double throttleL = 0.25;
+	double throttleR = 0.5;
 	
 	
 	protected void initialize() {
 		     
-	}  
+	}
 
 	protected void execute() {
 		if(Robot.oi.getRightTrigger(Player1) == 1 || Robot.oi.getRightTrigger(Player2) == 1) {
@@ -36,10 +37,33 @@ public class TankDrive extends Command {
 			Robot.MoveForward();
 		}
 	
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
+		
+		if(Robot.oi.getLeftStickY(Player1) > 0)
+		{
+			Robot.drivetrain.setRaw1(.5, .5);
+		} else if(Robot.oi.getLeftStickY(Player1) > 0 && Robot.oi.getRightStickX(Player1) > 0)
+		{
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleR, Robot.oi.getRightStickY(Player1)*throttleL);
+		}else if(Robot.oi.getLeftStickY(Player1) > 0 && Robot.oi.getRightStickX(Player1) < 0)
+		{
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleR);
+		}
+		
+		if(Robot.oi.getRightStickX(Player1) > 0)
+		{
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, -Robot.oi.getRightStickY(Player1)*throttleL);
+		}
+		
+		if(Robot.oi.getRightStickX(Player1) < 0)
+		{
+			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
+		}
+		
+		
+		
+		
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player2)*throttleL, Robot.oi.getRightStickY(Player2)*throttleL);
 		//Checking
-		// yes means no
 	}
 
 	
