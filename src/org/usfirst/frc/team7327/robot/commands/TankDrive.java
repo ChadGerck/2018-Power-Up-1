@@ -17,17 +17,25 @@ public class TankDrive extends Command {
 	XboxController Player2 = Robot.oi.Controller1;
 	double throttleW = 0.5;
 	double throttleA = 0.5;
+	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value Punchers = DoubleSolenoid.Value.kOff;
 	
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
 	protected void execute(){
-		//Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW, ((Robot.oi.getRightTrigger(Player1))-Robot.oi.getLeftTrigger(Player1))*throttleA);
+		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW, ((Robot.oi.getRightTrigger(Player1))-Robot.oi.getLeftTrigger(Player1))*throttleA);
 		if(Robot.oi.getRightBumper(Player1)) {
-			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kReverse);
+			Robot.drivetrain.setRawGrabber(Grabbers.kForward);
 		}
 		if(Robot.oi.getLeftBumper(Player1)) {
-			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kForward);
+			Robot.drivetrain.setRawGrabber(Grabbers.kReverse);
+		}
+		if(Robot.oi.getAButton(Player1)) {
+			Robot.drivetrain.setPunchers(Punchers.kForward);
+		}
+		if(Robot.oi.getBButton(Player1)) {
+			Robot.drivetrain.setPunchers(Punchers.kReverse);
 		}
 	}
 	protected boolean isFinished() {
