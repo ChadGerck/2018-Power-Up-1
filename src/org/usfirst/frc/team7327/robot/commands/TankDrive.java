@@ -42,11 +42,25 @@ public class TankDrive extends Command {
 			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 		}
 			
-			Robot.drivetrain.setRaw1((Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) + Robot.oi.getLeftStickX(Player1))*throttleL, (Robot.oi.getRightTrigger(Player1) -Robot.oi.getLeftTrigger(Player1) - Robot.oi.getLeftStickX(Player1))*throttleL);
-
+			Robot.drivetrain.setRaw1((Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) + Robot.oi.getLeftStickX(Player1))*throttleL, (Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) - Robot.oi.getLeftStickX(Player1))*throttleL);
+										//move the left motor forward	  will move the robot backwards      will make the robot's left side motor go	  move the right motor forward		  
+										//When Right Trigger is pressed   when the left trigger is pressed   while the right side motor stops so it can   When Right Trigger is pressed
+										//																	 stop
+										//
+			
+			boolean flag = true;
+			
+			if (Robot.oi.getAButton(Player1)){
+				if (flag = false){
+					flag = true;
+				}else if (flag = true){
+					flag = false; 
+				}
+				
+			}
 			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 			
-			 /*if(Robot.oi.getLeftStickX(Player1) == 1){
+			 /*if(Robot.oi.getLeftStickX(Player1) == 1){S
 				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), 0);
 			}*/
 	}
