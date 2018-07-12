@@ -16,35 +16,38 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain);
 	}
 
-	XboxControllerPlayer1=Robot.oi.Controller0;
+	XboxController Player1=Robot.oi.Controller0;
 
 	double throttleL = .25;
 
 	protected void execute() {
 		if (Robot.oi.getAButton(Player1)) {
-			//Robot.MoveForward();
+			// Robot.MoveForward();
 		}
 
 		if (Robot.oi.getBButton(Player1)) {
-			//Robot.TurnRight();  
+			// Robot.TurnRight();
 		}
 
-		Robot.drivetrain.setRaw1(Robot.oi.getRightStickX(Player1) * throttleL,
-				Robot.oi.getLeftStickY(Player1) * throttleL);
-		}
-		Robot.drivetrain.setRawArm(0);
-		Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1) * throttleL, Robot.oi.getRightStickY(Player1) * throttleL);
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftBumper(Player1) * throttleL,
+				Robot.oi.getRightBumper(Player1) * throttleL);
 
-		if (Robot.oi.getXButton(Player1)){
-			//Robot.TurnLeft();
-		
-			
+		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickX(Player1) * throttleL,
+				Robot.oi.getRightStickY(Player1) * throttleL);
+
+		if (Robot.oi.getXButton(Player1)) {
+			// Robot.TurnLeft();
+
 		}
-		public void setPunchers( DoubleSolenoid.Value punchervalue  ) {
-			Puncher.set(punchervalue);
+	}
+
+	public void setRawGrabber( DoubleSolenoid.Value .10 ) {
+			Grabbers.set(.10);
 		}
-		
-	
+
+	public void setPunchers( DoubleSolenoid.Value .10 ) {
+			Puncher.set(.10);
+		}
 
 	protected boolean isFinished() {
 
