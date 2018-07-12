@@ -30,8 +30,9 @@ public class TankDrive extends Command {
 	
 	
 	protected void execute(){
-		DoubleSolenoid value = new DoubleSolenoid(5,-5);
-	
+		DoubleSolenoid.Value kForward = DoubleSolenoid.Value.kForward;
+		DoubleSolenoid.Value kReverse = DoubleSolenoid.Value.kReverse;
+		DoubleSolenoid.Value kOff = DoubleSolenoid.Value.kOff;
 		
 		Robot.drivetrain.setRaw((-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, (-Robot.oi.getLeftStickY(Player1) + Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)*throttleA);
 		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player1),-Robot.oi.getLeftStickX(Player1) );
