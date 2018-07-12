@@ -13,16 +13,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
-
+	XboxController Player1 = Robot.oi.Controller0;
+	double throttleL = 0.25;
 	
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
 	
 	protected void execute(){
-		
-
-		
+	Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
 	}
 	
 	
@@ -35,5 +34,3 @@ public class TankDrive extends Command {
 		end();
 	}
 }
-
-// hello you bundle of sticck
