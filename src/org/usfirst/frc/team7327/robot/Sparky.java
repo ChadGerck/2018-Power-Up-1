@@ -6,33 +6,6 @@ public class Sparky {
 	public static void main(String[] args) {
 		Offline = true; }
 		//Autonomous.Auto(); 
-
-		
-		public static boolean IsPrime(int n) {
-
-		    if (n > 2 && n %2 == 0){
-		        return false;
-		    }
-		    int top = (int)Math.sqrt(n)+1;
-		    for (int i=3;i<top;i+=2){
-		        if (n%i==0){
-		            return false;
-		        }
-		    }
-		    return true;
-		
-		
-		System.out.println("Enter number to get prime number");
-	    int n = new Scanner(System.in).nextInt();
-	        for (int j=0;j<n;j++){
-	            if (IsPrime(j)){
-	                System.out.print(j + " ");
-	            }
-	        }
-
-	    }
-	 
-		
 		
 		
 	
