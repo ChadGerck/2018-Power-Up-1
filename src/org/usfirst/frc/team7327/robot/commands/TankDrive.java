@@ -20,7 +20,7 @@ public class TankDrive extends Command {
 	boolean isPunched = false;
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25;
-	double throttleA = .55;
+	double throttleA = .65;
 	protected void initialize() {
 		Robot.drivetrain.setRawArm(0);
 		Robot.drivetrain.setPunchers(0);
