@@ -21,16 +21,18 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
-	
 	protected void execute(){
-		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW, ((Robot.oi.getRightTrigger(Player1))-Robot.oi.getLeftTrigger(Player1))*throttleA);
+		//Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW, ((Robot.oi.getRightTrigger(Player1))-Robot.oi.getLeftTrigger(Player1))*throttleA);
+		if(Robot.oi.getRightBumper(Player1)) {
+			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kReverse);
+		}
+		if(Robot.oi.getLeftBumper(Player1)) {
+			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kForward);
+		}
 	}
-	
-	
 	protected boolean isFinished() {
 		return false;
 	}
-
 	protected void interrupted() {
 		end();
 	}
