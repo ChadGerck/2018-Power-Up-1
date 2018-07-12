@@ -16,43 +16,42 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	} 
-	//cbange
-	DoubleSolenoid value = new DoubleSolenoid(5,-5);
-	value.set(value.kOff);
+	
+	
 	boolean isGrabbed = false;
 	boolean isPunched = false;
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25;
 	double throttleA = .55;
 	protected void initialize() {
-		value.set(value.kReverse);
-		Robot.drivetrain.setRawArm(value.kReverse);
-		Robot.drivetrain.set
-		Robot.drivetrain.setRawGrabber(value.kReverse);
+	
 	}
 	
 	
 	
 	protected void execute(){
+		DoubleSolenoid value = new DoubleSolenoid(5,-5);
+	
+		
 		Robot.drivetrain.setRaw((-Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickX(Player1))*throttleL, (-Robot.oi.getLeftStickY(Player1) + Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)*throttleA);
 		Robot.drivetrain.setRawSpinner(Robot.oi.getLeftStickX(Player1),-Robot.oi.getLeftStickX(Player1) );
-		if(!isPunched && Robot.oi.getAButton(Player1) == 1){
+		if(!isPunched && Robot.oi.getLeftTrigger(Player1) == 1){
 			value.set(value.kForward);
 			Robot.drivetrain.setPunchers(value.kForward);
 			isPunched = true;
 		}
-		else if(isPunched && Robot.oi.getAButton(Player1) == 1){
-			value.set(value.kReverse);
+		else if(isPunched && Robot.oi.getLeftTrigger(Player1) == 1){
+			value.set(value.kOff);
 			Robot.drivetrain.setPunchers(value.kReverse));
 			isPunched = false;
 		}
-		if(!isGrabbed && Robot.oi.getRightBumper(Player1) == 1){
+		if(!isGrabbed && Robot.oi.getRightTrigger(Player1) == 1){
 			value.set(value.kForward)
 			Robot.drivetrain.setRawGrabber(value.kForward);
 			isGrabbed = true;
 		}
 		
-		else if(isGrabbed && Robot.oi.getRightBumper(Player1) == 1){
+		else if(isGrabbed && Robot.oi.getRightTrigger(Player1) == 1){
 			value.set(value.kReverse)
 			Robot.drivetrain.setRawGrabber(value.kReverse);
 			isGrabbed = false;
