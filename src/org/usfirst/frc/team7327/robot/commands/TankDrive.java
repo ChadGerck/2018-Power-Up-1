@@ -21,12 +21,12 @@ public class TankDrive extends Command {
 	}
 	
 	protected void execute(){
-	Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
+	//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*-throttleL, Robot.oi.getRightStickY(Player1)*-throttleL);
+	Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1));
 	}
 	
 	
 	protected boolean isFinished() {
-
 		return false;
 	}
 

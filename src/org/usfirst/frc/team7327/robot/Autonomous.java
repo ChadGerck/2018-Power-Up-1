@@ -21,7 +21,6 @@ public class Autonomous {
 	
 	public static void TurnAround() {
 		Robot.TurnRight();
-		Robot.TurnRi
-		ght();
+		Robot.TurnRight();
 	}
 }
