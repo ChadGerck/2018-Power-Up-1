@@ -21,6 +21,13 @@ public class TankDrive extends Command {
 	}
 	protected void execute(){
 		
+		XboxController Player1 = Robot.oi.Controller0;
+		
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1),(Robot.oi.getLeftStickX(Player1)));
+		
+	    
+		
+		
 	}
 
 	
