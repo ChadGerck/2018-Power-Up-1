@@ -41,7 +41,7 @@ public class TankDrive extends Command {
 			isPunched = true;
 		}
 		else if(isPunched && Robot.oi.getLeftTrigger(Player1) == 1){
-			Robot.drivetrain.setPunchers(kReverse);
+			Robot.drivetrain.setPunchers(kReverse);	
 			isPunched = false;
 		}
 		if(!isGrabbed && Robot.oi.getRightTrigger(Player1) == 1){
