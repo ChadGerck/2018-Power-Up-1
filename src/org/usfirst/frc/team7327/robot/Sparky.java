@@ -10,7 +10,7 @@ public class Sparky {
 		int x=1;
 		while(x<100){
 			System.out.println(x);
-			x=(x+2)/3;
+			x=
 		}
 		
 	/*MoveForward();

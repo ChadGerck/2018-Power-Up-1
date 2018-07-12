@@ -28,6 +28,7 @@ public class TankDrive extends Command {
 	protected void execute(){
 		Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)* throttleL,Robot.oi.getRightTrigger(Player1)* throttleL );
 		Robot.drivetrain.setRaw1(Robot.oi.getLeftTrigger(Player1)* throttleR,Robot.oi.getLeftTrigger(Player1)* throttleR );
+		Robot.drivetrain.setRaw1(Robot.oi.getXButton(Player1)* throttleR,Robot.oi.getLeftTrigger(Player1)* throttleR );
 		
 		
 	///////	hiii
