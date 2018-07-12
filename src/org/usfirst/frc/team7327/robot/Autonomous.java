@@ -10,7 +10,7 @@ public class Autonomous {
 
 			if (timer < 10) {
 				Robot.drivetrain.setRaw1(.27, .27);
-				// Robot.MoveForward();
+		
 			}
 
 			else if (timer < 16) {
