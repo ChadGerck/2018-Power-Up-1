@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
+	XboxController Player2 = Robot.oi.Controller1;
 	double throttleL = 0.25;
+	double throttleA = 0.35;
 	
 	public TankDrive() {
 		requires(Robot.drivetrain); 
@@ -22,7 +24,7 @@ public class TankDrive extends Command {
 	
 	protected void execute(){
 	//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*-throttleL, Robot.oi.getRightStickY(Player1)*-throttleL);
-	Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1));
+	Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)*throttleA);
 	}
 	
 	
