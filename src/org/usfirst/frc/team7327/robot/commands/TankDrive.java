@@ -22,7 +22,9 @@ public class TankDrive extends Command {
 	double throttleL = 0.25;
 	double throttleX = 0.30;
 	
-	
+	DoubleSolenoid.Value Puncher = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value Hands =  DoubleSolenoid.Value.kOff; 
+
 	
 	protected void initialize() {
 		     
@@ -65,16 +67,21 @@ public class TankDrive extends Command {
 		
 
 		*/
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player2)*throttleL, Robot.oi.getRightStickY(Player2)*throttleL);
-
-		if (Robot.oi.getAButton(Player1)) {
-			if (Robot.oi.getRightStickY(Player1) == 1 ) {
-					Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player2)*throttleL, Robot.oi.getRightStickY(Player2)*throttleL, throttleX);
-			} 
-		} else {
-			return;
+		
+		if (Robot.oi.getRightTrigger(Player1) == 1){
+			Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1)*throttleX);
+		} else 
+		{
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
 		}
-	// exe 
+	
+		if (Robot.oi.getRightBumper(Player1)) {
+			Robot.drivetrain.setPunchers(Puncher);
+		}
+		if (Robot.oi.getLeftBumper(Player1)) {
+			Robot.drivetrain.setRawGrabber(Hands);
+		}
+	// execute  
 	}
 
 	
