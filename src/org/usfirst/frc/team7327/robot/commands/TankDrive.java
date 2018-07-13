@@ -18,8 +18,8 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0;
-		double throttleL = .25;
-	
+		double throttleL = .45;
+		double throttleA = .50;
 		protected void initialize() {
 	}
 	
@@ -27,12 +27,12 @@ public class TankDrive extends Command {
 				
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
 			
-			if(Robot.oi.getRightTrigger(Player1) == 1) {
-				Robot.drivetrain.setRawArm(0.3);
+			if(Robot.oi.getRightStickY(Player1) == 1) {
+				Robot.drivetrain.setRawArm(throttleA);
 			}
 			else{
-				Robot.drivetrain.setRawArm(0);
-				
+				Robot.drivetrain.setRawArm(0*throttleA);
+			
 			}
 			
 			if( Robot.oi.getStartButton(Player1)) {
