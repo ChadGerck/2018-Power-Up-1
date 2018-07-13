@@ -18,7 +18,7 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0;
-	XboxController Player2 = Robot.oi.Controller1;
+
 	double throttleL = 0.25;
 	double throttleX = 0.30;
 	boolean Arm = false;
@@ -32,42 +32,11 @@ public class TankDrive extends Command {
 	}
 
 	protected void execute() {
-		if(Robot.oi.getRightTrigger(Player1) == 1 || Robot.oi.getRightTrigger(Player2) == 1) {
-			Robot.drivetrain.setRaw1(.5,.5);
-		}
-		if (Robot.oi.getStartButton(Player1) || Robot.oi.getStartButton(Player2)) {
+		if (Robot.oi.getStartButton(Player1)) {
 			Robot.TurnLeft();
 			Robot.TurnLeft();
 			Robot.MoveForward();
 		}
-	
-		
-	/*	if(Robot.oi.getLeftStickY(Player1) > 0)
-		{
-			Robot.drivetrain.setRaw1(.5, .5);
-		} 
-		else if(Robot.oi.getLeftStickY(Player1) > 0 && Robot.oi.getRightStickX(Player1) > 0)
-		{
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleR, Robot.oi.getRightStickY(Player1)*throttleL);
-		}
-		else if(Robot.oi.getLeftStickY(Player1) > 0 && Robot.oi.getRightStickX(Player1) < 0)
-		{
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleR);
-		}
-		
-		if(Robot.oi.getRightStickX(Player1) > 0)
-		{
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, -Robot.oi.getRightStickY(Player1)*throttleL);
-		}
-		
-		if(Robot.oi.getRightStickX(Player1) < 0)
-		{
-			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
-		}
-		
-		
-
-		*/
 		
 		if (Robot.oi.getStartButton(Player1))
 		{
