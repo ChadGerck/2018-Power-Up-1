@@ -20,19 +20,11 @@ public class TankDrive extends Command {
 	}
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25; 
-	double speed = .25; 
 	
 	protected void initialize() {
 	}
 	
 	protected void execute(){
-		if (Robot.oi.getRightTrigger(Player1) == 1){
-			speed = Math.abs(speed);
-		}
-		
-		if (Robot.oi.getLeftTrigger(Player1) == 1){
-			speed = -Math.abs(speed);
-		}
 			
 			Robot.drivetrain.setRaw1((Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) + Robot.oi.getLeftStickX(Player1))*throttleL, (Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) - Robot.oi.getLeftStickX(Player1))*throttleL);
 										//move the left motor forward	  will move the robot backwards      will make the robot's left side motor go	  move the right motor forward		  
