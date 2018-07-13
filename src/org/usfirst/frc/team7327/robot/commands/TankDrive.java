@@ -39,11 +39,13 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawSpinner(0.4,-0.4);
 		}
 		
-		if(Robot.oi.Dpad(Player1)>180) {
+		else if(Robot.oi.Dpad(Player1)>180) {
 			Robot.drivetrain.setRawSpinner(-0.4, 0.4);
 		}
 		
-		Robot.drivetrain.setRawSpinner(0,0);
+		else Robot.drivetrain.setRawSpinner(0,0);
+		
+		
 		
 		
 		
