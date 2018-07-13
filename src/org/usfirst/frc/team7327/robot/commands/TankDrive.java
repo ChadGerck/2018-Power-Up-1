@@ -29,11 +29,10 @@ public class TankDrive extends Command {
 			// Robot.TurnRight();
 		}
 
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftBumper(Player1) * throttleL,
-				Robot.oi.getRightBumper(Player1) * throttleL);
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftBumper(Player1), .4 * throttleL);
+				Robot.oi.RightBumper(Player1), .4 * throttleL);
 
-		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickX(Player1) * throttleL,
-				Robot.oi.getRightStickY(Player1) * throttleL);
+		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), .5 * throttleL);
 
 		if (Robot.oi.getXButton(Player1)) {
 			// Robot.TurnLeft();
