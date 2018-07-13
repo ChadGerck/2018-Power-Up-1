@@ -18,10 +18,16 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	protected void initialize() {
+
 	}
+	boolean flag = false; 
+	int Dpaddown = 180;
+	int Dpadup = 0;
+	int Dpadleft = 360;
+	int Dpadright = 90;
+
 	protected void execute(){
 		
-		boolean flag = false; 
 		
 		double throttle=.25;
 		double armvalue=.55;
@@ -51,6 +57,13 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1)*throttle,-Robot.oi.getRightStickY(Player1)*throttle);
 			
 		}
+		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<= 45)||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)){
+			Robot.drivetrain.setRawSpinner(.3, .3);
+		}
+		else if(Robot.oi.Dpad(Player1) > ? && Robot.oi.Dpad(Player1) <= ?){
+			Robot.drivetrain.setRawSpinner(spinnerleft, spinnerright);
+		}
+		
 		
 		
 	}
