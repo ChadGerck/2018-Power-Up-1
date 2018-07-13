@@ -26,7 +26,7 @@ public class TankDrive extends Command {
 	protected void initialize() {
 	}
 	protected void execute(){
-		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL ) + (Robot.oi.getRightStickX(Player1)* throttleL) , (Robot.oi.getRightStickX(Player1)* throttleL ) + (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRihgtTrigger(Player1)*throttleL)  );
+		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL ) + (Robot.oi.getRightStickX(Player1)* throttleL) , (Robot.oi.getRightStickX(Player1)* throttleL ) + (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
 		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1)*throttleL);
 		//Robot.drivetrain.setRawGrabber(Robot.oi.getAButton(Player1) * throttleL);
