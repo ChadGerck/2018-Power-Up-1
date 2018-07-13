@@ -26,10 +26,10 @@ public class TankDrive extends Command {
 		if(Robot.oi.getLeftBumper(Player1)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setRawGrabber(Grabbers);
-		if(Robot.oi.getAButton(Player1)) {
+		if(Robot.oi.getYButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setPunchers(Punchers);
-		if(Robot.oi.getBButton(Player1)) {
+		if(Robot.oi.getAButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
