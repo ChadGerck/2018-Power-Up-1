@@ -23,7 +23,7 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain);
 	}
 
-	protected void initialize() { 
+	protected void initialize() {
 	}
 
 	protected void execute() {
@@ -61,6 +61,17 @@ public class TankDrive extends Command {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
+		
+		if((Robot.oi.Dpad(Player1)>= 0 && Robot.oi.Dpad(Player1)<=45)
+			||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) <= 45)){
+			
+		Robot.drivetrain.setRawSpinner(.3, .3);
+		}
+		
+		else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 45){
+			Robot.drivetrain.setRawSpinner(0, 0);
+		} 
+		
 	}
 
 	protected boolean isFinished() {
