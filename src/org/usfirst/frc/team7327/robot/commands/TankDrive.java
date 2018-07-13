@@ -25,7 +25,9 @@ public class TankDrive extends Command {
 	}
 	protected void execute(){
 		
-		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)+(Robot.oi.getLeftStickX(Player1))*throttleL, Robot.oi.getRightStickY(Player1)+Robot.oi.getRightStickX(Player1)*throttleL);
+		Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)+(Robot.oi.getRightStickX(Player1))*throttleL, Robot.oi.getLeftStickY(Player1)-Robot.oi.getRightStickX(Player1)*throttleL);
+		
+		Robot.drivetrain.setRawArm(0);
 		
 		
 		
@@ -38,9 +40,7 @@ public class TankDrive extends Command {
 		
 		
 		
-		
-		
-		
+		/*
 		
 		if (Robot.oi.getAButton(Player1)) {
 			double timer = Robot.myTimer.get();
@@ -86,6 +86,7 @@ public class TankDrive extends Command {
 				Robot.drivetrain.setRaw1(0, 0);
 			}
 		}
+		*/
 	}
 
 	
