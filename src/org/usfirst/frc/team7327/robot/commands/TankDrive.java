@@ -43,12 +43,9 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawSpinner(-0.4, 0.4);
 		}
 		
-		else Robot.drivetrain.setRawSpinner(0,0);
+		else {Robot.drivetrain.setRawSpinner(0,0);
 		
-		
-		
-		
-		
+		}
 		
 		
 	}
