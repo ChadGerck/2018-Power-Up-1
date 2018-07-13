@@ -28,18 +28,10 @@ public class TankDrive extends Command {
 	protected void execute(){
 		if (Robot.oi.getRightTrigger(Player1) == 1){
 			speed = Math.abs(speed);
-			//Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)*throttleL, Robot.oi.getRightTrigger(Player1)*throttleL);
-			
-			//sRobot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 		}
 		
 		if (Robot.oi.getLeftTrigger(Player1) == 1){
 			speed = -Math.abs(speed);
-			//Robot.drivetrain.setRaw1(Robot.oi.getLeftTrigger(Player1)*throttleL, Robot.oi.getLeftTrigger(Player1)*throttleL);
-
-			
-			//throttleL = Math.abs(throttleL);			
-			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
 		}
 			
 			Robot.drivetrain.setRaw1((Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) + Robot.oi.getLeftStickX(Player1))*throttleL, (Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) - Robot.oi.getLeftStickX(Player1))*throttleL);
@@ -60,11 +52,7 @@ public class TankDrive extends Command {
 				}
 				
 			}
-			//Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, 0);
-			
-			 /*if(Robot.oi.getLeftStickX(Player1) == 1){S
-				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), 0);
-			}*/
+
 	}
 
 	
