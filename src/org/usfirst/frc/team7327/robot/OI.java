@@ -86,6 +86,11 @@ public class OI {
 		return raw; 
 	}
 	
+	public boolean getStickButtonLeft(XboxController Controller) {
+		boolean raw = Controller.getStickButtonPressed(Hand.kLeft);
+		return raw;
+	}
+	
 	public OI () {
 		
 	}

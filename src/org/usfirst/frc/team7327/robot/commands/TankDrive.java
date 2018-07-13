@@ -41,6 +41,9 @@ public class TankDrive extends Command {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
+		if(Robot.oi.getStickButtonLeft(Player1)) {
+			Robot.drivetrain.setRawSpinner(1,-1);
+		}
 	}
 	protected boolean isFinished() {
 		return false;
