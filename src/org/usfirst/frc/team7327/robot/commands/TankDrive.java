@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
-	double throttleL = 0.45;
-	double throttleX = 0.75;
+	double throttleL = 0.25;
+	double throttleX = 0.55;
 	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value Punchers = DoubleSolenoid.Value.kOff;
 	public TankDrive() {
@@ -19,24 +19,20 @@ public class TankDrive extends Command {
 	protected void initialize() {
 	}
 	protected void execute(){
-		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*-throttleL,Robot.oi.getRightStickX(Player1)*-throttleL,(Robot.oi.getRightTrigger(Player1)-Robot.oi.getLeftTrigger(Player1))*throttleX);
+		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*-throttleL,Robot.oi.getRightTrigger(Player1)*-throttleL,(Robot.oi.getRightStickY(Player1)-Robot.oi.getRightStickX(Player1))*throttleX);
 		if(Robot.oi.getRightBumper(Player1)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
-			Robot.drivetrain.setRawGrabber(Grabbers);
+			Robot.drivetrain.setRawGrabber(Grabbers);}
 		if(Robot.oi.getLeftBumper(Player1)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
-			Robot.drivetrain.setRawGrabber(Grabbers);
+			Robot.drivetrain.setRawGrabber(Grabbers);}
 		if(Robot.oi.getYButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kForward;
-			Robot.drivetrain.setPunchers(Punchers);
+			Robot.drivetrain.setPunchers(Punchers);}
 		if(Robot.oi.getAButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kReverse;
-			Robot.drivetrain.setPunchers(Punchers);
+			Robot.drivetrain.setPunchers(Punchers);}
 		}
-	}
-	}
-		}
-	}
 	protected boolean isFinished() {
 		return false;
 	} 
