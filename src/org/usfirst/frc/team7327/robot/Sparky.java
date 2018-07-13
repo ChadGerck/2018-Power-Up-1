@@ -35,9 +35,18 @@ array[9] = 10;
 		Scanner date = new Scanner(System.in);  // Reading from System.in
 		System.out.println("Enter Today's Date: ");
 		String numDate = date.next();
-			if (numDate == "7/11/18") {
+			if (numDate.contains("7/11/18")) {
 				System.out.println("Today is: " + days[2]);
 			  }
+			else if (numDate.contains("7/13/18")) {
+				System.out.println("Today is: " + days[4]);
+			}
+			else if (numDate.contains("7/14/18")) {
+				System.out.println("Today is: " + days[5]);
+			}
+			else {
+				System.out.println("FOLLOW THE FORMAT BUD. . .");
+			}
 		//once finished
 		date.close();
 		
