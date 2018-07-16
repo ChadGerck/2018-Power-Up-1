@@ -83,9 +83,9 @@ public class TankDrive extends Command {
 		if(Robot.oi.Dpad(Player2) >= 0) { Dpressed = true; }else{ Dpressed = false; }
 		
 		if((Robot.oi.Dpad(Player2) >= 0 && Robot.oi.Dpad(Player2) < 45) || (Robot.oi.Dpad(Player2) >= 315 && Robot.oi.Dpad(Player2) < 360) ) { 
-			DRight = -throttleS; DLeft = throttleS; }
+			DRight = throttleS; DLeft = -throttleS; }
 		else if(Robot.oi.Dpad(Player2) >= 45 && Robot.oi.Dpad(Player2) < 135) { DRight = throttleS; DLeft = throttleS; }
-		else if(Robot.oi.Dpad(Player2) >= 135 && Robot.oi.Dpad(Player2) < 225) { DRight = throttleS; DLeft = -throttleS; }
+		else if(Robot.oi.Dpad(Player2) >= 135 && Robot.oi.Dpad(Player2) < 225) { DRight = -throttleS; DLeft = throttleS; }
 		else if(Robot.oi.Dpad(Player2) >= 225 && Robot.oi.Dpad(Player2) < 315) { DRight = -throttleS; DLeft = -throttleS; }
 		else { DRight = 0; DLeft = 0; } 
 		
@@ -93,17 +93,16 @@ public class TankDrive extends Command {
 		else if(Dpressed && !SinglePlayer) { Robot.drivetrain.setRawSpinner(DLeft, DRight); }
 		if(SinglePlayer) { Robot.drivetrain.setRawSpinner(DLeft, DRight); }
 		
-		if(Robot.oi.getAButton(Player1) && SinglePlayer) { if(!armOn) { armOn = true;} else { armOn = false; } }
-		if(armOn) { Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA); }
+		//if(Robot.oi.getAButton(Player1) && SinglePlayer) { if(!armOn) { armOn = true;} else { armOn = false; } }
+		//if(armOn) { Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA); }
+		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA);
 
 		if(!SinglePlayer) {
 			if(Robot.oi.getRightTrigger(Player1) == 1) { throttleL = .85; throttleR = .85; }
 			else if(Robot.oi.getLeftTrigger(Player1) == 1) { throttleL = .4; throttleR = .4; }
 			else { throttleL = .6; throttleR = .6; }
 			
-			//if(-Robot.oi.getLeftStickY(Player1)>0) {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL+Robot.oi.getRightStickX(Player1)*throttleL, -Robot.oi.getLeftStickY(Player1) * throttleR-Robot.oi.getRightStickX(Player1)* throttleR);
-		
 			
 		} else if(SinglePlayer){
 			if(Robot.oi.getStartButton(Player1)) { if(Speed == 0 || Speed == 2) { Speed = 1; } else { Speed = 2; }}
@@ -112,12 +111,12 @@ public class TankDrive extends Command {
 			else if(Speed == 2){ throttleL = .85; throttleR = .85; }
 			else if(Speed == 0) { throttleL = .4; throttleR = .4; }
 			
-			if(armOn) { Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getLeftStickY(Player1) * throttleR ); }
-			else { 
+			//if(armOn) { Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL, -Robot.oi.getLeftStickY(Player1) * throttleR ); }
+			//else { 
 
 				Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1)* throttleL+Robot.oi.getRightStickX(Player1)*throttleL, -Robot.oi.getLeftStickY(Player1) * throttleR-Robot.oi.getRightStickX(Player1)* throttleR);
 			
-			}
+			//}
 		}
 	}
 
