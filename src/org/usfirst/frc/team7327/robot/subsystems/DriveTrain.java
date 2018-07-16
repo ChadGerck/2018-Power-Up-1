@@ -20,10 +20,6 @@ public class DriveTrain extends Subsystem {
 	private TalonSRX RightTalon;
 	private TalonSRX RightTalon1;
 
-	//private Spark LeftMotor;
-	//private Spark RightMotor;
-	//private Spark LeftMotor1;
-	//private Spark RightMotor1;
 	private Spark ArmMotor;
 	private Spark SpinnerLeft;
 	private Spark SpinnerRight;
@@ -37,10 +33,6 @@ public class DriveTrain extends Subsystem {
 		RightTalon = new TalonSRX(2);
 		RightTalon1= new TalonSRX(3);
 		
-		//LeftMotor = new Spark(RobotMap.LEFT_MOTOR.value);
-		//RightMotor = new Spark(RobotMap.RIGHT_MOTOR.value);	
-		//LeftMotor1 = new Spark(RobotMap.LEFT_MOTOR1.value);
-		//RightMotor1 = new Spark(RobotMap.RIGHT_MOTOR1.value);
 		ArmMotor = new Spark(RobotMap.ARM_MOTOR.value);
 		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
 		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
@@ -52,15 +44,6 @@ public class DriveTrain extends Subsystem {
 		return LeftTalon.getMotorOutputPercent();
 	}
 	
-	/*public void setRaw(double leftvalue, double rightvalue, double armvalue) {
-		LeftMotor.set(leftvalue);
-		RightMotor.set(-rightvalue);
-		LeftMotor1.set(leftvalue);
-		RightMotor1.set(-rightvalue);
-		ArmMotor.set(armvalue);
-			
-	} 
-	*/
 	public void setRaw(double leftvalue, double rightvalue, double armvalue) {
 		LeftTalon.set(ControlMode.PercentOutput, leftvalue);
 		LeftTalon1.set(ControlMode.PercentOutput, leftvalue);
@@ -69,15 +52,6 @@ public class DriveTrain extends Subsystem {
 		ArmMotor.set(armvalue);
 			
 	} 
-	/*
-	public void setRaw1(double leftvalue, double rightvalue) {
-		LeftMotor.set(leftvalue);
-		RightMotor.set(-rightvalue);
-		LeftMotor1.set(leftvalue);
-		RightMotor1.set(-rightvalue);
-		
-	} 
-	*/
 	public void setRaw1(double leftvalue, double rightvalue) {
 		LeftTalon.set(ControlMode.PercentOutput, leftvalue);
 		LeftTalon1.set(ControlMode.PercentOutput, leftvalue);
