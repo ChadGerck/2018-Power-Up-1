@@ -57,7 +57,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1)*throttle,-Robot.oi.getRightStickY(Player1)*throttle);
 			
 		}
-		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<= 45)||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)){
+		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<= 45)||(Robot.oi.Dpad(Player1) <= 315 && Robot.oi.Dpad(Player1) >= 360)){
 			Robot.drivetrain.setRawSpinner(.3, .3);
 		}
 		else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135){
@@ -66,19 +66,14 @@ public class TankDrive extends Command {
 		else if(Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <=225){
 			Robot.drivetrain.setRawSpinner(-.3, -.3);
 		}
-		else if(Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 360){
-			Robot.drivetrain.setRawSpinner(.2, .2);
+		else if(Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 0){
+			Robot.drivetrain.setRawSpinner(.3, .3);
+		}	
+		else {
+			Robot.drivetrain.setRawSpinner (0, 0);
 		}
+	}
 			
-			
-			
-			
-		}
-		
-		
-		
-
-
 	
 	protected boolean isFinished() {
 
