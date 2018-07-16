@@ -12,26 +12,73 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
+	
 
 	public TankDrive() {
 		requires(Robot.drivetrain);
+		
 	}
 
 	XboxController Player1 = Robot.oi.Controller0;
-	double throttleL = .25;
-
+	double throttleL = .25; 
+	double throttleA= 0.55;
+	boolean arm=true;
+	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
+	
 	protected void initialize() {
 	}
 
 	protected void execute() {
-		if (Robot.oi.getBButton(Player1)) {
-			Robot.MoveForward();
-		}
-
-		Robot.drivetrain.setRaw1((-Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
-				-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1) * throttleL);
 		
-
+	
+		if(Robot.oi.getAButton(Player1)){
+			if(arm == false){
+				 arm=true; }
+			else if( arm == true){
+				arm = false; }
+			
+		}
+		
+		 if(arm) {
+			 
+			 Robot.drivetrain.setRaw1((-Robot.oi.getLeftStickY(Player1)+ Robot.oi.getRightStickX(Player1))* throttleL, 
+						(-Robot.oi.getLeftStickY(Player1)+ -Robot.oi.getRightStickX(Player1)) * throttleL);
+		 }
+		 else {
+			 Robot.drivetrain.setRawArm((Robot.oi.getRightStickY(Player1)*throttleA));
+		 }
+		if(Robot.oi.Dpad(Player1)<180 && Robot.oi.Dpad(Player1)>=0) {
+			Robot.drivetrain.setRawSpinner(0.4,-0.4);
+		}
+		
+		else if(Robot.oi.Dpad(Player1)>180 && Robot.oi.Dpad(Player1)<=359) {
+			Robot.drivetrain.setRawSpinner(-0.4, 0.4);
+		}
+		
+		else {Robot.drivetrain.setRawSpinner(0,0);
+		
+		}
+		
+		if(Robot.oi.getYButton(Player1)) {
+			grabber = DoubleSolenoid.Value.kForward;
+		}
+			
+		if(Robot.oi.getBButton(Player1)) {
+			grabber = DoubleSolenoid.Value.kReverse;
+		}
+		
+		Robot.drivetrain.setRawGrabber(grabber);
+		
+		if(Robot.oi.getRightBumper(Player1)) {
+			puncher = DoubleSolenoid.Value.kForward;
+		}
+		
+		if(Robot.oi.getLeftBumper(Player1)) {
+			puncher = DoubleSolenoid.Value.kReverse;
+		}
+		
+			Robot.drivetrain.setPunchers(puncher);
 	}
 
 	protected boolean isFinished() {
@@ -43,5 +90,3 @@ public class TankDrive extends Command {
 		end();
 	}
 }
-
-

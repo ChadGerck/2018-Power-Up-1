@@ -4,8 +4,9 @@ public class Sparky {
 	public static boolean Offline = false; 
 	
 	public static void main(String[] args) {
-		Offline = true; 
+		Offline = true; }
 		//Autonomous.Auto(); 
+<<<<<<< HEAD
 		
 		int x = 1;
 		
@@ -17,6 +18,20 @@ public class Sparky {
 		
 		}
 	}	
+=======
+	
+	double x=1; {
+	
+	while(x>0) {
+		
+		System.out.println(x);
+		x = x/2;    }
+	}
+		
+	
+		
+	
+>>>>>>> 96acda900f2a036a0821bec00e672726b75aa92b
 	public static void MoveForward() {
 		System.out.println("Move robot forward 1 space");
 		if(!Offline) { Robot.MoveDistance(Robot.GyroAngle(), .3, 1); }
