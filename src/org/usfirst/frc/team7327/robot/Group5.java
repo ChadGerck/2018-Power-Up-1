@@ -102,9 +102,7 @@ public class Group5 {
 			else {
 				Robot.drivetrain.setRaw1(0, .25);
 				Robot.drivetrain.setRaw1(0, 0); 
-				//A whim away, a whim away, a whim away 
-				//Deep in the jungle, the mighty jungle, a lion sleeps toniiightt
-			}
+				
 
 		}
 	}

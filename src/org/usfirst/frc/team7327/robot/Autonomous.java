@@ -31,7 +31,7 @@ public class Autonomous {
 				else if (timer< 12) {
 				Robot.drivetrain.setRaw1(0.45, 0.45);
 			}	
-				else if (timer< 12) {
+				else if (timer< 14) {
 				Robot.drivetrain.setRaw1(0.25, 0.25);
 			}
 	    }
