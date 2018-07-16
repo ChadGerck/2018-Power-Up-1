@@ -25,7 +25,15 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL )  ,   (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleR) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
 		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1));	
-		Robot.drivetrain.setRawSpinner(Robot.oi.Dpad(Player1)*throttleL, Robot.oi.Dpad(Player1)*throttleR);
+		
+		if((Robot.oi.Dpad(Player1) >= 0 && (Robot.oi.Dpad(Player1)) <= 45)) if (Robot.oi.Dpad(Player1) <= 360 && (Robot.oi.Dpad(Player1)) >= 315){
+
+			Robot.drivetrain.setRawSpinner(-0.3, 0.3);	
+		}
+		else if (Robot.oi.Dpad(Player1) > 45 && (Robot.oi.Dpad(Player1) <= 135)){
+			Robot.drivetrain.setRawSpinner(0.3, 0.3);
+		}
+		
 	}
 
 	
