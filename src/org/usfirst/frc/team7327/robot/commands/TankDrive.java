@@ -20,82 +20,40 @@ public class TankDrive extends Command {
 	}
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25; 
+	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff; 
 	
 	protected void initialize() {
 	}
 	protected void execute(){
 		
+		Robot.drivetrain.setRawGrabber(grabber);
+		
+		if()){
+			DoubleSolenoid.Value.kForward;
+		}
+			
+		
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftStickY(Player1)+Robot.oi.getRightStickX(Player1))*throttleL, (Robot.oi.getLeftStickY(Player1)-Robot.oi.getRightStickX(Player1))*throttleL);
 		
 		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1));
 		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		
-		if (Robot.oi.getAButton(Player1)) {
-			double timer = Robot.myTimer.get();
-			// Robot.drivetrain.setRaw1(.25, .25);
-
-			if (timer < 1) {
-				Robot.drivetrain.setRaw1(.1, .1);
-			} else if (timer < 2) {
-				Robot.drivetrain.setRaw1(.2, .2);
-			} else if (timer < 3) {
-				Robot.drivetrain.setRaw1(.3, .3);
-			} else if (timer < 4) {
-				Robot.drivetrain.setRaw1(.4, .4);
-			} else if (timer < 5) {
-				Robot.drivetrain.setRaw1(.5, .5);
-			}
-			if (Robot.oi.getRightStickY(Player1) == 1) {
-				Robot.drivetrain.setRaw1(Robot.oi.getRightStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);	
-				//Robot.MoveForward();
-				//i = i + 1;
-			}
-
-			if (Robot.oi.getRightStickX(Player1) == 1) {
-				//Robot.TurnRight();
-				Robot.drivetrain.setRaw1(.25, -.25);
-			}
-			if (Robot.oi.getLeftStickX(Player1) == 1) {
-				//Robot.TurnLeft();
-				Robot.drivetrain.setRaw1(-.25, .25);
-			}
-			if (Robot.oi.getRightStickY(Player1) == 1) {
-				Robot.drivetrain.setRaw1(Robot.oi.getRightStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
-			}
-			if (Robot.oi.getLeftTrigger(Player1) == 1) {
-				//Robot.TurnLeft();
-				Robot.drivetrain.setRaw1(-.25, .25);
-			}
-			if (Robot.oi.getRightTrigger(Player1) == 1) {
-				//Robot.TurnRight();
-				Robot.drivetrain.setRaw1(.25, -.25);
-				
-			} else {
-				Robot.drivetrain.setRaw1(0, 0);
-			}
+		if((Robot.oi.Dpad(Player1)>=0 && Robot.oi.Dpad(Player1)<=45)
+		 || (Robot.oi.Dpad(Player1)<=315 && Robot.oi.Dpad(Player1)>=360)) {
+			Robot.drivetrain.setRawSpinner(-0.4,0.4);
 		}
-		*/
+		else if (Robot.oi.Dpad(Player1)>=46 && Robot.oi.Dpad(Player1)<=135){
+			Robot.drivetrain.setRawSpinner(0.4,0.4);
+		}
+		else if (Robot.oi.Dpad(Player1)>=136 && Robot.oi.Dpad(Player1)<=225) {
+			Robot.drivetrain.setRawSpinner(0.4,-0.4);
+		}
+		else if(Robot.oi.Dpad(Player1)>=226 && Robot.oi.Dpad(Player1)<=314) {
+			Robot.drivetrain.setRawSpinner(-0.4,-0.4);
+		}
+		else {
+			Robot.drivetrain.setRawSpinner(0,0);
+		}
+	
 	}
 
 	
