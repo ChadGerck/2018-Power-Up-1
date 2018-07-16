@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
+	public TankDrive(){
+	requires(Robot.drivetrain);
+	}
 
     
 	
@@ -39,12 +42,10 @@ public class TankDrive extends Command {
 		else if(Robot.oi.Dpad(Player1) <= 225 && (Robot.oi.Dpad(Player1)) >= 315){
 			Robot.drivetrain.setRawSpinner(-0.3, 0.3);	
 		}
-		else if (Robot.oi.Dpad(Player1) > 315 && (Robot.oi.Dpad(Player1) <= 360)){
+		else  {
 			Robot.drivetrain.setRawSpinner(0.3, 0.3);
 		}
-		else {
-			Robot.drivetrain.setRawSpinner(0, 0);
-		}
+		
 		
 	}
 
