@@ -69,7 +69,7 @@ public class TankDrive extends Command {
 			Hands = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setRawGrabber(Hands);
 		}
-        
+		
         /* UP          0; 
          * RIGHT       90; 
          * DOWN        180; 
@@ -91,6 +91,9 @@ public class TankDrive extends Command {
 	// Spin Left
 	else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 315){
 		Robot.drivetrain.setRawSpinner(-.3, -.3);
+	}
+	else {
+		Robot.drivetrain.setRawSpinner(0, 0);
 	}
 		// execute  
 	} 
