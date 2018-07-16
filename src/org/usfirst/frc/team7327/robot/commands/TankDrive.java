@@ -30,7 +30,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRaw1((Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) + Robot.oi.getLeftStickX(Player1))*throttleL, (Robot.oi.getRightTrigger(Player1) - Robot.oi.getLeftTrigger(Player1) - Robot.oi.getLeftStickX(Player1))*throttleL);
 										//move the left motor forward	  will move the robot backwards      will make the robot's left side motor go	  move the right motor forward		  
 										//When Right Trigger is pressed   when the left trigger is pressed   while the right side motor stops so it can   When Right Trigger is pressed
-										//																	 stop
+ 										//																	 stop
 										//
 			
 			boolean flag = true;
@@ -51,10 +51,12 @@ public class TankDrive extends Command {
 				Robot.drivetrain.setRaw1(0, 0);
 			}
 
-			if (Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) <= 315){
+			if (Robot.oi.Dpad(Player1) <= 45 && Robot.oi.Dpad(Player1) >= 315){
 				Robot.drivetrain.setRawSpinner(-.3, .3);
-			}else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 135){
+			}else if (Robot.oi.Dpad(Player1) <= 225 && Robot.oi.Dpad(Player1) >= 135){
 				Robot.drivetrain.setRawSpinner(.3, -.3);
+			}else {
+				Robot.drivetrain.setRawSpinner(0, 0);
 			}
 
 
