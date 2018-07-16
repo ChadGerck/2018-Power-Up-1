@@ -28,8 +28,6 @@ public class TankDrive extends Command {
 	double throttleR = .6;
 	double throttleA = .65;  
 	double throttleS = .7;
-	
-	//TalonSRX TestTalon = new TalonSRX(0); 
 
 	Servo Servo1 = new Servo(8);
 	Servo Servo2 = new Servo(9);
