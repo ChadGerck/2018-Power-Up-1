@@ -7,16 +7,16 @@ public class Autonomous {
 		
 		
 		//While loops 
-		GroupMaster.Project2();
+		//GroupMaster.Project2();
 		
 		//1 while loop and if command
-		GroupMaster.Project3();
+		//GroupMaster.Project3();
 		
 		//Switch
-		GroupMaster.Project4(); 
+		//GroupMaster.Project4(); 
 		
 		//timed if, else if, else
-		GroupMaster.Project5(); 
+		//GroupMaster.Project5(); 
 		
 		
 		
