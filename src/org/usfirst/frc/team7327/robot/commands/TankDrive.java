@@ -23,8 +23,16 @@ public class TankDrive extends Command {
 	double throttleR= -.25;
 	
 	protected void initialize() {
+		
 	}
+	
 	protected void execute(){
+		
+		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
+	
+		
+		
+		
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL )  ,   (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleR) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
 		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1));	
@@ -43,7 +51,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawSpinner(-0.3, 0.3);	
 		}
 		else  {
-			Robot.drivetrain.setRawSpinner(0.3, 0.3);
+			Robot.drivetrain.setRawSpinner(0, 0);
 		}
 		
 		
