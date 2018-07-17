@@ -3,7 +3,7 @@ package org.usfirst.frc.team7327.robot.commands;
 import org.usfirst.frc.team7327.robot.Robot;
 
 
-//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.ControlMode; 
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -18,33 +18,52 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0;
-		double throttleL = .35;
+		double throttleL = .25;
 		double throttleA = .50;
-		protected void initialize() {
+		double spinnerleft = .30;
+		double spinnerright = .30;
+	 protected void initialize() {
 	}
-	
+
+		Servo Servo1 = new Servo(1);
+		Servo Servo2 = new Servo(2);
+	 
 	protected void execute(){
 				
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
-			
+
+		if(Robot.oi.getBButton (Player1))	{
+			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
+			else { Servo1.setSpeed(-1);}
+		}
+		
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickX(Player1)*throttleA);
-			/*
-			if(Robot.oi.getRightStickX(Player1) == 1) {
+		
+			if(Robot.oi.getRightTrigger(Player1) == 1) {
 				
 			}
 			else{
-				Robot.drivetrain.setRawArm(0*throttleA);
-			
+				Robot.drivetrain.setRawArm(0*throttleA);	
 			}
-			*/
+			if(( Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<=45) 
+				||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >=315)){
+				Robot.drivetrain.setRawSpinner(-0.30,0.30);
+			}
+			if (Robot.oi.Dpad(Player1) >=0 && Robot.oi.Dpad(Player1) <45) {
+				Robot.drivetrain.setRawSpinner(-0.35, 0.35);
+	        }
+			else if (Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <=135){
+				Robot.drivetrain.setRawSpinner(0.30,-0.30);
+			}
 			
-			if( Robot.oi.getStartButton(Player1)) {
-				Robot.TurnLeft();
-				Robot.TurnLeft();
-				Robot.MoveForward();
+			if(( Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<=45)
+				||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >=315)){
+				Robot.drivetrain.setRawSpinner(-0.30,0.30);
+			}
+			else if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=135){
+				Robot.drivetrain.setRawSpinner(0.30,-0.30);
+			}	
 		}
-	}
-	
 	protected boolean isFinished() {
 
 		return false;
@@ -52,7 +71,12 @@ public class TankDrive extends Command {
 
 	protected void interrupted() {
 		end();
+	
+		
+		}
 	}
+		
+		
+	
 
-    
-}
+		
