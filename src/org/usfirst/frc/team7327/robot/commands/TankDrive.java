@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = true; 
+	private boolean SinglePlayer = false; 
 
 	boolean Dpressed = false;
 	boolean armOn = true;
@@ -59,13 +59,20 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceR: ", distanceR);
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
 		
+		
 		if(Robot.oi.getBButton(Player1)) {
 			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
 			else { Servo1.setSpeed(-1);}
 		}
 		if(Robot.oi.getXButton(Player1)) {
-			//if(Robot.drivetrain.getTalon() == 0) {Robot.drivetrain.setTalon(.5); }
-			//else { Robot.drivetrain.setTalon(0); }
+			if(!SinglePlayer) {
+				Player2 = Robot.oi.Controller0; 
+				SinglePlayer = true;
+			}
+			else {
+				Player2 = Robot.oi.Controller1; 
+				SinglePlayer = false; 
+			} 
 		}
 		
 		if(Robot.oi.getYButton(Player2)) { Robot.ShootBox(); }
