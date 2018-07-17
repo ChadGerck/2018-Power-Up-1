@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderL;
 	public static Encoder encoderR;
 	public static ADXRS450_Gyro gyro; 
-
+	public static UltrasonicSensor ultra = new UltrasonicSensor(2);
 	//public static UltrasonicSensor ultra = new UltrasonicSensor(0);
 	
 	public static boolean tele = false;

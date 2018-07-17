@@ -28,10 +28,12 @@ public class TankDrive extends Command {
 
 	protected void execute() {
 
-		// Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*-throttleL,
-		// Robot.oi.getRightTrigger(Player1)*-throttleL,
-		// (Robot.oi.getLeftStickY(Player1))*throttleK);
+		SmartDashboard.putNumber("Range: ", ultra.GetRangeMM());
 
+		
+		
+		
+		
 		if (Robot.oi.getRightBumper(Player1) == true) {
 			throttleL = Math.abs(throttleL) * -1;
 		}
