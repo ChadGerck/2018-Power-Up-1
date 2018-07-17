@@ -28,7 +28,7 @@ public class TankDrive extends Command {
 
 	protected void execute() {
 
-		SmartDashboard.putNumber("Range: ", ultra.GetRangeMM());
+		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
 
 		
 		
