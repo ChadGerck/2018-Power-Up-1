@@ -32,6 +32,14 @@ public class TankDrive extends Command {
 		if(Robot.oi.getAButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);}
+		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) >= 45)) {
+				||(Robot.oi.Dpad(Player1) <= 315 && Robot.oi.Dpad(Player1) >= 360)){
+				Robot.drivetrain.setRawSpinner(.3, .3);
+			}
+				else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135) {
+			
+			}
+		}
 		}
 	protected boolean isFinished() {
 		return false;
