@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 	DigitalInput limitSwitch; 
 	
     //Talon talon;
-	Compressor c0 = new Compressor(3);
+	Compressor c0 = new Compressor(0);
 	
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
