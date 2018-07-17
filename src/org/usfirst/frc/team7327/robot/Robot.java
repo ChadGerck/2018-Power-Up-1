@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
 	
 	public static boolean tele = false;
 	
-	DigitalInput limitSwitch; 
+	public static DigitalInput limitSwitch; 
 	
     //Talon talon;
 	Compressor c0 = new Compressor(0);
@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		
-		//limitSwitch = new DigitalInput(8);
+		limitSwitch = new DigitalInput(0);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		encoderL = new Encoder(2, 3, false, Encoder.EncodingType.k4X);

@@ -31,6 +31,8 @@ public class TankDrive extends Command {
 
 	protected void execute() {
 		
+		System.out.println(Robot.limitSwitch.get());
+		
 	
 		if(Robot.oi.getAButton(Player1)){
 			if(arm == false){
