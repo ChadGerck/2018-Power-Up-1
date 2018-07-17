@@ -29,6 +29,7 @@ public class TankDrive extends Command {
 	protected void execute(){
 		
 		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
+		SmartDashboard.putNumber("Angle: ", Robot.GyroAngle());
 	
 		
 		
