@@ -2,21 +2,12 @@ package org.usfirst.frc.team7327.robot;
 
 import org.usfirst.frc.team7327.robot.Robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Autonomous {
 
 	public static void Auto() {
 
-		
-		Group7.Project4(2);
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		while (true) {
 			double timer = Robot.myTimer.get();
 			if (timer > 2) {
@@ -44,8 +35,10 @@ public class Autonomous {
 			} else {
 				Robot.drivetrain.setRaw1(0, 0);
 			}
+			
 		}
-	}
+		
+			}
 	/*
 	 * while(true) { double timer = Robot.myTimer.get(); //leftvalue and
 	 * rightvalue from 0-1 Robot.drivetrain.setRaw1(.25, .25);
@@ -75,15 +68,58 @@ public class Autonomous {
 	 * Robot.MoveForward(); Robot.MoveForward(); Robot.MoveForward(); break;
 	 * 
 	 * } }
-	 * 
-	 * // other challenge public static void MoveAngle(double angle) {
-	 * Robot.drivetrain.setRaw1(.25, .25); double gyroAngle = Robot.GyroAngle();
-	 * gyroAngle = Math.toRadians(gyroAngle);
-	 * 
-	 * try{ Thread.sleep(20); }
-	 * 
-	 * catch(InterruptedException e){ e.printStackTrace(); } }
-	 * 
+	 */ 
+	 //other challenge
+	public static void MoveAngle(double angle) throws InterruptedException {
+	  Robot.drivetrain.setRaw1(.25, .25); 
+	  double gyroAngle = Robot.GyroAngle();
+	  gyroAngle = Math.toRadians(gyroAngle);
+	  
+	 Thread.sleep(20); 
+	
+
+		 
+		 //chades work
+		/* private static void TurnTo(double degrees){
+				double Phi = GyroAngle(); 
+				if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+					while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+						SmartDashboard.putNumber("Gyro: ", GyroAngle());
+						drivetrain.setRaw(-.3, .4, 0); 
+						try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+						Phi = GyroAngle();
+					} 
+					while(!tele && Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+						SmartDashboard.putNumber("Gyro: ", GyroAngle());
+						drivetrain.setRaw(.25, -.25, 0); 
+						try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+						Phi = GyroAngle();
+					} 
+				}else {
+					while(!tele && Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+						SmartDashboard.putNumber("Gyro: ", GyroAngle());
+						drivetrain.setRaw(.4, -.3, 0); 
+						try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+						Phi = GyroAngle();
+					}
+					while(!tele && Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+						SmartDashboard.putNumber("Gyro: ", GyroAngle());
+						drivetrain.setRaw(-.25, .25, 0); 
+						try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+						Phi = GyroAngle();
+					}
+				}
+	 }
+			/*double L = gyroAngle ;
+			double A = gyroAngle; 
+			while (L == gyroAngle){
+				L = L - A;*/
+				
+			
+		}
+
+	
+	 /* 
 	 * 
 	 * /*int i = 0; while (i <= 54) { Robot.MoveForward(); //sorry; if (i == 27
 	 * || i == 54) { Robot.TurnRight(); Robot.TurnRight(); } i++;
@@ -111,4 +147,6 @@ public class Autonomous {
 	public static void turnAround() {
 		turnRight(2);
 	}
+	
+	
 }

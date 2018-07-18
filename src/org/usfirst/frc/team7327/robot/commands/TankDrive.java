@@ -54,7 +54,7 @@ public class TankDrive extends Command {
 		else  {
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
-		
+		System.out.println(Robot.GyroAngle());
 		
 	}
 
