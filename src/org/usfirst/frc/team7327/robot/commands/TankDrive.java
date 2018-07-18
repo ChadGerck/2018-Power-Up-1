@@ -32,6 +32,8 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("Angle: ", Robot.GyroAngle());
 		
 		
+		
+		
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL )  ,   (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleR) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
 		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1));	
