@@ -66,7 +66,7 @@ public class TankDrive extends Command {
 		
 		//Zone 1
 		if((Robot.oi.Dpad(Player1)>= 0 && Robot.oi.Dpad(Player1)<=45)
-			||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) < 315)){	
+			||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) > 315)){	
 		Robot.drivetrain.setRawSpinner(-.3, .3);
 		}
 		
@@ -93,7 +93,7 @@ public class TankDrive extends Command {
 	}
  
 	protected boolean isFinished() {
-
+ 
 		return false;
 	}
 
