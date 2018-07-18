@@ -34,7 +34,8 @@ public class TankDrive extends Command {
 		System.out.println(Robot.limitSwitch.get());
 		
 		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
-		SmartDashboard.putNumber("Angle: ", Robot.GyroAngle());
+		SmartDashboard.putNumber("Angle: ", Robot.GyroAngle()); 
+		
 	
 		if(Robot.oi.getAButton(Player1)){
 			if(arm == false){
