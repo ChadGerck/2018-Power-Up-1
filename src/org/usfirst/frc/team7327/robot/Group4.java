@@ -49,32 +49,34 @@ public class Group4 {
 		case 2:
 			while (i < 15) {
 				Robot.MoveForward();
-
-				while (i < 2)
+				while (i < 2) {
 					Robot.TurnRight();
-				break;
+					break;
+
+				}
 
 			}
-
 		}
-
 	}
 
 	public static void Project5() {
 
-		// timed if, else if, else
-		{
-			if(10); {
+		double clock = Robot.myTimer.get();
+
+		while (true) {
+
+			if (clock < 2) {
 				Robot.MoveForward();
-				
-			else if(2) {
-				Robot.TurnLeft();
-				{else {
-					Robot.MoveForward();
-					
-				}
 			}
-		
+
+			else if (clock < 4) {
+				Robot.TurnLeft();
+			}
+
+			else {
+				Robot.MoveForward();
+
+			}
 		}
 	}
 }
