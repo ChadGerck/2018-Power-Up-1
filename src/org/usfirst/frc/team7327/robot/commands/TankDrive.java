@@ -12,39 +12,65 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
-public class TankDrive extends Command {
+public class TankDrive extends Command 
+{
 
     
-	public TankDrive() {
+	public TankDrive() 
+	{
 		requires(Robot.drivetrain); 
 	}
+	
 	XboxController Player1 = Robot.oi.Controller0; 
 	double throttleL = .25; 
 	double throttleA = .55;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff; 
+	DoubleSolenoid.Value punchers = DoubleSolenoid.Value.kOff;
 	
-	protected void initialize() {
-	}
+	protected void initialize() {}
+	
 	protected void execute(){
 		
 		/*Robot.drivetrain.setRawGrabber(grabber);
 		 * 
 		 */
 		
-		if (Robot.oi.getLeftBumper(Player1)){
+		//Wheels
+		Robot.drivetrain.setRaw1((Robot.oi.getLeftStickY(Player1)+Robot.oi.getRightStickX(Player1))*throttleL, (Robot.oi.getLeftStickY(Player1)-Robot.oi.getRightStickX(Player1))*throttleL);
+		
+		//Arm
+		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)* throttleA);
+		
+		//Grabbers
+		if (Robot.oi.getLeftBumper(Player1))
+		{
 			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kForward);
 		}
-		else if (Robot.oi.getRightBumper(Player1)){
+		else if (Robot.oi.getRightBumper(Player1))
+		{
 			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kReverse);
 		}
-		else {
+		else 
+		{
 			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kOff);
 		}
 		
-		Robot.drivetrain.setRaw1((Robot.oi.getLeftStickY(Player1)+Robot.oi.getRightStickX(Player1))*throttleL, (Robot.oi.getLeftStickY(Player1)-Robot.oi.getRightStickX(Player1))*throttleL);
+		//Punchers
+		if(Robot.oi.getAButton(Player1))
+		{
+			punchers = DoubleSolenoid.Value.kForward;
+			Robot.drivetrain.setPunchers(punchers);
 		
-		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)* throttleA);
+		}
 		
+		if (Robot.oi.getBButton(Player1)) 
+		{
+			punchers = DoubleSolenoid.Value.kReverse;
+			Robot.drivetrain.setPunchers(punchers);
+		}
+		
+		
+		//Spinners
 		if((Robot.oi.Dpad(Player1)>=0 && Robot.oi.Dpad(Player1)<=45)
 		 || (Robot.oi.Dpad(Player1)<=315 && Robot.oi.Dpad(Player1)>=360)) {
 			Robot.drivetrain.setRawSpinner(-0.4,0.4);
