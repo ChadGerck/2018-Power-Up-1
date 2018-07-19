@@ -25,10 +25,10 @@ public class TankDrive extends Command {
 	
 	DoubleSolenoid.Value Puncher = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value Hands =  DoubleSolenoid.Value.kOff;
-	//Servo exampleServo = new Servo(1);
 
 	
-	protected void initialize() {
+	protected void initialize() 
+	{
 		     
 	}
 
@@ -97,16 +97,6 @@ public class TankDrive extends Command {
 		{
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
-		//Servos
-//		if (Robot.oi.getBButton(Player1)) 
-//		{
-//			exampleServo.setAngle(90);
-//		} 
-//		else if (Robot.oi.getXButton(Player1)) 
-//		{
-//			exampleServo.setAngle(270);
-//
-//		}
 	} 
 
 	
