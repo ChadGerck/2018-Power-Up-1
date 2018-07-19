@@ -25,8 +25,8 @@ public class TankDrive extends Command {
 	 protected void initialize() {
 	}
 
-		Servo Servo1 = new Servo(1);
-		Servo Servo2 = new Servo(2);
+		Servo Servo1 = new Servo(8);
+		Servo Servo2 = new Servo(9);
 		
 	protected void execute(){
 				
@@ -43,13 +43,13 @@ public class TankDrive extends Command {
 	      double timer =  Robot.myTimer.get();
     	  
     	  if(timer < 10){
-    		  {Servo2.setSpeed(25);}
+    		  {Servo2.setSpeed(.25);}
     	  }
     	  else if(timer < 20){
-    		  {Servo2.setSpeed(05);}
+    		  {Servo2.setSpeed(.05);}
     	  }
     	  else if(timer < 30){
-    		  { Servo2.setSpeed(02);}
+    		  { Servo2.setSpeed(-1);}
     	  }
     	  else
     	  {
