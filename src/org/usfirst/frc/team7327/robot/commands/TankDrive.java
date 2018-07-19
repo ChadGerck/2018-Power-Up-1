@@ -34,7 +34,7 @@ protected void execute(){
 		
 		
 		
-		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*+throttleL,Robot.oi.getRightTrigger(Player1)*+throttleL,(Robot.oi.getRightStickY(Player1)-Robot.oi.getRightStickX(Player1))*throttleX);
+		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*+throttleL,Robot.oi.getRightTrigger(Player1)*+throttleL,(Robot.oi.getRightStickY(Player1)*+throttleL));
 		if(Robot.oi.getRightBumper(Player1)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setRawGrabber(Grabbers);
