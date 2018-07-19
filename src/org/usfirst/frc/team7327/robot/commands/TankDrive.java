@@ -32,18 +32,14 @@ public class TankDrive extends Command
 	}
 
 	boolean flag = false;
-	int Dpaddown = 180;
-	int Dpadup = 0;
-	int Dpadleft = 360;
-	int Dpadright = 90;
-
+	double throttle = .25;
+	double armvalue = .55;
+	double speed = .7;
 	protected void execute() 
 	{
 
 		System.out.println(limitswitch.get());
 
-		double throttle = .25;
-		double armvalue = .55;
 
 		XboxController Player1 = Robot.oi.Controller0;
 		
@@ -83,19 +79,19 @@ public class TankDrive extends Command
 		//This is for the Spinners
 		if ((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45) || (Robot.oi.Dpad(Player1) <= 315 && Robot.oi.Dpad(Player1) >= 360)) 
 		{
-			Robot.drivetrain.setRawSpinner(-.3, .3);
+			Robot.drivetrain.setRawSpinner(speed,speed);
 		} 
 		else if (Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135) 
 		{
-			Robot.drivetrain.setRawSpinner(.3, -.3);
+			Robot.drivetrain.setRawSpinner(-speed, -speed);
 		} 
 		else if (Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <= 225) 
 		{
-			Robot.drivetrain.setRawSpinner(.3, -.3);
+			Robot.drivetrain.setRawSpinner(speed, -speed);
 		} 
 		else if (Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 0) 
 		{
-			Robot.drivetrain.setRawSpinner(.3, .3);
+			Robot.drivetrain.setRawSpinner(-speed, speed);
 		} 
 		else 
 		{
