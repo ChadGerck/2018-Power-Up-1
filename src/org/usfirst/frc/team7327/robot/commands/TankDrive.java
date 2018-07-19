@@ -49,7 +49,7 @@ protected void execute(){
 		}
 		if(Robot.oi.getAButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kReverse;
-		}
+			
 
 	/*		Robot.drivetrain.setPunchers(Punchers);}
 		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) >= 45)) {
