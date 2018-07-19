@@ -27,15 +27,35 @@ public class TankDrive extends Command {
 
 		Servo Servo1 = new Servo(1);
 		Servo Servo2 = new Servo(2);
-	 
+		
 	protected void execute(){
 				
-
 		if(Robot.oi.getBButton (Player1))	{
 			if(Servo1.get() == 0) {Servo1.setSpeed(1); }
 			else { Servo1.setSpeed(-1);}
 		}
 		
+		if(Robot.oi.getXButton (Player1))	{
+			if(Servo2.get() == 0) {Servo2.setSpeed(1); }
+			else { Servo2.setSpeed(-1);}
+		}
+		
+	      double timer =  Robot.myTimer.get();
+    	  
+    	  if(timer < 10){
+    		  {Servo2.setSpeed(25);}
+    	  }
+    	  else if(timer < 20){
+    		  {Servo2.setSpeed(05);}
+    	  }
+    	  else if(timer < 30){
+    		  { Servo2.setSpeed(02);}
+    	  }
+    	  else
+    	  {
+    		  {Servo2.setSpeed(0);}
+    	  } 
+    	  
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickX(Player1)*throttleA);
 		
@@ -63,7 +83,7 @@ public class TankDrive extends Command {
 			else if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=135){
 				Robot.drivetrain.setRawSpinner(0.30,-0.30);
 			}	
-		}
+    	  }
 	protected boolean isFinished() {
 
 		return false;
@@ -71,12 +91,5 @@ public class TankDrive extends Command {
 
 	protected void interrupted() {
 		end();
-	
-		
 		}
-	}
-		
-		
-	
-
-		
+	}		
