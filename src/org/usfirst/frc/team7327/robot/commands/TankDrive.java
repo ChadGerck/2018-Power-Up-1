@@ -16,8 +16,8 @@ public class TankDrive extends Command {
 	DigitalInput limitswitch = new DigitalInput(1);
 
 	XboxController Player1 = Robot.oi.Controller0;
-	double throttleL = 0.25;
-	double throttleX = 0.55;
+	double throttle = 0.25;
+	double armvalue = 0.55;
 	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value Punchers = DoubleSolenoid.Value.kOff;
 
@@ -32,7 +32,7 @@ protected void execute()
 {
 		System.out.println(limitswitch.get());
 		
-		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*+throttleL,Robot.oi.getRightTrigger(Player1)*+throttleL,(Robot.oi.getRightStickY(Player1)*+throttleL));
+		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*+throttle,Robot.oi.getRightTrigger(Player1)*+throttle,(Robot.oi.getRightStickY(Player1)*+throttle));
 		
 		
 		//This is to set the mode for the Arm and the Wheels
@@ -60,7 +60,13 @@ protected void execute()
 		
 		if(flag)
 		{
-			//Robot.drivetrain.setRaw(Robot.oi.getRightstick
+			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1)*throttle, -Robot.oi.getRightStickY(Player1)*throttle);
+			Robot.drivetrain.setRawArm(0);
+		}
+		else
+		{
+			Robot.drivetrain.setRawArm( (Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1))*armvalue);
+			Robot.drivetrain.setRaw1(0,0);
 		}
 		
 		
