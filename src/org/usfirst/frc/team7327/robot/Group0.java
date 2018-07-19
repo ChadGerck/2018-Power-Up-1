@@ -111,22 +111,20 @@ public class Group0
 		double leftSp = 0.01;
 		double rightSp = 0.01;
 		
-				while (leftSp <= 0.60 && rightSp <= 0.60)
-				{
-					leftSp = leftSp * 2;
-					rightSp = rightSp * 2;
-					Robot.drivetrain.setRaw1(leftSp, rightSp);
+			while (leftSp <= 0.60 && rightSp <= 0.60)
+			{
+				leftSp = leftSp * 2;
+				rightSp = rightSp * 2;
+				Robot.drivetrain.setRaw1(leftSp, rightSp);		
+			}
 					
-				}
-					
-				while (leftSp >= 0.00 && rightSp >= 0.00)
-				{
-					leftSp = leftSp / 2;
-					rightSp = rightSp / 2;
-					Robot.drivetrain.setRaw1(leftSp, rightSp);
-		
-				}
-		}
+			while (leftSp >= 0.00 && rightSp >= 0.00)
+			{
+				leftSp = leftSp / 2;
+				rightSp = rightSp / 2;
+				Robot.drivetrain.setRaw1(leftSp, rightSp);
+			}
+	}
 	
 	public static void MoveForward(int distance)
 	{

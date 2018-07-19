@@ -24,19 +24,22 @@ public class TankDrive extends Command {
 	boolean Arm = false;
 	
 	DoubleSolenoid.Value Puncher = DoubleSolenoid.Value.kOff;
-	DoubleSolenoid.Value Hands =  DoubleSolenoid.Value.kOff; 
+	DoubleSolenoid.Value Hands =  DoubleSolenoid.Value.kOff;
+	//Servo exampleServo = new Servo(1);
+
 	
 	protected void initialize() {
 		     
 	}
 
-	protected void execute() {
+	protected void execute() 
+	{
 		// BOOLEAN
-		if (Robot.oi.getStartButton(Player1))
+		if (Arm == false && Robot.oi.getStartButton(Player1))
 		{
 			Arm = true;
 		}
-		if (Arm = true && Robot.oi.getStartButton(Player1))
+		if (Arm == true && Robot.oi.getStartButton(Player1))
 		{
 			Arm = false;
 		}
@@ -45,12 +48,12 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1)*throttleX);
 		} 
 		else 
-			// REGULAR MOVEMENT
+		//			REGULAR MOVEMENT
 		{
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleL, Robot.oi.getRightStickY(Player1)*throttleL);
 		}
 		
-		// 			BUMPERS
+		//			BUMPERS
 		if (Robot.oi.getRightBumper(Player1)) {
 			Puncher = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setPunchers(Puncher);
@@ -60,7 +63,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setPunchers(Puncher);
 		}
 		
-		// 			 TRIGGERS	
+		//			TRIGGERS	
 		if (Robot.oi.getRightTrigger(Player1) == 1) {
 			Hands = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setRawGrabber(Hands);
@@ -70,32 +73,40 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawGrabber(Hands);
 		}
 		
-        /* UP          0; 
-         * RIGHT       90; 
-         * DOWN        180; 
-         * LEFT        270; 
-         */ 
-		// 			DPAD
+		//			DPAD
 		
-	if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45 || (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
-			Robot.drivetrain.setRawSpinner(-.3,  .3);
+		if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45 || (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) 
+		{
+				Robot.drivetrain.setRawSpinner(-.3,  .3);
 		}
-	// Spin Right
-	else if (Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) <= 135) {
-		Robot.drivetrain.setRawSpinner(.3, .3);
-	}
-	// Pull In 
-	else if (Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <= 225) {
-		Robot.drivetrain.setRawSpinner(.3,-.3);
-	}
-	// Spin Left
-	else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 315){
-		Robot.drivetrain.setRawSpinner(-.3, -.3);
-	}
-	else {
-		Robot.drivetrain.setRawSpinner(0, 0);
-	}
-		// execute  
+		//			Spin Right
+		else if (Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) <= 135) 
+		{
+			Robot.drivetrain.setRawSpinner(.3, .3);
+		}
+		//			Pull In 
+		else if (Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <= 225) 
+		{
+			Robot.drivetrain.setRawSpinner(.3,-.3);
+		}
+		//			Spin Left
+		else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 315){
+			Robot.drivetrain.setRawSpinner(-.3, -.3);
+		}
+		else 
+		{
+			Robot.drivetrain.setRawSpinner(0, 0);
+		}
+		//Servos
+//		if (Robot.oi.getBButton(Player1)) 
+//		{
+//			exampleServo.setAngle(90);
+//		} 
+//		else if (Robot.oi.getXButton(Player1)) 
+//		{
+//			exampleServo.setAngle(270);
+//
+//		}
 	} 
 
 	
