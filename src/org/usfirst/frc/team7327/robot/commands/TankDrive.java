@@ -21,6 +21,7 @@ public class TankDrive extends Command {
 	XboxController Player1= Robot.oi.Controller0;
 	double throttleL=0.25;
 	double throttleR= -.25;
+	double throttleA = .55; 
 	
 	protected void initialize() {
 		
@@ -31,29 +32,71 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("Range: ", Robot.ultra.GetRangeMM());
 		SmartDashboard.putNumber("Angle: ", Robot.GyroAngle());
 		
+		//This is for the grabber
+		//DoubleSolenoid.Value.kForward or DoubleSolenoid.Value.kReverse
+		if (Robot.oi.getBButton(Player1))
+		{
+			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kForward);
+		}
+		else if (Robot.oi.getXButton(Player1))
+		{
+			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kReverse);
+		}
+		else 
+		{
+			Robot.drivetrain.setRawGrabber(DoubleSolenoid.Value.kOff);
+		}
 		
 		
 		
+		//This is for the puncher
+		//DoubleSolenoid.Value.kForward or DoubleSolenoid.Value.kReverse
+		if (Robot.oi.getYButton(Player1))
+		{
+			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kForward);
+		}
+		else if (Robot.oi.getAButton(Player1))
+		{
+			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kReverse);
+		}
+		else 
+		{
+			Robot.drivetrain.setPunchers(DoubleSolenoid.Value.kOff);
+		}
+		
+		
+		
+		//This is for the wheels
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL )  ,   (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleR) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
-		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1));	
+		//This is for the arm
+		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1)*throttleA);	
 		
-		if((Robot.oi.Dpad(Player1) >= 0 && (Robot.oi.Dpad(Player1)) <= 45) || (Robot.oi.Dpad(Player1) <= 360 && (Robot.oi.Dpad(Player1)) >= 315)){
+		//This is for the spinners
+		if((Robot.oi.Dpad(Player1) >= 0 && (Robot.oi.Dpad(Player1)) <= 45) || (Robot.oi.Dpad(Player1) <= 360 && (Robot.oi.Dpad(Player1)) >= 315))
+		{
 
 			Robot.drivetrain.setRawSpinner(-0.3, 0.3);	
 		}
-		else if (Robot.oi.Dpad(Player1) > 45 && (Robot.oi.Dpad(Player1) <= 135)){
+		else if (Robot.oi.Dpad(Player1) > 45 && (Robot.oi.Dpad(Player1) <= 135))
+		{
 			Robot.drivetrain.setRawSpinner(0.3, 0.3);
 		}
-		else if((Robot.oi.Dpad(Player1) > 135 && (Robot.oi.Dpad(Player1)) <= 225)){
+		else if((Robot.oi.Dpad(Player1) > 135 && (Robot.oi.Dpad(Player1)) <= 225))
+		{
 			Robot.drivetrain.setRawSpinner(-0.3, 0.3);
 		}
-		else if(Robot.oi.Dpad(Player1) <= 225 && (Robot.oi.Dpad(Player1)) >= 315){
+		else if(Robot.oi.Dpad(Player1) <= 225 && (Robot.oi.Dpad(Player1)) >= 315)
+		{
 			Robot.drivetrain.setRawSpinner(-0.3, 0.3);	
 		}
-		else  {
+		else  
+		{
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
+		
+		
+		
 		System.out.println(Robot.GyroAngle());
 		
 	}
@@ -68,46 +111,3 @@ public class TankDrive extends Command {
 	
 	}
 }
-
-
-//import com.ctre.phoenix.motorcontrol.ControlMode;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-
-/*public TankDrive() {p
-	requires(Robot.drivetrain); 
-}*/
-
-
-//Robot.drivetrain.setRawGrabber(Robot.oi.getAButton(Player1) * throttleL);
-
-	///////	hiii
-		
-			
-		/*
-		if(Robot.oi.getRightBumper(Player1))
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1))
-			*/
-		/*	
-		if (Robot.oi.getBButton(Player1)){
-			Robot.TurnRight();
-		}
-		 if (Robot.oi.getXButton(Player1)){
-			 Robot.TurnLeft();
-		 }
-		 */
-		 
-		/*if(Robot.oi.getAButton(Player1)){
-			Robot.MoveForward();
-		}
-		/*
-		if(Robot.oi.getRightTrigger(Player1)==1){
-			Robot.TurnRight();
-		}
-		*/
-		 /*
-		Robot.drivetrain.setRaw1(Robot.oi.get(Player1),0);
-		
-		Robot.drivetrain
-		*/
-
