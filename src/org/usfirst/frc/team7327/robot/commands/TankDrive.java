@@ -12,74 +12,116 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
+
 	DigitalInput limitswitch = new DigitalInput(1);
 
-	
-	  XboxController Player1 = Robot.oi.Controller0; double throttleL = 0.25;
-	  double throttleX = 0.55; DoubleSolenoid.Value Grabbers =
-	  DoubleSolenoid.Value.kOff; DoubleSolenoid.Value Punchers =
-	  DoubleSolenoid.Value.kOff;
+	XboxController Player1 = Robot.oi.Controller0;
+	double throttleL = 0.25;
+	double throttleX = 0.55;
+	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value Punchers = DoubleSolenoid.Value.kOff;
 
 	public TankDrive() {
 		requires(Robot.drivetrain);
 	}
 
 	protected void initialize() {
-}
+	}
 
-protected void execute(){
+protected void execute()
+{
 		System.out.println(limitswitch.get());
 		
-		
-		
-		
-		
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1)*+throttleL,Robot.oi.getRightTrigger(Player1)*+throttleL,(Robot.oi.getRightStickY(Player1)*+throttleL));
-		if(Robot.oi.getRightBumper(Player1)) {
+		
+		
+		//This is to set the mode for the Arm and the Wheels
+		//Start
+		
+		boolean flag = true;
+		
+		if(Robot.oi.getXButton(Player1))
+		{
+			if(flag)
+			{
+				flag = false;
+			}
+			else
+			{
+				flag = true;
+			}
+		}
+	
+		//End
+		
+		
+		//Based on the mode set the joy sticks to the correct part of the robot (wheels or arm)
+		//Start
+		
+		if(flag)
+		{
+			//Robot.drivetrain.setRaw(Robot.oi.getRightstick
+		}
+		
+		
+		
+		//End
+		
+		
+		
+		
+		//This is for the grabbers
+		
+		if(Robot.oi.getRightBumper(Player1)) 
+		{
 			Grabbers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
-		if(Robot.oi.getLeftBumper(Player1)) {
+		if(Robot.oi.getLeftBumper(Player1)) 
+		{
 			Grabbers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
-		if(Robot.oi.getYButton(Player1)) {
+		
+		
+		//This is for the punchers
+		if(Robot.oi.getYButton(Player1)) 
+		{
 			Punchers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
-		if(Robot.oi.getAButton(Player1)) {
+		if(Robot.oi.getAButton(Player1)) 
+		{
 			Punchers = DoubleSolenoid.Value.kReverse;
-			
-
-	/*		Robot.drivetrain.setPunchers(Punchers);}
-		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) >= 45)) {
-				||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)){
-				Robot.drivetrain.setRawSpinner(.3, .3);
-			}
-				else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135) {
-			
-			}
+			Robot.drivetrain.setPunchers(Punchers);
+		}
 		
-
-			Robot.drivetrain.setPunchers(Punchers);*/
 		
-		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
-				||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)){
+		//This is for the spinners
+		
+		if( (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45) || (Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315))
+		{
 			Robot.drivetrain.setRawSpinner(.3, .3);
 		}
-		else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135){
+		else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135)
+		{
 			Robot.drivetrain.setRawSpinner(-.3, -.3 );
 			
 		}
-		else if(Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <= 225){
+		else if(Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <= 225)
+		{
 			Robot.drivetrain.setRawSpinner(.3, -.3 );
 		}
-		else if(Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 315){
+		else if(Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 315)
+		{
 			Robot.drivetrain.setRawSpinner(-.3, .3 );
 		}
-		else {
+		else 
+		{
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
+		
+		
 	}
 
 	protected boolean isFinished() {
@@ -90,24 +132,3 @@ protected void execute(){
 		end();
 	}
 }
-
-/*package org.usfirst.frc.team1.robot;
-
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.SampleRobot;
-import edu.wpi.first.wpilibj.Timer;
-
-public class RobotTemplate extends SampleRobot {
-
-	protected void execute();
-
-      System.out.println()limitswitch.get();
-      
-	// public void robotInit() {
-	// limitSwitch = new DigitalInput(1);
-}
-
-/*
- * public void operatorControl() { // more code here while (limitSwitch.get()) {
- * Timer.delay(10); } // more code here }
- */
