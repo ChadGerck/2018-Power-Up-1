@@ -7,7 +7,7 @@ public class Sparky {
 		//Offline = true; 
 		//Autonomous.Auto(); 
 		
-		double i = 50.7557785;
+		int i = 1;
 		while (i>1){
 			
 		System.out.println(i);
@@ -35,5 +35,29 @@ public class Sparky {
 	//public static void TurnLeft() {
 		//System.out.println("Turn Left");
 		//if(!Offline) { Robot.TurnLeft(); }
+	/*
+
+package edu.wpi.first.wpilibj.templates;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Timer;
+
+public class RobotTemple extands SimpleRobot{
+
+	
+	
+	
 	
 
+
+	public void operationControl() {
+		
+		while (limitSwitch.get()) {
+			Timer.delay(10);
+			}
+			
+			
+		}
+	}
+*/
