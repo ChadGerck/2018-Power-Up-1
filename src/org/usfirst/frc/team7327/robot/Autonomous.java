@@ -18,6 +18,8 @@ public class Autonomous {
 		//timed if, else if, else
 		GroupMaster.Project5(); 
 		
+	}
+}
 		
 		
 		
@@ -51,66 +53,11 @@ public class Autonomous {
 		
 		
 		
-		
-		Robot.MoveForward(); 
-		
-		int i = 0; 
-		while(i < 26) {
-			Robot.MoveForward();
-			i = i + 1; 
-		}
-		Robot.TurnRight();
-		Robot.TurnRight();
-		
-		i = 0; 
-		while(i < 26) {
-			Robot.MoveForward();
-			i = i + 1; 
-		}
-		MoveForward(26);
-		Robot.TurnRight();
-		Robot.TurnRight();
-		MoveForward(26); 
-		
-		int station = 3; 
-		switch(station){
-		case 1: 
-			Robot.TurnRight();
-			Robot.TurnRight();
-			Robot.TurnRight();
-			Robot.TurnRight();
-			break; 
-		case 2: 
-			
-			
-			break; 
-			
-		case 3: 
-			break; 
-			
-		}
+	
 		
 		
 		
-		
-		while(true) {
-			double timer = Robot.myTimer.get(); 
-			//leftvalue and rightvalue from 0 - 1
-			Robot.drivetrain.setRaw1(.25, .25);
-			
-			if(timer < 10 ) {
-				
-			}
-			else if( timer < 20 ) {
-				
-			}
-			else if(timer < 30) {
-				
-			}
-			else {
-				
-			}
-		}
+	
 		
 		
 		
@@ -127,7 +74,7 @@ public class Autonomous {
 		
 		
 		
-		
+	/*	
 		
 	}
 	public static void MoveAngle(double angle ) {
@@ -152,3 +99,5 @@ public class Autonomous {
 		}
 	}
 }
+
+*/

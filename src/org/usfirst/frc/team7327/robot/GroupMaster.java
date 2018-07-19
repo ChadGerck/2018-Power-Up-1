@@ -2,13 +2,28 @@ package org.usfirst.frc.team7327.robot;
 
 public class GroupMaster {
 	public static void Project2() {
-		//While loops 
+		int count = 0;
+		while(count < 16){
+			Robot.MoveForward();
+			count++;
+		}
+		Robot.TurnLeft();
+		Robot.TurnLeft();
+		Robot.TurnLeft();
+		Robot.TurnLeft();
 		
 	}
 	
 	public static void Project3() {
-		
-		//1 while loop and if command
+		int count = 0;
+		while(count < 32){
+			Robot.MoveForward();
+			if(count == 16){
+				Robot.TurnLeft();
+				Robot.TurnLeft();
+				count++;
+			}
+		}
 		
 		
 	}
@@ -19,6 +34,10 @@ public class GroupMaster {
 		int station = 1; 
 		switch(station) {
 		case 1:
+			Robot.MoveForward();
+			Robot.TurnLeft();
+			Robot.TurnLeft();
+			Robot.MoveForward();
 			break; 
 		}
 		
@@ -26,7 +45,27 @@ public class GroupMaster {
 	
 	public static void Project5() {
 		
-		//timed if, else if, else
+		
+		while(true) {
+			double timer = Robot.myTimer.get(); 
+			//leftvalue and rightvalue from 0 - 1
+			Robot.drivetrain.setRaw1(.3, .3);
+			
+			if(timer < 10 ) {
+				Robot.MoveForward();
+			}
+			else if( timer < 13 ) {
+				Robot.TurnLeft();
+				
+			}
+			else if(timer < 24) {
+				Robot.MoveForward();
+				
+			}
+			else {
+				Robot.drivetrain.setRaw1(0, 0);
+			}
+		}
 	}
 
 }
