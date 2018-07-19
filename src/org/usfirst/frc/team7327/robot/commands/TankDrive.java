@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Servo;
 public class TankDrive extends Command {
 
 	XboxController Player1 = Robot.oi.Controller0;
+	XboxController Player2 = Robot.oi.Controller1;
 	double throttleL = 0.35;
 	double throttleK = 0.55;
 	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
@@ -42,24 +43,24 @@ public class TankDrive extends Command {
 		}
 
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * throttleL,
-				Robot.oi.getRightTrigger(Player1) * throttleL, (Robot.oi.getLeftStickY(Player1)) * throttleK);
+				Robot.oi.getRightTrigger(Player1) * throttleL, (Robot.oi.getLeftStickY(Player2)) * throttleK);
 
-		if (Robot.oi.getYButton(Player1)) {
+		if (Robot.oi.getYButton(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
 
-		if (Robot.oi.getAButton(Player1)) {
+		if (Robot.oi.getAButton(Player2)) {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
 
-		if (Robot.oi.getXButton(Player1)) {
+		if (Robot.oi.getXButton(Player2)) {
 			Punchers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
 
-		if (Robot.oi.getBButton(Player1)) {
+		if (Robot.oi.getBButton(Player2)) {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
