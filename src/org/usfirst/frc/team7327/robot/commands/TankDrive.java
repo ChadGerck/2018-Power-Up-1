@@ -22,6 +22,8 @@ public class TankDrive extends Command {
 	double throttleL = .25; 
 	double Nthrottle = -.25;
 	double Athrottle = .55;
+	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
+	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
 	
 	protected void initialize() {
 	}
@@ -62,7 +64,24 @@ public class TankDrive extends Command {
 			}
 
 					Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1) * Athrottle);
-
+					
+			
+			if (flag == true && Robot.oi.getBButton(Player1)){
+				grabber = DoubleSolenoid.Value.kForward;
+			}else if (flag == false && Robot.oi.getBButton(Player1)){
+				grabber = DoubleSolenoid.Value.kReverse;
+			}
+			
+					Robot.drivetrain.setRawGrabber(grabber);
+			
+			if (flag == true && Robot.oi.getXButton(Player1)){
+				puncher = DoubleSolenoid.Value.kForward;
+			}else if (flag == false && Robot.oi.getXButton(Player1)){
+				puncher = DoubleSolenoid.Value.kReverse;
+			}
+			
+					Robot.drivetrain.setPunchers(puncher);
+					
 	}
 
 	
