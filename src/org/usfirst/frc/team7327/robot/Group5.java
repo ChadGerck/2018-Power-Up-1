@@ -80,6 +80,7 @@ public class Group5 {
 			Robot.MoveForward();
 			Robot.MoveForward();
 			Robot.MoveForward();
+			break;
 
 		}
 	}

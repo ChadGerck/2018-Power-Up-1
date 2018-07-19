@@ -50,6 +50,7 @@ public class Group5 {
 			break;
 
 		}
+		c++;
 	}
 
 	public static void Project5() {
