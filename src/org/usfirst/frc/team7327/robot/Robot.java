@@ -231,6 +231,9 @@ public class Robot extends TimedRobot {
 		gyro.reset();
 		tele = true; 
 		
+
+		myTimer.reset();
+		myTimer.start();
 		
 		//imu.reset();
 		//imu.calibrate();

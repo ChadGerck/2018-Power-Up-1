@@ -27,7 +27,7 @@ public class TankDrive extends Command {
 
 		Servo Servo1 = new Servo(8);
 		Servo Servo2 = new Servo(9);
-		
+		double timer =  Robot.myTimer.get();
 	protected void execute(){
 				
 		if(Robot.oi.getBButton (Player1))	{
@@ -40,21 +40,22 @@ public class TankDrive extends Command {
 			else { Servo2.setSpeed(-1);}
 		}
 		
-	      double timer =  Robot.myTimer.get();
+	      timer =  Robot.myTimer.get();
     	  
     	  if(timer < 10){
-    		  {Servo2.setSpeed(.25);}
+    		  Servo2.setSpeed(1);
     	  }
     	  else if(timer < 20){
-    		  {Servo2.setSpeed(.05);}
+    		  Servo2.setSpeed(-1);
     	  }
     	  else if(timer < 30){
-    		  { Servo2.setSpeed(-1);}
+    		   Servo2.setSpeed(1);
     	  }
     	  else
     	  {
-    		  {Servo2.setSpeed(0);}
+    		  Servo2.setSpeed(-1);
     	  } 
+    	  
     	  
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickX(Player1)*throttleA);
