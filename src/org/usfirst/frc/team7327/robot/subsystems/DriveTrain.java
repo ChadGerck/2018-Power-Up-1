@@ -15,69 +15,39 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 	
-	private TalonSRX LeftTalon; 
-	private TalonSRX LeftTalon1; 
-	private TalonSRX RightTalon;
-	private TalonSRX RightTalon1;
+	private TalonSRX lilNW; 
+	private TalonSRX bigNW; 
+	private TalonSRX lilNE;
+	private TalonSRX bigNE;
+	private TalonSRX lilSW; 
+	private TalonSRX bigSW; 
+	private TalonSRX lilSE;
+	private TalonSRX bigSE;
 
-	private Spark ArmMotor;
-	private Spark SpinnerLeft;
-	private Spark SpinnerRight;
-	private DoubleSolenoid Grabbers;
-	private DoubleSolenoid Puncher;
-	
 	
 	public DriveTrain() {
-		LeftTalon  = new TalonSRX(0);
-		LeftTalon1 = new TalonSRX(1);
-		RightTalon = new TalonSRX(2);
-		RightTalon1= new TalonSRX(3);
-		
-		ArmMotor = new Spark(RobotMap.ARM_MOTOR.value);
-		SpinnerLeft = new Spark(RobotMap.SpinnerLeft_MOTOR.value);
-		SpinnerRight = new Spark(RobotMap.SpinnerRight_MOTOR.value);
-		Grabbers = new DoubleSolenoid(0,0,7);
-		Puncher = new DoubleSolenoid(1,1,6);
+		lilNW = new TalonSRX(0);
+		bigNW = new TalonSRX(1);
+		lilNE = new TalonSRX(2);
+		bigNE = new TalonSRX(3);
+		lilSW = new TalonSRX(4);
+		bigSW = new TalonSRX(5);
+		lilSE = new TalonSRX(6);
+		bigSE = new TalonSRX(7);
+	
 	}
 	
-	public double getLeftTalon() {
-		return LeftTalon.getMotorOutputPercent();
-	}
-	
-	public void setRaw(double leftvalue, double rightvalue, double armvalue) {
-		LeftTalon.set(ControlMode.PercentOutput, leftvalue);
-		LeftTalon1.set(ControlMode.PercentOutput, leftvalue);
-		RightTalon.set(ControlMode.PercentOutput, -rightvalue);
-		RightTalon1.set(ControlMode.PercentOutput, -rightvalue);
-		ArmMotor.set(armvalue);
+	public void setRaw(double lNW, double bNW, double lNE, double bNE, double lSW, double bSW, double lSE, double bSE) {
+		lilNW.set(ControlMode.PercentOutput, lNW);
+		bigNW.set(ControlMode.PercentOutput, bNW);
+		lilNE.set(ControlMode.PercentOutput, -lNE);
+		bigNE.set(ControlMode.PercentOutput, -bNE);
+		lilSW.set(ControlMode.PercentOutput, -lSW);
+		bigSW.set(ControlMode.PercentOutput, bSW);
+		lilSE.set(ControlMode.PercentOutput, -lSE);
+		bigSE.set(ControlMode.PercentOutput, -bSE);
 			
 	} 
-	public void setRaw1(double leftvalue, double rightvalue) {
-		LeftTalon.set(ControlMode.PercentOutput, leftvalue);
-		LeftTalon1.set(ControlMode.PercentOutput, leftvalue);
-		RightTalon.set(ControlMode.PercentOutput, -rightvalue);
-		RightTalon1.set(ControlMode.PercentOutput, -rightvalue);
-			
-	} 
-	
-	public void setRawArm(double armvalue) {
-		ArmMotor.set(armvalue);
-		
-	}
-	
-	public void setRawSpinner(double spinnerleft, double spinnerright) {
-		SpinnerLeft.set(spinnerleft);
-		SpinnerRight.set(spinnerright);
-	}
-	
-	public void setRawGrabber(DoubleSolenoid.Value grabbervalue) {
-		Grabbers.set(grabbervalue);
-	}
-
-	public void setPunchers( DoubleSolenoid.Value punchervalue ) {
-		Puncher.set(punchervalue);
-	}
-	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TankDrive());

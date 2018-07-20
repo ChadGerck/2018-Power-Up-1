@@ -11,10 +11,6 @@ package org.usfirst.frc.team7327.robot;
 
 public enum RobotMap {
 	//PWM Motor Mapping	
-	//LEFT_MOTOR(0),
-	//LEFT_MOTOR1(1),
-	//RIGHT_MOTOR(2),
-	//RIGHT_MOTOR1(3),
 	ARM_MOTOR(4),
 	SpinnerLeft_MOTOR(5),
 	SpinnerRight_MOTOR(6),
