@@ -1,9 +1,5 @@
 package org.usfirst.frc.team7327.robot.commands;
 
-import java.awt.List;
-import java.util.Collection;
-import java.util.LinkedList;
-
 import org.usfirst.frc.team7327.robot.Robot;
 
 
@@ -21,51 +17,26 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0; 
-
-	LinkedList<Wheels> list = new LinkedList<Wheels>(); 
-	Wheels test = new Wheels("test",-1,0);
 	protected void initialize() {
-		Wheels NW = new Wheels("NW", 0, Robot.encoderNW.getDistance()); 
-		Wheels NE = new Wheels("NE", 1, Robot.encoderNE.getDistance()); 
-		Wheels SW = new Wheels("SW", 2, Robot.encoderSW.getDistance()); 
-		Wheels SE = new Wheels("SE", 3, Robot.encoderSE.getDistance()); 
-		list.add(NW); 
-		list.add(NE); 
-		list.add(SW); 
-		list.add(SE); 
-		
 	}
 	static double distanceNW = Robot.encoderNW.getDistance();
 	static double distanceNE = Robot.encoderNE.getDistance();
 	static double distanceSW = Robot.encoderSW.getDistance();
 	static double distanceSE = Robot.encoderSE.getDistance();
-	static double[] distanceArray = new double[] {distanceNW, distanceNE, distanceSW, distanceSE}; 
 	static double errorNW = 0; 
 	static double errorNE = 0; 
 	static double errorSW = 0; 
 	static double errorSE = 0; 
-	static double averageDistance = 0; 
-	static double throttle = .65; 
-	double[] errorArray = new double[] {errorNW, errorNE, errorSW, errorSE};
-	
-	
-	
+	static double totalDistance = 0; 
 
-	int wheel = -1; 
+
+	int wheel = 0; 
 	protected void execute(){
-		test = list.getFirst();
-		
-		//System.out.println(test.Orientation); 
-		
-		
+
 		distanceNW = Robot.encoderNW.getDistance();
 		distanceNE = Robot.encoderNE.getDistance();
 		distanceSW = Robot.encoderSW.getDistance();
 		distanceSE = Robot.encoderSE.getDistance();
-		distanceArray[0] = Robot.encoderNW.getDistance();
-		distanceArray[1] = Robot.encoderNE.getDistance();
-		distanceArray[2] = Robot.encoderSW.getDistance();
-		distanceArray[3] = Robot.encoderSE.getDistance();
 		
 
 		SmartDashboard.putNumber("DistanceNW: ", distanceNW);
@@ -73,44 +44,36 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceSW: ", distanceSW);
 		SmartDashboard.putNumber("DistanceSE: ", distanceSE);
 		
-		if(Robot.oi.getYButton(Player1)) { wheel = 0; }
-		if(Robot.oi.getBButton(Player1)) { wheel = 1; }
-		if(Robot.oi.getXButton(Player1)) { wheel = 2; }
-		if(Robot.oi.getAButton(Player1)) { wheel = 3; }
-		if(Robot.oi.getStartButton(Player1)) { wheel = 4; }
+		if(Robot.oi.getYButton(Player1)) { wheel = 1; }
+		if(Robot.oi.getBButton(Player1)) { wheel = 2; }
+		if(Robot.oi.getXButton(Player1)) { wheel = 3; }
+		if(Robot.oi.getAButton(Player1)) { wheel = 4; }
+		if(Robot.oi.getStartButton(Player1)) { wheel = 5; }
 		
 		switch(wheel) {
-		case -1: break; 
-		case 0: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0); break; 
-		case 1: Robot.drivetrain.setRaw(0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0); break; 
-		case 2: Robot.drivetrain.setRaw(0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0); break; 
-		case 3: Robot.drivetrain.setRaw(0, 0, 0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)); break; 
-		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttle, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttle, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttle, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttle);
+		case 0: break; 
+		case 1: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0); break; 
+		case 2: Robot.drivetrain.setRaw(0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0); break; 
+		case 3: Robot.drivetrain.setRaw(0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0); break; 
+		case 4: Robot.drivetrain.setRaw(0, 0, 0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)); break; 
+		case 5: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1));
 			break; 
 		}
 		
 		
 		
 		
-		averageDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
+		totalDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
 
 		if(Robot.oi.getLeftStickX(Player1) == 0 ) {
-			errorNW = averageDistance - distanceNW;
-			errorNE = averageDistance - distanceNE;
-			errorSW = averageDistance - distanceSW;
-			errorSE = averageDistance - distanceSE;
-			
-			/*
-			if(list.get(0).Orientation.compareTo("NW")==0) {
-				
-			}
-			*/
-			
+			errorNW = totalDistance - distanceNW;
+			errorNE = totalDistance - distanceNE;
+			errorSW = totalDistance - distanceSW;
+			errorSE = totalDistance - distanceSE;
 			if(Math.abs(errorNW) > Math.abs(errorNE)) {
 				if(Math.abs(errorNW)>Math.abs(errorSW)) {
 					if(Math.abs(errorNW)>Math.abs(errorSE)) {
 						if(errorNW > 0) {Robot.drivetrain.setlNW(.15);} else {Robot.drivetrain.setlNW(-.15);}
-						System.out.println();
 					}
 					else {
 						if(errorSE > 0) {Robot.drivetrain.setlSE(-.15);} else {Robot.drivetrain.setlSE(.15);}
@@ -144,42 +107,32 @@ public class TankDrive extends Command {
 				}
 			}
 		}
-		/*
-		if(Robot.oi.getLeftStickX(Player1) == 0) {
-			if(list.get(0). > )
-		}
-		*/
-		
-		
-		
 		
 		
 		/*
 		if(Robot.oi.getLeftStickX(Player1) == 0 ) {
-			if(distanceNW < averageDistance) {
+			if(distanceNW < totalDistance) {
 				Robot.drivetrain.setlNW(.15);
 			}
-			else if(distanceNW > averageDistance) {
+			else if(distanceNW > totalDistance) {
 				Robot.drivetrain.setlNW(-.15);
 			}
-			if(distanceNE < averageDistance) {
+			if(distanceNE < totalDistance) {
 				Robot.drivetrain.setlNE(-.15);
 			}
-			else if(distanceNE > averageDistance) {
+			else if(distanceNE > totalDistance) {
 				Robot.drivetrain.setlNE(.15);
 			}
-			if(distanceSW < averageDistance) {
+			if(distanceSW < totalDistance) {
 				Robot.drivetrain.setlSW(-.15);
 			}
-			else if(distanceSW > averageDistance) {
+			else if(distanceSW > totalDistance) {
 				Robot.drivetrain.setlSW(.15);
 			}
-			if(distanceSE < averageDistance) {
+			if(distanceSE < totalDistance) {
 				Robot.drivetrain.setlSE(-.15);
 			}
-			else if(distanceSE > averageDistance) {..
-			
-			
+			else if(distanceSE > totalDistance) {
 				Robot.drivetrain.setlSE(.15);
 			}
 			
