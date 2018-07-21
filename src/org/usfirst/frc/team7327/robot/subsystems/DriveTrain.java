@@ -48,6 +48,19 @@ public class DriveTrain extends Subsystem {
 		bigSE.set(ControlMode.PercentOutput, -bSE);
 			
 	} 
+	
+	public void setlNW(double lNW) {
+		lilNW.set(ControlMode.PercentOutput, lNW);
+	}
+	public void setlNE(double lNE) {
+		lilNE.set(ControlMode.PercentOutput, lNE);
+	}
+	public void setlSW(double lSW) {
+		lilSW.set(ControlMode.PercentOutput, lSW);
+	}
+	public void setlSE(double lSE) {
+		lilSE.set(ControlMode.PercentOutput, lSE);
+	}
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TankDrive());
