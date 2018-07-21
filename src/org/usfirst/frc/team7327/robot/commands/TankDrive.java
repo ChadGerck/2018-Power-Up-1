@@ -44,38 +44,24 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("DistanceSW: ", distanceSW);
 		SmartDashboard.putNumber("DistanceSE: ", distanceSE);
 		
-		if(Robot.oi.getYButton(Player1)) {
-			wheel = 1; 
+		if(Robot.oi.getYButton(Player1)) { wheel = 1; }
+		if(Robot.oi.getBButton(Player1)) { wheel = 2; }
+		if(Robot.oi.getXButton(Player1)) { wheel = 3; }
+		if(Robot.oi.getAButton(Player1)) { wheel = 4; }
+		if(Robot.oi.getStartButton(Player1)) { wheel = 5; }
+		
+		switch(wheel) {
+		case 0: break; 
+		case 1: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0); break; 
+		case 2: Robot.drivetrain.setRaw(0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0); break; 
+		case 3: Robot.drivetrain.setRaw(0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0); break; 
+		case 4: Robot.drivetrain.setRaw(0, 0, 0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)); break; 
+		case 5: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1));
+			break; 
 		}
-		if(wheel == 1) {
-			Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0);
-		}
-		if(Robot.oi.getBButton(Player1)) {
-			wheel = 2; 
-		}
-		if(wheel == 2) {
-			Robot.drivetrain.setRaw(0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0);
-		}
-
-		if(Robot.oi.getXButton(Player1)) {
-			wheel = 3; 
-		}
-		if(wheel == 3) {
-			Robot.drivetrain.setRaw(0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0);
-		}
-
-		if(Robot.oi.getAButton(Player1)) {
-			wheel = 4; 
-		}
-		if(wheel == 4) {
-			Robot.drivetrain.setRaw(0, 0, 0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1));
-		}
-		if(Robot.oi.getStartButton(Player1)) {
-			wheel = 5; 
-		}
-		if(wheel == 5) {
-			Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1));
-		}
+		
+		
+		
 		
 		totalDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
 
