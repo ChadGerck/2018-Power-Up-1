@@ -184,6 +184,75 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
+
+	static XboxController Player1 = Robot.oi.Controller0; 
+	static double totalDistance; 
+	static double distanceNW = Robot.encoderNW.getDistance();
+	static double distanceNE = Robot.encoderNE.getDistance();
+	static double distanceSW = Robot.encoderSW.getDistance();
+	static double distanceSE = Robot.encoderSE.getDistance();
+	static double errorNW = 0; 
+	static double errorNE = 0; 
+	static double errorSW = 0; 
+	static double errorSE = 0; 
+	public static void CorrectYourself() {
+
+
+		distanceNW = Robot.encoderNW.getDistance();
+		distanceNE = Robot.encoderNE.getDistance();
+		distanceSW = Robot.encoderSW.getDistance();
+		distanceSE = Robot.encoderSE.getDistance();
+		
+
+		SmartDashboard.putNumber("DistanceNW: ", distanceNW);
+		SmartDashboard.putNumber("DistanceNE: ", distanceNE);
+		SmartDashboard.putNumber("DistanceSW: ", distanceSW);
+		SmartDashboard.putNumber("DistanceSE: ", distanceSE);
+		totalDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
+
+		if(Robot.oi.getLeftStickX(Player1) == 0 ) {
+			errorNW = totalDistance - distanceNW;
+			errorNE = totalDistance - distanceNE;
+			errorSW = totalDistance - distanceSW;
+			errorSE = totalDistance - distanceSE;
+			if(Math.abs(errorNW) > Math.abs(errorNE)) {
+				if(Math.abs(errorNW)>Math.abs(errorSW)) {
+					if(Math.abs(errorNW)>Math.abs(errorSE)) {
+						if(errorNW > .01) {Robot.drivetrain.setlNW(.15);} else if(errorNW < -.01){Robot.drivetrain.setlNW(-.15);} 
+					}
+					else {
+						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+					}
+				}
+				else {
+					if(Math.abs(errorSW)>Math.abs(errorSE)) {
+						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
+					}
+					else {
+						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01){Robot.drivetrain.setlSE(.15);}
+					}
+				}
+			}
+			else {
+				if(Math.abs(errorNE)>Math.abs(errorSW)) {
+					if(Math.abs(errorNE)>Math.abs(errorSE)) {
+						if(errorNE > .01) {Robot.drivetrain.setlNE(-.15);} else if(errorNE < -.01) {Robot.drivetrain.setlNE(.15);}
+					}
+					else {
+						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+					}
+				}
+				else {
+					if(Math.abs(errorSW)>Math.abs(errorSE)) {
+						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
+					}
+					else {
+						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+					}
+				}
+			}
+		}	
+	}
 	/*
 	public static void MoveForward() {
 		MoveDistance(GyroAngle(), .25, 1); 
