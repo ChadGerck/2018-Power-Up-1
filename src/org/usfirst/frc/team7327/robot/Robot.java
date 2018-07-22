@@ -11,6 +11,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team7327.robot.commands.TankDrive;
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
 	//public static SPI spi;
 	public static OI oi;
 	public static DriveTrain drivetrain;
+	public static TankDrive tankdrive; 
 	//CameraServer Camera;
 	public static Encoder encoderNW;
 	public static Encoder encoderNE;
@@ -185,12 +187,12 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 
-	static XboxController Player1 = Robot.oi.Controller0; 
-	static double totalDistance; 
-	static double distanceNW = Robot.encoderNW.getDistance();
-	static double distanceNE = Robot.encoderNE.getDistance();
-	static double distanceSW = Robot.encoderSW.getDistance();
-	static double distanceSE = Robot.encoderSE.getDistance();
+	
+	static double totalDistance = 0; 
+	static double distanceNW = 0;
+	static double distanceNE = 0;
+	static double distanceSW = 0;
+	static double distanceSE = 0;
 	static double errorNW = 0; 
 	static double errorNE = 0; 
 	static double errorSW = 0; 
@@ -210,7 +212,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("DistanceSE: ", distanceSE);
 		totalDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
 
-		if(Robot.oi.getLeftStickX(Player1) == 0 ) {
+		if(Robot.oi.getLeftStickX(TankDrive.Player1) == 0 ) {
 			errorNW = totalDistance - distanceNW;
 			errorNE = totalDistance - distanceNE;
 			errorSW = totalDistance - distanceSW;
