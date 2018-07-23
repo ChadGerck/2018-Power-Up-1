@@ -19,14 +19,18 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0; 
-	double throttleL = .25; 
-	double Nthrottle = -.25;
+	double throttleL = .3; 
+	double Nthrottle = -.3;
 	double Athrottle = .55;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
+	boolean flag = true;
+	
 	
 	protected void initialize() {
 	}
+	
+	
 	
 	protected void execute(){
 			
@@ -36,7 +40,7 @@ public class TankDrive extends Command {
  										//																	 stop
 										//
 			
-			boolean flag = true;
+			//boolean flag = true;
 			
 			if (Robot.oi.getAButton(Player1)){
 				if (flag == false){
