@@ -27,10 +27,10 @@ public class TankDrive extends Command {
 				//Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle, 
 				//Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle);
 		
-		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttle, Robot.oi.getLeftStickX(Player1)*throttle,
-				Robot.oi.getLeftStickY(Player1)*throttle,  Robot.oi.getLeftStickX(Player1)*throttle,
-				-Robot.oi.getLeftStickY(Player1)*throttle, Robot.oi.getLeftStickX(Player1)*throttle,
-				-Robot.oi.getLeftStickY(Player1)*throttle,  -Robot.oi.getLeftStickX(Player1)*throttle); 
+		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttle, Robot.oi.getLeftStickY(Player1)*throttle,
+				Robot.oi.getLeftStickX(Player1)*throttle,  Robot.oi.getLeftStickY(Player1)*throttle,
+				-Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getLeftStickY(Player1)*throttle,
+				-Robot.oi.getLeftStickX(Player1)*throttle,  -Robot.oi.getLeftStickY(Player1)*throttle); 
 		
 		
 		Robot.CorrectYourself(); 
