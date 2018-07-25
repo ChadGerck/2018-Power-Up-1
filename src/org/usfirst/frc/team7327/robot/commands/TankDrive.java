@@ -43,7 +43,7 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw1(-Robot.oi.getRightStickY(Player1)*throttleL + Robot.oi.getRightStickX(Player1)*throttleL, -Robot.oi.getLeftStickY(Player1) * throttleL + - Robot.oi.getRightStickX(Player1)*throttleL);
 
 		//This is for the arm
-		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1) * throttleA);
+		Robot.drivetrain.setRawArm(Robot.oi.getRightTrigger(Player1) * throttleA);
 
 		//This is for the spinners
 		if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45 || Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315) 
@@ -72,12 +72,12 @@ public class TankDrive extends Command {
 			grabber = DoubleSolenoid.Value.kForward;
 		}
 		if (Robot.oi.getYButton(Player1)) {
-			grabber = DoubleSolenoid.Value.kReverse;
+			grabber = DoubleSolenoid.Value.kReverse;  
 		}
-		Robot.drivetrain.setRawGrabber(grabber);
+		Robot.drivetrain.setRawGrabber(grabber); 
 
-		if (Robot.oi.getRightBumper(Player1)) {
-			puncher = DoubleSolenoid.Value.kForward;
+		if (Robot.oi.getRightBumper(Player1)) { 
+			puncher = DoubleSolenoid.Value.kForward; 
 		}
 		if (Robot.oi.getLeftBumper(Player1)) {
 			puncher = DoubleSolenoid.Value.kReverse;
