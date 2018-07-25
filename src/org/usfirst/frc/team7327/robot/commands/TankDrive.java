@@ -26,10 +26,10 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setbNW(Robot.oi.getRightStickY(Player1)*throttle);
 		Robot.drivetrain.setlNE(Robot.oi.getLeftStickY(Player1)*-throttle);
 		Robot.drivetrain.setbNE(Robot.oi.getRightStickY(Player1)*-throttle);
-		Robot.drivetrain.setlSW(Robot.oi.getLeftStickY(Player1)*throttle);
-		Robot.drivetrain.setbSW(Robot.oi.getRightStickY(Player1)*throttle);
-		Robot.drivetrain.setlSE(Robot.oi.getLeftStickY(Player1)*-throttle);
-		Robot.drivetrain.setbSE(Robot.oi.getRightStickY(Player1)*-throttle);
+		Robot.drivetrain.setlSW(Robot.oi.getLeftStickX(Player1)*throttle);
+		Robot.drivetrain.setbSW(Robot.oi.getRightStickX(Player1)*throttle);
+		Robot.drivetrain.setlSE(Robot.oi.getLeftStickX(Player1)*-throttle);
+		Robot.drivetrain.setbSE(Robot.oi.getRightStickX(Player1)*-throttle);
 		
 		Robot.CorrectYourself(); 
 		 
