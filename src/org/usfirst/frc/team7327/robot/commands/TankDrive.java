@@ -18,7 +18,7 @@ public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
 
 	double throttleL = .25;
-	double throttleA = .55;
+	double throttleA = .6;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
 
@@ -39,26 +39,35 @@ public class TankDrive extends Command {
 			}
 		}
 
-		Robot.drivetrain.setRaw1(-Robot.oi.getLeftTrigger(Player1) * throttleL, Robot.oi.getRightTrigger(Player1) * throttleL);
-		
-		Robot.drivetrain.setRaw1(Robot.oi.getRightStickX(Player1) * throttleL + Robot.oi.getRightStickY(Player1) * throttleL, 
-				-Robot.oi.getRightStickX(Player1) * throttleL + -Robot.oi.getRightStickY(Player1) * throttleL);
+		//This is for the wheels
+		Robot.drivetrain.setRaw1(-Robot.oi.getRightStickY(Player1)*throttleL + Robot.oi.getRightStickX(Player1)*throttleL, -Robot.oi.getLeftStickY(Player1) * throttleL + - Robot.oi.getRightStickX(Player1)*throttleL);
 
+		//This is for the arm
 		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1) * throttleA);
 
-		if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45
-				|| Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315) {
-			Robot.drivetrain.setRawSpinner(-0.3, 0.3);
-		} else if (Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) <= 135) {
-			Robot.drivetrain.setRawSpinner(0.3, 0.3);
-		} else if (Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <= 225) {
-			Robot.drivetrain.setRawSpinner(0.3, 0.3);
-		} else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 300) {
-			Robot.drivetrain.setRawSpinner(-0.3, -0.3);
+		//This is for the spinners
+		if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45 || Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315) 
+		{
+			Robot.drivetrain.setRawSpinner(0.5, 0.5);
+		} 
+		else if (Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) <= 135) 
+		{
+			Robot.drivetrain.setRawSpinner(0.5, -0.5);
+		} 
+		else if (Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <= 225) 
+		{
+			Robot.drivetrain.setRawSpinner(-0.5, -0.5);
+		} 
+		else if (Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) <= 300) 
+		{
+			Robot.drivetrain.setRawSpinner(-0.5, 0.5);
 		}
+		else
 		{
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
+		
+		
 		if (Robot.oi.getXButton(Player1)) {
 			grabber = DoubleSolenoid.Value.kForward;
 		}
@@ -85,4 +94,4 @@ public class TankDrive extends Command {
 		end();
 	}
 }
-// HELLLLOOOOOOOO!!!!!!
+// HELLLLOOOOOOO!!!!!
