@@ -20,7 +20,8 @@ public class TankDrive extends Command {
 	XboxController Player2 = Robot.oi.Controller1;
 		double throttleL = .25;
 		double throttleA = .55;
-
+		
+		
 	 protected void initialize() {
 	}
 		Servo Servo1 = new Servo(8);
@@ -63,21 +64,24 @@ public class TankDrive extends Command {
 			
 			if(( Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1)<=45) 
 				||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >=315)){
-				Robot.drivetrain.setRawSpinner(-0.30,0.30);
+				Robot.drivetrain.setRawSpinner(-0.60,0.60);
 			}
 			else if (Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <=135){
-				Robot.drivetrain.setRawSpinner(0.30,-0.30);
+				Robot.drivetrain.setRawSpinner(0.60,-0.60);
 			}
 			else if (Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225){
-				Robot.drivetrain.setRawSpinner(0.30,-0.30);
+				Robot.drivetrain.setRawSpinner(0.60,-0.60);
 			}	
-			
-    	  }
+			else {
+				Robot.drivetrain.setRawSpinner(0,0);
+			}
+	}   
 	protected boolean isFinished() {
 
 		return false;
 	}
-
+	
+	
 	protected void interrupted() {
 		end();
 		}
