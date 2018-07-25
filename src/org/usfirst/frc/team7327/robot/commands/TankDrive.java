@@ -29,12 +29,12 @@ public class TankDrive extends Command {
 			if(flag) {
 				flag = false;
 			}
-			if(!flag) {
+			else {
 				flag = true;
 			}
 		}
 		if(flag) {
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW);
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*-throttleW, Robot.oi.getRightStickY(Player1)*-throttleW);
 			if(Robot.oi.getRightBumper(Player1)) {
 				Grabbers = DoubleSolenoid.Value.kForward;
 				Robot.drivetrain.setRawGrabber(Grabbers);
