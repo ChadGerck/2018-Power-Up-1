@@ -22,7 +22,14 @@ public class TankDrive extends Command {
 	static double throttle = .25; 
 	protected void execute(){
 		
-		
+		Robot.drivetrain.setlNW(Robot.oi.getLeftStickY(Player1)*throttle);
+		Robot.drivetrain.setbNW(Robot.oi.getRightStickY(Player1)*throttle);
+		Robot.drivetrain.setlNE(Robot.oi.getLeftStickY(Player1)*-throttle);
+		Robot.drivetrain.setbNE(Robot.oi.getRightStickY(Player1)*-throttle);
+		Robot.drivetrain.setlSW(Robot.oi.getLeftStickX(Player1)*throttle);
+		Robot.drivetrain.setbSW(Robot.oi.getRightStickX(Player1)*throttle);
+		Robot.drivetrain.setlSE(Robot.oi.getLeftStickX(Player1)*-throttle);
+		Robot.drivetrain.setbSE(Robot.oi.getRightStickX(Player1)*-throttle);
 		
 		Robot.CorrectYourself(); 
 		
