@@ -35,7 +35,7 @@ public class TankDrive extends Command {
 				Servo1.setSpeed(1);
 			} else {
 				Servo1.setSpeed(-1);
-				
+				 
 			}
 		}
 
