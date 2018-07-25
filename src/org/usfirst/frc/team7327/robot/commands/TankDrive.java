@@ -16,7 +16,7 @@ public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
 	XboxController Player2 = Robot.oi.Controller1;
 	double throttleW = 0.5;
-	double throttleA = 0.5;
+	double throttleA = 0.7;
 	DoubleSolenoid.Value Grabbers = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value Punchers = DoubleSolenoid.Value.kOff;
 	boolean flag = true;
@@ -53,10 +53,13 @@ public class TankDrive extends Command {
 			}
 			if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
 					||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
-				Robot.drivetrain.setRawSpinner(-.35,.35);
+				Robot.drivetrain.setRawSpinner(-.55,.55);
 			}
-			if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
-				Robot.drivetrain.setRawSpinner(.35,-.35);
+			else if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
+				Robot.drivetrain.setRawSpinner(.55,-.55);
+			}
+			else {
+				Robot.drivetrain.setRawSpinner(0,0);
 			}
 		}
 		if(!flag) {
@@ -81,10 +84,7 @@ public class TankDrive extends Command {
 					||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
 				Robot.drivetrain.setRawSpinner(-.55,.55);
 			}
-			else {
-				Robot.drivetrain.setRawSpinner(0,0);
-			}
-			if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
+			else if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
 				Robot.drivetrain.setRawSpinner(.55,-.55);
 			}
 			else {
