@@ -23,9 +23,9 @@ public class TankDrive extends Command {
 	protected void execute(){
 		
 		Robot.drivetrain.setlNW(Robot.oi.getLeftStickX(Player1)*throttle);
-		Robot.drivetrain.setbNW(Robot.oi.getRightStickY(Player1)*throttle);
+		Robot.drivetrain.setbNW(Robot.oi.getRightStickY(Player1)*-throttle);
 		Robot.drivetrain.setlNE(Robot.oi.getLeftStickX(Player1)*-throttle);
-		Robot.drivetrain.setbNE(Robot.oi.getRightStickY(Player1)*-throttle);
+		Robot.drivetrain.setbNE(Robot.oi.getRightStickY(Player1)*throttle);
 		Robot.drivetrain.setlSW(Robot.oi.getLeftStickX(Player1)*-throttle);
 		Robot.drivetrain.setbSW(Robot.oi.getRightStickY(Player1)*throttle);
 		Robot.drivetrain.setlSE(Robot.oi.getLeftStickX(Player1)*-throttle);
