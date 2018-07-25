@@ -34,7 +34,13 @@ public class TankDrive extends Command {
 			}
 		}
 		if(flag) {
+<<<<<<< HEAD
 			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*-throttleW, Robot.oi.getRightStickY(Player1)*-throttleW);
+=======
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW);
+
+			Robot.drivetrain.setRawArm(0);
+>>>>>>> 3b88bd78afea56cc9d1d4f68c0bd334961c50758
 			if(Robot.oi.getRightBumper(Player1)) {
 				Grabbers = DoubleSolenoid.Value.kForward;
 				Robot.drivetrain.setRawGrabber(Grabbers);
@@ -61,6 +67,8 @@ public class TankDrive extends Command {
 		}
 		if(!flag) {
 			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)*throttleA);
+
+			Robot.drivetrain.setRaw1(0, 0);
 			if(Robot.oi.getRightBumper(Player1)) {
 				Grabbers = DoubleSolenoid.Value.kForward;
 				Robot.drivetrain.setRawGrabber(Grabbers);
@@ -91,6 +99,7 @@ public class TankDrive extends Command {
 				Robot.drivetrain.setRawSpinner(0,0);
 			}
 		}
+		System.out.println(flag);
 	}
 	protected boolean isFinished() {
 		return false;
