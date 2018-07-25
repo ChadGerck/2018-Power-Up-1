@@ -22,14 +22,15 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain);
 	}
 
-	protected void initialize() {
+	protected void initialize(){
 	}
-
+		boolean flag = true;
 	protected void execute() {
 		System.out.println(limitswitch.get());
+		
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * +throttle,
 				Robot.oi.getRightTrigger(Player1) * +throttle, (Robot.oi.getRightStickY(Player1) * +throttle));
-		boolean flag = true;
+		
 		if (Robot.oi.getXButton(Player1)) {
 			if (flag) {
 				flag = false;
@@ -41,7 +42,8 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1) * throttle,
 					-Robot.oi.getRightStickY(Player1) * throttle);
 			Robot.drivetrain.setRawArm(0);
-		} else {
+		} 
+		else {
 			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
 			Robot.drivetrain.setRaw1(0, 0);
 		}
@@ -63,14 +65,18 @@ public class TankDrive extends Command {
 		}
 		if ((Robot.oi.Dpad(Player1) >= 316 && Robot.oi.Dpad(Player1) <= 44)
 				|| (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
-			Robot.drivetrain.setRawSpinner(.3, -.3);
-		} else if (Robot.oi.Dpad(Player1) >= 46 && Robot.oi.Dpad(Player1) <= 134) {
-			Robot.drivetrain.setRawSpinner(-.3, -.3);
-		} else if (Robot.oi.Dpad(Player1) >= 136 && Robot.oi.Dpad(Player1) <= 224) {
-			Robot.drivetrain.setRawSpinner(-.3, .3);
-		} else if (Robot.oi.Dpad(Player1) >= 226 && Robot.oi.Dpad(Player1) <= 314) {
-			Robot.drivetrain.setRawSpinner(.3, .3);
-		} else {
+			Robot.drivetrain.setRawSpinner(.8, -.8);
+		}
+		 else if (Robot.oi.Dpad(Player1) >= 46 && Robot.oi.Dpad(Player1) <= 134) {
+			Robot.drivetrain.setRawSpinner(.8, .8);
+		}
+		 else if (Robot.oi.Dpad(Player1) >= 136 && Robot.oi.Dpad(Player1) <= 224) {
+			Robot.drivetrain.setRawSpinner(-.8, .8);
+		}
+		 else if (Robot.oi.Dpad(Player1) >= 226 && Robot.oi.Dpad(Player1) <= 314) {
+			Robot.drivetrain.setRawSpinner(-.8, -.8);
+		} 
+		 else {
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
 	}
