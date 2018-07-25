@@ -2,7 +2,6 @@ package org.usfirst.frc.team7327.robot.commands;
 
 import org.usfirst.frc.team7327.robot.Robot;
 
-
 //import com.ctre.phoenix.motorcontrol.ControlMode; 
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -18,13 +17,12 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 	XboxController Player1 = Robot.oi.Controller0;
+	XboxController Player2 = Robot.oi.Controller1;
 		double throttleL = .25;
 		double throttleA = .50;
-		double spinnerleft = .30;
-		double spinnerright = .30;
+
 	 protected void initialize() {
 	}
-
 		Servo Servo1 = new Servo(8);
 		Servo Servo2 = new Servo(9);
 		double timer =  Robot.myTimer.get();
@@ -45,20 +43,22 @@ public class TankDrive extends Command {
     	  if(timer < 10){
     		  Servo2.setSpeed(1);
     	  }
-    	  else if(timer < 20){
+    	  else if(timer < 15){
     		  Servo2.setSpeed(-1);
     	  }
-    	  else if(timer < 30){
+    	  else if(timer < 20){
     		   Servo2.setSpeed(1);
     	  }
+    	  else if(timer < 25){
+   		   Servo2.setSpeed(-1);
+    	  }	
     	  else
     	  {
-    		  Servo2.setSpeed(-1);
-    	  } 
+    		  Servo2.setSpeed(1);
+    	  }     	  
     	  
-    	  
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
-			Robot.drivetrain.setRawArm(Robot.oi.getRightStickX(Player1)*throttleA);
+			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1), Robot.oi.getRightStickY(Player1)*throttleL);
+			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player2)*throttleA);
 		
 			if(Robot.oi.getRightTrigger(Player1) == 1) {
 				
