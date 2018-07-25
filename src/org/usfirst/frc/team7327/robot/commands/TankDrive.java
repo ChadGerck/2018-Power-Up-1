@@ -24,63 +24,64 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
-	protected void execute(){
-		if(flag) {
-			Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW);
-			if(Robot.oi.getRightBumper(Player1)) {
-				Grabbers = DoubleSolenoid.Value.kForward;
-				Robot.drivetrain.setRawGrabber(Grabbers);
+	protected void execute() {
+			if(flag) {
+				Robot.drivetrain.setRaw1(Robot.oi.getLeftStickY(Player1)*throttleW, Robot.oi.getRightStickY(Player1)*throttleW);
+				if(Robot.oi.getRightBumper(Player1)) {
+					Grabbers = DoubleSolenoid.Value.kForward;
+					Robot.drivetrain.setRawGrabber(Grabbers);
+				}
+				if(Robot.oi.getLeftBumper(Player1)) {
+					Grabbers = DoubleSolenoid.Value.kReverse;
+					Robot.drivetrain.setRawGrabber(Grabbers);
+				}
+				if(Robot.oi.getAButton(Player1)) {
+					Punchers = DoubleSolenoid.Value.kForward;
+					Robot.drivetrain.setPunchers(Punchers);
+				}
+				if(Robot.oi.getBButton(Player1)) {
+					Punchers = DoubleSolenoid.Value.kReverse;
+					Robot.drivetrain.setPunchers(Punchers);
+				}
+				if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
+						||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
+					Robot.drivetrain.setRawSpinner(-.35,.35);
+				}
+				if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
+					Robot.drivetrain.setRawSpinner(.35,-.35);
+				}
+				if(Robot.oi.getYButton(Player1)) {
+					flag = false;
+				}
 			}
-			if(Robot.oi.getLeftBumper(Player1)) {
-				Grabbers = DoubleSolenoid.Value.kReverse;
-				Robot.drivetrain.setRawGrabber(Grabbers);
-			}
-			if(Robot.oi.getAButton(Player1)) {
-				Punchers = DoubleSolenoid.Value.kForward;
-				Robot.drivetrain.setPunchers(Punchers);
-			}
-			if(Robot.oi.getBButton(Player1)) {
-				Punchers = DoubleSolenoid.Value.kReverse;
-				Robot.drivetrain.setPunchers(Punchers);
-			}
-			if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
-					||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
-				Robot.drivetrain.setRawSpinner(-.35,.35);
-			}
-			if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
-				Robot.drivetrain.setRawSpinner(.35,-.35);
-			}
-			if(Robot.oi.getYButton(Player1)) {
-				flag = false;
-			}
-		}
-		if(!flag) {
-			Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)*throttleA);
-			if(Robot.oi.getRightBumper(Player1)) {
-				Grabbers = DoubleSolenoid.Value.kForward;
-				Robot.drivetrain.setRawGrabber(Grabbers);
-			}
-			if(Robot.oi.getLeftBumper(Player1)) {
-				Grabbers = DoubleSolenoid.Value.kReverse;
-				Robot.drivetrain.setRawGrabber(Grabbers);
-			}
-			if(Robot.oi.getAButton(Player1)) {
-				Punchers = DoubleSolenoid.Value.kForward;
-				Robot.drivetrain.setPunchers(Punchers);
-			}
-			if(Robot.oi.getBButton(Player1)) {
-				Punchers = DoubleSolenoid.Value.kReverse;
-				Robot.drivetrain.setPunchers(Punchers);
-			}
-			if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
-					||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
-				Robot.drivetrain.setRawSpinner(-.35,.35);
-			}
-			if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
-				Robot.drivetrain.setRawSpinner(.35,-.35);
-			}
-			if(Robot.oi.getYButton(Player1)) {
-				flag = true;
+			if(!flag) {
+				Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)*throttleA);
+				if(Robot.oi.getRightBumper(Player1)) {
+					Grabbers = DoubleSolenoid.Value.kForward;
+					Robot.drivetrain.setRawGrabber(Grabbers);
+				}
+				if(Robot.oi.getLeftBumper(Player1)) {
+					Grabbers = DoubleSolenoid.Value.kReverse;
+					Robot.drivetrain.setRawGrabber(Grabbers);
+				}
+				if(Robot.oi.getAButton(Player1)) {
+					Punchers = DoubleSolenoid.Value.kForward;
+					Robot.drivetrain.setPunchers(Punchers);
+				}
+				if(Robot.oi.getBButton(Player1)) {
+					Punchers = DoubleSolenoid.Value.kReverse;
+					Robot.drivetrain.setPunchers(Punchers);
+				}
+				if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <=45)
+						||(Robot.oi.Dpad(Player1) <=360 && Robot.oi.Dpad(Player1) >=315)) {
+					Robot.drivetrain.setRawSpinner(-.35,.35);
+				}
+				if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) <=225) {
+					Robot.drivetrain.setRawSpinner(.35,-.35);
+				}
+				if(Robot.oi.getYButton(Player1)) {
+					flag = true;
+				}
 			}
 		}
 	}
