@@ -29,8 +29,8 @@ public class TankDrive extends Command {
 		
 		Robot.drivetrain.setRaw(Robot.oi.getLeftStickY(Player1)*throttle, Robot.oi.getLeftStickY(Player1)*throttle,
 				Robot.oi.getLeftStickX(Player1)*throttle,  Robot.oi.getLeftStickY(Player1)*throttle,
-				-Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getLeftStickY(Player1)*throttle,
-				-Robot.oi.getLeftStickX(Player1)*throttle,  -Robot.oi.getLeftStickY(Player1)*throttle); 
+				Robot.oi.getLeftStickX(Player1)*throttle, -Robot.oi.getLeftStickY(Player1)*throttle,
+				Robot.oi.getLeftStickX(Player1)*throttle,  -Robot.oi.getLeftStickY(Player1)*throttle); 
 		
 		
 		Robot.CorrectYourself(); 
