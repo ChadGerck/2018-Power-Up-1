@@ -64,7 +64,7 @@ public class TankDrive extends Command
 		//This is for the arm
 		if (flag) 
 		{
-			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickY(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
+			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
 			Robot.drivetrain.setRaw1(0, 0);
 
 		} 
