@@ -31,6 +31,13 @@ public class TankDrive extends Command {
 		if(Robot.oi.getAButton(Player1)) { wheel = 3; }
 		if(Robot.oi.getStartButton(Player1)) { wheel = 4; }
 		
+		if(Robot.oi.getStartButton(Player1)) {
+			throttle = 1; 
+		}
+		if(Robot.oi.getSlowButton(Player1)) {
+			throttle = .65; 
+		}
+		
 		switch(wheel) {
 		case -1: break; 
 		case 0: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0); fix = false; break; 
