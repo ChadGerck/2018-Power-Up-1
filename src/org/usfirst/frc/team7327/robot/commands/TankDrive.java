@@ -33,7 +33,7 @@ public class TankDrive extends Command
 
 	boolean flag = false;
 	double throttle = .25;
-	double armvalue = .55;
+	double armvalue = .6;
 	double speed = .7;
 	protected void execute() 
 	{
