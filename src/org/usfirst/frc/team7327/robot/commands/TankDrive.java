@@ -70,7 +70,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawArm(0);
 
 		} else {
-			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
+			Robot.drivetrain.setRawArm((Robot.oi.getRightStickY(Player1)) * armvalue);
 			Robot.drivetrain.setRaw1(0, 0);
 		}
 
@@ -102,30 +102,15 @@ public class TankDrive extends Command {
 
 		// This is for the spinners
 
-		if ((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45)
-				|| (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
-			Robot.drivetrain.setRawSpinner(.3, -.3);
-		} else if (Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135) {
-			Robot.drivetrain.setRawSpinner(.3, .3);
-
-		} else if (Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <= 225) {
-			Robot.drivetrain.setRawSpinner(-.3, .3);
-		} else if (Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 315) {
-			Robot.drivetrain.setRawSpinner(-.3, .3);
-		} else {
-			Robot.drivetrain.setRawSpinner(0, 0);
-		}
-
-
 		if ((Robot.oi.Dpad(Player1) >= 316 && Robot.oi.Dpad(Player1) <= 44)
 				|| (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
-			Robot.drivetrain.setRawSpinner(.6, -.6);
+			Robot.drivetrain.setRawSpinner(-.6, .6);
 		}
 		 else if (Robot.oi.Dpad(Player1) >= 46 && Robot.oi.Dpad(Player1) <= 134) {
 			Robot.drivetrain.setRawSpinner(.6, .6);
 		}
 		 else if (Robot.oi.Dpad(Player1) >= 136 && Robot.oi.Dpad(Player1) <= 224) {
-			Robot.drivetrain.setRawSpinner(-.6, .6);
+			Robot.drivetrain.setRawSpinner(.6, -.6);
 		}
 		 else if (Robot.oi.Dpad(Player1) >= 226 && Robot.oi.Dpad(Player1) <= 314) {
 			Robot.drivetrain.setRawSpinner(-.6, -.6);
