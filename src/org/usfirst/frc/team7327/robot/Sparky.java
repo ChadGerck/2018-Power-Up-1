@@ -23,3 +23,67 @@ public class Sparky {
 		if(!Offline) { Robot.TurnLeft(); }
 	}
 } 
+
+
+
+//
+//static double[] distanceArray = new double[] {0, 0, 0, 0};
+//
+//static int[] intarray = new int[] {1, 2, 3, 4, 5};
+//int k =0;{
+//while(k < distanceArray.length) {
+//	System.out.println(distanceArray[k]);
+//	k++;
+//}
+//System.out.println(distanceArray[0]);
+//}
+//
+//distanceNW = Robot.encoderNW.getDistance();
+//distanceNE = Robot.encoderNE.getDistance();
+//distanceSW = Robot.encoderSW.getDistance();
+//distanceSE = Robot.encoderSE.getDistance();
+//distanceArray[0] = Robot.encoder[0].getDistance();
+
+static double[] distanceArray = new double[] {1, 2, 3, 4};
+static double errorNW = 1;
+static double errorNE = 2;
+static double errorSW = 3;
+static double errorSE = 4;
+static double averageDistance = 0;
+static double throttle = .65;
+double[] errorArray = new double[] {1, 2, 3, 4};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
