@@ -51,26 +51,13 @@ public class TankDrive extends Command {
 		// Start
 
  {
-		System.out.println(limitswitch.get());
-		
-		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * +throttle,
-				Robot.oi.getRightTrigger(Player1) * +throttle, (Robot.oi.getRightStickY(Player1) * +throttle));
-		
-		if (Robot.oi.getXButton(Player1)) {
-			if (flag) {
-				flag = false;
-			} else {
-				flag = true;
-			}
-		}
-
 		if (flag) {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1) * throttle,
 					-Robot.oi.getRightStickY(Player1) * throttle);
 			Robot.drivetrain.setRawArm(0);
 
 		} else {
-			Robot.drivetrain.setRawArm((Robot.oi.getRightStickY(Player1)) * armvalue);
+			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
 			Robot.drivetrain.setRaw1(0, 0);
 		}
 
