@@ -71,8 +71,8 @@ public class TankDrive extends Command
 		else //This is for the wheels
 		{
 			Robot.drivetrain.setRawArm(0);
-			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1) * throttle,
-					-Robot.oi.getRightStickY(Player1) * throttle);
+			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickY(Player1) * throttle,
+					-Robot.oi.getRightStickX(Player1) * throttle);
 
 		}
 		
