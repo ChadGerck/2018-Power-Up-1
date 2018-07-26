@@ -24,9 +24,9 @@ public class TankDrive extends Command {
 
 	protected void initialize(){
 	}
-<<<<<<< HEAD
+
 	boolean flag = true;
-	protected void execute() {
+		protected void execute () {
 		System.out.println(limitswitch.get());
 
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * +throttle,
@@ -43,16 +43,14 @@ public class TankDrive extends Command {
 				flag = true;
 			}
 		}
-
+	}
 		// End
 
 		// Based on the mode set the joy sticks to the correct part of the robot
 		// (wheels or arm)
 		// Start
 
-=======
-		boolean flag = true;
-	protected void execute() {
+ {
 		System.out.println(limitswitch.get());
 		
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * +throttle,
@@ -65,12 +63,12 @@ public class TankDrive extends Command {
 				flag = true;
 			}
 		}
->>>>>>> c72fa9439fd0ae3d61efa65d95204d4fb581cca7
+
 		if (flag) {
 			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1) * throttle,
 					-Robot.oi.getRightStickY(Player1) * throttle);
 			Robot.drivetrain.setRawArm(0);
-<<<<<<< HEAD
+
 		} else {
 			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
 			Robot.drivetrain.setRaw1(0, 0);
@@ -80,13 +78,6 @@ public class TankDrive extends Command {
 
 		// This is for the grabbers
 
-=======
-		} 
-		else {
-			Robot.drivetrain.setRawArm((Robot.oi.getLeftStickX(Player1) - Robot.oi.getRightStickY(Player1)) * armvalue);
-			Robot.drivetrain.setRaw1(0, 0);
-		}
->>>>>>> c72fa9439fd0ae3d61efa65d95204d4fb581cca7
 		if (Robot.oi.getRightBumper(Player1)) {
 			Grabbers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setRawGrabber(Grabbers);
@@ -95,11 +86,10 @@ public class TankDrive extends Command {
 			Grabbers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
-<<<<<<< HEAD
+
 
 		// This is for the punchers
-=======
->>>>>>> c72fa9439fd0ae3d61efa65d95204d4fb581cca7
+
 		if (Robot.oi.getYButton(Player1)) {
 			Punchers = DoubleSolenoid.Value.kForward;
 			Robot.drivetrain.setPunchers(Punchers);
@@ -108,7 +98,7 @@ public class TankDrive extends Command {
 			Punchers = DoubleSolenoid.Value.kReverse;
 			Robot.drivetrain.setPunchers(Punchers);
 		}
-<<<<<<< HEAD
+
 
 		// This is for the spinners
 
@@ -126,7 +116,7 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
 
-=======
+
 		if ((Robot.oi.Dpad(Player1) >= 316 && Robot.oi.Dpad(Player1) <= 44)
 				|| (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
 			Robot.drivetrain.setRawSpinner(.6, -.6);
@@ -143,7 +133,7 @@ public class TankDrive extends Command {
 		 else {
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
->>>>>>> c72fa9439fd0ae3d61efa65d95204d4fb581cca7
+
 	}
 	protected boolean isFinished() {
 		return false;
