@@ -22,11 +22,12 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain);
 	}
 
-	protected void initialize(){
+	protected void initialize() {
 	}
 
 	boolean flag = true;
-		protected void execute () {
+
+	protected void execute() {
 		System.out.println(limitswitch.get());
 
 		Robot.drivetrain.setRaw(Robot.oi.getLeftTrigger(Player1) * +throttle,
@@ -38,22 +39,22 @@ public class TankDrive extends Command {
 		if (Robot.oi.getXButton(Player1)) {
 			if (flag) {
 				flag = false;
-			} 
-			else {
+			} else {
 				flag = true;
 			}
 		}
-	}
-		// End
+	
+	// End
 
-		// Based on the mode set the joy sticks to the correct part of the robot
-		// (wheels or arm)
-		// Start
+	// Based on the mode set the joy sticks to the correct part of the robot
+	// (wheels or arm)
+	// Start
 
- {
+	
 		if (flag) {
-			Robot.drivetrain.setRaw1(-Robot.oi.getRightStickY(Player1) * throttle-Robot.oi.getRightStickX(Player1) * throttle,
-					-Robot.oi.getRightStickY(Player1) * throttle +Robot.oi.getRightStickX(Player1) * throttle);
+			Robot.drivetrain.setRaw1(
+					-Robot.oi.getRightStickY(Player1) * throttle - Robot.oi.getRightStickX(Player1) * throttle,
+					-Robot.oi.getRightStickY(Player1) * throttle + Robot.oi.getRightStickX(Player1) * throttle);
 			Robot.drivetrain.setRawArm(0);
 
 		} else {
@@ -74,7 +75,6 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setRawGrabber(Grabbers);
 		}
 
-
 		// This is for the punchers
 
 		if (Robot.oi.getYButton(Player1)) {
@@ -86,27 +86,23 @@ public class TankDrive extends Command {
 			Robot.drivetrain.setPunchers(Punchers);
 		}
 
-
 		// This is for the spinners
 
 		if ((Robot.oi.Dpad(Player1) >= 316 && Robot.oi.Dpad(Player1) <= 44)
 				|| (Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315)) {
 			Robot.drivetrain.setRawSpinner(-.7, .7);
-		}
-		 else if (Robot.oi.Dpad(Player1) >= 46 && Robot.oi.Dpad(Player1) <= 134) {
+		} else if (Robot.oi.Dpad(Player1) >= 46 && Robot.oi.Dpad(Player1) <= 134) {
 			Robot.drivetrain.setRawSpinner(.7, .7);
-		}
-		 else if (Robot.oi.Dpad(Player1) >= 136 && Robot.oi.Dpad(Player1) <= 224) {
+		} else if (Robot.oi.Dpad(Player1) >= 136 && Robot.oi.Dpad(Player1) <= 224) {
 			Robot.drivetrain.setRawSpinner(.7, -.7);
-		}
-		 else if (Robot.oi.Dpad(Player1) >= 226 && Robot.oi.Dpad(Player1) <= 314) {
+		} else if (Robot.oi.Dpad(Player1) >= 226 && Robot.oi.Dpad(Player1) <= 314) {
 			Robot.drivetrain.setRawSpinner(-.7, -.7);
-		} 
-		 else {
+		} else {
 			Robot.drivetrain.setRawSpinner(0, 0);
 		}
 
 	}
+
 	protected boolean isFinished() {
 		return false;
 	}

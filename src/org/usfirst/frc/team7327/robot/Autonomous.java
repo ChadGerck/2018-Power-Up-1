@@ -3,27 +3,24 @@ package org.usfirst.frc.team7327.robot;
 import org.usfirst.frc.team7327.robot.Robot;
 
 public class Autonomous {
-	public static void Auto() {
-
-		while (true) {
-			double timer = Robot.myTimer.get();
-
-			if (timer < 10) {
-				Robot.drivetrain.setRaw1(.27, .27);
-				// Robot.MoveForward();
+		public static void Project5() {
+			
+			while(true) {
+				double timer = Robot.myTimer.get();
+				if (timer < 5) {
+					Robot.drivetrain.setRaw1(.20, .20);
+				} else if (timer < 10) {
+					Robot.drivetrain.setRaw1(.25, .25);
+				} else if (timer < 15) {
+					Robot.drivetrain.setRaw1(.20, .20);
+				} else {
+					Robot.drivetrain.setRaw1(0, 0);
+					break; 
+				}
 			}
-
-			else if (timer < 16) {
-				Robot.TurnRight();
-			} else if (timer < 30) {
-				Robot.drivetrain.setRaw1(.35, .35);
-				Robot.MoveForward();
-			}
-
-			else {
-				Robot.drivetrain.setRaw1(0, 0);
-			}
-
 		}
 	}
-}
+
+	
+
+	
