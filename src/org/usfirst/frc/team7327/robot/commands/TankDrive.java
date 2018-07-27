@@ -19,7 +19,7 @@ public class TankDrive extends Command {
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() {
 	}
-	static double throttle = .25; 
+	static double throttle = .55; 
 	static int wheel=1;
 	protected void execute() {
 		
