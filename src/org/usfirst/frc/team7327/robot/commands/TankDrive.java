@@ -18,7 +18,7 @@ public class TankDrive extends Command {
 	XboxController Player1 = Robot.oi.Controller0;
 
 	double throttleL = .25;
-	double throttleA = .6;
+	double throttleA = .8;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
 
@@ -40,10 +40,10 @@ public class TankDrive extends Command {
 		}
 
 		//This is for the wheels
-		Robot.drivetrain.setRaw1(-Robot.oi.getRightStickY(Player1)*throttleL + Robot.oi.getRightStickX(Player1)*throttleL, -Robot.oi.getLeftStickY(Player1) * throttleL + - Robot.oi.getRightStickX(Player1)*throttleL);
+		Robot.drivetrain.setRaw1(Robot.oi.getRightTrigger(Player1)*throttleL + -Robot.oi.getLeftTrigger(Player1) * throttleL, Robot.oi.getLeftStickX(Player1) * throttleL);
 
 		//This is for the arm
-		Robot.drivetrain.setRawArm(Robot.oi.getRightTrigger(Player1) * throttleA);
+		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1) * throttleA);
 
 		//This is for the spinners
 		if (Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) <= 45 || Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) >= 315) 
