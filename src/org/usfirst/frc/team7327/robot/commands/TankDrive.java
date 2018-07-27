@@ -68,22 +68,22 @@ public class TankDrive extends Command {
 		//Zone 1
 		if((Robot.oi.Dpad(Player1)>= 0 && Robot.oi.Dpad(Player1)<=45)
 			||(Robot.oi.Dpad(Player1) <= 360 && Robot.oi.Dpad(Player1) > 315)){	
-		Robot.drivetrain.setRawSpinner(-.5, .5);
+		Robot.drivetrain.setRawSpinner(-.7, .7);
 		}
 		
 		//Zone 2
 		else if(Robot.oi.Dpad(Player1) > 45 && Robot.oi.Dpad(Player1) <= 135){
-			Robot.drivetrain.setRawSpinner(.5, .5);
+			Robot.drivetrain.setRawSpinner(.7, .7);
 		} 
 		
 		//Zone 3
 		else if(Robot.oi.Dpad(Player1) > 135 && Robot.oi.Dpad(Player1) <= 225){
-			Robot.drivetrain.setRawSpinner(.5, -.5);
+			Robot.drivetrain.setRawSpinner(.7, -.7);
 		} 
 		
 		//Zone 4
 		else if(Robot.oi.Dpad(Player1) > 225 && Robot.oi.Dpad(Player1) <= 315){
-			Robot.drivetrain.setRawSpinner(-.5, -.5);
+			Robot.drivetrain.setRawSpinner(-.7, -.7);
 		} 
 		
 		else{
@@ -92,7 +92,6 @@ public class TankDrive extends Command {
 		
 		
 	}
- 
 
 	
 	
