@@ -20,19 +20,42 @@ public class TankDrive extends Command {
 	protected void initialize() {
 	}
 	static double throttle = .25; 
-	protected void execute(){
+	static int wheel=1;
+	protected void execute() {
+		
+		
 		
 		Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle, 
 				Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle, 
 				Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle, 
 				Robot.oi.getLeftStickX(Player1)*throttle, Robot.oi.getRightStickY(Player1)*throttle);
 		
+		switch(wheel) {
+		case 1: if(Robot.oi.getXButton(Player1)) {
+			Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle,0,0,0,0,0,0,0);
+			wheel = 2;
+			
+		}
+		case 2: if(Robot.oi.getYButton(Player1)) {
+			Robot.drivetrain.setRaw(0,0,Robot.oi.getLeftStickX(Player1)*throttle,0,0,0,0,0);
+			wheel = 3;
+		}
+		case 3: if(Robot.oi.getAButton(Player1)) {
+			Robot.drivetrain.setRaw(0,0,0,0,Robot.oi.getLeftStickX(Player1)*throttle,0,0,0);
+			wheel = 4;
+		}
+		case 4: if(Robot.oi.getBButton(Player1)) {
+			Robot.drivetrain.setRaw(0,0,0,0,0,0,Robot.oi.getLeftStickX(Player1)*throttle,0);
+			wheel = 5;
+		}
+		case 5:
+			wheel = 1;
+			break;
+		
+		}
 		Robot.CorrectYourself(); 
 		
 	}
-	
-
-	
 	protected boolean isFinished() {
 
 		return false;
