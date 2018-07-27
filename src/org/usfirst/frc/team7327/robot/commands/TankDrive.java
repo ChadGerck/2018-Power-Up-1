@@ -20,8 +20,8 @@ public class TankDrive extends Command {
 	}
 
 	XboxController Player1 = Robot.oi.Controller0;
-	double throttleL = .25; 
-	double throttleA= 0.55;
+	double throttleL = 1.0; 
+	double throttleA= 1.0;
 	boolean arm=true;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
@@ -54,11 +54,11 @@ public class TankDrive extends Command {
 			 Robot.drivetrain.setRawArm((Robot.oi.getRightStickY(Player1)*throttleA));
 		 }
 		if(Robot.oi.Dpad(Player1)<180 && Robot.oi.Dpad(Player1)>=0) {
-			Robot.drivetrain.setRawSpinner(0.4,-0.4);
+			Robot.drivetrain.setRawSpinner(0.7,-0.7);
 		}
 		
 		else if(Robot.oi.Dpad(Player1)>180 && Robot.oi.Dpad(Player1)<=359) {
-			Robot.drivetrain.setRawSpinner(-0.4, 0.4);
+			Robot.drivetrain.setRawSpinner(-0.7, 0.7);
 		}
 		
 		else {Robot.drivetrain.setRawSpinner(0,0);
