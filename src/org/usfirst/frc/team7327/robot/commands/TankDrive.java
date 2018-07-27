@@ -21,7 +21,7 @@ public class TankDrive extends Command {
 	XboxController Player1= Robot.oi.Controller0;
 	double throttleL=0.3;
 	double throttleR= -0.3;
-	double throttleA = .55; 
+	double throttleA = .8; 
 	
 	protected void initialize() {
 		
