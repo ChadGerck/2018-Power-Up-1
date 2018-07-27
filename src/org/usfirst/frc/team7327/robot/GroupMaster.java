@@ -3,14 +3,11 @@ package org.usfirst.frc.team7327.robot;
 public class GroupMaster {
 	public static void Project2() {
 		int count = 0;
-		while(count < 16){
+		while(count < 12){
 			Robot.MoveForward();
 			count++;
 		}
-		Robot.TurnLeft();
-		Robot.TurnLeft();
-		Robot.TurnLeft();
-		Robot.TurnLeft();
+		
 		
 	}
 	
