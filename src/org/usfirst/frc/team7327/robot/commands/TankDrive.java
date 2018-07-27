@@ -21,7 +21,7 @@ public class TankDrive extends Command {
 
 	XboxController Player1 = Robot.oi.Controller0;
 	double throttleL = .65; 
-	double throttleA= 0.75;
+	double throttleA= 0.85;
 	boolean arm=true;
 	DoubleSolenoid.Value grabber = DoubleSolenoid.Value.kOff;
 	DoubleSolenoid.Value puncher = DoubleSolenoid.Value.kOff;
