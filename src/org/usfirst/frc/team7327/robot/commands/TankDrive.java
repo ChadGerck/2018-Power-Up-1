@@ -19,7 +19,7 @@ public class TankDrive extends Command {
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() {
 	}
-	static double throttle = .65; 
+	static double throttle = .45; 
 	static boolean fix = false; 
 
 	int wheel = -1; 
@@ -32,10 +32,10 @@ public class TankDrive extends Command {
 		if(Robot.oi.getStartButton(Player1)) { wheel = 4; }
 		
 		if(Robot.oi.getStartButton(Player1)) {
-			throttle = 1; 
+			throttle = .45; 
 		}
 		if(Robot.oi.getSlowButton(Player1)) {
-			throttle = .65; 
+			throttle = .25; 
 		}
 		
 		switch(wheel) {
