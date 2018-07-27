@@ -52,8 +52,8 @@ public class TankDrive extends Command {
 
  {
 		if (flag) {
-			Robot.drivetrain.setRaw1(-Robot.oi.getLeftStickX(Player1) * throttle,
-					-Robot.oi.getRightStickY(Player1) * throttle);
+			Robot.drivetrain.setRaw1(-Robot.oi.getRightStickY(Player1) * throttle-Robot.oi.getRightStickX(Player1) * throttle,
+					-Robot.oi.getRightStickY(Player1) * throttle +Robot.oi.getRightStickX(Player1) * throttle);
 			Robot.drivetrain.setRawArm(0);
 
 		} else {
