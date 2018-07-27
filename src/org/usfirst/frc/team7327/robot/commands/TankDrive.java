@@ -19,8 +19,8 @@ public class TankDrive extends Command {
     
 	
 	XboxController Player1= Robot.oi.Controller0;
-	double throttleL=0.25;
-	double throttleR= -.25;
+	double throttleL=0.3;
+	double throttleR= -0.3;
 	double throttleA = .55; 
 	
 	protected void initialize() {
@@ -70,7 +70,7 @@ public class TankDrive extends Command {
 		Robot.drivetrain.setRaw1((Robot.oi.getLeftTrigger(Player1)* throttleR)  + (Robot.oi.getLeftStickX(Player1)* throttleL) + (Robot.oi.getRightTrigger(Player1)* throttleL )  ,   (Robot.oi.getLeftTrigger(Player1)* throttleR) + (Robot.oi.getLeftStickX(Player1)* throttleR) + (Robot.oi.getRightTrigger(Player1)*throttleL)  );
 		
 		//This is for the arm
-		Robot.drivetrain.setRawArm(Robot.oi.getLeftStickY(Player1)*throttleA);	
+		Robot.drivetrain.setRawArm(Robot.oi.getRightStickY(Player1)*throttleA);	
 		
 		//This is for the spinners
 		if((Robot.oi.Dpad(Player1) >= 0 && (Robot.oi.Dpad(Player1)) <= 45) || (Robot.oi.Dpad(Player1) <= 360 && (Robot.oi.Dpad(Player1)) >= 315))
