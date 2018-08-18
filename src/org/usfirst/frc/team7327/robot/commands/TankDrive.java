@@ -26,6 +26,7 @@ public class TankDrive extends Command {
 	//static boolean fix = false; 
 
 	int wheel = -1; 
+	boolean fix = false; 
 	
 
 	protected void execute(){
@@ -53,17 +54,25 @@ public class TankDrive extends Command {
 		}
 		
 		switch(wheel) {
-		case -1: break; 
-		case 0: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0, 0, 0);  break; 
-		case 1: Robot.drivetrain.setRaw(0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0, 0, 0);  break; 
-		case 2: Robot.drivetrain.setRaw(0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1), 0, 0);  break; 
-		case 3: Robot.drivetrain.setRaw(0, 0, 0, 0, 0, 0, Robot.oi.getLeftStickX(Player1), Robot.oi.getRightStickY(Player1));  break; 
-		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle); break;
-		case 6:  break; 
+		case 0: Robot.NWTurnTo(225); fix = false; break; 
+		case 1: Robot.NETurnTo(315); fix = false; break; 
+		case 2: Robot.SWTurnTo(45); fix = false; break; 
+		case 3: Robot.SETurnTo(135); fix = false; break; 
+		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle);
+			fix = true; 
+			break; 
+		
+		case 6:
+			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
+			fix = false; 
+			break; 
+		
 		}
 		
 		
-		Robot.CorrectYourself();
+		System.out.println(wheel);
+		
+		if(fix) {Robot.CorrectYourself();}
 		
 	}
 	

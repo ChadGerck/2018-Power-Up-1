@@ -48,6 +48,13 @@ public class DriveTrain extends Subsystem {
 		bigSE.set(ControlMode.PercentOutput, -bSE);
 			
 	} 
+	public void setSpeed(double speed) {
+		bigNW.set(ControlMode.PercentOutput, -speed);
+		bigNE.set(ControlMode.PercentOutput, -speed);
+		bigSW.set(ControlMode.PercentOutput, speed);
+		bigSE.set(ControlMode.PercentOutput, -speed);
+			
+	} 
 	
 	public void setlNW(double lNW) {
 		lilNW.set(ControlMode.PercentOutput, lNW);

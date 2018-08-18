@@ -289,6 +289,13 @@ public class Robot extends TimedRobot {
 		return angle; 
 	}
 	
+	public static void YawAngles() {
+		Robot.NWTurnTo(225);
+		Robot.NETurnTo(315);
+		Robot.SWTurnTo(45);
+		Robot.SETurnTo(135);
+	}
+	
 	static double angleNW; 
 	static double angleNE; 
 	static double angleSW; 
@@ -440,7 +447,75 @@ public class Robot extends TimedRobot {
 		}
 		}
 	}
-	
+	public static void SWTurnTo(double degrees){
+		if(degrees != -1) {
+		double Phi = SWAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSW: ", SWAngle());
+				Robot.drivetrain.setlSW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SWAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeSW: ", SWAngle());
+				Robot.drivetrain.setlSW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SWAngle();
+			} 
+			Robot.drivetrain.setlSW(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeSW: ", SWAngle());
+				Robot.drivetrain.setlSW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SWAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSW: ", SWAngle());
+				Robot.drivetrain.setlSW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SWAngle(); 
+			}
+			Robot.drivetrain.setlSW(0);
+		}
+		}
+	}
+
+	public static void SETurnTo(double degrees){
+		if(degrees != -1) {
+		double Phi = SEAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSE: ", SEAngle());
+				Robot.drivetrain.setlSE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SEAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeSE: ", SEAngle());
+				Robot.drivetrain.setlSE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SEAngle();
+			} 
+			Robot.drivetrain.setlSE(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeSE: ", SEAngle());
+				Robot.drivetrain.setlSE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SEAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSE: ", SEAngle());
+				Robot.drivetrain.setlSE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = SEAngle(); 
+			}
+			Robot.drivetrain.setlSE(0);
+		}
+		}
+	}
 	/*
 	public static void MoveForward() {
 		MoveDistance(GyroAngle(), .25, 1); 
