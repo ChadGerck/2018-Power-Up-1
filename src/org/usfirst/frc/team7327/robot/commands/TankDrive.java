@@ -17,25 +17,10 @@ public class TankDrive extends Command {
 		requires(Robot.drivetrain); 
 	}
 
-	Thread NWthread = new Thread() {
-		public void run() {
-			Robot.NWTurnTo(Robot.oi.Dpad(Player1));
-		}
-	};
-	
-	Thread NEthread = new Thread() {
-		public void run() {
-			Robot.NETurnTo(Robot.oi.Dpad(Player1));
-		}
-	}; 
 	
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() {
-		NWthread.start();
-		NEthread.start();
 
-		try {NWthread.join();} catch (InterruptedException e) {e.printStackTrace();}
-		try {NEthread.join();} catch (InterruptedException e) {e.printStackTrace();}
 	}
 	static double throttle = .45; 
 	//static boolean fix = false; 
@@ -78,7 +63,7 @@ public class TankDrive extends Command {
 		}
 		
 		
-		//Robot.CorrectYourself();
+		Robot.CorrectYourself();
 		
 	}
 	
