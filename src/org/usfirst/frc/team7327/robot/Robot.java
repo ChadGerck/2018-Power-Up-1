@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -62,13 +61,7 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderNE;
 	public static Encoder encoderSW;
 	public static Encoder encoderSE;
-	
-
-	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -121);
-	public static Potentiometer abeNE = new AnalogPotentiometer(1, 360, -180.6);
-	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -101.3);
-	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -248.7);
-	public static ADXRS450_Gyro gyro; 
+	//public static ADXRS450_Gyro gyro; 
 
 	
 	//public static boolean tele = false;
@@ -91,8 +84,7 @@ public class Robot extends TimedRobot {
 		myTimer.start();
 		
 		//limitSwitch = new DigitalInput(8);
-		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
-		
+		//gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		encoderSE = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 		encoderSE.setMaxPeriod(.1);
@@ -130,7 +122,7 @@ public class Robot extends TimedRobot {
 		//Camera.startAutomaticCapture();
 		//Camera.getVideo();
 		
-		gyro.calibrate();
+		//gyro.calibrate();
 		
 	}
 
@@ -149,7 +141,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		myTimer.reset();
 		myTimer.start();
-		gyro.reset();
+		//gyro.reset();
 		encoderNW.reset();
 		encoderNE.reset();
 		encoderSW.reset();
@@ -173,7 +165,7 @@ public class Robot extends TimedRobot {
 		encoderNE.reset();
 		encoderSW.reset();
 		encoderSE.reset();
-		gyro.reset();
+		//gyro.reset();
 		//tele = true; 
 		
 		
@@ -262,185 +254,7 @@ public class Robot extends TimedRobot {
 				}
 			}
 		}	
-		
 	}
-	public static double NWAngle() {
-		double angle = abeNW.get();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	public static double NEAngle() {
-		double angle = abeNE.get();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	public static double SWAngle() {
-		double angle = abeSW.get();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	public static double SEAngle() {
-		double angle = abeSE.get();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	
-	static double angleNW; 
-	static double angleNE; 
-	static double angleSW; 
-	static double angleSE; 
-	static double averageCos;
-	static double averageAngle; 
-	public static void AbsolutelyCorrectYourself() {
-
-		angleNW = NWAngle();
-		angleNE = NEAngle();
-		angleSW = SWAngle();
-		angleSE = SEAngle();
-		
-		SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
-		SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
-		SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
-		SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
-		
-		
-		averageCos = (Math.cos(Math.toRadians(angleNW))+Math.cos(Math.toRadians(angleNE))+
-				Math.cos(Math.toRadians(angleSW))+Math.cos(Math.toRadians(angleSE)))/4;
-		
-		averageAngle = Math.acos(averageCos);
-
-		if(Robot.oi.getLeftStickX(TankDrive.Player1) == 0 ) {
-			errorNW = averageCos - Math.cos(Math.toRadians(angleNW));
-			errorNE = averageCos - Math.cos(Math.toRadians(angleNE));
-			errorSW = averageCos - Math.cos(Math.toRadians(angleSW));
-			errorSE = averageCos - Math.cos(Math.toRadians(angleSE));
-			if(Math.abs(errorNW) > Math.abs(errorNE)) {
-				if(Math.abs(errorNW)>Math.abs(errorSW)) {
-					if(Math.abs(errorNW)>Math.abs(errorSE)) {
-						if(errorNW > .01) {Robot.drivetrain.setlNW(.15);} else if(errorNW < -.01){Robot.drivetrain.setlNW(-.15);} 
-					}
-					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
-					}
-				}
-				else {
-					if(Math.abs(errorSW)>Math.abs(errorSE)) {
-						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
-					}
-					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01){Robot.drivetrain.setlSE(.15);}
-					}
-				}
-			}
-			else {
-				if(Math.abs(errorNE)>Math.abs(errorSW)) {
-					if(Math.abs(errorNE)>Math.abs(errorSE)) {
-						if(errorNE > .01) {Robot.drivetrain.setlNE(-.15);} else if(errorNE < -.01) {Robot.drivetrain.setlNE(.15);}
-					}
-					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
-					}
-				}
-				else {
-					if(Math.abs(errorSW)>Math.abs(errorSE)) {
-						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
-					}
-					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
-					}
-				}
-			}
-		}	
-		
-	}
-	
-	public static double GyroAngle() {
-		double angle = Robot.gyro.getAngle();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	
-	public static double GyroAngle(double add) {
-		double angle = Robot.gyro.getAngle() + add;
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
-		return angle; 
-	}
-	
-	public static void NWTurnTo(double degrees){
-		if(degrees != -1) {
-		double Phi = NWAngle(); 
-		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
-			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
-				SmartDashboard.putNumber("abeNW: ", NWAngle());
-				Robot.drivetrain.setlNW(.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NWAngle();
-			} 
-			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
-				SmartDashboard.putNumber("abeNW: ", NWAngle());
-				Robot.drivetrain.setlNW(-.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NWAngle();
-			} 
-			Robot.drivetrain.setlNW(0);
-		}else {
-			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
-				SmartDashboard.putNumber("abeNW: ", NWAngle());
-				Robot.drivetrain.setlNW(-.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NWAngle(); 
-			}
-			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
-				SmartDashboard.putNumber("abeNW: ", NWAngle());
-				Robot.drivetrain.setlNW(.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NWAngle(); 
-			}
-			Robot.drivetrain.setlNW(0);
-		}
-		}
-	}
-	public static void NETurnTo(double degrees){
-		if(degrees != -1) {
-		double Phi = NEAngle(); 
-		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
-			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
-				SmartDashboard.putNumber("abeNE: ", NEAngle());
-				Robot.drivetrain.setlNE(.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NEAngle();
-			} 
-			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
-				SmartDashboard.putNumber("abeNE: ", NEAngle());
-				Robot.drivetrain.setlNE(-.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NEAngle();
-			} 
-			Robot.drivetrain.setlNE(0);
-		}else {
-			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
-				SmartDashboard.putNumber("abeNE: ", NEAngle());
-				Robot.drivetrain.setlNE(-.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NEAngle(); 
-			}
-			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
-				SmartDashboard.putNumber("abeNE: ", NEAngle());
-				Robot.drivetrain.setlNE(.15);
-				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
-				Phi = NEAngle(); 
-			}
-			Robot.drivetrain.setlNE(0);
-		}
-		}
-	}
-	
 	/*
 	public static void MoveForward() {
 		MoveDistance(GyroAngle(), .25, 1); 
@@ -543,6 +357,20 @@ public class Robot extends TimedRobot {
 				Phi = GyroAngle();
 			}
 		}
+	}
+	
+	public static double GyroAngle() {
+		double angle = Robot.gyro.getAngle();
+		while(angle > 360) { angle -= 360; }
+		while(angle < 0)   { angle += 360; }
+		return angle; 
+	}
+	
+	public static double GyroAngle(double add) {
+		double angle = Robot.gyro.getAngle() + add;
+		while(angle > 360) { angle -= 360; }
+		while(angle < 0)   { angle += 360; }
+		return angle; 
 	}
 	
 	public static void ShootBox() {
