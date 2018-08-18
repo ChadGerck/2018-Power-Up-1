@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
 		encoderL.reset();
 		encoderR.reset();
 		Autonomous.Auto();
-		station = DriverStation.getInstance().getLocation();
+		//station = DriverStation.getInstance().getLocation();
 		
 		/*
 		System.out.println("FIRST MOVEMENT");
