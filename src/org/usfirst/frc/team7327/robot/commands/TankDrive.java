@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Servo;
 
 public class TankDrive extends Command {
 
-	private boolean SinglePlayer = false; 
+	private boolean SinglePlayer = true; 
 
 	boolean Dpressed = false;
 	boolean armOn = true;
