@@ -1,5 +1,8 @@
 package org.usfirst.frc.team7327.robot.commands;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.usfirst.frc.team7327.robot.Robot;
 
 
@@ -16,11 +19,31 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
-
 	
+	/*
+	Thread NWthread = new Thread() {
+		public void run() {
+			System.out.println("Working");
+		}
+	};
+	
+	Thread NEthread = new Thread() {
+		public void run() {
+			System.out.println("Better");
+		}
+	}; 
+	*/
+
+	ExecutorService executorService = Executors.newFixedThreadPool(2);
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() {
-
+		/*
+		NWthread.start();
+		NEthread.start();
+		try {NWthread.join();} catch (InterruptedException e) {e.printStackTrace();}
+		try {NEthread.join();} catch (InterruptedException e) {e.printStackTrace();}
+		*/
+		
 	}
 	static double throttle = .45; 
 	//static boolean fix = false; 
@@ -28,7 +51,51 @@ public class TankDrive extends Command {
 	int wheel = -1; 
 	boolean fix = false; 
 	
+	void testA() {
+		System.out.println("Working");
+	}
+	void testB() {
+		System.out.println("Better");
+	}
+	
+	private int countA = 0; 
+	private int countB = 0; 
+	
+	int countA(){
+        for (int i = 0; i < 1000; i++) {
+            countA++;
+            try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+            System.out.println(countA);
+        }
+        return countA;
+    }
+
+	
+    int countB(){
+        for (int i = 0; i < 1000; i++) {
+            countB++;
+            try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            System.out.println(countB);
+        }
+        return countB;
+    }
+
+
+   
+    
+	
 	protected void execute(){
 		SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
 		SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
@@ -69,11 +136,40 @@ public class TankDrive extends Command {
 		
 		}
 		
+		//executorService.submit(this::ControllerY);
+	    //executorService.submit(this::ControllerX);
 		
-		System.out.println(wheel);
 		
 		if(fix) {Robot.CorrectYourself();}
 		
+	}
+	
+	public int ControllerY() {
+		 for (int i = 0; i < 1000; i++) {
+	            try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+	    		System.out.println("Y= " + Robot.oi.getRightStickY(Player1));
+	        }
+		return 0; 
+	}
+	
+	public int ControllerX() {
+		 for (int i = 0; i < 1000; i++) {
+	            try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+	    		System.out.println("X= " + Robot.oi.getRightStickY(Player1));
+	        }
+		return 0; 
 	}
 	
 
