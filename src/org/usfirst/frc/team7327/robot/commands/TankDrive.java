@@ -110,12 +110,12 @@ public class TankDrive extends Command {
 		if(Robot.oi.getBButton(Player1)) { wheel = 1; }
 		if(Robot.oi.getXButton(Player1)) { wheel = 2; }
 		if(Robot.oi.getAButton(Player1)) { wheel = 3; }
-		if(Robot.oi.getStartButton(Player1)) { wheel = 4; }
+		if(Robot.oi.getStartButton(Player1)) { wheel = 4;
+			if(throttle == .45) { throttle = .65; }
+			else { throttle = .45; }
+		}
 		if(Robot.oi.getRightBumper(Player1)) { wheel = 6; }
 		
-		if(Robot.oi.getStartButton(Player1)) {
-			throttle = .45; 
-		}
 		if(Robot.oi.getSlowButton(Player1)) {
 			throttle = .25; 
 		}
@@ -130,7 +130,6 @@ public class TankDrive extends Command {
 			break; 
 		
 		case 6:
-				executorService.submit(this::ControllerY);
 			    executorService.submit(this::ControllerX);
 			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
 			fix = false; 
