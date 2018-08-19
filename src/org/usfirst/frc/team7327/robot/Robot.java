@@ -64,10 +64,10 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderSE;
 	
 
-	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -121);
-	public static Potentiometer abeNE = new AnalogPotentiometer(1, 360, -180.6);
-	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -101.3);
-	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -248.7);
+	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -185.5);
+	public static Potentiometer abeNE = new AnalogPotentiometer(1, 360, -48.6);
+	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -279.5);
+	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -71.6);
 	public static ADXRS450_Gyro gyro; 
 
 	
@@ -228,36 +228,46 @@ public class Robot extends TimedRobot {
 			if(Math.abs(errorNW) > Math.abs(errorNE)) {
 				if(Math.abs(errorNW)>Math.abs(errorSW)) {
 					if(Math.abs(errorNW)>Math.abs(errorSE)) {
-						if(errorNW > .01) {Robot.drivetrain.setlNW(.15);} else if(errorNW < -.01){Robot.drivetrain.setlNW(-.15);} 
+						if(errorNW > .01) {if(errorNW > .2) {Robot.drivetrain.setlNW(.3);}else if(errorNW > .1) {Robot.drivetrain.setlNW(.25);} else if(errorNW > .05) {Robot.drivetrain.setlNW(.2);}else{Robot.drivetrain.setlNW(.15);}} 
+						else if(errorNW < -.01){if(errorNW < -.2) {Robot.drivetrain.setlNW(-.3);}else if(errorNW < -.1) {Robot.drivetrain.setlNW(-.25);} else if(errorNW < -.05) {Robot.drivetrain.setlNW(-.2);}else{Robot.drivetrain.setlNW(-.15);}} 
 					}
 					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+						if(errorSE > .01) {if(errorSE > .2) {Robot.drivetrain.setlSE(-.3);}else if(errorSE > .1) {Robot.drivetrain.setlSE(-.25);} else if(errorSE > .05) {Robot.drivetrain.setlSE(-.2);}else{Robot.drivetrain.setlSE(-.15);}}
+						else if(errorSE < -.01) {if(errorSE < -.2) {Robot.drivetrain.setlSE(.3);}else if(errorSE < -.1) {Robot.drivetrain.setlSE(.25);} else if(errorSE < -.05) {Robot.drivetrain.setlSE(.2);}else{Robot.drivetrain.setlSE(.15);}} 
 					}
 				}
 				else {
 					if(Math.abs(errorSW)>Math.abs(errorSE)) {
-						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
+						if(errorSW > .01 )  {if(errorSW > .2) {Robot.drivetrain.setlSW(-.3);}else if(errorSW > .1) {Robot.drivetrain.setlSW(-.25);} else if(errorSW > .05) {Robot.drivetrain.setlSW(-.2);}else{Robot.drivetrain.setlSW(-.15);}}
+						else if(errorSW < -.01) {if(errorSW < -.2) {Robot.drivetrain.setlSW(.3);}else if(errorSW < -.1) {Robot.drivetrain.setlSW(.25);} else if(errorSW < -.05) {Robot.drivetrain.setlSW(.2);}else{Robot.drivetrain.setlSW(.15);}} 
 					}
 					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01){Robot.drivetrain.setlSE(.15);}
+						if(errorSE > .01) {if(errorSE > .2) {Robot.drivetrain.setlSE(-.3);}else if(errorSE > .1) {Robot.drivetrain.setlSE(-.25);} else if(errorSE > .05) {Robot.drivetrain.setlSE(-.2);}else{Robot.drivetrain.setlSE(-.15);}}
+						else if(errorSE < -.01) {if(errorSE < -.2) {Robot.drivetrain.setlSE(.3);}else if(errorSE < -.1) {Robot.drivetrain.setlSE(.25);} else if(errorSE < -.05) {Robot.drivetrain.setlSE(.2);}else{Robot.drivetrain.setlSE(.15);}} 
 					}
 				}
 			}
 			else {
 				if(Math.abs(errorNE)>Math.abs(errorSW)) {
 					if(Math.abs(errorNE)>Math.abs(errorSE)) {
-						if(errorNE > .01) {Robot.drivetrain.setlNE(-.15);} else if(errorNE < -.01) {Robot.drivetrain.setlNE(.15);}
+						if(errorNE > .01)  {if(errorNE > .2) {Robot.drivetrain.setlNE(-.3);}else if(errorNE > .1) {Robot.drivetrain.setlNE(-.25);} else if(errorNE > .05) {Robot.drivetrain.setlNE(-.2);}else{Robot.drivetrain.setlNE(-.15);}}
+						else if(errorNE < -.01) {if(errorNE < -.2) {Robot.drivetrain.setlNE(.3);}else if(errorNE < -.1) {Robot.drivetrain.setlNE(.25);} else if(errorNE < -.05) {Robot.drivetrain.setlNE(.2);}else{Robot.drivetrain.setlNE(.15);}} 
 					}
 					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+						if(errorSE > .01) {if(errorSE > .2) {Robot.drivetrain.setlSE(-.3);}else if(errorSE > .1) {Robot.drivetrain.setlSE(-.25);} else if(errorSE > .05) {Robot.drivetrain.setlSE(-.2);}else{Robot.drivetrain.setlSE(-.15);}}
+						else if(errorSE < -.01) {if(errorSE < -.2) {Robot.drivetrain.setlSE(.3);}else if(errorSE < -.1) {Robot.drivetrain.setlSE(.25);} else if(errorSE < -.05) {Robot.drivetrain.setlSE(.2);}else{Robot.drivetrain.setlSE(.15);}} 
+					
 					}
 				}
 				else {
 					if(Math.abs(errorSW)>Math.abs(errorSE)) {
-						if(errorSW > .01 ) {Robot.drivetrain.setlSW(-.15);} else if(errorSW < -.01) {Robot.drivetrain.setlSW(.15);}
+						if(errorSW > .01 )  {if(errorSW > .2) {Robot.drivetrain.setlSW(-.3);}else if(errorSW > .1) {Robot.drivetrain.setlSW(-.25);} else if(errorSW > .05) {Robot.drivetrain.setlSW(-.2);}else{Robot.drivetrain.setlSW(-.15);}}
+						else if(errorSW < -.01) {if(errorSW < -.2) {Robot.drivetrain.setlSW(.3);}else if(errorSW < -.1) {Robot.drivetrain.setlSW(.25);} else if(errorSW < -.05) {Robot.drivetrain.setlSW(.2);}else{Robot.drivetrain.setlSW(.15);}} 
 					}
 					else {
-						if(errorSE > .01) {Robot.drivetrain.setlSE(-.15);} else if(errorSE < -.01) {Robot.drivetrain.setlSE(.15);}
+						if(errorSE > .01) {if(errorSE > .2) {Robot.drivetrain.setlSE(-.3);}else if(errorSE > .1) {Robot.drivetrain.setlSE(-.25);} else if(errorSE > .05) {Robot.drivetrain.setlSE(-.2);}else{Robot.drivetrain.setlSE(-.15);}}
+						else if(errorSE < -.01) {if(errorSE < -.2) {Robot.drivetrain.setlSE(.3);}else if(errorSE < -.1) {Robot.drivetrain.setlSE(.25);} else if(errorSE < -.05) {Robot.drivetrain.setlSE(.2);}else{Robot.drivetrain.setlSE(.15);}} 
+					
 					}
 				}
 			}
