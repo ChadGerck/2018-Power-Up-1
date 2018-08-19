@@ -130,14 +130,14 @@ public class TankDrive extends Command {
 			break; 
 		
 		case 6:
+				executorService.submit(this::ControllerY);
+			    executorService.submit(this::ControllerX);
 			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
 			fix = false; 
 			break; 
 		
 		}
 		
-		//executorService.submit(this::ControllerY);
-	    //executorService.submit(this::ControllerX);
 		
 		
 		if(fix) {Robot.CorrectYourself();}
@@ -145,30 +145,18 @@ public class TankDrive extends Command {
 	}
 	
 	public int ControllerY() {
-		 for (int i = 0; i < 1000; i++) {
-	            try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-	    		System.out.println("Y= " + Robot.oi.getRightStickY(Player1));
-	        }
+			 
+		System.out.println("Y= " + Robot.oi.getRightStickY(Player1));
+		try { Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
+		 
 		return 0; 
 	}
 	
 	public int ControllerX() {
-		 for (int i = 0; i < 1000; i++) {
-	            try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-	    		System.out.println("X= " + Robot.oi.getRightStickY(Player1));
-	        }
+			
+	   	System.out.println("X= " + Robot.oi.getLeftStickX(Player1));
+	   	try {Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
+	    
 		return 0; 
 	}
 	

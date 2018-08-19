@@ -379,7 +379,7 @@ public class Robot extends TimedRobot {
 		return angle; 
 	}
 	
-	public static void NWTurnTo(double degrees){
+	public static int NWTurnTo(double degrees){
 		if(degrees != -1) {
 		double Phi = NWAngle(); 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
@@ -412,8 +412,9 @@ public class Robot extends TimedRobot {
 			Robot.drivetrain.setlNW(0);
 		}
 		}
+		return 0; 
 	}
-	public static void NETurnTo(double degrees){
+	public static int NETurnTo(double degrees){
 		if(degrees != -1) {
 		double Phi = NEAngle(); 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
@@ -446,8 +447,9 @@ public class Robot extends TimedRobot {
 			Robot.drivetrain.setlNE(0);
 		}
 		}
+		return 0; 
 	}
-	public static void SWTurnTo(double degrees){
+	public static int SWTurnTo(double degrees){
 		if(degrees != -1) {
 		double Phi = SWAngle(); 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
@@ -480,9 +482,10 @@ public class Robot extends TimedRobot {
 			Robot.drivetrain.setlSW(0);
 		}
 		}
+		return 0; 
 	}
 
-	public static void SETurnTo(double degrees){
+	public static int SETurnTo(double degrees){
 		if(degrees != -1) {
 		double Phi = SEAngle(); 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
@@ -515,6 +518,7 @@ public class Robot extends TimedRobot {
 			Robot.drivetrain.setlSE(0);
 		}
 		}
+		return 0; 
 	}
 	/*
 	public static void MoveForward() {
