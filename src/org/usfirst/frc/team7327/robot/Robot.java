@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 	static DoubleSolenoid.Value GrabOff = DoubleSolenoid.Value.kOff; 
 	
 	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-	public static int station = DriverStation.getInstance().getLocation();
+	//public static int station = DriverStation.getInstance().getLocation();
 	//private String gameData;
 	
 	//Change based on alliance
