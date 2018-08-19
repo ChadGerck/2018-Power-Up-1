@@ -26,7 +26,7 @@ public class TankDrive extends Command {
 	//throttle speed from 1 to 0 based on desired speed
 	double throttleL = .6;
 	double throttleR = .6;
-	double throttleA = .65;  
+	double throttleA = .8;  
 	double throttleS = .7;
 
 	Servo Servo1 = new Servo(8);
