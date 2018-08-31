@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void setRaw(double lNW, double bNW, double lNE, double bNE, double lSW, double bSW, double lSE, double bSE) {
-		lilNW.set(ControlMode.PercentOutput, lNW);
+		lilNW.set(ControlMode.PercentOutput, -lNW);
 		bigNW.set(ControlMode.PercentOutput, bNW);
 		lilNE.set(ControlMode.PercentOutput, -lNE);
 		bigNE.set(ControlMode.PercentOutput, -bNE);
@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem {
 	} 
 	
 	public void setlNW(double lNW) {
-		lilNW.set(ControlMode.PercentOutput, lNW);
+		lilNW.set(ControlMode.PercentOutput, -lNW);
 	}
 	public void setlNE(double lNE) {
 		lilNE.set(ControlMode.PercentOutput, lNE);

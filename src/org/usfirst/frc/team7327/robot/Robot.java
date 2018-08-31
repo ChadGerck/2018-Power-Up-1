@@ -52,8 +52,6 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.*;
 
 public class Robot extends TimedRobot { 
-	//public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-	//public static SPI spi;
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	public static TankDrive tankdrive; 
@@ -75,7 +73,7 @@ public class Robot extends TimedRobot {
 	
 	
 	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-	public static int station = DriverStation.getInstance().getLocation();
+	//public static int station = DriverStation.getInstance().getLocation();
 	//private String gameData;
 	
 	//Change based on alliance
@@ -176,10 +174,6 @@ public class Robot extends TimedRobot {
 		gyro.reset();
 		//tele = true; 
 		
-		
-		//imu.reset();
-		//imu.calibrate();
-		//gyroOffset = imu.getYaw(); 
 		
 	}
 	
@@ -300,8 +294,8 @@ public class Robot extends TimedRobot {
 	}
 	
 	public static void YawAngles() {
-		Robot.NWTurnTo(225);
-		Robot.NETurnTo(315);
+		Robot.NWTurnTo(315);
+		Robot.NETurnTo(225);
 		Robot.SWTurnTo(45);
 		Robot.SETurnTo(135);
 	}
