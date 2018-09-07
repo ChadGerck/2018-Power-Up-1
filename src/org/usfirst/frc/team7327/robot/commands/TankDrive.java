@@ -34,7 +34,7 @@ public class TankDrive extends Command {
 	}; 
 	*/
 
-	ExecutorService executorService = Executors.newFixedThreadPool(2);
+	ExecutorService executorService = Executors.newFixedThreadPool(4);
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() {
 		
@@ -43,7 +43,7 @@ public class TankDrive extends Command {
 	//static boolean fix = false; 
 
 	int wheel = -1; 
-	boolean fix = false; 
+	static boolean fix = true; 
 	
 	
 	protected void execute(){
@@ -115,6 +115,7 @@ public class TankDrive extends Command {
 	public int NWTurnTo() {
 		double degrees = 315; 
 		double Phi = Robot.NWAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
@@ -144,6 +145,7 @@ public class TankDrive extends Command {
 			}
 			Robot.drivetrain.setlNW(0);
 		}
+		}
 		
 		return 0; 
 	}
@@ -151,6 +153,7 @@ public class TankDrive extends Command {
 	public int NETurnTo(){
 		double degrees = 225; 
 		double Phi = Robot.NEAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
@@ -179,6 +182,7 @@ public class TankDrive extends Command {
 				Phi = Robot.NEAngle(); 
 			}
 			Robot.drivetrain.setlNE(0);
+		}
 		}
 		return 0;
 		
@@ -188,6 +192,7 @@ public class TankDrive extends Command {
 	public int SWTurnTo(){
 		int degrees = 45; 
 		double Phi = Robot.SWAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
@@ -217,13 +222,14 @@ public class TankDrive extends Command {
 			}
 			Robot.drivetrain.setlSW(0);
 		}
-		
+		}
 		return 0; 
 	}
 
 	public int SETurnTo(){
 		int degrees = 135; 
 		double Phi = Robot.SEAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
@@ -252,6 +258,7 @@ public class TankDrive extends Command {
 				Phi = Robot.SEAngle(); 
 			}
 			Robot.drivetrain.setlSE(0);
+		}
 		}
 		
 		return 0; 
