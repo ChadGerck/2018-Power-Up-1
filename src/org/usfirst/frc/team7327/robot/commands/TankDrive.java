@@ -19,20 +19,6 @@ public class TankDrive extends Command {
 	public TankDrive() {
 		requires(Robot.drivetrain); 
 	}
-	
-	/*
-	Thread NWthread = new Thread() {
-		public void run() {
-			System.out.println("Working");
-		}
-	};
-	
-	Thread NEthread = new Thread() {
-		public void run() {
-			System.out.println("Better");
-		}
-	}; 
-	*/
 
 	ExecutorService executorService = Executors.newFixedThreadPool(4);
 	public static XboxController Player1 = Robot.oi.Controller0; 
@@ -40,7 +26,6 @@ public class TankDrive extends Command {
 		
 	}
 	static double throttle = .45; 
-	//static boolean fix = false; 
 
 	int wheel = -1; 
 	static boolean fix = true; 
@@ -55,11 +40,6 @@ public class TankDrive extends Command {
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
 		
 		
-		
-		if(Robot.oi.getYButton(Player1)) { wheel = 0; }
-		if(Robot.oi.getBButton(Player1)) { wheel = 1; }
-		if(Robot.oi.getXButton(Player1)) { wheel = 2; }
-		if(Robot.oi.getAButton(Player1)) { wheel = 3; }
 		if(Robot.oi.getStartButton(Player1)) { wheel = 4;
 			if(throttle == .45) { throttle = .65; }
 			else { throttle = .45; }
@@ -71,19 +51,16 @@ public class TankDrive extends Command {
 		}
 		
 		switch(wheel) {
-		case 0: Robot.NWTurnTo(225); fix = false; break; 
-		case 1: Robot.NETurnTo(315); fix = false; break; 
-		case 2: Robot.SWTurnTo(45); fix = false; break; 
-		case 3: Robot.SETurnTo(135); fix = false; break; 
+		case -1: fix = false; break; 
 		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle);
 			fix = true; 
 			break; 
 		
 		case 6:
-			executorService.submit(this::NWTurnTo);
-			executorService.submit(this::NETurnTo);
-			executorService.submit(this::SWTurnTo);
-			executorService.submit(this::SETurnTo); 
+			executorService.submit(this::NWSpin);
+			executorService.submit(this::NESpin);
+			executorService.submit(this::SWSpin);
+			executorService.submit(this::SESpin); 
 			    
 			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
 			fix = false; 
@@ -94,25 +71,8 @@ public class TankDrive extends Command {
 		if(fix) {Robot.CorrectYourself();}
 		
 	}
-	
-	public int ControllerY() {
-			 
-		System.out.println("Y= " + Robot.oi.getRightStickY(Player1));
-		try { Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
-		 
-		return 0; 
-	}
-	
-	public int ControllerX() {
-			
-	   	System.out.println("X= " + Robot.oi.getLeftStickX(Player1));
-	   	try {Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
-	    
-		return 0; 
-	}
-	
 
-	public int NWTurnTo() {
+	public int NWSpin() {
 		double degrees = 315; 
 		double Phi = Robot.NWAngle(); 
 		if(!fix) {
@@ -150,7 +110,7 @@ public class TankDrive extends Command {
 		return 0; 
 	}
 
-	public int NETurnTo(){
+	public int NESpin(){
 		double degrees = 225; 
 		double Phi = Robot.NEAngle(); 
 		if(!fix) {
@@ -189,7 +149,7 @@ public class TankDrive extends Command {
 	}
 	
 
-	public int SWTurnTo(){
+	public int SWSpin(){
 		int degrees = 45; 
 		double Phi = Robot.SWAngle(); 
 		if(!fix) {
@@ -226,7 +186,7 @@ public class TankDrive extends Command {
 		return 0; 
 	}
 
-	public int SETurnTo(){
+	public int SESpin(){
 		int degrees = 135; 
 		double Phi = Robot.SEAngle(); 
 		if(!fix) {
