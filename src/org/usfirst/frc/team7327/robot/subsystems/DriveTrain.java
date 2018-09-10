@@ -1,7 +1,9 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
 import org.usfirst.frc.team7327.robot.RobotMap;
-import org.usfirst.frc.team7327.robot.commands.TankDrive;
+//import org.usfirst.frc.team7327.robot.commands.TankDrive;
+import org.usfirst.frc.team7327.robot.commands.SwerveDrive;
+
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -55,6 +57,13 @@ public class DriveTrain extends Subsystem {
 		bigSE.set(ControlMode.PercentOutput, -speed);
 			
 	} 
+	public void setTurnSpeed(double speed) {
+		lilNW.set(ControlMode.PercentOutput, -speed);
+		lilNE.set(ControlMode.PercentOutput, -speed);
+		lilSW.set(ControlMode.PercentOutput, -speed);
+		lilSE.set(ControlMode.PercentOutput, -speed);
+		
+	}
 	
 	public void setlNW(double lNW) {
 		lilNW.set(ControlMode.PercentOutput, -lNW);
@@ -70,7 +79,7 @@ public class DriveTrain extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new SwerveDrive());
 
 
 	}

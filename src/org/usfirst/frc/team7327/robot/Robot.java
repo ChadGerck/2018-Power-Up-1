@@ -11,7 +11,8 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import java.io.IOException;
 
-import org.usfirst.frc.team7327.robot.commands.TankDrive;
+//import org.usfirst.frc.team7327.robot.commands.TankDrive;
+import org.usfirst.frc.team7327.robot.commands.SwerveDrive;
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -54,7 +55,8 @@ import edu.wpi.first.wpilibj.*;
 public class Robot extends TimedRobot { 
 	public static OI oi;
 	public static DriveTrain drivetrain;
-	public static TankDrive tankdrive; 
+	//public static TankDrive tankdrive; 
+	public static SwerveDrive swervedrive; 
 	//CameraServer Camera;
 	public static Encoder encoderNW;
 	public static Encoder encoderNE;
@@ -67,28 +69,16 @@ public class Robot extends TimedRobot {
 	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -279.5);
 	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -71.6);
 	public static ADXRS450_Gyro gyro; 
-
 	
-	//public static boolean tele = false;
-	
-	
-	//private DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-	//public static int station = DriverStation.getInstance().getLocation();
-	//private String gameData;
-	
-	//Change based on alliance
-	//private char RobotLocation = 'L';
 	
 	public static Timer myTimer = new Timer();
 	public static boolean done = true; 
-	//public static boolean killButton = true; 
-
+	
 	@Override
 	public void robotInit() {
 		myTimer.reset();
 		myTimer.start();
 		
-		//limitSwitch = new DigitalInput(8);
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		
@@ -153,7 +143,6 @@ public class Robot extends TimedRobot {
 		encoderSW.reset();
 		encoderSE.reset();
 		//Autonomous.Auto();
-		//station = DriverStation.getInstance().getLocation();
 		
 		
 	}
@@ -172,8 +161,6 @@ public class Robot extends TimedRobot {
 		encoderSW.reset();
 		encoderSE.reset();
 		gyro.reset();
-		//tele = true; 
-		
 		
 	}
 	
@@ -214,7 +201,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("DistanceSE: ", distanceSE);
 		totalDistance = (distanceNW+distanceNE+distanceSW+distanceSE)/4;
 
-		if(Robot.oi.getLeftStickX(TankDrive.Player1) == 0 ) {
+		if(Robot.oi.getLeftStickX(SwerveDrive.Player1) == 0 ) {
 			errorNW = totalDistance - distanceNW;
 			errorNE = totalDistance - distanceNE;
 			errorSW = totalDistance - distanceSW;
@@ -293,13 +280,6 @@ public class Robot extends TimedRobot {
 		return angle; 
 	}
 	
-	public static void YawAngles() {
-		Robot.NWTurnTo(315);
-		Robot.NETurnTo(225);
-		Robot.SWTurnTo(45);
-		Robot.SETurnTo(135);
-	}
-	
 	static double angleNW; 
 	static double angleNE; 
 	static double angleSW; 
@@ -324,7 +304,7 @@ public class Robot extends TimedRobot {
 		
 		averageAngle = Math.acos(averageCos);
 
-		if(Robot.oi.getLeftStickX(TankDrive.Player1) == 0 ) {
+		if(Robot.oi.getLeftStickX(SwerveDrive.Player1) == 0 ) {
 			errorNW = averageCos - Math.cos(Math.toRadians(angleNW));
 			errorNE = averageCos - Math.cos(Math.toRadians(angleNE));
 			errorSW = averageCos - Math.cos(Math.toRadians(angleSW));
