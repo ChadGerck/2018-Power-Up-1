@@ -25,6 +25,7 @@ public class DriveTrain extends Subsystem {
 	private TalonSRX bigSW; 
 	private TalonSRX lilSE;
 	private TalonSRX bigSE;
+	
 
 	
 	public DriveTrain() {
@@ -36,6 +37,15 @@ public class DriveTrain extends Subsystem {
 		bigSW = new TalonSRX(5);
 		lilSE = new TalonSRX(6);
 		bigSE = new TalonSRX(7);
+		
+		lilNW.enableVoltageCompensation(true);
+		bigNW.enableVoltageCompensation(true);
+		lilNE.enableVoltageCompensation(true);
+		bigNE.enableVoltageCompensation(true);
+		lilSW.enableVoltageCompensation(true);
+		bigSW.enableVoltageCompensation(true);
+		lilSE.enableVoltageCompensation(true);
+		bigSE.enableVoltageCompensation(true);
 	
 	}
 	
@@ -50,6 +60,15 @@ public class DriveTrain extends Subsystem {
 		bigSE.set(ControlMode.PercentOutput, -bSE);
 			
 	} 
+	public void setautoSpeed(double speed) {
+		bigNW.set(ControlMode.PercentOutput, -speed);
+		bigNE.set(ControlMode.PercentOutput, speed);
+		bigSW.set(ControlMode.PercentOutput, -speed);
+		bigSE.set(ControlMode.PercentOutput, speed);
+			
+	} 
+	
+	
 	public void setSpeed(double speed) {
 		bigNW.set(ControlMode.PercentOutput, -speed);
 		bigNE.set(ControlMode.PercentOutput, -speed);

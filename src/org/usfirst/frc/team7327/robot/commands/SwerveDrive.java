@@ -1,7 +1,10 @@
 package org.usfirst.frc.team7327.robot.commands;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.usfirst.frc.team7327.robot.Robot;
 
@@ -21,14 +24,21 @@ public class SwerveDrive extends Command {
 	}
 
 	ExecutorService executorService = Executors.newFixedThreadPool(4);
+	
 	public static XboxController Player1 = Robot.oi.Controller0; 
-	protected void initialize() {
+	protected void initialize() { 
 		
 	}
+
+	Future<Double> futureNW = executorService.submit(this::InitialSpin);  
+	Future<Double> futureNE = executorService.submit(this::InitialSpin);  
+	Future<Double> futureSW = executorService.submit(this::InitialSpin); 
+	Future<Double> futureSE = executorService.submit(this::InitialSpin); 
 	static double throttle = .45; 
 
 	int wheel = -1; 
-	static boolean fix = true; 
+	public static boolean fix = false; 
+	boolean futureReset = true; 
 	
 	
 	protected void execute(){
@@ -44,24 +54,81 @@ public class SwerveDrive extends Command {
 			if(throttle == .45) { throttle = .65; }
 			else { throttle = .45; }
 		}
-		if(Robot.oi.getRightBumper(Player1)) { wheel = 6; }
+		if(Robot.oi.getRightBumper(Player1)) { wheel = 6; futureReset = true; }
 		
 		if(Robot.oi.getSlowButton(Player1)) {
 			throttle = .25; 
 		}
 		
 		switch(wheel) {
-		case -1: fix = true; break; 
-		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)+Robot.oi.getRightTrigger(Player1))*throttle, Robot.oi.getLeftStickX(Player1)*throttle, (Robot.oi.getRightStickY(Player1)-Robot.oi.getRightTrigger(Player1))*throttle);
+		case -1: fix = false; break; 
+		case 4: Robot.drivetrain.setRaw(Robot.oi.getLeftStickX(Player1)*throttle, 
+				(Robot.oi.getRightStickY(Player1)+(Robot.oi.getRightTrigger(Player1)*throttle)-(Robot.oi.getLeftTrigger(Player1)*throttle))*throttle,
+				Robot.oi.getLeftStickX(Player1)*throttle, 
+				(Robot.oi.getRightStickY(Player1)-(Robot.oi.getRightTrigger(Player1)*throttle)+(Robot.oi.getLeftTrigger(Player1)*throttle))*throttle, 
+				Robot.oi.getLeftStickX(Player1)*throttle, 
+				(Robot.oi.getRightStickY(Player1)+(Robot.oi.getRightTrigger(Player1)*throttle)-(Robot.oi.getLeftTrigger(Player1)*throttle))*throttle, 
+				Robot.oi.getLeftStickX(Player1)*throttle, 
+				(Robot.oi.getRightStickY(Player1)-(Robot.oi.getRightTrigger(Player1)*throttle)+(Robot.oi.getLeftTrigger(Player1)*throttle))*throttle);
 			fix = true; 
 			break; 
 		
 		case 6:
-			executorService.submit(this::NWSpin);
-			executorService.submit(this::NESpin);
-			executorService.submit(this::SWSpin);
-			executorService.submit(this::SESpin); 
-			    
+			//executorService.submit(this::NWSpin);
+			//executorService.submit(this::NESpin);
+			//executorService.submit(this::SWSpin);
+			//executorService.submit(this::SESpin); 
+			
+			
+			
+			//Future futureNW = executorService.submit(this::NWSpin);  //NW to 315
+			//Future futureNE = executorService.submit(this::NESpin);  //NE to 225
+			//Future futureSW = executorService.submit(this::SWSpin);  //SW to 45
+			//Future futureSE = executorService.submit(this::SESpin);  //SE to 135
+			if(!futureReset) {
+			try {
+				if( futureNW.get() <= 325 &&  futureNW.get() >= 305) {} 
+				else {
+					futureNW = executorService.submit(this::NWSpin);
+					System.out.println("futureNW: "+futureNW.get());
+				}
+
+				if(futureNE.get() <= 55 && futureNE.get() >= 35) {}
+				else {
+					futureNE = executorService.submit(this::NESpin);
+					System.out.println("futureNE: "+futureNE.get());
+				}
+
+				if(futureSW.get() <= 235 && futureSW.get() >= 215) {}
+				else {
+					futureSW = executorService.submit(this::SWSpin);
+					System.out.println("futureSW: "+futureSW.get());
+				}
+
+				if(futureSE.get() <= 325 && futureSE.get() >= 305) {}
+				else {
+					futureSE = executorService.submit(this::SESpin);
+					System.out.println("futureSE: "+futureSE.get());
+				}
+			} catch (InterruptedException | ExecutionException e) { e.printStackTrace(); }
+			}
+			if(futureReset) {
+				futureNW = executorService.submit(this::NWSpin);
+				futureNE = executorService.submit(this::NESpin);
+				futureSW = executorService.submit(this::SWSpin);
+				futureSE = executorService.submit(this::SESpin);
+				futureReset = false; 
+			}
+			
+			/*
+			try {
+				System.out.println("futureNW: "+futureNW.get());
+				System.out.println("futureNE: "+futureNE.get());
+				System.out.println("futureSW: "+futureSW.get());
+				System.out.println("futureSE: "+futureSE.get());
+			} catch (InterruptedException | ExecutionException e1) { e1.printStackTrace(); }
+			*/
+			
 			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
 			fix = false; 
 			break; 
@@ -70,10 +137,22 @@ public class SwerveDrive extends Command {
 		
 		
 		if(fix) {Robot.CorrectYourself();}
-		
 	}
+	/*
+	Future future2 = executorService.submit(new Runnable() {
+	    public void run() {
+	        System.out.println("Asynchronous task");
+	    }
+	});
+	
+	Future future3 = executorService.submit(new Runnable() {
+	    public void run() {
+	        System.out.println("Asynchronous task");
+	    }
+	});
+	*/
 
-	public int NWSpin() {
+	public double NWSpin() {
 		double degrees = 315; 
 		double Phi = Robot.NWAngle(); 
 		if(!fix) {
@@ -108,10 +187,10 @@ public class SwerveDrive extends Command {
 		}
 		}
 		
-		return 0; 
+		return Phi; 
 	}
 
-	public int NESpin(){
+	public double NESpin(){
 		double degrees = 225; 
 		double Phi = Robot.NEAngle(); 
 		if(!fix) {
@@ -145,12 +224,12 @@ public class SwerveDrive extends Command {
 			Robot.drivetrain.setlNE(0);
 		}
 		}
-		return 0;
+		return Phi;
 		
 	}
 	
 
-	public int SWSpin(){
+	public double SWSpin(){
 		int degrees = 45; 
 		double Phi = Robot.SWAngle(); 
 		if(!fix) {
@@ -184,10 +263,10 @@ public class SwerveDrive extends Command {
 			Robot.drivetrain.setlSW(0);
 		}
 		}
-		return 0; 
+		return Phi; 
 	}
 
-	public int SESpin(){
+	public double SESpin(){
 		int degrees = 135; 
 		double Phi = Robot.SEAngle(); 
 		if(!fix) { 
@@ -222,9 +301,12 @@ public class SwerveDrive extends Command {
 		}
 		}
 		
-		return 0; 
+		return Phi; 
 	}
 
+	public double InitialSpin() {
+		return 0; 
+	}
 	
 	protected boolean isFinished() {
 

@@ -9,6 +9,10 @@ package org.usfirst.frc.team7327.robot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import java.io.IOException;
 
 //import org.usfirst.frc.team7327.robot.commands.TankDrive;
@@ -63,12 +67,19 @@ public class Robot extends TimedRobot {
 	public static Encoder encoderSW;
 	public static Encoder encoderSE;
 	
+	ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -185.5);
-	public static Potentiometer abeNE = new AnalogPotentiometer(1, 360, -48.6);
-	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -279.5);
-	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -71.6);
+	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -184.2);
+	public static Potentiometer abeNE = new AnalogPotentiometer(1, 360, -73.85);
+	public static Potentiometer abeSW = new AnalogPotentiometer(2, 360, -281.3);
+	public static Potentiometer abeSE = new AnalogPotentiometer(3, 360, -70.7);
 	public static ADXRS450_Gyro gyro; 
+	
+	
+	public static double NWdegree = 0; 
+	public static double NEdegree = 0;
+	public static double SWdegree = 0;
+	public static double SEdegree = 0;
 	
 	
 	public static Timer myTimer = new Timer();
@@ -142,7 +153,59 @@ public class Robot extends TimedRobot {
 		encoderNE.reset();
 		encoderSW.reset();
 		encoderSE.reset();
-		//Autonomous.Auto();
+		/*
+		while(myTimer.get() < 6) {
+			if(myTimer.get() < 5) {
+				Robot.drivetrain.setautoSpeed(.25);
+			}
+			else {
+				Robot.drivetrain.setautoSpeed(0);
+			}
+			System.out.println(myTimer.get());
+		}
+		
+		AllTurnTo(75);
+		
+		while(myTimer.get() > 10 && myTimer.get() < 15) {
+			Robot.drivetrain.setautoSpeed(.25);
+		}
+		Robot.drivetrain.setautoSpeed(0);
+		*/
+		
+		SwerveDrive.fix = false; 
+		
+		NWdegree = 315; 
+		executorService.submit(this::NWSpin);
+		NEdegree = 225; 
+		executorService.submit(this::NESpin);
+		SWdegree = 45; 
+		executorService.submit(this::SWSpin);
+		SEdegree = 135; 
+		executorService.submit(this::SESpin); 
+		
+		double timer = myTimer.get(); 
+		while(myTimer.get() < timer+5) {
+			Robot.drivetrain.setautoSpeed(.25);
+			
+		}
+		
+		Robot.drivetrain.setautoSpeed(0);
+		/*
+		NWdegree = 0; 
+		executorService.execute(this::SESpin);
+		NEdegree = 0; 
+		executorService.execute(this::NESpin);
+		SWdegree = 0; 
+		executorService.execute(this::SWSpin);
+		SEdegree = 0; 
+		executorService.execute(this::SESpin); 
+		*/
+		//executorService.shutdown();
+		
+		
+		
+		
+			//Autonomous.Auto();
 		
 		
 	}
@@ -363,6 +426,14 @@ public class Robot extends TimedRobot {
 		return angle; 
 	}
 	
+	public static void AllTurnTo(double degrees) {
+
+		NWTurnTo(degrees); 
+		NETurnTo(degrees);
+		SWTurnTo(degrees);
+		SETurnTo(degrees);
+	}
+	
 	public static int NWTurnTo(double degrees){
 		if(degrees != -1) {
 		double Phi = NWAngle(); 
@@ -504,6 +575,155 @@ public class Robot extends TimedRobot {
 		}
 		return 0; 
 	}
+
+	public int NWSpin() {
+		double degrees = NWdegree; 
+		double Phi = Robot.NWAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
+				Robot.drivetrain.setlNW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NWAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
+				Robot.drivetrain.setlNW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NWAngle();
+			} 
+			Robot.drivetrain.setlNW(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
+				Robot.drivetrain.setlNW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NWAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
+				Robot.drivetrain.setlNW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NWAngle(); 
+			}
+			Robot.drivetrain.setlNW(0);
+		}
+		
+		
+		return 0; 
+	}
+
+	public int NESpin(){
+		double degrees = NEdegree; 
+		double Phi = Robot.NEAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
+				Robot.drivetrain.setlNE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NEAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
+				Robot.drivetrain.setlNE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NEAngle();
+			} 
+			Robot.drivetrain.setlNE(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
+				Robot.drivetrain.setlNE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NEAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
+				Robot.drivetrain.setlNE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.NEAngle(); 
+			}
+			Robot.drivetrain.setlNE(0);
+		}
+		
+		return 0;
+		
+	}
+	
+
+	public int SWSpin(){
+		double degrees = SWdegree; 
+		double Phi = Robot.SWAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
+				Robot.drivetrain.setlSW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SWAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
+				Robot.drivetrain.setlSW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SWAngle();
+			} 
+			Robot.drivetrain.setlSW(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
+				Robot.drivetrain.setlSW(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SWAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
+				Robot.drivetrain.setlSW(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SWAngle(); 
+			}
+			Robot.drivetrain.setlSW(0);
+		}
+		
+		return 0; 
+	}
+
+	public int SESpin(){
+		double degrees = SEdegree; 
+		double Phi = Robot.SEAngle(); 
+		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
+				Robot.drivetrain.setlSE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SEAngle();
+			} 
+			while(Math.sin(Math.toRadians(degrees-Phi)) > 0) {
+				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
+				Robot.drivetrain.setlSE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SEAngle();
+			} 
+			Robot.drivetrain.setlSE(0);
+		}else {
+			while(Math.sin(Math.toRadians(degrees-Phi)) >= 0) {
+				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
+				Robot.drivetrain.setlSE(-.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SEAngle(); 
+			}
+			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
+				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
+				Robot.drivetrain.setlSE(.15);
+				try{Thread.sleep(20);}catch(InterruptedException e){e.printStackTrace();}
+				Phi = Robot.SEAngle(); 
+			}
+			Robot.drivetrain.setlSE(0);
+		}
+		
+		
+		return 0; 
+	}
+	
 	/*
 	public static void MoveForward() {
 		MoveDistance(GyroAngle(), .25, 1); 
