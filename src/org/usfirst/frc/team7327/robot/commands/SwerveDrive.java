@@ -41,7 +41,6 @@ public class SwerveDrive extends Command {
 	boolean futureReset = true; 
 	
 	
-	
 	protected void execute(){
 		SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
 		SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
@@ -56,7 +55,6 @@ public class SwerveDrive extends Command {
 			else { throttle = .45; }
 		}
 		if(Robot.oi.getRightBumper(Player1)) { wheel = 6; futureReset = true; }
-		if(Robot.oi.getLeftBumper(Player1)) { wheel = 7; futureReset = true; }
 		
 		if(Robot.oi.getSlowButton(Player1)) {
 			throttle = .25; 
@@ -91,43 +89,34 @@ public class SwerveDrive extends Command {
 			try {
 				if( futureNW.get() <= 325 &&  futureNW.get() >= 305) {} 
 				else {
-					Robot.NWdegree = 315; 
 					futureNW = executorService.submit(this::NWSpin);
 					System.out.println("futureNW: "+futureNW.get());
 				}
 
-				if(futureNE.get() <= 235 && futureNE.get() >= 215) {}
+				if(futureNE.get() <= 55 && futureNE.get() >= 35) {}
 				else {
-					Robot.NEdegree = 225; 
 					futureNE = executorService.submit(this::NESpin);
 					System.out.println("futureNE: "+futureNE.get());
 				}
 
-				if(futureSW.get() <= 55 && futureSW.get() >= 35) {}
+				if(futureSW.get() <= 235 && futureSW.get() >= 215) {}
 				else {
-					Robot.SWdegree = 45; 
 					futureSW = executorService.submit(this::SWSpin);
 					System.out.println("futureSW: "+futureSW.get());
 				}
 
-				if(futureSE.get() <= 145 && futureSE.get() >= 125) {}
+				if(futureSE.get() <= 325 && futureSE.get() >= 305) {}
 				else {
-					Robot.SEdegree = 135; 
 					futureSE = executorService.submit(this::SESpin);
 					System.out.println("futureSE: "+futureSE.get());
 				}
 			} catch (InterruptedException | ExecutionException e) { e.printStackTrace(); }
 			}
 			if(futureReset) {
-				Robot.NWdegree = 315; 
 				futureNW = executorService.submit(this::NWSpin);
-				Robot.NEdegree = 225; 
 				futureNE = executorService.submit(this::NESpin);
-				Robot.SWdegree = 45; 
 				futureSW = executorService.submit(this::SWSpin);
-				Robot.SEdegree = 135; 
 				futureSE = executorService.submit(this::SESpin);
-				System.out.println("It made it here!!!!!");
 				futureReset = false; 
 			}
 			
@@ -143,53 +132,6 @@ public class SwerveDrive extends Command {
 			Robot.drivetrain.setSpeed(Robot.oi.getRightStickY(Player1)*throttle);
 			fix = false; 
 			break; 
-		case 7: 
-			if(!futureReset) {
-				try {
-					if( futureNW.get() <= 190 &&  futureNW.get() >= 170) {} 
-					else {
-						Robot.NWdegree = 180; 
-						futureNW = executorService.submit(this::NWSpin);
-						System.out.println("futureNW: "+futureNW.get());
-					}
-
-					if(futureNE.get() <= 190 && futureNE.get() >= 170) {}
-					else {
-						Robot.NEdegree = 180; 
-						futureNE = executorService.submit(this::NESpin);
-						System.out.println("futureNE: "+futureNE.get());
-					}
-
-					if(futureSW.get() <= 170 && futureSW.get() >= 170) {}
-					else {
-						Robot.SWdegree = 180; 
-						futureSW = executorService.submit(this::SWSpin);
-						System.out.println("futureSW: "+futureSW.get());
-					}
-
-					if(futureSE.get() <= 190 && futureSE.get() >= 170) {}
-					else {
-						Robot.SEdegree = 180; 
-						futureSE = executorService.submit(this::SESpin);
-						System.out.println("futureSE: "+futureSE.get());
-					}
-				} catch (InterruptedException | ExecutionException e) { e.printStackTrace(); }
-				}
-				if(futureReset) {
-					Robot.NWdegree = 180; 
-					futureNW = executorService.submit(this::NWSpin);
-					Robot.NEdegree = 180; 
-					futureNE = executorService.submit(this::NESpin);
-					Robot.SWdegree = 180; 
-					futureSW = executorService.submit(this::SWSpin);
-					Robot.SEdegree = 180; 
-					futureSE = executorService.submit(this::SESpin);
-					System.out.println("It made it here!!!!!");
-					futureReset = false; 
-				}
-				fix = false; 
-				break; 
-			
 		
 		}
 		
@@ -211,8 +153,9 @@ public class SwerveDrive extends Command {
 	*/
 
 	public double NWSpin() {
-		double degrees = Robot.NWdegree; 
+		double degrees = 315; 
 		double Phi = Robot.NWAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeNW: ", Robot.NWAngle());
@@ -242,14 +185,15 @@ public class SwerveDrive extends Command {
 			}
 			Robot.drivetrain.setlNW(0);
 		}
-		
+		}
 		
 		return Phi; 
 	}
 
 	public double NESpin(){
-		double degrees = Robot.NEdegree; 
+		double degrees = 225; 
 		double Phi = Robot.NEAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeNE: ", Robot.NEAngle());
@@ -279,15 +223,16 @@ public class SwerveDrive extends Command {
 			}
 			Robot.drivetrain.setlNE(0);
 		}
-		
+		}
 		return Phi;
 		
 	}
 	
 
 	public double SWSpin(){
-		double degrees = Robot.SWdegree; 
-		double Phi = Robot.SWAngle();
+		int degrees = 45; 
+		double Phi = Robot.SWAngle(); 
+		if(!fix) {
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeSW: ", Robot.SWAngle());
@@ -317,13 +262,14 @@ public class SwerveDrive extends Command {
 			}
 			Robot.drivetrain.setlSW(0);
 		}
-		
+		}
 		return Phi; 
 	}
 
 	public double SESpin(){
-		double degrees = Robot.SEdegree; 
+		int degrees = 135; 
 		double Phi = Robot.SEAngle(); 
+		if(!fix) { 
 		if(Math.sin(Math.toRadians(degrees - Phi)) < 0) {
 			while(Math.sin(Math.toRadians(degrees-Phi)) < 0) {
 				SmartDashboard.putNumber("abeSE: ", Robot.SEAngle());
@@ -353,13 +299,12 @@ public class SwerveDrive extends Command {
 			}
 			Robot.drivetrain.setlSE(0);
 		}
-		
+		}
 		
 		return Phi; 
 	}
 
 	public double InitialSpin() {
-		System.out.println("GOT HERE!!");
 		return 0; 
 	}
 	
