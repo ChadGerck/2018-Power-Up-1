@@ -23,14 +23,17 @@ public class SwerveDrive extends Command {
 	public SwerveDrive() {
 		requires(Robot.drivetrain); 
 	}
-
 	
+
+	int setting = 0; 
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() { 
-		
+		setting = 0; 
+		addDegree = 0; 
 	}
 
 	double setDegree = 0;
+	double addDegree = 0; 
 	
 	protected void execute(){
 		
@@ -47,7 +50,10 @@ public class SwerveDrive extends Command {
 		
 		double LT = Robot.oi.getLeftTrigger(Player1); 
 		double RT = Robot.oi.getRightTrigger(Player1); 
+		boolean Lb = Robot.oi.getLeftBumper(Player1);
+		boolean Rb = Robot.oi.getRightBumper(Player1);
 		boolean StartButton = Robot.oi.getStartButton(Player1); 
+		boolean BackButton = Robot.oi.getSlowButton(Player1); 
 		
 		
 		double degrees = Math.toDegrees(Math.atan2(Ly,  Lx)) + 90;
@@ -57,18 +63,34 @@ public class SwerveDrive extends Command {
 		double degreesR = Math.toDegrees(Math.atan2(Ry,  Rx)) + 90;
 		double magnitudeR = Math.sqrt(Math.pow(Rx, 2) + Math.pow(Ry, 2));
 		
-		if(StartButton) Robot.gyro.reset();
-		
 		 
 		
 		if(magnitudeR > .5) {
 			setDegree = 360-degreesR;
 		}
-		System.out.println(magnitudeR);
 		
+		if(Robot.oi.getAButton(Player1)) {
+			setting = 0; 
+		}
+		
+		
+		if(StartButton) Robot.gyro.reset();
+		if(BackButton) addDegree = setDegree; 
+		
+
+		if(Lb) setting = 0; 
+		if(Rb) setting = 1; 
 		
 		Robot.drivetrain.setAllSpeed(Ly-RT+LT);
-		Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle());
+		switch(setting) {
+		case 0: 
+			Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle()+addDegree);
+			break;
+		case 1:
+			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
+			break;
+		}
+		
 	}
 	
 	protected boolean isFinished() {

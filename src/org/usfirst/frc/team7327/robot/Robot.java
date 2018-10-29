@@ -59,16 +59,12 @@ import edu.wpi.first.wpilibj.*;
 public class Robot extends TimedRobot { 
 	public static OI oi;
 	public static DriveTrain drivetrain;
-	//public static TankDrive tankdrive; 
 	public static SwerveDrive swervedrive; 
 	//CameraServer Camera;
 	public static Encoder encoderNW;
 	public static Encoder encoderNE;
 	public static Encoder encoderSW;
 	public static Encoder encoderSE;
-	
-	ExecutorService executorService = Executors.newFixedThreadPool(4);
-
 	
 	public static ADXRS450_Gyro gyro; 
 	
@@ -168,23 +164,6 @@ public class Robot extends TimedRobot {
 		}
 		Robot.drivetrain.setautoSpeed(0);
 		*/
-		
-		/*
-		NWdegree = 0; 
-		executorService.execute(this::SESpin);
-		NEdegree = 0; 
-		executorService.execute(this::NESpin);
-		SWdegree = 0; 
-		executorService.execute(this::SWSpin);
-		SEdegree = 0; 
-		executorService.execute(this::SESpin); 
-		*/
-		//executorService.shutdown();
-		
-		
-		
-		
-			//Autonomous.Auto();
 		
 		
 	}
