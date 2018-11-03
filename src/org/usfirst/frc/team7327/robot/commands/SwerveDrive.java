@@ -47,6 +47,7 @@ public class SwerveDrive extends Command {
 		
 		boolean A = Robot.oi.getAButton(Player1); 
 		boolean B = Robot.oi.getBButton(Player1); 
+		boolean Y = Robot.oi.getYButton(Player1);
 		
 		double Lx = Robot.oi.getLeftStickX(Player1); 
 		double Ly = Robot.oi.getLeftStickY(Player1); 
@@ -84,15 +85,9 @@ public class SwerveDrive extends Command {
 		if(A)  { setting = 0; Robot.drivetrain.turning.setOn(false); }
 		if(Lb) { setting = 0; Robot.drivetrain.turning.setOn(false); }
 		if(Rb) { setting = 1; Robot.drivetrain.turning.setOn(false); }
-		if(B)  { setting = 2; Robot.drivetrain.turning.setOn(true);  }
+		if(Y)
 		
-		if(Robot.oi.Dpad(Player1) >= 0 ) { setting = 3; Robot.drivetrain.turning.setOn(true); }
-		/*
-		if((Robot.oi.Dpad(Player1) >= 0 && Robot.oi.Dpad(Player1) < 45) || (Robot.oi.Dpad(Player1) >= 315 && Robot.oi.Dpad(Player1) < 360) ) { setting = 3; Robot.drivetrain.turning.setOn(true); }
-		else if(Robot.oi.Dpad(Player1) >= 45 && Robot.oi.Dpad(Player1) < 135) { setting = 4; Robot.drivetrain.turning.setOn(true); }
-		else if(Robot.oi.Dpad(Player1) >= 135 && Robot.oi.Dpad(Player1) < 225) { setting = 5; Robot.drivetrain.turning.setOn(true); }
-		else if(Robot.oi.Dpad(Player1) >= 225 && Robot.oi.Dpad(Player1) < 315) { setting = 6; Robot.drivetrain.turning.setOn(true); }
-		*/
+		if(Robot.oi.Dpad(Player1) >= 0 ) { setting = 2; Robot.drivetrain.turning.setOn(true); }
 	
 		switch(setting) {
 		case 0: 
@@ -105,27 +100,9 @@ public class SwerveDrive extends Command {
 			break;
 		case 2: 
 			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
-			Robot.drivetrain.turning.setYaw(0);
-			break; 
-		case 3: 
-			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
 			Robot.drivetrain.turning.setYaw(Robot.oi.Dpad(Player1));
 			if(Robot.oi.Dpad(Player1) == -1) { setting = 0; Robot.drivetrain.turning.setOn(false); }
 			break; 
-			/*
-		case 4: 
-			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
-			Robot.drivetrain.turning.setYaw(90);
-			break; 
-		case 5: 
-			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
-			Robot.drivetrain.turning.setYaw(180);
-			break; 
-		case 6: 
-			Robot.drivetrain.setEachDegree(225, 315, 135, 45);
-			Robot.drivetrain.turning.setYaw(270);
-			break; 
-		*/
 		}
 		
 	}
