@@ -86,34 +86,34 @@ public class Robot extends TimedRobot {
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 		
 		
-		encoderSE = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-		encoderSE.setMaxPeriod(.1);
-		encoderSE.setMinRate(10);
-		encoderSE.setDistancePerPulse(.0073);
-		encoderSE.setSamplesToAverage(7);
-		encoderSE.reset();
+		encoderNE = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		encoderNE.setMaxPeriod(.1);
+		encoderNE.setMinRate(10);
+		encoderNE.setDistancePerPulse(.0073);
+		encoderNE.setSamplesToAverage(7);
+		encoderNE.reset();
 		
 		
-		encoderSW = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-		encoderSW.setMaxPeriod(.1);
-		encoderSW.setMinRate(10);
-		encoderSW.setDistancePerPulse(.0073);
-		encoderSW.setSamplesToAverage(7);
-		encoderSW.reset();
-		
-		encoderNW = new Encoder(7, 6, true, Encoder.EncodingType.k4X);
+		encoderNW = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 		encoderNW.setMaxPeriod(.1);
 		encoderNW.setMinRate(10);
 		encoderNW.setDistancePerPulse(.0073);
 		encoderNW.setSamplesToAverage(7);
 		encoderNW.reset();
 		
-		encoderNE = new Encoder(9, 8, true, Encoder.EncodingType.k4X);
-		encoderNE.setMaxPeriod(.1);
-		encoderNE.setMinRate(10);
-		encoderNE.setDistancePerPulse(.0073);
-		encoderNE.setSamplesToAverage(7);
-		encoderNE.reset();
+		encoderSW = new Encoder(7, 6, true, Encoder.EncodingType.k4X);
+		encoderSW.setMaxPeriod(.1);
+		encoderSW.setMinRate(10);
+		encoderSW.setDistancePerPulse(.0073);
+		encoderSW.setSamplesToAverage(7);
+		encoderSW.reset();
+		
+		encoderSE = new Encoder(9, 8, true, Encoder.EncodingType.k4X);
+		encoderSE.setMaxPeriod(.1);
+		encoderSE.setMinRate(10);
+		encoderSE.setDistancePerPulse(.0073);
+		encoderSE.setSamplesToAverage(7);
+		encoderSE.reset();
 		
 				
 		oi = new OI();
