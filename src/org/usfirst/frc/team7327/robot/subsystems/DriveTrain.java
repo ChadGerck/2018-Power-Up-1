@@ -2,6 +2,7 @@ package org.usfirst.frc.team7327.robot.subsystems;
 
 import org.usfirst.frc.team7327.robot.RobotMap;
 import org.usfirst.frc.team7327.robot.SwerveModule;
+import org.usfirst.frc.team7327.robot.TurnModule;
 //import org.usfirst.frc.team7327.robot.commands.TankDrive;
 import org.usfirst.frc.team7327.robot.commands.SwerveDrive;
 
@@ -23,9 +24,15 @@ public class DriveTrain extends Subsystem {
 	
 	private SwerveModule moduleNE, moduleNW, moduleSE, moduleSW;
 	
+	public TurnModule turning; 
+	
 	static final double kP = 2.5;
 	static final double kI = 0;
 	static final double kD = 0;
+	
+	static final double tkP = .4;
+	static final double tkI = .000001;
+	static final double tkD = .04;
 	
 	
 	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -184.2);
@@ -38,6 +45,8 @@ public class DriveTrain extends Subsystem {
 		moduleNW = new SwerveModule(1, 0, abeNW, kP, kI, kD,false);
 		moduleSE = new SwerveModule(7, 6, abeSE, kP, kI, kD,true);
 		moduleSW = new SwerveModule(5, 4, abeSW, kP, kI, kD,false);
+
+		turning = new TurnModule(tkP, tkI, tkD);
 	
 	}
 	
