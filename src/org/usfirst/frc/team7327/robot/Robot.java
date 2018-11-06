@@ -7,54 +7,17 @@
 
 package org.usfirst.frc.team7327.robot;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
-
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import java.io.IOException;
-
-//import org.usfirst.frc.team7327.robot.commands.TankDrive;
 import org.usfirst.frc.team7327.robot.commands.SwerveDrive;
 import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.DigitalInput;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Timer;
-	//import edu.wpi.first.wpilibj.command.Command;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import edu.wpi.first.wpilibj.CameraServer;
-
-import edu.wpi.first.wpilibj.Compressor;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-	//import edu.wpi.first.wpilibj.Compressor;
-	//import java.util.Timer;
-
-import edu.wpi.first.wpilibj.DriverStation;
-
 import edu.wpi.first.wpilibj.Encoder;
 
-import edu.wpi.first.wpilibj.Joystick;
-
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Ultrasonic;
-	//import edu.wpi.first.wpilibj.Solenoid;
-
-import edu.wpi.first.wpilibj.*;
 
 public class Robot extends TimedRobot { 
 	public static OI oi;

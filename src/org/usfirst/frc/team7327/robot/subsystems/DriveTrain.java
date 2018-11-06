@@ -1,22 +1,12 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
-import org.usfirst.frc.team7327.robot.RobotMap;
 import org.usfirst.frc.team7327.robot.SwerveModule;
 import org.usfirst.frc.team7327.robot.TurnModule;
-//import org.usfirst.frc.team7327.robot.commands.TankDrive;
 import org.usfirst.frc.team7327.robot.commands.SwerveDrive;
 
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
