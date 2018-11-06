@@ -37,9 +37,7 @@ public class DriveTrain extends Subsystem {
 		moduleSW = new SwerveModule(5, 4, abeSW, kP, kI, kD,false);
 
 		turning = new TurnModule(tkP, tkI, tkD);
-	
 	}
-	
 	
 	public void setAllSpeed(double speed) {
 		moduleNW.setDrive(speed);
@@ -70,22 +68,14 @@ public class DriveTrain extends Subsystem {
 		moduleSW.setSteeringDeg(SW);
 	}
 	
-	public double getSteeringSetpoint() {
-		return moduleNW.getSteeringSetpoint();
-	}
+	public double getSteeringSetpoint() { return moduleNW.getSteeringSetpoint(); }
 	
-	public double getSteeringError() {
-		return moduleNW.getError();
-	}
+	public double getSteeringError() { return moduleNW.getError(); }
 	
-	public double getSteeringPosition() {
-		return moduleNW.getSteeringEncoder();
-	}
+	public double getSteeringPosition() { return moduleNW.getSteeringEncoder(); }
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new SwerveDrive());
-
-
 	}
 
 }
