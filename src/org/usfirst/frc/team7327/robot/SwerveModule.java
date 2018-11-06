@@ -59,7 +59,5 @@ public class SwerveModule{
     public double getSteeringSetpoint() {
     	return setPoint;
     }
-    
-    
 
 }

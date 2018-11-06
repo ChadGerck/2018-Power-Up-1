@@ -15,8 +15,6 @@ public class TurnModule{
     	lastError = getError(); 
     	error = lastError; 
     	TurningPID = new Notifier(() ->  {
-    		System.out.println(getError());
-
     		SmartDashboard.putNumber("gyroTo: ", gyroTo);
     		SmartDashboard.putNumber("GyroAngle: ", Robot.GyroAngle());
     		error = getError(); 
