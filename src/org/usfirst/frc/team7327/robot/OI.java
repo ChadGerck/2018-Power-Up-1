@@ -21,6 +21,7 @@ public class OI {
 		double raw = Controller.getRawAxis(0);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
 	}
+	
 	public double getLeftStickY(XboxController Controller) {
 		double raw = Controller.getRawAxis(1);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
@@ -30,33 +31,29 @@ public class OI {
 		double raw = Controller.getRawAxis(4);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
 	}
+	
 	public double getRightStickY(XboxController Controller) {
 		double raw = Controller.getRawAxis(5);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
 	}
-
+	
 	public double getLeftTrigger(XboxController Controller) {
 		double raw = Controller.getRawAxis(2);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
 	}
+	
 	public double getRightTrigger(XboxController Controller) {
 		double raw = Controller.getRawAxis(3);
 		return Math.abs(raw) < DEADZONE_LIMIT ? 0.0 : raw;
 	}
+	
 	public boolean getLeftBumper(XboxController Controller) {
 		boolean raw = Controller.getBumperPressed(Hand.kLeft);
 		return raw;
 	}
+	
 	public boolean getRightBumper(XboxController Controller) {
 		boolean raw = Controller.getBumperPressed(Hand.kRight);
-		return raw;
-	}
-	public boolean getXButton(XboxController Controller) {
-		boolean raw = Controller.getXButtonPressed();
-		return raw;
-	}
-	public boolean getYButton(XboxController Controller) {
-		boolean raw = Controller.getYButtonPressed();
 		return raw;
 	}
 
@@ -69,10 +66,25 @@ public class OI {
 		boolean raw = Controller.getBButtonPressed();
 		return raw;
 	}
+
+	public boolean getXButton(XboxController Controller) {
+		boolean raw = Controller.getXButtonPressed();
+		return raw;
+	}
+	
+	public boolean getYButton(XboxController Controller) {
+		boolean raw = Controller.getYButtonPressed();
+		return raw;
+	}
 	
 	public double Dpad(XboxController Controller) {
 		double raw = Controller.getPOV();
 		return raw;
+	}
+	
+	public boolean getStartButton(XboxController Controller) {
+		boolean raw = Controller.getStartButtonPressed();
+		return raw; 
 	}
 	
 	public boolean getBackButton(XboxController Controller) {
@@ -80,10 +92,6 @@ public class OI {
 		return raw; 
 	}
 	
-	public boolean getStartButton(XboxController Controller) {
-		boolean raw = Controller.getStartButtonPressed();
-		return raw; 
-	}
 	
 	public OI () {
 		
