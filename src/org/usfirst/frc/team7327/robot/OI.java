@@ -76,7 +76,7 @@ public class OI {
 		return raw;
 	}
 	
-	public boolean getSlowButton(XboxController Controller) {
+	public boolean getBackButton(XboxController Controller) {
 		boolean raw = Controller.getRawButtonPressed(7);
 		return raw; 
 	}

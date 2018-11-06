@@ -35,7 +35,7 @@ public class SwerveDrive extends Command {
 	boolean Lb = Robot.oi.getLeftBumper(Player1);
 	boolean Rb = Robot.oi.getRightBumper(Player1);
 	boolean StartButton = Robot.oi.getStartButton(Player1); 
-	boolean BackButton = Robot.oi.getSlowButton(Player1); 
+	boolean BackButton = Robot.oi.getBackButton(Player1); 
 	
 	protected void execute(){
 		
