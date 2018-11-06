@@ -34,11 +34,9 @@ public class TurnModule{
         return Math.sin(Math.toRadians(gyroFinal));
     }
     
-    public void setYaw(double degree){
-    	gyroTo = degree; 
-    }
+    public void setYaw(double degree){ gyroTo = degree; }
     
-    public boolean setOn(boolean flipOn) {
+    public boolean setOn(boolean flipOn) { 
     	on = flipOn; 
     	return on; 
     }

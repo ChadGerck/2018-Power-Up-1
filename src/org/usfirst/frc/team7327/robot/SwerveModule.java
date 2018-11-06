@@ -40,24 +40,19 @@ public class SwerveModule{
 
     public double getSteeringEncoder(){
         double angle = steeringEncoder.get();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
+		while(angle > 360) angle -= 360; 
+		while(angle < 0)   angle += 360; 
 		return angle; 
     }
 
     public void setDrive(double pow){
-    	if(isFlipped)
-    		mDrive.set(ControlMode.PercentOutput, -pow);
-    	else
-    		mDrive.set(ControlMode.PercentOutput, pow);
+    	if(isFlipped) mDrive.set(ControlMode.PercentOutput,-pow);
+    	else          mDrive.set(ControlMode.PercentOutput, pow);
     }
 
-    public void setSteeringDeg(double deg){
-        setPoint = deg;
-    }
+    public void setSteeringDeg(double deg) { setPoint = deg; }
+    
   
-    public double getSteeringSetpoint() {
-    	return setPoint;
-    }
+    public double getSteeringSetpoint() { return setPoint; }
 
 }

@@ -96,15 +96,15 @@ public class Robot extends TimedRobot {
 	
 	public static double GyroAngle() {
 		double angle = Robot.gyro.getAngle();
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
+		while(angle > 360) angle -= 360; 
+		while(angle < 0)   angle += 360;
 		return angle; 
 	}
 	
 	public static double GyroAngle(double add) {
 		double angle = Robot.gyro.getAngle() + add;
-		while(angle > 360) { angle -= 360; }
-		while(angle < 0)   { angle += 360; }
+		while(angle > 360)  angle -= 360; 
+		while(angle < 0)    angle += 360; 
 		return angle; 
 	}
 	

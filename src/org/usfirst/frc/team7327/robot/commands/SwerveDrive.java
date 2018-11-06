@@ -10,17 +10,14 @@ public class SwerveDrive extends Command {
 	public SwerveDrive() {
 		requires(Robot.drivetrain); 
 	}
-	
 
 	int setting = 0; 
 	public static XboxController Player1 = Robot.oi.Controller0; 
 	protected void initialize() { 
 		setting = 0; 
-		addDegree = 0; 
 	}
 
 	double setDegree = 0;
-	double addDegree = 0; 
 	
 
 	boolean A = Robot.oi.getAButton(Player1); 
@@ -58,7 +55,6 @@ public class SwerveDrive extends Command {
 		
 		
 		if(StartButton) Robot.gyro.reset();
-		if(BackButton) addDegree = setDegree; 
 		
 		if(A)  { setting = 0; Robot.drivetrain.turning.setOn(false); }
 		if(Lb) { setting = 0; Robot.drivetrain.turning.setOn(false); }
@@ -70,7 +66,7 @@ public class SwerveDrive extends Command {
 		
 		switch(setting) {
 		case 0: //Power Mode
-			Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle()+addDegree);
+			Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle());
 			Robot.drivetrain.setAllSpeed(Ly-RT+LT);
 			break;
 		case 1: //Turn Mode
@@ -83,7 +79,7 @@ public class SwerveDrive extends Command {
 			if(Robot.oi.Dpad(Player1) == -1) { setting = 0; Robot.drivetrain.turning.setOn(false); }
 			break; 
 		case 4: //Precision Mode 
-			Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle()+addDegree);
+			Robot.drivetrain.setAllDegrees(setDegree+Robot.GyroAngle());
 			Robot.drivetrain.setAllSpeed(-RT+LT);
 			if(magnitudeL > .5) { setting = 5; Robot.drivetrain.turning.setOn(true); }
 			break; 
