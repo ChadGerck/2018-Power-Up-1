@@ -26,7 +26,6 @@ public class Robot extends TimedRobot {
 	
 	public static ADXRS450_Gyro gyro; 
 	
-	
 	public static double NWdegree, NEdegree, SWdegree, SEdegree = 0;
 	
 	
@@ -39,7 +38,6 @@ public class Robot extends TimedRobot {
 		myTimer.start();
 		
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
-		
 				
 		oi = new OI();
 		drivetrain = new DriveTrain();
@@ -85,8 +83,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
-		
 	}
 
 	@Override
