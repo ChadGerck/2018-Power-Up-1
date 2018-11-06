@@ -24,18 +24,11 @@ public class Robot extends TimedRobot {
 	public static DriveTrain drivetrain;
 	public static SwerveDrive swervedrive; 
 	//CameraServer Camera;
-	public static Encoder encoderNW;
-	public static Encoder encoderNE;
-	public static Encoder encoderSW;
-	public static Encoder encoderSE;
 	
 	public static ADXRS450_Gyro gyro; 
 	
 	
-	public static double NWdegree = 0; 
-	public static double NEdegree = 0;
-	public static double SWdegree = 0;
-	public static double SEdegree = 0;
+	public static double NWdegree, NEdegree, SWdegree, SEdegree = 0;
 	
 	
 	public static Timer myTimer = new Timer();
@@ -47,36 +40,6 @@ public class Robot extends TimedRobot {
 		myTimer.start();
 		
 		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
-		
-		
-		encoderSE = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-		encoderSE.setMaxPeriod(.1);
-		encoderSE.setMinRate(10);
-		encoderSE.setDistancePerPulse(.0073);
-		encoderSE.setSamplesToAverage(7);
-		encoderSE.reset();
-		
-		
-		encoderSW = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-		encoderSW.setMaxPeriod(.1);
-		encoderSW.setMinRate(10);
-		encoderSW.setDistancePerPulse(.0073);
-		encoderSW.setSamplesToAverage(7);
-		encoderSW.reset();
-		
-		encoderNW = new Encoder(7, 6, true, Encoder.EncodingType.k4X);
-		encoderNW.setMaxPeriod(.1);
-		encoderNW.setMinRate(10);
-		encoderNW.setDistancePerPulse(.0073);
-		encoderNW.setSamplesToAverage(7);
-		encoderNW.reset();
-		
-		encoderNE = new Encoder(9, 8, true, Encoder.EncodingType.k4X);
-		encoderNE.setMaxPeriod(.1);
-		encoderNE.setMinRate(10);
-		encoderNE.setDistancePerPulse(.0073);
-		encoderNE.setSamplesToAverage(7);
-		encoderNE.reset();
 		
 				
 		oi = new OI();
@@ -105,10 +68,6 @@ public class Robot extends TimedRobot {
 		myTimer.reset();
 		myTimer.start();
 		gyro.reset();
-		encoderNW.reset();
-		encoderNE.reset();
-		encoderSW.reset();
-		encoderSE.reset();
 		/*
 		while(myTimer.get() < 6) {
 			if(myTimer.get() < 5) {
@@ -138,12 +97,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-
-
-		encoderNW.reset();
-		encoderNE.reset();
-		encoderSW.reset();
-		encoderSE.reset();
 		gyro.reset();
 		
 	}
