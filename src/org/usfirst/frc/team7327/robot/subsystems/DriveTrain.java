@@ -30,9 +30,9 @@ public class DriveTrain extends Subsystem {
 	static final double kI = 0;
 	static final double kD = 0;
 	
-	static final double tkP = .4;
+	static final double tkP = .4;  //.4 cement , .6 carpet
 	static final double tkI = .000001;
-	static final double tkD = .04;
+	static final double tkD = .04; //.04 cement , .05 carpet
 	
 	
 	public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, -184.2);
@@ -58,6 +58,13 @@ public class DriveTrain extends Subsystem {
 		moduleSE.setDrive(speed);
 			
 	} 
+	
+	public void setEachSpeed(double sNW, double sNE, double sSW, double sSE) {
+		moduleNW.setDrive(sNW);
+		moduleNE.setDrive(sNE);
+		moduleSW.setDrive(sSW);
+		moduleSE.setDrive(sSE);
+	}
 
 	public void setAllDegrees(double deg) {
 		moduleNW.setSteeringDeg(deg);
