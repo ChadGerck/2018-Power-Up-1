@@ -35,6 +35,24 @@ public class SwerveDrive extends Command {
 	double setDegree = 0;
 	double addDegree = 0; 
 	
+
+	boolean A = Robot.oi.getAButton(Player1); 
+	boolean B = Robot.oi.getBButton(Player1); 
+	boolean Y = Robot.oi.getYButton(Player1);
+	
+	double Lx = Robot.oi.getLeftStickX(Player1); 
+	double Ly = Robot.oi.getLeftStickY(Player1); 
+	
+	double Rx = Robot.oi.getRightStickX(Player1); 
+	double Ry = Robot.oi.getRightStickY(Player1);
+	
+	double LT = Robot.oi.getLeftTrigger(Player1); 
+	double RT = Robot.oi.getRightTrigger(Player1); 
+	boolean Lb = Robot.oi.getLeftBumper(Player1);
+	boolean Rb = Robot.oi.getRightBumper(Player1);
+	boolean StartButton = Robot.oi.getStartButton(Player1); 
+	boolean BackButton = Robot.oi.getSlowButton(Player1); 
+	
 	protected void execute(){
 		
 		SmartDashboard.putNumber("Gyro: ", Robot.GyroAngle());
@@ -43,40 +61,13 @@ public class SwerveDrive extends Command {
 		SmartDashboard.putNumber("Angular Position", Robot.drivetrain.getSteeringPosition());
 		
 		
-		
-		
-		boolean A = Robot.oi.getAButton(Player1); 
-		boolean B = Robot.oi.getBButton(Player1); 
-		boolean Y = Robot.oi.getYButton(Player1);
-		
-		double Lx = Robot.oi.getLeftStickX(Player1); 
-		double Ly = Robot.oi.getLeftStickY(Player1); 
-		
-		double Rx = Robot.oi.getRightStickX(Player1); 
-		double Ry = Robot.oi.getRightStickY(Player1);
-		
-		double LT = Robot.oi.getLeftTrigger(Player1); 
-		double RT = Robot.oi.getRightTrigger(Player1); 
-		boolean Lb = Robot.oi.getLeftBumper(Player1);
-		boolean Rb = Robot.oi.getRightBumper(Player1);
-		boolean StartButton = Robot.oi.getStartButton(Player1); 
-		boolean BackButton = Robot.oi.getSlowButton(Player1); 
-		
-		
 		double degreesL = Math.toDegrees(Math.atan2(Ly,  Lx)) + 90;
 		double magnitudeL = Math.sqrt(Math.pow(Lx, 2) + Math.pow(Ly, 2));
-		
 
 		double degreesR = Math.toDegrees(Math.atan2(Ry,  Rx)) + 90;
 		double magnitudeR = Math.sqrt(Math.pow(Rx, 2) + Math.pow(Ry, 2));
 		
-		 
-		
-		if(magnitudeR > .5) {
-			setDegree = 360-degreesR;
-		}
-		
-		
+		if(magnitudeR > .5) setDegree = 360-degreesR;
 		
 		
 		if(StartButton) Robot.gyro.reset();
