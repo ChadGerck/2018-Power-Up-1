@@ -14,18 +14,4 @@ public class Sparky {
 		}
 		
 	}
-	/*
-	public static void MoveForward() {
-		System.out.println("Move robot forward 1 space");
-		if(!Offline) { Robot.MoveDistance(Robot.GyroAngle(), .3, 1); }
-	}
-	public static void TurnRight() {
-		System.out.println("Turn Right");
-		if(!Offline) { Robot.TurnRight(); }
-	}
-	public static void TurnLeft() {
-		System.out.println("Turn Left");
-		if(!Offline) { Robot.TurnLeft(); }
-	}
-	*/
-}
+	
