@@ -7,9 +7,7 @@ public class Sparky {
 		Offline = true; 
 		//Autonomous.Auto(); 
 		
-		
-		
-		
+				
 }
 		
 	
