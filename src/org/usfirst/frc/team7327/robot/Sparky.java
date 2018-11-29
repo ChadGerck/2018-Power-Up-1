@@ -6,10 +6,11 @@ public class Sparky {
 	public static void main(String[] args) {
 		Offline = true; 
 		//Autonomous.Auto();
+		System.out.println("Hello World!");
+		
 	   
 		
 		
-		
-		
+	}	
 		
 }
