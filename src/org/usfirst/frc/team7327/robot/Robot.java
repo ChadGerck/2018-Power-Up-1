@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
 		gyro.reset();
 		encoderL.reset();
 		encoderR.reset();
-		Autonomous.Auto();
+		Autonomous.auto();
 		
 		/*
 		System.out.println("FIRST MOVEMENT");

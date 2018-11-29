@@ -4,6 +4,13 @@ public class Sparky {
 	public static void main(String[] args) {
 		Offline = true; 
 		//Autonomous.Auto(); 
+		
+		System.out.println("Hello World\n"
+				         + "This is my second line\n"
+				         + "third line,\n"
+				         + "etc.....");
+		
+		
 	}
 	public static void MoveForward() {
 		System.out.println("Move robot forward 1 space");
