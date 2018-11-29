@@ -8,7 +8,10 @@ public class Sparky {
 		//Autonomous.Auto(); 
 		MoveForward();
 		System.out.println("Hello, Chadbois!");
-		
+		System.out.println("Hi Chad1");
+		System.out.println("Hi Chad2");
+		System.out.println("Hi Chad3");
+		System.out.println("Hi Chad4");
 	}
 	public static void MoveForward() {
 		System.out.println("Move robot forward 1 space");
