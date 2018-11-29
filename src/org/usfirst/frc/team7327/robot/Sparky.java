@@ -19,7 +19,12 @@ array[6] = 7;
 array[7] = 8;
 array[8] = 9;
 array[9] = 10;
-	System.out.println("I love Ethan more than Jenisa Does");
+	
+	System.out.println("I love Ethan more than Jenisa Does\n"
+				+"i miss ethan already\n"
+				+"donde esta ethan\n"
+				+"what do i do now chad";
+	
 		for (int i = 0; i < 10;) {
 			System.out.println("Value of i: " + array[i]);
 			i++;
