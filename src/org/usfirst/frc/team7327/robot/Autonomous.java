@@ -21,37 +21,6 @@ public class Autonomous {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		Robot.MoveForward(); 
 		
 		int i = 0; 
