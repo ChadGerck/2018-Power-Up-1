@@ -7,7 +7,7 @@ public class Autonomous {
 	
 		int i = 0;
 		
-	while (i < 34) {
+/*	while (i < 34) {
 		Robot.MoveForward();
 		i = i++;
 	}		
@@ -32,7 +32,7 @@ public class Autonomous {
 	while (i < 34) {
 		Robot.MoveForward();
 		i = i++;
-		}
-	
+		} 
+	*/
 	}
 }
