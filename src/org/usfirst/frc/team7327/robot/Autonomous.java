@@ -6,11 +6,110 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Autonomous {
-	public static void Auto() {
+	public static void auto() {
 			
 		Robot.MoveForward();
-		Robot.TurnRight();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		
+		Robot.TurnLeft();
+		
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		
+		Robot.TurnLeft();
+		Robot.TurnLeft();
+		
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
 	
+		Robot.TurnRight();
+		
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
+		Robot.MoveForward();
 		}
 	}
 			
