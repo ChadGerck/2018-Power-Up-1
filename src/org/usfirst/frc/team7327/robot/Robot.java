@@ -273,8 +273,10 @@ public class Robot extends TimedRobot {
 		MoveDistance(GyroAngle(), .25, 1); 
 	}
 	
-
-	 
+	public static void MoveForwardFeet(int feet) {
+		MoveDistance(GyroAngle(), 0.35, feet);
+	}
+	
 	
 	public static void MoveDistance(double angle, double speed, double distance) { 
 		
