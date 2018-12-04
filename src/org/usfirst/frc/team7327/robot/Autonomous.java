@@ -9,14 +9,14 @@ public class Autonomous {
 		
 	while (i < 34) {
 		Robot.MoveForward();
-		i = i + 1;
+		i = i++;
 	}		
 	
 		Robot.TurnRight();
 	
 	while (i < 6) {
 		Robot.MoveForward();
-		i = i + 1;
+		i = i++;
 	}
 	
 		Robot.TurnRight();
@@ -24,14 +24,14 @@ public class Autonomous {
 		
 	while (i < 6) {
 		Robot.MoveForward();
-		i = i + 1;
+		i = i++;
 		}
 		
 		Robot.TurnLeft();
 		
 	while (i < 34) {
 		Robot.MoveForward();
-		i = i + 1;
+		i = i++;
 		}
 	
 	}
