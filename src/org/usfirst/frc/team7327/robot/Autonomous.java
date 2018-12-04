@@ -8,14 +8,14 @@ public class Autonomous {
 
 	public static void Auto() {
 		
-		Robot.MoveForwardFeet(37);
+		Robot.MoveForwardFeet(33);
 		Robot.TurnLeft();
 		Robot.MoveForwardFeet(7);
 		Robot.TurnRight();
 		Robot.TurnRight();
 		Robot.MoveForwardFeet(7);
 		Robot.TurnRight();
-		Robot.MoveForwardFeet(37);
+		Robot.MoveForwardFeet(33);
 	}
 	public static void MoveAngle(double angle) throws InterruptedException {
 	  Robot.drivetrain.setRaw1(.25, .25); 
