@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Autonomous {
-	public static void auto() {
+	public static void Auto() {
 			
 		Robot.MoveForward();
 		Robot.TurnRight();
