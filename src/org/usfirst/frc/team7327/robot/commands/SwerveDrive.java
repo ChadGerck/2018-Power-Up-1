@@ -6,6 +6,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 public class SwerveDrive extends Command {
 	public SwerveDrive() {
 		requires(Robot.drivetrain); 
@@ -17,6 +21,8 @@ public class SwerveDrive extends Command {
 		setting = 0; 
 	}
 	double setDegree = 0;
+
+	
 	
 	
 	protected void execute(){
